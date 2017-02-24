@@ -1,0 +1,413 @@
+<html>
+    <head>
+      <title>Test</title>
+
+	<script src="/static/jquery.min.js"></script>
+    <script src="/static/jstree.min.js"></script>
+    <script src="/static/reload-client.js"></script>
+    <link rel="stylesheet" href="/static/style.min.css" />
+    <style>
+    .left-sticky {
+		position: absolute;
+		padding-left:10px;
+		overflow-y: auto !important;
+		overflow-x: hidden; 
+		width: 201px;
+		z-index:10;
+		background-color: {{bg_color_a}};
+    	padding-right: 1px;
+	    box-sizing: border-box;
+	}
+	.left-sticky.fix-search {
+	    position: fixed;
+	    top: 0px;
+	    height: 100%;
+	  }
+	  .background_text {
+	  	color: #999;
+	  }
+	  #right-bar {
+	  	float:left; margin-left: 201px; /* 201 so we can easily find references */
+	  	overflow-x:hidden;
+	  }
+
+
+	  .img {
+	  	margin: 0px;
+	  	float: left;
+	  	width: 110px;
+	  	height: 190px;
+	  	text-align:center;
+	  	position:relative;
+	  }
+	  .img :after {
+	  	content: '';
+	      display: block;
+	      clear: both;
+	  }
+	  .img.selected {
+	  	background-color: lightcyan;
+	  	-webkit-transition: background-color 0.3s;
+	  	transition: background-color 0.3s;
+	  }
+	  img.thumbnail {
+	  	cursor:pointer;
+	  }
+      .split.left {
+      	cursor:col-resize;
+      	width: 18px;
+      	left:0px;
+  	  }
+      .split.right {
+      	cursor:col-resize;
+      	width: 18px;
+      	left:92px
+      }
+      .split.between {
+      	cursor:pointer;
+      	left:18px;
+      	width: 73px;
+      }
+	</style>
+</head>
+<body>
+<div class="left-sticky" id="left-bar">
+	<!-- new jsonified jstree: -->
+	<div id="jstree_box"  style="display:none;">
+		<button type="button" id="jstree-selector" style="
+	background-repeat: no-repeat;background: url(/static/cog.png); 
+	width:27px; height:27px;padding:4px; border-radius:4px; border:1px solid silver; margin-top:10px;  
+	position: absolute;
+	top: 0;
+	left: 10;" >
+	    </button>
+		<input type="text" id="jstree_searchbox" style="padding:4px; border-radius:4px; border:1px solid silver; margin-top:46px;">
+		<div id="jstree">
+		</div>
+	</div>
+	<div class="drop" style="min-height:200px; min-width:200px; background:lime; border-radius:10px;">Drop here</div>
+</div>
+	<script>
+$(function () {
+	$.ajax({
+	  dataType: "json",
+	  url: '/annotation/annotation.csv',
+	  success: function(schema_json) {
+	  		console.log(schema_json)
+			$('#jstree').on('loaded.jstree', function() {
+				$('#jstree_box').show()
+					
+				var timeout = false;
+				var background_text = "search" // to display "greyed out" search string
+				$('#jstree_searchbox').keyup(function () {
+					if(timeout) { clearTimeout(timeout); }
+					timeout = setTimeout(function () {
+						var v = $('#jstree_searchbox').val();
+						$('#jstree').jstree(true).search(v);
+					}, 250);
+				}).focus(function(){
+			  		if ($(this).val() == background_text){
+			    		$(this).val('').removeClass('background_text');
+					}
+			 	}).blur(function(){
+			  		if ($(this).val().length == 0){
+			    		$(this).val(background_text).addClass('background_text');
+					}
+			 	}).val(background_text).addClass('background_text');
+
+
+			}).jstree({
+				"core" : {
+					'data': schema_json.children,
+					"multiple" : false,
+					"animation" : 0,
+					"check_callback" : true,
+					"icons": true
+				},
+				"types": {
+		            "label": {
+		                "icon": "leaf"
+		            }
+		        },
+				"plugins" : [  "unique","search", "types" /*,  "contextmenu"*/  ],
+				"search" :  {
+					"case_insensitive" : true,
+					"show_only_matches":true
+				}
+				
+			}).bind("select_node.jstree", function(e, node) {
+				$("#jstree").jstree(true).toggle_node(node.node);
+			}).bind("dblclick.jstree", function(e, node){
+				$("#jstree").jstree(true).toggle_node(e.target);
+			}).bind("move_node.jstree", function (e, data) {console.log("move_node",e, data)})
+
+			// attach  dragging event
+			// $("#jstree").mousedown(jstree_drag)
+			// $("#jstree").on('open_node.jstree', expand_left_col);
+			// $("#jstree").on('close_node.jstree', expand_left_col);
+			
+			// $.jstree.defaults.dnd.is_draggable = function(data) { console.log("is_draggable",data); return data[0].original.type === "label"}
+			$('#jstree')
+			    .on('mousedown', function (e) {
+			    	console.log(e.target)
+			    	// console.log($(e.target).hasClass('jstree-leaf'))
+			    	if ($(e.target).hasClass('is_label')) {
+				    	// console.log(e)
+
+				    	// console.log($(this))
+				        return $.vakata.dnd.start(e, { 'jstree' : true, 'obj' : $(e.target), 'nodes' : [{ id : true, text: $(e.target).text() }] }, '<div id="jstree-dnd" class="jstree-default"><i class="jstree-icon jstree-er"></i>' + $(e.target).text() + '</div>');
+				    }
+			    });
+			
+			$(document)
+			    .on('dnd_move.vakata', function (e, data) {
+			        var t = $(data.event.target);
+			        if(!t.closest('#jstree').length) {
+			            if(t.closest('.drop').length) {
+			                data.helper.find('.jstree-icon').removeClass('jstree-er').addClass('jstree-ok');
+			            }
+			            else {
+			                data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
+			            }
+			        }
+			    })
+			    .on('dnd_stop.vakata', function (e, data) {
+			    	console.log(data)
+			        var t = $(data.event.target);
+			        if(!t.closest('#jstree').length) {
+			            if(t.closest('.drop').length) {
+                            $(data.data.obj[0]).clone().appendTo(t.closest('.drop'));
+			            }
+			        }
+			    });
+		}
+	});
+});
+	</script>
+
+
+	<div id="right-bar">
+		<div class="gallery">
+		</div>
+		<!-- <a class="load-next" href="#">Load more</a> -->
+	</div>
+	<script>
+	url = window.location.href.split('/')
+	var participant_name = url[url.indexOf('participant')+1]
+	// console.log(typeof(window.location.href))
+	// var participant_name = window.location.href.split('/').last()
+	console.log("participant_name",participant_name)
+
+	var imgs = [];
+	var evts = [];
+	// var img_sizes = {
+	// 	thumbnail: [100, 87],
+	// 	medium: [864,645],
+	// 	original: [2592,1936]
+	// }
+	var start = 20, end=100;
+	$.post('/participant/'+participant_name+'/images', {start:start, end:end})
+		.done((response) => {
+			console.log("done", start, end)
+			for(var i=0; i<=end-start;i++ ) {
+				// console.log(response[i], i+start, date_from_filename(response[i]));
+				imgs[i+start] = response[i];
+				evts[i+start] = Math.round(Math.random()*3);
+				create_image(i+start);
+			}
+		})
+		.fail((response) => {console.log("post response:",response)});
+	function new_img(img) {
+		img.needs_update=true; // set needs_update to true
+		// convert time to Date (not possible to send in JSON)
+		if ("image_time" in img) img.image_time = new Date(img.image_time); 
+	}
+
+	function create_image(idx) { 
+		var i = imgs[idx];
+		var e = evts[idx];
+		var is_first = evts[idx]!==null && evts[idx] !== evts[idx-1];
+		var is_last = evts[idx]!==null && evts[idx] !== evts[idx+1];
+		var time = date_from_filename(i);
+		var label = 'none';
+		var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'"'//+((i.label_id===null || i.label_id===undefined) ? '' : 'label-id="'+i.label_id+'" ');
+		// str +=' is-last="'+is_last+'" is-first="'+is_first+'" first-id="' + first_id + '"  last-id="' + last_id + '">' 
+		str += '">' 
+	 	if ((e!==undefined && e!==null)) {			 	
+			if (is_last) {
+				 str += '<div style="left:92px;" class="split right" split-dir="right"></div>'
+			}
+			if (is_first) {
+				str += '<div style="left:0px;" class="split left" split-dir="left"></div>'
+			}
+		}
+		str += '<svg width="110" height="30">'
+
+		str += '</svg>'
+		str += '<img class="thumbnail" width="100" height="87" src="'+window.location.href+'thumbnail/'+i+'" >'
+		str += '<p>' + time.toLocaleTimeString()+'</p></div>'
+		// str += '<p>' + pad_num(image_time[3],2)+':'+ pad_num(image_time[4],2)+':'+pad_num(image_time[5],2)+'</p></div>'
+		// console.log(str)
+		$('.gallery').append(str);
+	}
+
+	function date_from_filename(n) {
+	    console.log(n.slice(6,9))
+	    return new Date(
+	        n.slice(17,21), // year
+	        parseInt(n.slice(21,23))-1 , // month
+	        n.slice(23,25), // day
+	        n.slice(26,28), // hour
+	        n.slice(28,30), // minutes
+	        n.slice(30,32), // seconds
+	        n.slice(6,9) // this is the photo's sequence number, used as a tiebreaker millisecond value for photos with the same timestamp 
+	    ); 
+	}
+
+    // SPLIT IMAGES CODE
+	$(function() {
+
+		// fixes img x and width to not be changable, removes interaction, and removes seperators
+		function fix_appearance() {
+			$(".fake.seperator").attr("class", "seperator")
+			$(".line").attr("nw", function () { return this.getBBox().width})
+			$(".line").attr("nx", function () {return this.getBBox().x})
+			$(".split").unbind("click mouseenter mouseleave")
+			$(".circle").unbind("mousedown")
+			$('div.img').unbind("mousemove")
+		}
+
+        $(document).on('click', '.split', function(e) {
+        	// if (!$(e.target).hasClass("split")) return 0;
+        	var me = $(e.target)
+        	var image_id = me.closest("div.img").attr("image-id");
+        	var event_id = me.closest("div.img").attr("event-id");
+        	var dir = me.attr("split-dir");
+			fix_appearance()	        	
+
+        	// Event.split(dir, {{id}},event_id, image_id).then(reload_images)
+
+        }).on('mouseenter', '.split', function(e){ 
+        	// if (!$(e.target).hasClass("split")) return 0;
+        	if (is_dragging) return 0;
+        	var dir = $(e.target).attr("split-dir");
+        	var img = $(e.target).closest("div.img")
+        	if (dir=="left") {
+        		makeSeperator(img, {'x':10})
+        		makeSeperator(img.prev("div.img"), {'x':im_width_both-10})
+        	} 
+        	if (dir=="right") {
+        		makeSeperator(img, {'x':im_width_both-10})
+        		makeSeperator(img.next("div.img"), {'x':10})
+        	}
+        }).on('mouseleave', '.split', function(e) { // hover off
+        	// if (!$(e.target).hasClass("split")) {console.log(e.target);return 0;}
+        	var img = $(e.target).closest("div.img")
+        	$(".fake.seperator").remove()
+        	$(".line").each(function(){
+				$(this).attr({"width":$(this).attr("nw"), "x":$(this).attr("nx")});
+			});
+        });
+
+        function makeSeperator(el, attrs) {
+        	// $(el).find(".line").attr("visibility",'hidden')
+        	attrs['fill'] = "{{fillcol}}"
+        	attrs['width'] = 5
+        	makeSeperatorLine(el, attrs);
+        	var curr_line = $(el).find(".line");
+        	// console.log( curr_line.attr("width"),  curr_line.attr("x"))
+        	if ( curr_line.attr("nw")-10<0) console.log(el, attrs, curr_line)
+
+    		curr_line.attr("width", curr_line.attr("nw")-10)
+        	if (attrs['x']<55) {
+        		curr_line.attr("x", curr_line.attr("nx") + 10)
+        	}
+        	return 0
+        		// curr_line.attr("width", curr_line.attr("width")-15)
+        	// attrs['fill'] = ""
+        	attrs['width'] = im_width_both-15
+
+        	attrs['x'] =  (attrs['x']>55 ? 15 : 0)
+        	console.log(attrs)
+        	makeLine(el, attrs);
+        }
+        	
+        function makeSeperatorLine(el, attrs) {
+        	attrs['class'] = 'fake seperator'
+        	attrs['height'] = 20
+        	attrs['y'] = 5
+        	$(el).find("svg").append(makeSVG("rect",attrs));
+        }
+	    })
+
+
+
+	function modify_img(id, state, color) {
+		var img = $("div#"+id+".img")
+		var svg = img.find("svg")
+		if (state=="from-left") {
+			svg.find(".line:not(.fake)").attr("visibility","hidden");
+			makeLine(svg, {"x":0,"width":55 })
+			if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
+			else svg.find(".circle:not(.fake)").attr("visibility","visible")
+		}
+		else if (state=="from-right") {
+			svg.find(".line:not(.fake)").attr("visibility","hidden");
+			makeLine(svg, {"x":55,"width":55 })
+			if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
+			else svg.find(".circle:not(.fake)").attr("visibility","visible")
+		} else if (state=="standalone") {
+			svg.find(".line:not(.fake)").attr("visibility","hidden");
+			if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
+			else svg.find(".circle:not(.fake)").attr("visibility","visible")
+		} else if (state=="through") {
+			svg.find(".line:not(.fake)").attr("visibility","hidden");
+			makeLine(svg, {"x":0,"width":im_width_both })
+			svg.find(".circle").attr("visibility","hidden")
+		} else if (state=="blank") {
+			svg.find(".line").attr("visibility","hidden");
+			svg.find(".circle").attr("visibility","hidden")
+		}
+		if (color) svg_colorize(id, color) 
+	}
+
+	/////// SVG stuff
+
+	function svg_colorize(i, color) {
+		if (!color) {
+			// var img = imgs[i];
+			var label_color = imgs[i].label_color;
+			if (label_color) {
+				color = label_color
+			}
+		}
+		if (color) {
+			el = $("div.img#"+i);
+			el.find(".line").css({fill:color})
+			el.find(".circle").css({stroke:color})
+			el.find(".seperator").css({stroke:color})
+		}
+	}
+
+	// SVG's must have their attributes set in a special way (not just insert raw html) which these methods facilitate
+	function makeCircle(el, real) {
+		el.append(makeSVG("circle", {"cx":55, "cy":15, "r":10, "class":"circle" + (real===true ? "": " fake")}));
+	}
+	function makeLine(el, attrs, real) {
+		attrs['class'] = 'line' + (real===true ? "": " fake")
+		attrs['height'] = 5
+		attrs['fill'] = "{{fillcol}}"
+		attrs['y'] = 12.5
+		attrs['z-index'] = 5
+		// console.log(attrs)
+		el.prepend(makeSVG("rect",attrs));
+	}
+	function makeSVG(tag, attrs) {
+        var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (var k in attrs)
+            el.setAttribute(k, attrs[k]);
+        return el;
+    }
+	</script>
+</body>
+</html>
