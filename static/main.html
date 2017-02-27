@@ -53,6 +53,15 @@
 	  img.thumbnail {
 	  	cursor:pointer;
 	  }
+
+	  .split {
+	  	fill-opacity:0;
+	  	z-index:10;
+	  	/*background-color: yellow;*/
+	  	height:30px;
+	  	top:0px;
+	  	position:absolute;
+	  }
       .split.left {
       	cursor:col-resize;
       	width: 18px;
@@ -67,6 +76,14 @@
       	cursor:pointer;
       	left:18px;
       	width: 73px;
+      }
+
+      .circle {
+      	stroke: lightblue;
+      	stroke-width:5;
+      	fill:white;
+      	cursor: grab;
+      	cursor: -webkit-grab;
       }
 	</style>
 </head>
@@ -162,27 +179,50 @@ $(function () {
 			$(document)
 			    .on('dnd_move.vakata', function (e, data) {
 			        var t = $(data.event.target);
-			        if(!t.closest('#jstree').length) {
-			            if(t.closest('.drop').length) {
-			                data.helper.find('.jstree-icon').removeClass('jstree-er').addClass('jstree-ok');
-			            }
-			            else {
-			                data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
-			            }
-			        }
+		            if(t.closest('.img').length) {
+		                data.helper.find('.jstree-icon').removeClass('jstree-er').addClass('jstree-ok');
+		            }
+		            else {
+		                data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
+		            }
+		        
 			    })
 			    .on('dnd_stop.vakata', function (e, data) {
 			    	console.log(data)
 			        var t = $(data.event.target);
-			        if(!t.closest('#jstree').length) {
-			            if(t.closest('.drop').length) {
-                            $(data.data.obj[0]).clone().appendTo(t.closest('.drop'));
-			            }
-			        }
+		            if(t.closest('.img').length) {
+		            	var label = $(data.data.obj[0]).text();
+		            	console.log("label:", label)
+		            	annotate_image(parseInt(t.closest('.img').attr('id')), 'new_label')
+		            	console.log(data.data.obj[0])
+
+                        $(data.data.obj[0]).clone().appendTo(t.closest('.img'));
+		            }
+		        
 			    });
 		}
 	});
 });
+function annotate_image(i, label) {
+	var e = evts[i];
+	if (typeof(e)!=='number') {
+		evts[i] = get_new_event_id;
+		labels[i] = label;
+	} else {
+		var new_e = get_new_event_id();
+		var changed = [];
+		for (var v in evts) {
+			if (evts[v] == e) {
+				evts[v] = new_e;
+				labels[v] = label;
+				changed.push[v];
+			}
+		}
+		changed.forEach(function(i) {
+			svg_update(i)
+		})
+	}
+}
 	</script>
 
 
@@ -198,8 +238,12 @@ $(function () {
 	// var participant_name = window.location.href.split('/').last()
 	console.log("participant_name",participant_name)
 
-	var imgs = [];
-	var evts = [];
+
+	// all should be same length
+	var imgs = []; 
+	var evts = []; // event-id
+	var evts_fake = [];
+	var labels = []; // image label
 	// var img_sizes = {
 	// 	thumbnail: [100, 87],
 	// 	medium: [864,645],
@@ -209,10 +253,15 @@ $(function () {
 	$.post('/participant/'+participant_name+'/images', {start:start, end:end})
 		.done((response) => {
 			console.log("done", start, end)
+			var fake_event_id = 0;
 			for(var i=0; i<=end-start;i++ ) {
 				// console.log(response[i], i+start, date_from_filename(response[i]));
 				imgs[i+start] = response[i];
-				evts[i+start] = Math.round(Math.random()*3);
+				evts[i+start] = fake_event_id;
+				if (i > 10 && Math.random() > 0.8) fake_event_id++;
+			}
+
+			for(var i=0; i<=end-start;i++ ) {
 				create_image(i+start);
 			}
 		})
@@ -222,22 +271,28 @@ $(function () {
 		// convert time to Date (not possible to send in JSON)
 		if ("image_time" in img) img.image_time = new Date(img.image_time); 
 	}
-
+	function is_first_(idx) {
+		return evts[idx]!==null && evts[idx] !== evts[idx-1];
+	}
+	function is_last_(idx) {
+		return evts[idx]!==null && evts[idx] !== evts[idx+1];
+	}
 	function create_image(idx) { 
 		var i = imgs[idx];
 		var e = evts[idx];
-		var is_first = evts[idx]!==null && evts[idx] !== evts[idx-1];
-		var is_last = evts[idx]!==null && evts[idx] !== evts[idx+1];
+
+		var is_first = is_first_(idx);
+		var is_last = is_last_(idx);
 		var time = date_from_filename(i);
 		var label = 'none';
 		var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'"'//+((i.label_id===null || i.label_id===undefined) ? '' : 'label-id="'+i.label_id+'" ');
 		// str +=' is-last="'+is_last+'" is-first="'+is_first+'" first-id="' + first_id + '"  last-id="' + last_id + '">' 
 		str += '">' 
 	 	if ((e!==undefined && e!==null)) {			 	
-			if (is_last) {
+			if (!is_last) {
 				 str += '<div style="left:92px;" class="split right" split-dir="right"></div>'
 			}
-			if (is_first) {
+			if (!is_first) {
 				str += '<div style="left:0px;" class="split left" split-dir="left"></div>'
 			}
 		}
@@ -249,10 +304,11 @@ $(function () {
 		// str += '<p>' + pad_num(image_time[3],2)+':'+ pad_num(image_time[4],2)+':'+pad_num(image_time[5],2)+'</p></div>'
 		// console.log(str)
 		$('.gallery').append(str);
+		svg_ize($('.img#'+idx), idx, is_first, is_last);
 	}
 
 	function date_from_filename(n) {
-	    console.log(n.slice(6,9))
+	    // console.log(n.slice(6,9))
 	    return new Date(
 	        n.slice(17,21), // year
 	        parseInt(n.slice(21,23))-1 , // month
@@ -264,112 +320,37 @@ $(function () {
 	    ); 
 	}
 
-    // SPLIT IMAGES CODE
-	$(function() {
-
-		// fixes img x and width to not be changable, removes interaction, and removes seperators
-		function fix_appearance() {
-			$(".fake.seperator").attr("class", "seperator")
-			$(".line").attr("nw", function () { return this.getBBox().width})
-			$(".line").attr("nx", function () {return this.getBBox().x})
-			$(".split").unbind("click mouseenter mouseleave")
-			$(".circle").unbind("mousedown")
-			$('div.img').unbind("mousemove")
-		}
-
-        $(document).on('click', '.split', function(e) {
-        	// if (!$(e.target).hasClass("split")) return 0;
-        	var me = $(e.target)
-        	var image_id = me.closest("div.img").attr("image-id");
-        	var event_id = me.closest("div.img").attr("event-id");
-        	var dir = me.attr("split-dir");
-			fix_appearance()	        	
-
-        	// Event.split(dir, {{id}},event_id, image_id).then(reload_images)
-
-        }).on('mouseenter', '.split', function(e){ 
-        	// if (!$(e.target).hasClass("split")) return 0;
-        	if (is_dragging) return 0;
-        	var dir = $(e.target).attr("split-dir");
-        	var img = $(e.target).closest("div.img")
-        	if (dir=="left") {
-        		makeSeperator(img, {'x':10})
-        		makeSeperator(img.prev("div.img"), {'x':im_width_both-10})
-        	} 
-        	if (dir=="right") {
-        		makeSeperator(img, {'x':im_width_both-10})
-        		makeSeperator(img.next("div.img"), {'x':10})
-        	}
-        }).on('mouseleave', '.split', function(e) { // hover off
-        	// if (!$(e.target).hasClass("split")) {console.log(e.target);return 0;}
-        	var img = $(e.target).closest("div.img")
-        	$(".fake.seperator").remove()
-        	$(".line").each(function(){
-				$(this).attr({"width":$(this).attr("nw"), "x":$(this).attr("nx")});
-			});
-        });
-
-        function makeSeperator(el, attrs) {
-        	// $(el).find(".line").attr("visibility",'hidden')
-        	attrs['fill'] = "{{fillcol}}"
-        	attrs['width'] = 5
-        	makeSeperatorLine(el, attrs);
-        	var curr_line = $(el).find(".line");
-        	// console.log( curr_line.attr("width"),  curr_line.attr("x"))
-        	if ( curr_line.attr("nw")-10<0) console.log(el, attrs, curr_line)
-
-    		curr_line.attr("width", curr_line.attr("nw")-10)
-        	if (attrs['x']<55) {
-        		curr_line.attr("x", curr_line.attr("nx") + 10)
-        	}
-        	return 0
-        		// curr_line.attr("width", curr_line.attr("width")-15)
-        	// attrs['fill'] = ""
-        	attrs['width'] = im_width_both-15
-
-        	attrs['x'] =  (attrs['x']>55 ? 15 : 0)
-        	console.log(attrs)
-        	makeLine(el, attrs);
-        }
-        	
-        function makeSeperatorLine(el, attrs) {
-        	attrs['class'] = 'fake seperator'
-        	attrs['height'] = 20
-        	attrs['y'] = 5
-        	$(el).find("svg").append(makeSVG("rect",attrs));
-        }
-	    })
 
 
 
-	function modify_img(id, state, color) {
-		var img = $("div#"+id+".img")
-		var svg = img.find("svg")
-		if (state=="from-left") {
-			svg.find(".line:not(.fake)").attr("visibility","hidden");
-			makeLine(svg, {"x":0,"width":55 })
-			if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
-			else svg.find(".circle:not(.fake)").attr("visibility","visible")
-		}
-		else if (state=="from-right") {
-			svg.find(".line:not(.fake)").attr("visibility","hidden");
-			makeLine(svg, {"x":55,"width":55 })
-			if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
-			else svg.find(".circle:not(.fake)").attr("visibility","visible")
-		} else if (state=="standalone") {
-			svg.find(".line:not(.fake)").attr("visibility","hidden");
-			if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
-			else svg.find(".circle:not(.fake)").attr("visibility","visible")
-		} else if (state=="through") {
-			svg.find(".line:not(.fake)").attr("visibility","hidden");
-			makeLine(svg, {"x":0,"width":im_width_both })
-			svg.find(".circle").attr("visibility","hidden")
-		} else if (state=="blank") {
-			svg.find(".line").attr("visibility","hidden");
-			svg.find(".circle").attr("visibility","hidden")
-		}
-		if (color) svg_colorize(id, color) 
-	}
+	// function modify_img(id, state, color) {
+	// 	var img = $("div#"+id+".img")
+	// 	var svg = img.find("svg")
+	// 	if (state=="from-left") {
+	// 		svg.find(".line:not(.fake)").attr("visibility","hidden");
+	// 		makeLine(svg, {"x":0,"width":55 })
+	// 		if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
+	// 		else svg.find(".circle:not(.fake)").attr("visibility","visible")
+	// 	}
+	// 	else if (state=="from-right") {
+	// 		svg.find(".line:not(.fake)").attr("visibility","hidden");
+	// 		makeLine(svg, {"x":55,"width":55 })
+	// 		if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
+	// 		else svg.find(".circle:not(.fake)").attr("visibility","visible")
+	// 	} else if (state=="standalone") {
+	// 		svg.find(".line:not(.fake)").attr("visibility","hidden");
+	// 		if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
+	// 		else svg.find(".circle:not(.fake)").attr("visibility","visible")
+	// 	} else if (state=="through") {
+	// 		svg.find(".line:not(.fake)").attr("visibility","hidden");
+	// 		makeLine(svg, {"x":0,"width":im_width_both })
+	// 		svg.find(".circle").attr("visibility","hidden")
+	// 	} else if (state=="blank") {
+	// 		svg.find(".line").attr("visibility","hidden");
+	// 		svg.find(".circle").attr("visibility","hidden")
+	// 	}
+	// 	if (color) svg_colorize(id, color) 
+	// }
 
 	/////// SVG stuff
 
@@ -390,13 +371,15 @@ $(function () {
 	}
 
 	// SVG's must have their attributes set in a special way (not just insert raw html) which these methods facilitate
-	function makeCircle(el, real) {
-		el.append(makeSVG("circle", {"cx":55, "cy":15, "r":10, "class":"circle" + (real===true ? "": " fake")}));
+	var fillcol = 'lightblue';
+	function makeCircle(el, visible) {
+		el.append(makeSVG("circle", {"cx":55, "cy":15, "r":10, "class":"circle", "visibility": visible===false ? "": "hidden"}));
 	}
-	function makeLine(el, attrs, real) {
-		attrs['class'] = 'line' + (real===true ? "": " fake")
+	function makeLine(el, attrs, visible) {
+		attrs['class'] = ( ('class' in attrs) ? attrs['class']+' ' : '' ) + 'line'
+		attrs['visibility'] = visible===false ? "": "hidden";
 		attrs['height'] = 5
-		attrs['fill'] = "{{fillcol}}"
+		attrs['fill'] = fillcol
 		attrs['y'] = 12.5
 		attrs['z-index'] = 5
 		// console.log(attrs)
@@ -408,6 +391,241 @@ $(function () {
             el.setAttribute(k, attrs[k]);
         return el;
     }
+
+
+    function svg_ize(el, i, is_first, is_last) {
+    	// console.log(el, i)
+    	var container = el.find("svg")
+    	// var img = imgs[i];
+    	// console.log(el,i, img[0],img[5])
+    	makeCircle(container,!(evts[i] !== undefined && (is_first || is_last)))
+		// console.log(i,  is_first ? "hidden":"" , is_last  ? "hidden":"", is_first, is_last)
+		makeLine(container, {width:im_half, x:0, nx:0, id:i, class:'left'}, is_first)
+		makeLine(container, {width:im_half, x:im_half, id:i, class:'right'}, is_last)
+		el.find('p').text(evts[i])
+    }	
+    function svg_update(i, this_evts) {
+    	
+    	if (this_evts===undefined)  this_evts = evts;
+    	var container = $('.img#'+i).find('svg');
+    	var is_first =  this_evts[i]!==null && this_evts[i] !== this_evts[i-1];
+    	var is_last =  this_evts[i]!==null && this_evts[i] !== this_evts[i+1];
+
+		console.log("svg_", i, this_evts[i], is_first, is_last)
+		container.find('.circle').attr({visibility: !(this_evts[i] !== undefined && (is_first || is_last)) ? "hidden":"" })
+		container.find('.line.left').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_first) ?  "hidden":""})
+		container.find('.line.right').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_last) ?  "hidden":""})
+		$('.img#'+i).find('p').text(this_evts[i] + " ")
+    }
+    function get_new_event_id() {
+    	return evts.reduce(function (p, v) {
+    	    return ( p > v ? p : v ); // get max value
+    	})+1;
+    }
+
+
+
+
+
+
+
+var temp = [];
+
+    var is_dragging = false;
+	var im_half = 55;
+    var im_width_both = 110;
+    // SPLIT IMAGES CODE
+	$(function() {
+		var start_img_id = null;
+		var start_evt_id = null;
+		var start_is_first = null;
+		var start_is_last = null;
+		var prev_hover_id = null;
+		var start_dir = null;
+		function hoverImg(e) {
+			if (is_dragging) {
+				e.preventDefault();
+				var curr_img_id = parseInt($(e.target).closest("div.img")[0].id);
+				if (curr_img_id==prev_hover_id) {
+					return 0;
+				} 
+				console.log('hoverImg', curr_img_id)
+
+				var hasChanged = false;
+				var other_event = undefined;
+				var internal = false;
+				if (start_dir==0) {
+					console.log("both")
+					other_event= evts[start_img_id+Math.sign(curr_img_id - start_img_id)*-1];
+				} else if (curr_img_id == start_img_id) {
+					console.log("internal (same)")
+					other_event = null;
+					internal = true;
+				} else if ((curr_img_id - start_img_id)*start_dir > 0 ) {
+					console.log("internal")
+					console.log("pos", start_img_id+Math.sign(curr_img_id - start_img_id)*-1)
+					other_event= evts[start_img_id+Math.sign(curr_img_id - start_img_id)*-1];
+					internal = true;
+				} else {
+					console.log("external")
+					other_event = start_evt_id;
+				}
+				console.log(other_event)
+  
+				// if (internal)
+				// for (var i = Math.min(start_img_id, curr_img_id); i<Math.max(start_img_id, curr_img_id); i++) {
+				// 	if (evts_fake[i]!=start_evt_id) {
+				// 		hasChanged = true;
+				// 		evts_fake[i] = start_evt_id;
+				// 	}
+				// }
+
+				if (other_event !== null) {
+					console.log("processing other_event",other_event)
+					for (var i = Math.min(start_img_id, curr_img_id); i<=Math.max(start_img_id, curr_img_id); i++) {
+						if (!(internal && i==curr_img_id))
+							evts_fake[i] = other_event;
+					}
+					for (var i = Math.min(start_img_id, curr_img_id)-1; i<=Math.max(start_img_id, curr_img_id)+1; i++) {
+						console.log(i, evts_fake[i])
+						svg_update(i, evts_fake)
+					}
+					svg_update(prev_hover_id, evts_fake)
+				}
+				prev_hover_id = curr_img_id;
+			}
+		}
+
+		$(document).on('mousedown', 'circle', function(e) {
+			e.preventDefault()
+			is_dragging = true;
+			evts_fake = evts.slice(); // copy
+			start_img_id = parseInt($(e.target).closest("div.img")[0].id);
+			start_evt_id = evts[start_img_id]
+			start_is_first = is_first_(start_img_id);
+			start_is_last = is_last_(start_img_id);
+			start_dir = (start_is_first && start_is_last) ? 0 : (start_is_first ? 1 : -1) 
+			console.log('start_is_first',start_is_first, 'start_is_last',start_is_last, 'start_dir',start_dir)
+			console.log("start_img_id",start_img_id)
+			$(document).on('mousemove', 'div.img', hoverImg);
+		}); 
+		
+		$(document).on('mouseup', function(e) {
+			if (is_dragging) {
+				e.preventDefault();
+				$(document).off('mousemove', 'div.img', hoverImg);
+				console.log('mouseup')
+				e.preventDefault();
+				is_dragging = false;
+				start_img_id = null;
+				start_evt_id = null;
+				start_is_first = null;
+				start_is_last = null;
+				start_dir = null;
+				temp = evts_fake.slice()
+				console.log('evts_fake',evts_fake)
+				for (var v in evts_fake) {
+					v = parseInt(v)
+					if (evts[v] != evts_fake[v]) console.log(v, evts[v], evts_fake[v], typeof(v))
+					evts[v] = evts_fake[v]
+				}
+				// evts = evts_fake.slice();
+				evts_fake = null;
+				console.log(evts)
+			}
+		})
+
+        $(document).on('click', '.split', function(e) {
+        	e.preventDefault();
+        	// if (!$(e.target).hasClass("split")) return 0;
+        	var me = $(e.target)
+        	var image_id = parseInt(me.closest("div.img").attr("id"));
+        	var event_id = evts[image_id];
+        	console.log("ids:",image_id, event_id)
+        	var dir = me.attr("split-dir") == "left" ? 1 : -1;
+        	if (dir == -1 ) {
+	        	$(".img#"+(image_id+1)).find('.split.left').remove()
+	        	$(".img#"+(image_id)).find('.split.right').remove()
+        	} else {
+        		$(".img#"+(image_id-1)).find('.split.right').remove()
+        		$(".img#"+(image_id)).find('.split.left').remove()        		
+        	}
+        	$(".fake.seperator").remove()
+
+
+    		var new_event_id = get_new_event_id();
+        	var i = image_id;
+    		console.log("dir:", i, dir, new_event_id);
+        	var changed = [i-dir, i];
+        	
+        	console.log(i, evts[i], event_id)
+        	while (evts[i] == event_id) {
+	        	changed.push(i);
+        		evts[i] = new_event_id;
+        		i += dir;
+        	}
+        	changed.forEach(function(i) {
+        		svg_update(i)
+        	})
+        	
+        	// Event.split(dir, {{id}},event_id, image_id).then(reload_images)
+        	return 0;
+        }).on('mouseenter', '.split', function(e){ 
+        	if (is_dragging) return 0;
+        	var dir = $(e.target).attr("split-dir");
+        	var img = $(e.target).closest("div.img")
+        	if (dir=="left") {
+        		makeSeperator(img, {'x':10})
+        		makeSeperator(img.prev("div.img"), {'x':im_width_both-10})
+        	} 
+        	if (dir=="right") {
+        		makeSeperator(img, {'x':im_width_both-10})
+        		makeSeperator(img.next("div.img"), {'x':10})
+        	}
+        }).on('mouseleave', '.split', function(e) { // hover off
+        	var img = $(e.target).closest("div.img")
+        	$(".fake.seperator").remove()
+        });
+
+        function makeSeperator(el, attrs) {
+        	// $(el).find(".line").attr("visibility",'hidden')
+        	attrs['fill'] = fillcol
+        	attrs['width'] = 5
+        	makeSeperatorLine(el, attrs);
+        	if (attrs['x'] > im_half) attrs['x'] += 5;
+        	else attrs['x'] -= 10;
+        	attrs['fill'] = 'white'
+        	attrs['width'] = 10
+        	makeSeperatorLine(el, attrs);
+        }
+        	
+        function makeSeperatorLine(el, attrs) {
+        	attrs['class'] = 'fake seperator'
+        	attrs['height'] = 20
+        	attrs['y'] = 5
+        	$(el).find("svg").append(makeSVG("rect",attrs));
+        }
+        if (0) {
+        setTimeout(function() {$('.img#23').find(".split.right").click()} , 3250);
+        setTimeout(function() {$('.img#23').find(".split.right").mouseenter()} , 2000);
+        // // setTimeout(function() {$('.img#23').find(".split.right").mouseleave()} , 600);
+
+
+        setTimeout(function() {$('.img#28').find(".split.left").mouseleave()} , 1550);
+        setTimeout(function() {$('.img#28').find(".split.left").click()} , 1250);
+        setTimeout(function() {$('.img#28').find(".split.left").mouseenter()} , 1200);
+    }
+        // setTimeout(function() {$('.img#28').find(".split.left").mouseleave()} , 1600);
+       setTimeout(function() {$('.img#20').find(".circle").mousedown()} , 150);
+       setTimeout(function() {$('.img#20').mousemove()} , 50);
+       setTimeout(function() {$('.img#21').mousemove()} , 350);
+       setTimeout(function() {$('.img#22').mousemove()} , 650);
+       setTimeout(function() {$('.img#23').mousemove()} , 1250);
+       setTimeout(function() {$('.img#23').find(".circle").mouseup()} , 1850);
+       // setTimeout(function() {$('.img#20').find(".circle").mousedown()} , 250);
+    })
+
+
 	</script>
 </body>
 </html>

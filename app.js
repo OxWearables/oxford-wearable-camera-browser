@@ -90,7 +90,7 @@ var db = new Db()
 db.load();
 
 app.use('/static/', express.static('static'))
-app.use('/participant', express.static('participant'))
+app.use('/participant/', express.static('participant'))
 
 app.get('/', function (req, res) {
   res.send('Hello World!'+db.participant.map( p => '<br><a href="participant/'+p.name+'">'+p.name+' - '+p.sizes.full.length + ' images </a>').reduce((a, b) => a+b));
@@ -201,7 +201,7 @@ function parse_annotation(fn) {
 var server = http.createServer(app)
 
 var reloadServer = reload(server, app);
-watch.watchTree(__dirname + "/static", function (f, curr, prev) {
+watch.watchTree(__dirname + "/static", {'interval':0.01}, function (f, curr, prev) {
     // Fire server-side reload event
     reloadServer.reload();
 });
