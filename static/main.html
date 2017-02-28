@@ -3,20 +3,25 @@
       <title>Test</title>
 
 	<script src="/static/jquery.min.js"></script>
+	<script src="/static/jquery-ui.js"></script>
     <script src="/static/jstree.min.js"></script>
     <script src="/static/reload-client.js"></script>
     <link rel="stylesheet" href="/static/style.min.css" />
     <style>
     .left-sticky {
 		position: absolute;
+		left: 0px;
+		top: 0px;
 		padding-left:10px;
 		overflow-y: auto !important;
 		overflow-x: hidden; 
 		width: 201px;
+		height: 100%;
 		z-index:10;
-		background-color: {{bg_color_a}};
+		background-color: rgba(247, 245, 232, 0.9);;
     	padding-right: 1px;
 	    box-sizing: border-box;
+	    margin: 0px;
 	}
 	.left-sticky.fix-search {
 	    position: fixed;
@@ -26,11 +31,12 @@
 	  .background_text {
 	  	color: #999;
 	  }
-	  #right-bar {
+	  .right-sticky {
 	  	float:left; margin-left: 201px; /* 201 so we can easily find references */
 	  	overflow-x:hidden;
+	  	overflow-y: auto !important;
+	  	height: 100%;
 	  }
-
 
 	  .img {
 	  	margin: 0px;
@@ -88,7 +94,7 @@
 	</style>
 </head>
 <body>
-<div class="left-sticky" id="left-bar">
+<div class="left-sticky">
 	<!-- new jsonified jstree: -->
 	<div id="jstree_box"  style="display:none;">
 		<button type="button" id="jstree-selector" style="
@@ -102,15 +108,77 @@
 		<div id="jstree">
 		</div>
 	</div>
-	<div class="drop" style="min-height:200px; min-width:200px; background:lime; border-radius:10px;">Drop here</div>
 </div>
 	<script>
+
+	var highlight_enabled = false;
+function byte2Hex(n)
+{
+	var nybHexString = "0123456789ABCDEF";
+	return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+}
+function RGB2Color(r,g,b)
+  {
+    return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+  }
+// https://krazydad.com/tutorials/makecolors.php
+function makeColorGradient(frequency1, frequency2, frequency3,
+	                           phase1, phase2, phase3,
+	                           center, width, len)
+	{
+	  if (center == undefined)   center = 128;
+	  if (width == undefined)    width = 127;
+	  if (len == undefined)      len = 50;
+	  var output = [];
+	  for (var i = 0; i < len; ++i)
+	  {
+	     var red = Math.sin(frequency1*i + phase1) * width + center;
+	     var grn = Math.sin(frequency2*i + phase2) * width + center;
+	     var blu = Math.sin(frequency3*i + phase3) * width + center;
+	     // var o = 0.5;
+	     // red *= 
+	     output.push(RGB2Color(red,grn,blu));
+	  }
+	   return output
+	}
+
+
+function get_leaves(schema) {
+	if ('children' in schema) {
+		var leaves = [];
+		schema.children.forEach((c) => {
+			leaves.push.apply(leaves, get_leaves(c))
+		});
+		return leaves;
+	} else {
+		return [schema];
+	}
+}
 $(function () {
 	$.ajax({
 	  dataType: "json",
-	  url: '/annotation/annotation.csv',
+	  // url: '/annotation/annotation.csv',
+  	  url: '/annotation/7-class.csv',
+
 	  success: function(schema_json) {
 	  		console.log(schema_json)
+
+	  		// GENERATE COLORS
+	  		var leaves = get_leaves(schema_json);
+	  		console.log(leaves.length)
+	  		var colors = makeColorGradient(.3,.3,.3,0,2,4, 230,100,leaves.length)
+	  		console.log(colors)
+	  		console.log(colors.length)
+	  		leaves.forEach((l, index) => {
+	  			// l.color = colors[index];
+	  			l.li_attr = {style:"background-color:"+colors[index]+";background-image:false; width:24px; border-radius: 16px;"};
+	  			l.icon = false;
+	  			label_to_color[l.text] = colors[index]
+
+	  		})
+
+	  		console.log(leaves.slice(0,10))
+
 			$('#jstree').on('loaded.jstree', function() {
 				$('#jstree_box').show()
 					
@@ -191,12 +259,28 @@ $(function () {
 			    	console.log(data)
 			        var t = $(data.event.target);
 		            if(t.closest('.img').length) {
+		            	img_idx = parseInt(t.closest('.img')[0].id);
+		            	if (!Number.isInteger(img_idx)) {
+		            		console.log("error: img_idx on drop ", img_idx, t.closest('.img')[0])
+		            	}
+		            	event_id = evts[img_idx]
+		            	console.log("event_id", event_id)
 		            	var label = $(data.data.obj[0]).text();
+		            	var event_color = label_to_color[label];
 		            	console.log("label:", label)
-		            	annotate_image(parseInt(t.closest('.img').attr('id')), 'new_label')
-		            	console.log(data.data.obj[0])
 
-                        $(data.data.obj[0]).clone().appendTo(t.closest('.img'));
+		            	if (Number.isInteger(event_id)) {
+		            		evts.forEach((evt, idx) => {
+		            			if (evt==event_id) {
+		            				console.log
+		            				evts[idx] = event_id;
+			            			svg_colorize(idx, event_color)
+			            			$('.img#'+idx).effect("highlight", {color:event_color}, 1000);
+			            		}
+		            		})
+		            	}
+		            	annotate_image(parseInt(t.closest('.img').attr('id')), label)
+		            	console.log(data.data.obj[0])
 		            }
 		        
 			    });
@@ -206,27 +290,29 @@ $(function () {
 function annotate_image(i, label) {
 	var e = evts[i];
 	if (typeof(e)!=='number') {
-		evts[i] = get_new_event_id;
-		labels[i] = label;
+		evts[i] = arr_max(evts)+1;
+		labels[evts[i]] = label; // new event -> label
 	} else {
-		var new_e = get_new_event_id();
+		var new_e = arr_max(evts)+1;
 		var changed = [];
 		for (var v in evts) {
 			if (evts[v] == e) {
 				evts[v] = new_e;
-				labels[v] = label;
 				changed.push[v];
 			}
 		}
+		labels[new_e] = label;
+		new_color = label_to_color[label]
 		changed.forEach(function(i) {
 			svg_update(i)
+			svg_colorize(i, new_color)
 		})
 	}
 }
 	</script>
 
 
-	<div id="right-bar">
+	<div class="right-sticky">
 		<div class="gallery">
 		</div>
 		<!-- <a class="load-next" href="#">Load more</a> -->
@@ -242,8 +328,9 @@ function annotate_image(i, label) {
 	// all should be same length
 	var imgs = []; 
 	var evts = []; // event-id
-	var evts_fake = [];
-	var labels = []; // image label
+	var evts_fake = []; // temp for dragging, evts is cloned from this on release
+	var labels = {}; // event -> image label
+	var label_to_color = {}; // image label
 	// var img_sizes = {
 	// 	thumbnail: [100, 87],
 	// 	medium: [864,645],
@@ -266,6 +353,7 @@ function annotate_image(i, label) {
 			}
 		})
 		.fail((response) => {console.log("post response:",response)});
+
 	function new_img(img) {
 		img.needs_update=true; // set needs_update to true
 		// convert time to Date (not possible to send in JSON)
@@ -289,12 +377,12 @@ function annotate_image(i, label) {
 		// str +=' is-last="'+is_last+'" is-first="'+is_first+'" first-id="' + first_id + '"  last-id="' + last_id + '">' 
 		str += '">' 
 	 	if ((e!==undefined && e!==null)) {			 	
-			if (!is_last) {
+			// if (!is_last) {
 				 str += '<div style="left:92px;" class="split right" split-dir="right"></div>'
-			}
-			if (!is_first) {
+			// }
+			// if (!is_first) {
 				str += '<div style="left:0px;" class="split left" split-dir="left"></div>'
-			}
+			// }
 		}
 		str += '<svg width="110" height="30">'
 
@@ -320,54 +408,14 @@ function annotate_image(i, label) {
 	    ); 
 	}
 
-
-
-
-	// function modify_img(id, state, color) {
-	// 	var img = $("div#"+id+".img")
-	// 	var svg = img.find("svg")
-	// 	if (state=="from-left") {
-	// 		svg.find(".line:not(.fake)").attr("visibility","hidden");
-	// 		makeLine(svg, {"x":0,"width":55 })
-	// 		if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
-	// 		else svg.find(".circle:not(.fake)").attr("visibility","visible")
-	// 	}
-	// 	else if (state=="from-right") {
-	// 		svg.find(".line:not(.fake)").attr("visibility","hidden");
-	// 		makeLine(svg, {"x":55,"width":55 })
-	// 		if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
-	// 		else svg.find(".circle:not(.fake)").attr("visibility","visible")
-	// 	} else if (state=="standalone") {
-	// 		svg.find(".line:not(.fake)").attr("visibility","hidden");
-	// 		if (svg.find(".circle:not(.fake)").length!==1) makeCircle(svg);
-	// 		else svg.find(".circle:not(.fake)").attr("visibility","visible")
-	// 	} else if (state=="through") {
-	// 		svg.find(".line:not(.fake)").attr("visibility","hidden");
-	// 		makeLine(svg, {"x":0,"width":im_width_both })
-	// 		svg.find(".circle").attr("visibility","hidden")
-	// 	} else if (state=="blank") {
-	// 		svg.find(".line").attr("visibility","hidden");
-	// 		svg.find(".circle").attr("visibility","hidden")
-	// 	}
-	// 	if (color) svg_colorize(id, color) 
-	// }
-
 	/////// SVG stuff
 
 	function svg_colorize(i, color) {
-		if (!color) {
-			// var img = imgs[i];
-			var label_color = imgs[i].label_color;
-			if (label_color) {
-				color = label_color
-			}
-		}
-		if (color) {
-			el = $("div.img#"+i);
-			el.find(".line").css({fill:color})
-			el.find(".circle").css({stroke:color})
-			el.find(".seperator").css({stroke:color})
-		}
+		if (color===undefined) color = fillcol;
+		el = $("div.img#"+i);
+		el.find(".line").css({fill:color})
+		el.find(".circle").css({stroke:color})
+		el.find(".seperator").css({stroke:color})
 	}
 
 	// SVG's must have their attributes set in a special way (not just insert raw html) which these methods facilitate
@@ -411,16 +459,25 @@ function annotate_image(i, label) {
     	var is_first =  this_evts[i]!==null && this_evts[i] !== this_evts[i-1];
     	var is_last =  this_evts[i]!==null && this_evts[i] !== this_evts[i+1];
 
-		console.log("svg_", i, this_evts[i], is_first, is_last)
+		// console.log("svg_", i, this_evts[i], is_first, is_last)
 		container.find('.circle').attr({visibility: !(this_evts[i] !== undefined && (is_first || is_last)) ? "hidden":"" })
 		container.find('.line.left').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_first) ?  "hidden":""})
 		container.find('.line.right').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_last) ?  "hidden":""})
 		$('.img#'+i).find('p').text(this_evts[i] + " ")
+		if (highlight_enabled) $('.img#'+i).effect("highlight", {}, 1000);
+		// console.log("svg_update i",i )
+		// console.trace()
     }
-    function get_new_event_id() {
-    	return evts.reduce(function (p, v) {
+
+    function arr_max(arr) {
+    	return arr.reduce(function (p, v) {
     	    return ( p > v ? p : v ); // get max value
-    	})+1;
+    	});
+    }
+    function arr_min(arr) {
+    	return arr.reduce(function (p, v) {
+    	    return ( p < v ? p : v ); // get max value
+    	});
     }
 
 
@@ -447,52 +504,98 @@ var temp = [];
 				e.preventDefault();
 				var curr_img_id = parseInt($(e.target).closest("div.img")[0].id);
 				if (curr_img_id==prev_hover_id) {
-					return 0;
+					return false;
 				} 
-				console.log('hoverImg', curr_img_id)
+				console.log('hoverImg', curr_img_id, prev_hover_id)
 
-				var hasChanged = false;
+				// var hasChanged = false;
 				var other_event = undefined;
-				var internal = false;
-				if (start_dir==0) {
-					console.log("both")
-					other_event= evts[start_img_id+Math.sign(curr_img_id - start_img_id)*-1];
-				} else if (curr_img_id == start_img_id) {
-					console.log("internal (same)")
-					other_event = null;
-					internal = true;
-				} else if ((curr_img_id - start_img_id)*start_dir > 0 ) {
-					console.log("internal")
-					console.log("pos", start_img_id+Math.sign(curr_img_id - start_img_id)*-1)
-					other_event= evts[start_img_id+Math.sign(curr_img_id - start_img_id)*-1];
-					internal = true;
-				} else {
-					console.log("external")
-					other_event = start_evt_id;
-				}
-				console.log(other_event)
-  
-				// if (internal)
-				// for (var i = Math.min(start_img_id, curr_img_id); i<Math.max(start_img_id, curr_img_id); i++) {
-				// 	if (evts_fake[i]!=start_evt_id) {
-				// 		hasChanged = true;
-				// 		evts_fake[i] = start_evt_id;
-				// 	}
-				// }
+				// var internal = false;
 
-				if (other_event !== null) {
-					console.log("processing other_event",other_event)
-					for (var i = Math.min(start_img_id, curr_img_id); i<=Math.max(start_img_id, curr_img_id); i++) {
-						if (!(internal && i==curr_img_id))
-							evts_fake[i] = other_event;
-					}
-					for (var i = Math.min(start_img_id, curr_img_id)-1; i<=Math.max(start_img_id, curr_img_id)+1; i++) {
-						console.log(i, evts_fake[i])
-						svg_update(i, evts_fake)
-					}
-					svg_update(prev_hover_id, evts_fake)
-				}
+				// FIGURE OUT STATE FOR MOVE
+				var state = "";
+				if (start_dir==0) {
+					other_event= start_evt_id
+					state = "both"
+				} else if (curr_img_id == start_img_id) {
+					other_event = start_evt_id;
+					state = "same"
+				} else if ((curr_img_id - start_img_id)*start_dir > 0 ) {
+					other_event= evts[start_img_id+Math.sign(curr_img_id - start_img_id)*-1];
+					if (curr_img_id > start_img_id) state = "internal right" 
+					else state = "internal left"
+				} else  {
+					other_event = start_evt_id;
+					if (curr_img_id > start_img_id) state = "external right" 
+					else state = "external left"
+				} 
+				console.log(state, other_event)
 				prev_hover_id = curr_img_id;
+
+				// LIMIT POSITION OF DRAG IF INTERNAL
+				if (state == "internal left") curr_img_id =  Math.max(start_edge, curr_img_id)
+				if (state == "internal right") curr_img_id =  Math.min(start_edge, curr_img_id)
+				// GENERATE LIST OF CHANGED IMGS
+				// DOM MANIPULATION IS INEFFICIENT, ONLY CHANGED WHERE TRUE IN ARRAY
+				var START = Math.min(start_img_id, curr_img_id);
+				var END = Math.max(start_img_id, curr_img_id);
+				var changed = [];
+
+				var evts_min = arr_min(Object.keys(evts).map(Number))
+				var evts_max = arr_max(Object.keys(evts).map(Number))
+				console.log("evts min max",evts_min, evts_max)
+				if (state.startsWith("internal")) {
+					// INTERNAL DRAGS DO NOT EFFECT THE DRAGGED IMG
+					for (var i = evts_min;  i<=evts_max; i++) {
+						var new_val = undefined;
+						if (i >= START && i <= END) {
+							if (i != curr_img_id) new_val = other_event;
+							else new_val = start_evt_id;
+						} else {
+							new_val = evts[i];
+						}
+						if (evts_fake[i] !== new_val) {
+							changed[i] = true;
+							evts_fake[i] = new_val
+						} else {
+							changed[i] = false;
+						}
+					}
+				} else {
+					for (var i = evts_min;  i<=evts_max; i++) {
+						var new_val = undefined;
+						if (i >= START && i <= END) {
+							new_val = other_event;
+						} else {
+							new_val = evts[i];
+						}
+						if (evts_fake[i] !== new_val) {
+							changed[i] = true;
+							evts_fake[i] = new_val
+						} else {
+							changed[i] = false;
+						}
+					}
+				}
+				if (changed.length == 0) {
+					// console.log("no change: ", changed)
+					return false; 
+				}
+
+				// FOR EACH IMG MUST REDRAW IF IT OR ANY NEIGHTBOURING IMGS ARE CHANGED
+				var changed_min = arr_min(Object.keys(changed).map(Number))
+				var changed_max = arr_max(Object.keys(changed).map(Number))
+				console.log("changed min max", changed_min, changed_max)
+				for (var i = changed_min;  i<=changed_max; i++) {
+					if (changed[i-1] === true || changed[i] === true || changed[i+1] ===true) {
+						svg_update(i, evts_fake)
+						color = label_to_color[labels[evts_fake[i]]]
+						console.log(i, color, evts_fake[i], labels[evts_fake[i]])
+						svg_colorize(i, color)
+					}
+				}
+
+				return false;
 			}
 		}
 
@@ -502,20 +605,28 @@ var temp = [];
 			evts_fake = evts.slice(); // copy
 			start_img_id = parseInt($(e.target).closest("div.img")[0].id);
 			start_evt_id = evts[start_img_id]
+			start_edge = null;
 			start_is_first = is_first_(start_img_id);
 			start_is_last = is_last_(start_img_id);
+
+			for (var i in Object.keys(evts)) {
+				if (evts[i]==start_evt_id) {
+					if (start_is_first && (start_edge === null || i > start_edge)) start_edge = i;
+					if (start_is_last && (start_edge === null || i < start_edge)) start_edge = i;
+				}
+			}
+
 			start_dir = (start_is_first && start_is_last) ? 0 : (start_is_first ? 1 : -1) 
 			console.log('start_is_first',start_is_first, 'start_is_last',start_is_last, 'start_dir',start_dir)
 			console.log("start_img_id",start_img_id)
-			$(document).on('mousemove', 'div.img', hoverImg);
+			$(document).on('mouseenter', 'div.img', hoverImg);
 		}); 
 		
 		$(document).on('mouseup', function(e) {
 			if (is_dragging) {
 				e.preventDefault();
-				$(document).off('mousemove', 'div.img', hoverImg);
+				$(document).off('mouseenter', 'div.img', hoverImg);
 				console.log('mouseup')
-				e.preventDefault();
 				is_dragging = false;
 				start_img_id = null;
 				start_evt_id = null;
@@ -553,7 +664,7 @@ var temp = [];
         	$(".fake.seperator").remove()
 
 
-    		var new_event_id = get_new_event_id();
+    		var new_event_id = arr_max(evts)+1;
         	var i = image_id;
     		console.log("dir:", i, dir, new_event_id);
         	var changed = [i-dir, i];
@@ -572,8 +683,10 @@ var temp = [];
         	return 0;
         }).on('mouseenter', '.split', function(e){ 
         	if (is_dragging) return 0;
-        	var dir = $(e.target).attr("split-dir");
         	var img = $(e.target).closest("div.img")
+        	var id = img[0].id;
+        	var dir = $(e.target).attr("split-dir");
+        	if ((!is_first_(id) && dir=="left") || (!is_last_(id) && dir=="right")) return 0;
         	if (dir=="left") {
         		makeSeperator(img, {'x':10})
         		makeSeperator(img.prev("div.img"), {'x':im_width_both-10})
@@ -614,17 +727,47 @@ var temp = [];
         setTimeout(function() {$('.img#28').find(".split.left").mouseleave()} , 1550);
         setTimeout(function() {$('.img#28').find(".split.left").click()} , 1250);
         setTimeout(function() {$('.img#28').find(".split.left").mouseenter()} , 1200);
-    }
         // setTimeout(function() {$('.img#28').find(".split.left").mouseleave()} , 1600);
        setTimeout(function() {$('.img#20').find(".circle").mousedown()} , 150);
-       setTimeout(function() {$('.img#20').mousemove()} , 50);
-       setTimeout(function() {$('.img#21').mousemove()} , 350);
-       setTimeout(function() {$('.img#22').mousemove()} , 650);
-       setTimeout(function() {$('.img#23').mousemove()} , 1250);
+       setTimeout(function() {$('.img#20').mouseenter()} , 50);
+       setTimeout(function() {$('.img#21').mouseenter()} , 350);
+       setTimeout(function() {$('.img#22').mouseenter()} , 650);
+       setTimeout(function() {$('.img#23').mouseenter()} , 1250);
        setTimeout(function() {$('.img#23').find(".circle").mouseup()} , 1850);
        // setTimeout(function() {$('.img#20').find(".circle").mousedown()} , 250);
+    }
     })
 
+
+
+	// SLIDE OUT SIDE ANNOTATION BAR
+    var left_col_expanded = false;
+    (function() {
+	    var left_bar_width = 201;
+		var expand_left_col = function() { // on
+		        // var fn = function() { console.log("done")};
+		        var max_width = Math.min(left_bar_width+left_col_expanded*500, $( window ).width()*0.9);
+		        // console.log(left_col_expanded ? "on" : "off", max_width, $('.left-sticky')[0].scrollWidth)
+		        $('.left-sticky').stop().animate({
+		        	width:Math.min(max_width, Math.max(left_bar_width, $('.left-sticky')[0].scrollWidth))
+		        }, {duration: 200, done: null});
+		    }
+		$('.left-sticky').hover(
+		    function() { // on
+		        // console.log('hover', is_dragging);
+		        if (!is_dragging) {
+			        left_col_expanded = true;
+			        expand_left_col();
+			    }
+		    }, 
+		    function() { // off
+		        // console.log('hover off');
+		        left_col_expanded = false;
+		        expand_left_col();
+		    }
+		);
+
+	})();
 
 	</script>
 </body>
