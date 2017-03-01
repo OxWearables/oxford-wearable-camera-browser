@@ -8,6 +8,7 @@ var reload        = require('reload')
 var bodyParser    = require("body-parser");
 var http          = require('http')
 var watch         = require('watch')
+var sharp         = require('sharp')
 var app           = express()
 
 app.use(bodyParser.json());
@@ -20,8 +21,14 @@ String.prototype.last = Array.prototype.last = function(){
     return this[this.length - 1];
 };
 
-
+// for resizing
+var img_sizes = {
+	thumbnail: [100, 87],
+	medium: [864,645],
+	full: [2592,1936]
+}
 class Db {
+
 	constructor() {
 		this.cache = {};
 		this.participant = [];
@@ -79,9 +86,35 @@ class Db {
 			console.log('done reading')
 			console.log(this.participant)
 		}).then(() => {
+			console.log('ensuring all sizes exist')
 			Promise.each(this.participant, (p) => {
-				// p.sizes.full.forEach((f))
+
+				p.sizes.full.forEach((f) => {
+
+
+					var f_full = path.join(p_dir, p.name, 'medium',f)
+					// console.log(f_full)
+					fs.stat(f_full, (err, stat) => {
+						if (err!==null && err.code == 'ENOENT') {
+							console.log(p.name, 'not exist', f);
+							sharp(path.join(p_dir, p.name, 'full',f))
+								.resize(img_sizes['medium'][0],img_sizes['medium'][1])
+								.toFile(f_full)
+						}
+					})
+					f_full = path.join(p_dir, p.name, 'thumbnail',f)
+					fs.stat(f_full, (err, stat) => {
+						if (err!==null && err.code == 'ENOENT') {
+							console.log(p.name, 'not exist', f);
+							sharp(path.join(p_dir, p.name, 'full',f))
+								.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
+								.toFile(f_full)
+						}
+					})
+				})
+
 			})
+			console.log('all sizes should be created')
 		})
 	}
 }
@@ -139,6 +172,7 @@ app.post('/participant/:pName/images/', function (req, res) {
 	var requestedData = [];//p.sizes['full'].slice(start, end);
 	for(var i=start; i<=end; i++) {
 		requestedData[i-start] = p.sizes['full'][i];
+		// console.log(i, p.sizes['full'][i])
 	}
 
 	

@@ -6,8 +6,16 @@
 	<script src="/static/jquery-ui.js"></script>
     <script src="/static/jstree.min.js"></script>
     <script src="/static/reload-client.js"></script>
+    <script src="/static/photoswipe/photoswipe.min.js"></script>
+    <script src="/static/photoswipe/photoswipe-ui-default.min.js"></script>
     <link rel="stylesheet" href="/static/style.min.css" />
+    <link rel="stylesheet" href="/static/photoswipe/photoswipe.css" />
+    <link rel="stylesheet" href="/static/photoswipe/default-skin/default-skin.css"> 
+
     <style>
+    body {
+    	margin: 0px;
+    }
     .left-sticky {
 		position: absolute;
 		left: 0px;
@@ -28,16 +36,28 @@
 	    top: 0px;
 	    height: 100%;
 	  }
+
+	  .right-sticky {
+	  	margin-left: 201px; /* 201 so we can easily find references */
+	  }
+	  #right-sticky {
+	  	overflow-x:hidden;
+	  	overflow-y: auto;
+	  	height: 100%;
+	  }
+	  .gallery.fullscreen{
+	  	float: bottom;
+	  	overflow-x: auto !important;
+	  	overflow-y:hidden !important;
+	  	display:inline-block;
+	  		  	height: 100px;
+	  	width: auto;    vertical-align:top;
+
+	  }
+
 	  .background_text {
 	  	color: #999;
 	  }
-	  .right-sticky {
-	  	float:left; margin-left: 201px; /* 201 so we can easily find references */
-	  	overflow-x:hidden;
-	  	overflow-y: auto !important;
-	  	height: 100%;
-	  }
-
 	  .img {
 	  	margin: 0px;
 	  	float: left;
@@ -48,8 +68,8 @@
 	  }
 	  .img :after {
 	  	content: '';
-	      display: block;
-	      clear: both;
+		display: block;
+		clear: both;
 	  }
 	  .img.selected {
 	  	background-color: lightcyan;
@@ -90,6 +110,24 @@
       	fill:white;
       	cursor: grab;
       	cursor: -webkit-grab;
+      }
+
+      /*photoSwipe*/
+      #pswp-container {
+        position: fixed;
+        left: 201px;
+        right: 0px;
+        top: 0px;
+        bottom: 190px;    
+        z-index: -2;
+      }
+      .pswp {
+        display: none;
+        position: relative !important;
+      }
+      .pswp__caption__center {
+      	text-align: center;
+      	max-width: 1000px;
       }
 	</style>
 </head>
@@ -157,8 +195,8 @@ function get_leaves(schema) {
 $(function () {
 	$.ajax({
 	  dataType: "json",
-	  // url: '/annotation/annotation.csv',
-  	  url: '/annotation/7-class.csv',
+	  url: '/annotation/annotation.csv',
+  	  // url: '/annotation/7-class.csv',
 
 	  success: function(schema_json) {
 	  		console.log(schema_json)
@@ -281,6 +319,7 @@ $(function () {
 		            	}
 		            	annotate_image(parseInt(t.closest('.img').attr('id')), label)
 		            	console.log(data.data.obj[0])
+		            	set_tooltip(data.event);
 		            }
 		        
 			    });
@@ -312,7 +351,79 @@ function annotate_image(i, label) {
 	</script>
 
 
-	<div class="right-sticky">
+	<div class="right-sticky" id="right-sticky">
+
+		<div id="pswp-container">
+
+			<!-- Root element of PhotoSwipe. Must have class pswp. -->
+			<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+			    <!-- Background of PhotoSwipe. 
+			         It's a separate element as animating opacity is faster than rgba(). -->
+			    <div class="pswp__bg"></div>
+
+			    <!-- Slides wrapper with overflow:hidden. -->
+			    <div class="pswp__scroll-wrap">
+
+			        <!-- Container that holds slides. 
+			            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+			            Don't modify these 3 pswp__item elements, data is added later on. -->
+			        <div class="pswp__container"> 
+			            <div class="pswp__item"></div>
+			            <div class="pswp__item"></div>
+			            <div class="pswp__item"></div>
+			        </div>
+
+			        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+			        <div class="pswp__ui pswp__ui--hidden">
+
+			            <div class="pswp__top-bar">
+
+			                <!--  Controls are self-explanatory. Order can be changed. -->
+
+			                <div class="pswp__counter"></div>
+
+			                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+			                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+			                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+			                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+			                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+			                <!-- element will get class pswp__preloader--active when preloader is running -->
+			                <div class="pswp__preloader">
+			                    <div class="pswp__preloader__icn">
+			                      <div class="pswp__preloader__cut">
+			                        <div class="pswp__preloader__donut"></div>
+			                      </div>
+			                    </div>
+			                </div>
+			            </div>
+
+			            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+			                <div class="pswp__share-tooltip"></div> 
+			            </div>
+
+			            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+			            </button>
+
+			            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+			            </button>
+
+			            <div class="pswp__caption">
+			                <div class="pswp__caption__center"></div>
+			            </div>
+
+			        </div>
+
+			    </div>
+
+			<div id="handle"></div> 
+			</div>
+		</div>
+
 		<div class="gallery">
 		</div>
 		<!-- <a class="load-next" href="#">Load more</a> -->
@@ -327,38 +438,34 @@ function annotate_image(i, label) {
 
 	// all should be same length
 	var imgs = []; 
+	var img_times = []; 
 	var evts = []; // event-id
-	var evts_fake = []; // temp for dragging, evts is cloned from this on release
+	var evts_fake = null; // temp for dragging, evts is cloned from this on release
 	var labels = {}; // event -> image label
 	var label_to_color = {}; // image label
-	// var img_sizes = {
-	// 	thumbnail: [100, 87],
-	// 	medium: [864,645],
-	// 	original: [2592,1936]
-	// }
-	var start = 20, end=100;
+
+	var start = 2, end=100;
 	$.post('/participant/'+participant_name+'/images', {start:start, end:end})
 		.done((response) => {
-			console.log("done", start, end)
+			console.log("done", start, end, response)
 			var fake_event_id = 0;
 			for(var i=0; i<=end-start;i++ ) {
 				// console.log(response[i], i+start, date_from_filename(response[i]));
-				imgs[i+start] = response[i];
-				evts[i+start] = fake_event_id;
-				if (i > 10 && Math.random() > 0.8) fake_event_id++;
+				if (i in response && response[i] != null && response[i]!=undefined) {
+					imgs[i+start] = response[i];
+					evts[i+start] = fake_event_id;
+					img_times[i+start] = date_from_filename(response[i])
+					if (i > 10 && Math.random() > 0.8) fake_event_id++;
+				}
 			}
 
 			for(var i=0; i<=end-start;i++ ) {
-				create_image(i+start);
+				if (imgs[i+start]!=undefined) create_image(i+start);
 			}
 		})
 		.fail((response) => {console.log("post response:",response)});
 
-	function new_img(img) {
-		img.needs_update=true; // set needs_update to true
-		// convert time to Date (not possible to send in JSON)
-		if ("image_time" in img) img.image_time = new Date(img.image_time); 
-	}
+
 	function is_first_(idx) {
 		return evts[idx]!==null && evts[idx] !== evts[idx-1];
 	}
@@ -486,7 +593,6 @@ function annotate_image(i, label) {
 
 
 
-var temp = [];
 
     var is_dragging = false;
 	var im_half = 55;
@@ -579,7 +685,7 @@ var temp = [];
 				}
 				if (changed.length == 0) {
 					// console.log("no change: ", changed)
-					return false; 
+					return true; 
 				}
 
 				// FOR EACH IMG MUST REDRAW IF IT OR ANY NEIGHTBOURING IMGS ARE CHANGED
@@ -594,8 +700,9 @@ var temp = [];
 						svg_colorize(i, color)
 					}
 				}
+				set_tooltip(e);
 
-				return false;
+				return true;
 			}
 		}
 
@@ -609,16 +716,16 @@ var temp = [];
 			start_is_first = is_first_(start_img_id);
 			start_is_last = is_last_(start_img_id);
 
-			for (var i in Object.keys(evts)) {
-				if (evts[i]==start_evt_id) {
+			evts.forEach((evt, i) =>{
+				if (evt==start_evt_id) {
 					if (start_is_first && (start_edge === null || i > start_edge)) start_edge = i;
 					if (start_is_last && (start_edge === null || i < start_edge)) start_edge = i;
 				}
-			}
+			}) 
 
 			start_dir = (start_is_first && start_is_last) ? 0 : (start_is_first ? 1 : -1) 
 			console.log('start_is_first',start_is_first, 'start_is_last',start_is_last, 'start_dir',start_dir)
-			console.log("start_img_id",start_img_id)
+			console.log("start_edge",start_edge)
 			$(document).on('mouseenter', 'div.img', hoverImg);
 		}); 
 		
@@ -626,15 +733,12 @@ var temp = [];
 			if (is_dragging) {
 				e.preventDefault();
 				$(document).off('mouseenter', 'div.img', hoverImg);
-				console.log('mouseup')
 				is_dragging = false;
 				start_img_id = null;
 				start_evt_id = null;
 				start_is_first = null;
 				start_is_last = null;
 				start_dir = null;
-				temp = evts_fake.slice()
-				console.log('evts_fake',evts_fake)
 				for (var v in evts_fake) {
 					v = parseInt(v)
 					if (evts[v] != evts_fake[v]) console.log(v, evts[v], evts_fake[v], typeof(v))
@@ -642,25 +746,28 @@ var temp = [];
 				}
 				// evts = evts_fake.slice();
 				evts_fake = null;
-				console.log(evts)
+				console.log('mouseup')
+				set_tooltip(e);
 			}
 		})
 
         $(document).on('click', '.split', function(e) {
-        	e.preventDefault();
         	// if (!$(e.target).hasClass("split")) return 0;
         	var me = $(e.target)
         	var image_id = parseInt(me.closest("div.img").attr("id"));
         	var event_id = evts[image_id];
         	console.log("ids:",image_id, event_id)
         	var dir = me.attr("split-dir") == "left" ? 1 : -1;
-        	if (dir == -1 ) {
-	        	$(".img#"+(image_id+1)).find('.split.left').remove()
-	        	$(".img#"+(image_id)).find('.split.right').remove()
-        	} else {
-        		$(".img#"+(image_id-1)).find('.split.right').remove()
-        		$(".img#"+(image_id)).find('.split.left').remove()        		
-        	}
+        	if ((is_first_(image_id) && dir==1) || (is_last_(image_id) && dir==-1)) return 0;
+        	e.preventDefault();
+
+        	// if (dir == -1 ) {
+	        // 	$(".img#"+(image_id+1)).find('.split.left').remove()
+	        // 	$(".img#"+(image_id)).find('.split.right').remove()
+        	// } else {
+        	// 	$(".img#"+(image_id-1)).find('.split.right').remove()
+        	// 	$(".img#"+(image_id)).find('.split.left').remove()        		
+        	// }
         	$(".fake.seperator").remove()
 
 
@@ -675,6 +782,8 @@ var temp = [];
         		evts[i] = new_event_id;
         		i += dir;
         	}
+        	// give new event same label as old event
+        	if (event_id in labels) labels[new_event_id] = labels[event_id]
         	changed.forEach(function(i) {
         		svg_update(i)
         	})
@@ -682,18 +791,21 @@ var temp = [];
         	// Event.split(dir, {{id}},event_id, image_id).then(reload_images)
         	return 0;
         }).on('mouseenter', '.split', function(e){ 
-        	if (is_dragging) return 0;
+        	if (is_dragging) return true; // true allows jquery event bubbling up
         	var img = $(e.target).closest("div.img")
-        	var id = img[0].id;
+        	var image_id = parseInt(img.attr("id"));
         	var dir = $(e.target).attr("split-dir");
-        	if ((!is_first_(id) && dir=="left") || (!is_last_(id) && dir=="right")) return 0;
+        	console.log(image_id, ".split dir:", dir, is_first_(image_id), is_last_(image_id) )
+        	if ((is_first_(image_id) && dir=="left") || (is_last_(image_id) && dir=="right")) return true;
+        	console.log(labels[evts[image_id]])
+        	var color = label_to_color[labels[evts[image_id]]]
         	if (dir=="left") {
-        		makeSeperator(img, {'x':10})
-        		makeSeperator(img.prev("div.img"), {'x':im_width_both-10})
+        		makeSeperator(img, {'x':10,'fill':color})
+        		makeSeperator(img.prev("div.img"), {'x':im_width_both-10,'fill':color})
         	} 
         	if (dir=="right") {
-        		makeSeperator(img, {'x':im_width_both-10})
-        		makeSeperator(img.next("div.img"), {'x':10})
+        		makeSeperator(img, {'x':im_width_both-10,'fill':color})
+        		makeSeperator(img.next("div.img"), {'x':10,'fill':color})
         	}
         }).on('mouseleave', '.split', function(e) { // hover off
         	var img = $(e.target).closest("div.img")
@@ -701,8 +813,9 @@ var temp = [];
         });
 
         function makeSeperator(el, attrs) {
+        	console.log(attrs['fill'])
         	// $(el).find(".line").attr("visibility",'hidden')
-        	attrs['fill'] = fillcol
+        	if (!('fill' in attrs) || attrs['fill']===undefined) attrs['fill'] = fillcol
         	attrs['width'] = 5
         	makeSeperatorLine(el, attrs);
         	if (attrs['x'] > im_half) attrs['x'] += 5;
@@ -738,8 +851,29 @@ var temp = [];
     }
     })
 
+	function generate_annotation_file() {
+		var curr_label = null;
+		var curr_evt = null;
+		var curr_start = null;
+		var str = "startTime, endTime, annotation\n";
+		evts.forEach((e, i) => {
+			var label = labels[e];
+			// console.log(i, e, label)
+			if (curr_evt!== e || label !== curr_label) {
+				if (curr_start!==null) {
+					var end = img_times[i];
+					str += curr_start.toISOString() + ',' + end.toISOString() + ',' + curr_label + '\n';
+				}
+				curr_label = label;
+				curr_evt = e;
+				curr_start = img_times[i];
+			}
+		})
+		console.log(str)
 
+	}
 
+	// setInterval(generate_annotation_file, 1000)
 	// SLIDE OUT SIDE ANNOTATION BAR
     var left_col_expanded = false;
     (function() {
@@ -768,7 +902,315 @@ var temp = [];
 		);
 
 	})();
+	</script>
+
+
+	<script>
+	$(document).ready(function() {
+		$(document).on('mouseenter', '.img', set_tooltip);
+		$(document).on('mouseup', '.img', set_tooltip);
+
+
+        $(document).on('mouseleave', '.img', function(e) { 
+            $('.tooltip').css('display', 'none');
+            $(e.target).closest('div.img')
+            $(e.target).closest('div.img').find('p').show()
+        });
+
+    });
+	function set_tooltip(e) {
+		// console.log("tooltip")
+		var image_id = parseInt($(e.target).closest('div.img').attr('id'));
+		// console.log("evts_fake==null", evts_fake==null)
+		if (evts_fake!==null)  label = labels[evts_fake[image_id]];
+		else label = labels[evts[image_id]];
+		if (!label) label = "none"
+		if (typeof(image_id)=="number") {
+			// console.log("TT", image_id, label)
+			var pos = $(e.target).closest('div.img').offset()
+            // put other effect in when moving over the element
+
+            // from e you can get the pageX(left position) and pageY(top position) 
+            // im not sure if it was the relative or the absolute position
+            // i added 10 pxs on the top and left to show the tooltip a bit after
+            $('.tooltip').css('left', pos.left).css('top', pos.top + 130 ).css('display', 'block');
+			$('.tooltip').text(label)
+			$(e.target).closest('div.img').find('p').hide()
+		}
+		return true
+    }
+	</script>
+	<style>
+	      .tooltip {
+	              position: fixed; /** depends on how it handles the e.pageX and e.pageY **/
+	              width: 100;
+	              /*height: 30px;*/
+	              margin: 5px;
+	              background: #FFF;
+	              border-radius:6px;
+	              border: 1px solid #000;
+	              z-index: 20;
+	              text-align: center;
+	              display: none; /**let the tooltip be not visable, when startup **/
+	              pointer-events:none;   /*css-property that makes events "pass through" an DOM-element  */
+	          }
+	</style>
+	<div class="tooltip">Tooltip</div>
+	<script>
+
+	$(document).on('mousedown','.gallery', function(e) {
+		console.log('openPhotoSwipe(idx)')
+	})
+	$(document).on('mousedown','.thumbnail', function(e) {
+		console.log('openPhotoSwipe(idx)')
+		if (e.which!==1) return; 
+		var idx = parseInt($(this).closest(".img").attr("id"))
+		openPhotoSwipe(idx)
+
+	})
+	setTimeout(function() {
+		$('.img#25').find('.thumbnail').mousedown();
+	}, 100)
+	var img_sizes = {
+		thumbnail: [100, 87],
+		medium: [864,645],
+		full: [2592,1936]
+	}
+	    // stop loading more images when pswp is open
+	    var pswpIsOpen = false;
+	    var pswp;
+
+	    // $(function() {slides = new Array(imgs.length)})
+		function openPhotoSwipe(index) {
+			if (pswpIsOpen) {
+				pswp.goTo(index);
+				return;
+			}
+			pswpIsOpen = true;
+			console.log(index)
+			var slides = imgs.map(function(img) { 
+				return {url: img}
+			});
+		    $(".gallery").addClass("fullscreen")
+		    $(".right-sticky").removeAttr('id')
+			console.log(slides)
+			var pswpElement = document.querySelectorAll('.pswp')[0];
+			var options = {
+				shareEl: false,
+				tapToClose: false,
+				index: index,
+				getThumbBoundsFn: function(index) {
+
+				    // find thumbnail element
+				    var thumbnail = $("div#"+index+".img").find(".thumbnail")[0];
+				    // get window scroll Y
+				    var pageYScroll = window.pageYOffset || document.documentElement.scrollTop; 
+				    // optionally get horizontal scroll
+
+				    // get position of element relative to viewport
+				    var rect = thumbnail.getBoundingClientRect(); 
+
+				    // w = width
+				    return {x:rect.left - 201, y:rect.top + pageYScroll, w:rect.width};
+
+				},
+				history: false,
+				closeOnVerticalDrag: false,
+				closeOnScroll: false
+				// modal: true
+			}
+			pswp = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, slides, options);
+			// create variable that will store real size of viewport
+			var realViewportWidth,
+			    useLargeImages = false,
+			    firstResize = true,
+			    imageSrcWillChange;
+
+			// beforeResize event fires each time size of gallery viewport updates
+			pswp.listen('beforeResize', function() {
+			    // calculate real pixels when size changes
+			    realViewportWidth = pswp.viewportSize.x * window.devicePixelRatio;
+
+			    // Code below is needed if you want image to switch dynamically on window.resize
+
+			    // Find out if current images need to be changed
+			    if(useLargeImages && realViewportWidth < img_sizes.medium[0]) {
+			        useLargeImages = false;
+			        imageSrcWillChange = true;
+			    } else if(!useLargeImages && realViewportWidth >= img_sizes.medium[0]) {
+			        useLargeImages = true;
+			        imageSrcWillChange = true;
+			    }
+
+			    // Invalidate items only when source is changed and when it's not the first update
+			    if(imageSrcWillChange && !firstResize) {
+			        // invalidateCurrItems sets a flag on slides that are in DOM,
+			        // which will force update of content (image) on window.resize.
+			        pswp.invalidateCurrItems();
+			    }
+
+			    if(firstResize) {
+			        firstResize = false;
+			    }
+
+			    imageSrcWillChange = false;
+
+			});
+
+
+			// gettingData event fires each time PhotoSwipe retrieves image source & size
+			pswp.listen('gettingData', function(index, item) {
+				console.log('gettingData',index, item)
+			    // Set image source & size based on real viewport width
+			    if( useLargeImages ) {
+			        item.src = window.location.href+'full/'+imgs[index];
+			        item.w = img_sizes.full[0],
+			        item.h = img_sizes.full[1]
+			    } else {
+			        item.src = window.location.href+'medium/'+imgs[index];
+			        item.w = img_sizes.medium[0],
+			        item.h = img_sizes.medium[1]
+			    }
+		        item.msrc = window.location.href+'thumbnail/'+imgs[index];
+			    item.title = labels[evts[index]] || ""
+			    // if (labels[evts[index]]) item.title = labels[imgs[index].label_id].text
+			    // else console.log("no img text for ", index, imgs[index])
+			});
+
+			var scrollTargetPos = null;
+			// pswp.listen('beforeChange', function() {
+			// 	var img = pswp.currItem;
+			// 	if (img.label_id!=null) img.title = labels[img.label_id].text
+			// });
+
+			pswp.listen('afterChange', function() {
+
+		    	var index = pswp.getCurrentIndex()
+
+		    	// http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
+		    	var container = $('.gallery'),
+		    	    scrollTo = $("div#"+index+".img");
+		    	
+		    	// container.scrollTop(
+		    	//     scrollTargetPos
+		    	// );
+
+		    	// Or you can animate the scrolling:
+		    	if (scrollTo.offset().top - container.offset().top + container.scrollTop()!=scrollTargetPos) {
+			    	scrollTargetPos = scrollTo.offset().top - container.offset().top + container.scrollTop();
+			    	container.stop().animate({
+			    	    scrollTop: scrollTargetPos
+			    	})
+		    	}
+		    	// var bgcol = scrollTo.css("background-color")
+		    	scrollTo.stop(undefined, true)
+		    	scrollTo.effect('highlight',{color:'lightblue'}, 1000)
+		    })
+		    // store the original scroll postion
+		    var originalScroll = $(window).scrollTop();
+
+		    $("#pswp-container").css('z-index',2);
+		    
+		    setCorrectHeight();
+
+		    $(pswpElement).show();
+
+
+		    pswp.listen('close', function(){
+				
+			    $(".gallery").css({
+			    	marginTop: '', 
+			    	height: '',
+			    	overflowY: ''
+		    	})
+
+
+
+			    var index = pswp.getCurrentIndex()
+
+			    // http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
+
+			    var scrollTo = $("div.img#"+index);
+
+			    console.log("index",index, "offset:", originalScroll)
+			    $(document).scrollTop(originalScroll )
+			    $(window).unbind("resize",setCorrectHeight)
+
+			});
+
+
+		    pswp.listen('destroy', function(){
+			    $("#pswp-container").css('z-index',-10);
+			    $(pswpElement).hide();
+			    pswpIsOpen = false;
+			    console.log("scrolling back again!",originalScroll)
+			    $(".gallery").removeClass("fullscreen")
+			    $(".right-sticky").attr('id', 'right-sticky')
+			    // $(document).scrollTop(originalScroll )
+			});
+
+		    pswp.init();
+		}
+
+		$(window).bind("resize",function() {if (pswpIsOpen) setCorrectHeight()})
+
+		// sets the container underneath photoswipe to fill the remaining space
+	    function setCorrectHeight() {
+	    	console.log("setCorrectHeight")
+	    	$(".gallery").css({
+		    	marginTop: $("#pswp-container").height(),
+		    	height:$(window).innerHeight()-$("#pswp-container").height(),
+		    	overflowX: 'scroll',
+		    	overflowY: 'hidden'
+		    })
+	    }
+		// Resize photoswipe div 
+		$(function () {
+			var isResizing = false;
+
+		    var handle = $('#handle'),
+		    	container = $("#pswp-container");
+
+		    handle.on('mousedown', function (e) {
+		        isResizing = true;
+		        console.log("resizing")
+		        e.preventDefault();
+		    });
+
+		    $(document).on('mousemove', function (e) {
+		        // we don't want to do anything if we aren't resizing.
+		        if (!isResizing) 
+		            return;
+		        
+		        var offsetBottom = e.clientY + container.offset().top ;
+		        console.log("resizing move", e.clientY,  offsetBottom)
+		        container.css('height', offsetBottom)
+		        setCorrectHeight();
+		        if (pswp) pswp.updateSize(true);
+
+		    }).on('mouseup', function (e) {
+		        // stop resizing
+		        isResizing = false;
+		    });
+		});
+		function first(p){for(var i in p)return i;}
+		$("#pswp-container").on('wheel', function(e) {
+			var delta = e.originalEvent.deltaY;
+			delta = Math.min(1,Math.max(-1, Math.round(delta/100)))
+			if (pswp) {
+				var top_index = imgs.lastIndexOf(imgs.slice(-1)[0]);
+				var bottom_index = parseInt(first(imgs));
+				var new_index = pswp.getCurrentIndex()+delta;
+				if (new_index > top_index) new_index = new_index - top_index + bottom_index
+				else if (new_index < bottom_index) new_index = new_index + top_index - bottom_index
+				console.log(top_index ,bottom_index ,new_index)
+				pswp.goTo(new_index);
+			}
+			return false;
+		});
+
 
 	</script>
+
 </body>
 </html>
