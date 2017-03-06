@@ -1,6 +1,6 @@
 <html>
     <head>
-      <title>Test</title>
+      <title>SvenViewer</title>
 
 	<script src="/static/jquery.min.js"></script>
 	<script src="/static/jquery-ui.js"></script>
@@ -44,7 +44,7 @@
 	  	overflow-x:hidden;
 	  	overflow-y: auto;
 	  	height: 100%;
-	  }
+	  }/*
 	  .gallery.fullscreen{
 	  	float: bottom;
 	  	overflow-x: auto !important;
@@ -53,7 +53,7 @@
 	  		  	height: 100px;
 	  	width: auto;    vertical-align:top;
 
-	  }
+	  }*/
 
 	  .background_text {
 	  	color: #999;
@@ -192,13 +192,19 @@ function get_leaves(schema) {
 		return [schema];
 	}
 }
+
+var current_schema = null;
 $(function () {
+
+	load_schema('annotation.csv')
+})
+function load_schema(schema) {
+	current_schema = null;
 	$.ajax({
 	  dataType: "json",
-	  url: '/annotation/annotation.csv',
-  	  // url: '/annotation/7-class.csv',
-
+	  url: '/schema/'+schema,
 	  success: function(schema_json) {
+	  		current_schema = schema; // assign once done so we can save with correct filename
 	  		console.log(schema_json)
 
 	  		// GENERATE COLORS
@@ -325,7 +331,8 @@ $(function () {
 			    });
 		}
 	});
-});
+}
+
 function annotate_image(i, label) {
 	var e = evts[i];
 	if (typeof(e)!=='number') {
@@ -557,20 +564,20 @@ function annotate_image(i, label) {
 		// console.log(i,  is_first ? "hidden":"" , is_last  ? "hidden":"", is_first, is_last)
 		makeLine(container, {width:im_half, x:0, nx:0, id:i, class:'left'}, is_first)
 		makeLine(container, {width:im_half, x:im_half, id:i, class:'right'}, is_last)
-		el.find('p').text(evts[i])
+		// el.find('p').text(evts[i])
     }	
     function svg_update(i, this_evts) {
-    	
+    	if (typeof(i)=="string") throw Error("no string indexes!!")
     	if (this_evts===undefined)  this_evts = evts;
     	var container = $('.img#'+i).find('svg');
     	var is_first =  this_evts[i]!==null && this_evts[i] !== this_evts[i-1];
     	var is_last =  this_evts[i]!==null && this_evts[i] !== this_evts[i+1];
-
-		// console.log("svg_", i, this_evts[i], is_first, is_last)
+    	// console.log(i, is_first, is_last)
+		// console.log("svg_", i, this_evts[i-1], this_evts[i], this_evts[i+1], is_first, is_last)
 		container.find('.circle').attr({visibility: !(this_evts[i] !== undefined && (is_first || is_last)) ? "hidden":"" })
 		container.find('.line.left').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_first) ?  "hidden":""})
 		container.find('.line.right').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_last) ?  "hidden":""})
-		$('.img#'+i).find('p').text(this_evts[i] + " ")
+		// $('.img#'+i).find('p').text(this_evts[i] + " ")
 		if (highlight_enabled) $('.img#'+i).effect("highlight", {}, 1000);
 		// console.log("svg_update i",i )
 		// console.trace()
@@ -851,27 +858,6 @@ function annotate_image(i, label) {
     }
     })
 
-	function generate_annotation_file() {
-		var curr_label = null;
-		var curr_evt = null;
-		var curr_start = null;
-		var str = "startTime, endTime, annotation\n";
-		evts.forEach((e, i) => {
-			var label = labels[e];
-			// console.log(i, e, label)
-			if (curr_evt!== e || label !== curr_label) {
-				if (curr_start!==null) {
-					var end = img_times[i];
-					str += curr_start.toISOString() + ',' + end.toISOString() + ',' + curr_label + '\n';
-				}
-				curr_label = label;
-				curr_evt = e;
-				curr_start = img_times[i];
-			}
-		})
-		console.log(str)
-
-	}
 
 	// setInterval(generate_annotation_file, 1000)
 	// SLIDE OUT SIDE ANNOTATION BAR
@@ -1194,6 +1180,7 @@ function annotate_image(i, label) {
 		    });
 		});
 		function first(p){for(var i in p)return i;}
+		
 		$("#pswp-container").on('wheel', function(e) {
 			var delta = e.originalEvent.deltaY;
 			delta = Math.min(1,Math.max(-1, Math.round(delta/100)))
@@ -1209,7 +1196,107 @@ function annotate_image(i, label) {
 			return false;
 		});
 
+		function generate_annotation_file() {
+			var first = function(elements) {return elements.find(function(element) { return !!element })};
 
+			var curr_evt = null
+			var curr_label = null
+			var curr_start = null
+			var str = "startTime, endTime, annotation\n";
+			console.log("STARTING", curr_evt,curr_start, curr_label)
+
+			var last_idx = -100;
+			evts.forEach((e, i) => {
+				last_idx = Math.max(i, last_idx)
+				var label = labels[e];
+				// console.log(i, e, label)
+				if (curr_evt!== e || label !== curr_label) {
+					if (curr_start!==null) {
+						var end = img_times[i-1];
+						str += curr_start.toISOString() + ',' + end.toISOString() + ',' + curr_label + '\n';
+					}
+					curr_label = label;
+					curr_evt = e;
+					curr_start = img_times[i];
+					console.log(e,i, label, curr_start.toISOString())
+				}
+			})
+			if (last_idx!==-100) {
+				var end = img_times[last_idx];
+				str += curr_start.toISOString() + ',' + end.toISOString() + ',' + curr_label + '\n';
+			}
+			console.log(str)
+			return str
+		}
+
+		function save_annotation() {
+			if (current_schema===null) return console.log("current schema not set (may be mid-load)", current_schema)
+			var data = generate_annotation_file();
+			$.post('/participant/'+participant_name+'/save', {data:data, schema:current_schema})
+
+		}
+
+		function read_annotation_file(text) {
+			var text = text.split('\n')
+
+			if (text[0]!=="startTime, endTime, annotation") return console.log("first row of csv not valid:", text[0])
+			text.splice(0,1);
+
+				 for (var i in img_times) {
+				 	console.log(i, img_times[i].toLocaleTimeString())
+				 }
+
+			var curr_idx = null;
+			var evt_idx = 0;
+			evts = [];
+			labels = {};
+			for (var i in img_times) {curr_idx = parseInt(i); break;} // set to first
+			text.forEach((line, idx) => {
+				var l=line.split(','); // TODO: check for escaped commas
+				if (l.length!==3) return console.log('invalid line:',l)
+
+				 var startDate =  new Date(l[0]);
+				 var endDate =  new Date(l[1]);
+				 var annotation = l[2]==="undefined" ? undefined : l[2];
+				 if (annotation!==undefined) {
+
+				 }
+				 labels[evt_idx] = annotation;
+				 color = label_to_color[annotation];
+				 while(true) {
+				 	if (img_times[curr_idx] < startDate) curr_idx++;
+				 	else break;
+				 }
+				 start_idx = curr_idx
+				 while(true) {
+				 	evts[curr_idx] = evt_idx;
+
+				 	if (img_times[curr_idx] < endDate) curr_idx++;
+				 	else break;
+				 }
+				 end_idx = curr_idx
+				 console.log('->', startDate.toLocaleTimeString(), " - ", endDate.toLocaleTimeString(), "   ", annotation,"   - ", start_idx, end_idx)
+				 console.log('->', img_times[start_idx].toLocaleTimeString(), " - ", img_times[end_idx].toLocaleTimeString(), color)
+
+				 evt_idx++;
+			})
+
+			for (var idx in evts) {
+				idx = parseInt(idx)
+				svg_update(idx)
+			 	svg_colorize(idx, label_to_color[labels[evts[idx]]])
+			 }
+
+
+		}
+		// setTimeout(save_annotation, 1200)
+		console.log(typeof(labels))
+		setTimeout(()=>{
+			$.get('/annotation/'+participant_name+'/annotation_'+current_schema+'',{},(data) => {
+				console.log('loaded annotation:',data)
+				read_annotation_file(data)
+			})
+		}, 200)
 	</script>
 
 </body>

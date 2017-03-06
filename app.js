@@ -92,23 +92,23 @@ class Db {
 				p.sizes.full.forEach((f) => {
 
 
-					var f_full = path.join(p_dir, p.name, 'medium',f)
-					// console.log(f_full)
-					fs.stat(f_full, (err, stat) => {
+					var f_medium = path.join(p_dir, p.name, 'medium',f)
+					// console.log(f_medium)
+					fs.stat(f_medium, (err, stat) => {
 						if (err!==null && err.code == 'ENOENT') {
-							console.log(p.name, 'not exist', f);
+							console.log(p.name, 'medium not exist', f);
 							sharp(path.join(p_dir, p.name, 'full',f))
 								.resize(img_sizes['medium'][0],img_sizes['medium'][1])
-								.toFile(f_full)
+								.toFile(f_medium)
 						}
 					})
-					f_full = path.join(p_dir, p.name, 'thumbnail',f)
-					fs.stat(f_full, (err, stat) => {
+					var f_thumbnail = path.join(p_dir, p.name, 'thumbnail',f)
+					fs.stat(f_thumbnail, (err, stat) => {
 						if (err!==null && err.code == 'ENOENT') {
-							console.log(p.name, 'not exist', f);
+							console.log(p.name, 'thumbnail not exist', f);
 							sharp(path.join(p_dir, p.name, 'full',f))
 								.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
-								.toFile(f_full)
+								.toFile(f_thumbnail)
 						}
 					})
 				})
@@ -124,6 +124,7 @@ db.load();
 
 app.use('/static/', express.static('static'))
 app.use('/participant/', express.static('participant'))
+app.use('/annotation/', express.static('annotation'))
 
 app.get('/', function (req, res) {
   res.send('Hello World!'+db.participant.map( p => '<br><a href="participant/'+p.name+'">'+p.name+' - '+p.sizes.full.length + ' images </a>').reduce((a, b) => a+b));
@@ -142,6 +143,37 @@ app.get('/participant/:pName', function (req, res) {
 	}
 });
 
+app.post('/participant/:pName/save/', function (req, res) {
+	var data = req.body.data;
+	var schema = req.body.schema;
+	var pName = req.params.pName;
+	console.log(data, schema,pName)
+	var schema_filepath = path.join(__dirname, 'schema',schema)
+	fs.statAsync(schema_filepath)
+		.catch({code:'ENOENT'}, (e) => {
+			console.log('schema does not exist' , schema_filepath)
+			throw e;
+		}).then(()=>{
+			console.log('schema exists ' , schema_filepath)
+			var dir = path.join(__dirname, 'annotation', pName);
+			return fs.exists(dir)
+		}).catch({code:'ENOENT'}, (e) => {
+		    console.log('participant',pName,'had no annotation folder so created it: ', dir)
+		    return fs.mkdir(dir);
+		}).then(() => {
+			console.log('annotation dir exists')
+			var filename = path.join(__dirname, 'annotation', pName, 'annotation_'+schema);
+			console.log(data)
+			return fs.writeFile(filename, data)
+		}).catch((e)=>{
+			console.log("error writing annotation file: ", e);
+			throw e;
+		}).then(()=>{
+			res.status(200)
+			res.send('success')
+		});
+		
+});
 
 
 // app.use(express.json());
@@ -184,13 +216,13 @@ app.post('/participant/:pName/images/', function (req, res) {
 	// var test = req.param('test', null);
 });
 
-app.get('/annotation/:annotation', function (req, res) {
-	var name = req.params.annotation;
+app.get('/schema/:schema', function (req, res) {
+	var name = req.params.schema;
 
-	parse_annotation(path.join('annotation', name)).then(parsedCsv => res.json(parsedCsv));
+	parse_schema(path.join('schema', name)).then(parsedCsv => res.json(parsedCsv));
 }); 
  
-function parse_annotation(fn) {
+function parse_schema(fn) {
 	return fs.readFileAsync(fn,'utf8').then((data) => {
 			var json = {
 				text: 'root node',
@@ -225,11 +257,8 @@ function parse_annotation(fn) {
 					}
 				})
 			})
-			// console.log(json)
-			// console.log(json.children.last())
 			return json;
 		})
-	// })
 }
 
 var server = http.createServer(app)
@@ -239,7 +268,7 @@ watch.watchTree(__dirname + "/static", {'interval':0.01}, function (f, curr, pre
     // Fire server-side reload event
     reloadServer.reload();
 });
-// parse_annotation('annotation/annotation.csv')
+
 
 server.listen(app.get('port'), function(){
   console.log("Web server listening on port " + app.get('port'));
