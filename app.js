@@ -36,13 +36,22 @@ class Db {
 	load() {
 
 		var p_dir = 'participant'
+		var annotation_dir = 'annotation'
 		fs.readdirAsync(p_dir).map(
 			(p_folder) => {
 				var sizes = {}
 				console.log(p_folder);
+
+				
 				var dir = path.join(p_dir, p_folder)
 
 				if (fs.lstatSync(dir).isDirectory()) {
+					// ensure corresponding annotation directory also exists
+					fs.statAsync(path.join(annotation_dir, p_folder)).catch( {code:'ENOENT'}, (e) => {
+						console.log("creating annotatioin dir:", path.join(annotation_dir, p_folder))
+						fs.mkdir(path.join(annotation_dir, p_folder));
+					})
+					// ensure all size directories exist
 					return Promise.each(
 						['full', 'medium', 'thumbnail'], 
 						(size) => {
