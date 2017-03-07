@@ -102,7 +102,20 @@
       	cursor: grab;
       	cursor: -webkit-grab;
       }
-
+      .menu-button {
+      	width:34px; 
+      	height:34px;
+      	padding:4px; 
+      	border-radius:4px; 
+      	border:1px solid silver; 
+      	margin-top:10px;  
+      }
+      #jstree_searchbox {
+      	padding:4px; 
+      	border-radius:4px; 
+      	border:1px solid silver; 
+      	margin-top:10;
+      }
       /*photoSwipe*/
       #pswp-container {
         position: fixed;
@@ -126,14 +139,12 @@
 <div class="left-sticky">
 	<!-- new jsonified jstree: -->
 	<div id="jstree_box"  style="display:none;">
-		<button type="button" id="jstree-selector" style="
-	background-repeat: no-repeat;background: url(/static/cog.png); 
-	width:27px; height:27px;padding:4px; border-radius:4px; border:1px solid silver; margin-top:10px;  
-	position: absolute;
-	top: 0;
-	left: 10;" >
-	    </button>
-		<input type="text" id="jstree_searchbox" style="padding:4px; border-radius:4px; border:1px solid silver; margin-top:46px;">
+		<button type="button" class="menu-button" id="btn-home"><i class="fa fa-home fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-save"><i class="fa fa-floppy-o fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-download"><i class="fa fa-download fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-settings"><i class="fa fa-cog fa-2x"></i> </button>
+		<input type="text" id="jstree_searchbox">
 		<div id="jstree">
 		</div>
 	</div>
@@ -196,14 +207,15 @@ function load_schema(schema) {
 	  url: '/schema/'+schema,
 	  success: function(schema_json) {
 	  		current_schema = schema; // assign once done so we can save with correct filename
-	  		console.log(schema_json)
+	  		load_annotation()
+	  		// console.log(schema_json)
 
 	  		// GENERATE COLORS
 	  		var leaves = get_leaves(schema_json);
-	  		console.log(leaves.length)
+	  		// console.log(leaves.length)
 	  		var colors = makeColorGradient(.3,.3,.3,0,2,4, 230,100,leaves.length)
-	  		console.log(colors)
-	  		console.log(colors.length)
+	  		// console.log(colors)
+	  		// console.log(colors.length)
 	  		leaves.forEach((l, index) => {
 	  			// l.color = colors[index];
 	  			l.li_attr = {style:"background-color:"+colors[index]+";background-image:false; width:24px; border-radius: 16px;"};
@@ -212,7 +224,7 @@ function load_schema(schema) {
 
 	  		})
 
-	  		console.log(leaves.slice(0,10))
+	  		// console.log(leaves.slice(0,10))
 
 			$('#jstree').on('loaded.jstree', function() {
 				$('#jstree_box').show()
@@ -445,19 +457,23 @@ function annotate_image(i, label) {
 	var start = 2, end=100;
 	$.post('/participant/'+participant_name+'/images', {start:start, end:end})
 		.done((response) => {
-			console.log("done", start, end, response)
-			var fake_event_id = 0;
-			for(var i=0; i<=end-start;i++ ) {
-				// console.log(response[i], i+start, date_from_filename(response[i]));
-				if (i in response && response[i] != null && response[i]!=undefined) {
-					imgs[i+start] = response[i];
-					evts[i+start] = fake_event_id;
-					img_times[i+start] = date_from_filename(response[i])
-					if (i > 10 && Math.random() > 0.8) fake_event_id++;
+			// console.log("done", start, end, response)
+			if (0) {
+				var fake_event_id = 0;
+				for(var i=0; i<=end-start;i++ ) {
+					// console.log(response[i], i+start, date_from_filename(response[i]));
+					if (i in response && response[i] != null && response[i]!=undefined) {
+						imgs[i+start] = response[i];
+						evts[i+start] = fake_event_id;
+						
+						if (i > 10 && Math.random() > 0.8) fake_event_id++;
+					}
 				}
 			}
-
 			for(var i=0; i<=end-start;i++ ) {
+				imgs[i+start] = response[i];
+				evts[i+start] = null
+				img_times[i+start] = date_from_filename(response[i])
 				if (imgs[i+start]!=undefined) create_image(i+start);
 			}
 		})
@@ -481,14 +497,14 @@ function annotate_image(i, label) {
 		var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'"'//+((i.label_id===null || i.label_id===undefined) ? '' : 'label-id="'+i.label_id+'" ');
 		// str +=' is-last="'+is_last+'" is-first="'+is_first+'" first-id="' + first_id + '"  last-id="' + last_id + '">' 
 		str += '">' 
-	 	if ((e!==undefined && e!==null)) {			 	
+	 	// if ((e!==undefined && e!==null)) {			 	
 			// if (!is_last) {
 				 str += '<div style="left:92px;" class="split right" split-dir="right"></div>'
 			// }
 			// if (!is_first) {
 				str += '<div style="left:0px;" class="split left" split-dir="left"></div>'
 			// }
-		}
+		// }
 		str += '<svg width="110" height="30">'
 
 		str += '</svg>'
@@ -722,8 +738,8 @@ function annotate_image(i, label) {
 			}) 
 
 			start_dir = (start_is_first && start_is_last) ? 0 : (start_is_first ? 1 : -1) 
-			console.log('start_is_first',start_is_first, 'start_is_last',start_is_last, 'start_dir',start_dir)
-			console.log("start_edge",start_edge)
+			// console.log('start_is_first',start_is_first, 'start_is_last',start_is_last, 'start_dir',start_dir)
+			// console.log("start_edge",start_edge)
 			$(document).on('mouseenter', 'div.img', hoverImg);
 		}); 
 		
@@ -754,24 +770,17 @@ function annotate_image(i, label) {
         	var me = $(e.target)
         	var image_id = parseInt(me.closest("div.img").attr("id"));
         	var event_id = evts[image_id];
-        	console.log("ids:",image_id, event_id)
+        	// console.log("ids:",image_id, event_id)
         	var dir = me.attr("split-dir") == "left" ? 1 : -1;
         	if ((is_first_(image_id) && dir==1) || (is_last_(image_id) && dir==-1)) return 0;
         	e.preventDefault();
 
-        	// if (dir == -1 ) {
-	        // 	$(".img#"+(image_id+1)).find('.split.left').remove()
-	        // 	$(".img#"+(image_id)).find('.split.right').remove()
-        	// } else {
-        	// 	$(".img#"+(image_id-1)).find('.split.right').remove()
-        	// 	$(".img#"+(image_id)).find('.split.left').remove()        		
-        	// }
         	$(".fake.seperator").remove()
 
 
     		var new_event_id = arr_max(evts)+1;
         	var i = image_id;
-    		console.log("dir:", i, dir, new_event_id);
+    		// console.log("dir:", i, dir, new_event_id);
         	var changed = [i-dir, i];
         	
         	console.log(i, evts[i], event_id)
@@ -793,9 +802,9 @@ function annotate_image(i, label) {
         	var img = $(e.target).closest("div.img")
         	var image_id = parseInt(img.attr("id"));
         	var dir = $(e.target).attr("split-dir");
-        	console.log(image_id, ".split dir:", dir, is_first_(image_id), is_last_(image_id) )
+        	// console.log(image_id, ".split dir:", dir, is_first_(image_id), is_last_(image_id) )
         	if ((is_first_(image_id) && dir=="left") || (is_last_(image_id) && dir=="right")) return true;
-        	console.log(labels[evts[image_id]])
+        	// console.log(labels[evts[image_id]])
         	var color = label_to_color[labels[evts[image_id]]]
         	if (dir=="left") {
         		makeSeperator(img, {'x':10,'fill':color})
@@ -811,7 +820,6 @@ function annotate_image(i, label) {
         });
 
         function makeSeperator(el, attrs) {
-        	console.log(attrs['fill'])
         	// $(el).find(".line").attr("visibility",'hidden')
         	if (!('fill' in attrs) || attrs['fill']===undefined) attrs['fill'] = fillcol
         	attrs['width'] = 5
@@ -968,7 +976,6 @@ function annotate_image(i, label) {
 			var slides = imgs.map(function(img) { 
 				return {url: img}
 			});
-		    $(".gallery").addClass("fullscreen")
 		    $(".right-sticky").removeAttr('id')
 			console.log(slides)
 			var pswpElement = document.querySelectorAll('.pswp')[0];
@@ -1121,7 +1128,6 @@ function annotate_image(i, label) {
 			    $(pswpElement).hide();
 			    pswpIsOpen = false;
 			    console.log("scrolling back again!",originalScroll)
-			    $(".gallery").removeClass("fullscreen")
 			    $(".right-sticky").attr('id', 'right-sticky')
 			    // $(document).scrollTop(originalScroll )
 			});
@@ -1223,7 +1229,7 @@ function annotate_image(i, label) {
 		function save_annotation() {
 			if (current_schema===null) return console.log("current schema not set (may be mid-load)", current_schema)
 			var data = generate_annotation_file();
-			$.post('/participant/'+participant_name+'/save', {data:data, schema:current_schema})
+			return $.post('/participant/'+participant_name+'/save', {data:data, schema:current_schema})
 
 		}
 
@@ -1280,14 +1286,22 @@ function annotate_image(i, label) {
 
 
 		}
-		// setTimeout(save_annotation, 1200)
-		console.log(typeof(labels))
-		setTimeout(()=>{
+		function load_annotation() {
 			$.get('/annotation/'+participant_name+'/annotation_'+current_schema+'',{},(data) => {
 				console.log('loaded annotation:',data)
 				read_annotation_file(data)
+			}).fail(() => {
+				console.log('annotation failed to load')
 			})
-		}, 200)
+		}
+		$("#btn-save").click(()=>{
+			console.log("save", this)
+			var temp_icon = 'fa-spinner'
+			$("#btn-save").find('i').removeClass('fa-floppy-o').addClass(temp_icon)
+			save_annotation().then(() => {
+				$("#btn-save").find('i').removeClass(temp_icon).addClass('fa-floppy-o')
+			})
+		})
 	</script>
 
 </body>
