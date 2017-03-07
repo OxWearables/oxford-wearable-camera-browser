@@ -123,6 +123,7 @@ var db = new Db()
 db.load();
 
 app.use('/static/', express.static('static'))
+app.use('/fonts/', express.static('fonts'))
 app.use('/participant/', express.static('participant'))
 app.use('/annotation/', express.static('annotation'))
 
@@ -270,6 +271,6 @@ watch.watchTree(__dirname + "/static", {'interval':0.01}, function (f, curr, pre
 });
 
 
-server.listen(app.get('port'), function(){
+server.listen(app.get('port'), '127.0.0.1', function(){
   console.log("Web server listening on port " + app.get('port'));
 });
