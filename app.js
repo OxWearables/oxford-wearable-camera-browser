@@ -135,7 +135,10 @@ app.use('/static/', express.static('static'))
 app.use('/fonts/', express.static('fonts'))
 app.use('/participant/', express.static('participant'))
 app.use('/annotation/', express.static('annotation'))
-
+app.get('/favicon.ico', (req, res) => {
+	console.log('favicon', res)
+  res.sendFile(__dirname+'/static/favicon.ico')
+})
 app.get('/', function (req, res) {
   res.send('Hello World!'+db.participant.map( p => '<br><a href="participant/'+p.name+'">'+p.name+' - '+p.sizes.full.length + ' images </a>').reduce((a, b) => a+b));
 })
@@ -157,7 +160,7 @@ app.post('/participant/:pName/save/', function (req, res) {
 	var data = req.body.data;
 	var schema = req.body.schema;
 	var pName = req.params.pName;
-	console.log(data, schema,pName)
+	// console.log(data, schema,pName)
 	var schema_filepath = path.join(__dirname, 'schema',schema)
 	fs.statAsync(schema_filepath)
 		.catch({code:'ENOENT'}, (e) => {
@@ -173,7 +176,7 @@ app.post('/participant/:pName/save/', function (req, res) {
 		}).then(() => {
 			console.log('annotation dir exists')
 			var filename = path.join(__dirname, 'annotation', pName, 'annotation_'+schema);
-			console.log(data)
+			// console.log(data)
 			return fs.writeFile(filename, data)
 		}).catch((e)=>{
 			console.log("error writing annotation file: ", e);
@@ -231,7 +234,7 @@ app.get('/schema/:schema', function (req, res) {
 
 	parse_schema(path.join('schema', name)).then(parsedCsv => res.json(parsedCsv));
 }); 
- 
+
 function parse_schema(fn) {
 	return fs.readFileAsync(fn,'utf8').then((data) => {
 			var json = {

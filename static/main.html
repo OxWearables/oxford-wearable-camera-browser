@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/static/photoswipe/photoswipe.css" />
     <link rel="stylesheet" href="/static/photoswipe/default-skin/default-skin.css"> 
     <link rel="stylesheet" href="/static/font-awesome.css">
+    <link rel="shortcut icon"href="/favicon.png" />
     <style>
     body {
     	margin: 0px;
@@ -139,7 +140,7 @@
 <div class="left-sticky">
 	<!-- new jsonified jstree: -->
 	<div id="jstree_box"  style="display:none;">
-		<button type="button" class="menu-button" id="btn-home"><i class="fa fa-home fa-2x"></i> </button>
+		<a  href="/"><button type="button" class="menu-button" id="btn-home"><i class="fa fa-home fa-2x"></i> </button></a>
 		<button type="button" class="menu-button" id="btn-save"><i class="fa fa-floppy-o fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-download"><i class="fa fa-download fa-2x"></i> </button>
@@ -436,7 +437,6 @@ function annotate_image(i, label) {
 
 		<div class="gallery">
 		</div>
-		<!-- <a class="load-next" href="#">Load more</a> -->
 	</div>
 	<script>
 	url = window.location.href.split('/')
@@ -953,9 +953,6 @@ function annotate_image(i, label) {
 		openPhotoSwipe(idx)
 
 	})
-	setTimeout(function() {
-		$('.img#25').find('.thumbnail').mousedown();
-	}, 100)
 	var img_sizes = {
 		thumbnail: [100, 87],
 		medium: [864,645],
@@ -1239,9 +1236,9 @@ function annotate_image(i, label) {
 			if (text[0]!=="startTime, endTime, annotation") return console.log("first row of csv not valid:", text[0])
 			text.splice(0,1);
 
-				 for (var i in img_times) {
-				 	console.log(i, img_times[i].toLocaleTimeString())
-				 }
+				 // for (var i in img_times) {
+				 // 	console.log(i, img_times[i].toLocaleTimeString())
+				 // }
 
 			var curr_idx = null;
 			var evt_idx = 0;
@@ -1272,8 +1269,8 @@ function annotate_image(i, label) {
 				 	else break;
 				 }
 				 end_idx = curr_idx
-				 console.log('->', startDate.toLocaleTimeString(), " - ", endDate.toLocaleTimeString(), "   ", annotation,"   - ", start_idx, end_idx)
-				 console.log('->', img_times[start_idx].toLocaleTimeString(), " - ", img_times[end_idx].toLocaleTimeString(), color)
+				 // console.log('->', startDate.toLocaleTimeString(), " - ", endDate.toLocaleTimeString(), "   ", annotation,"   - ", start_idx, end_idx)
+				 // console.log('->', img_times[start_idx].toLocaleTimeString(), " - ", img_times[end_idx].toLocaleTimeString(), color)
 
 				 evt_idx++;
 			})
@@ -1288,7 +1285,7 @@ function annotate_image(i, label) {
 		}
 		function load_annotation() {
 			$.get('/annotation/'+participant_name+'/annotation_'+current_schema+'',{},(data) => {
-				console.log('loaded annotation:',data)
+				console.log('loaded annotation')
 				read_annotation_file(data)
 			}).fail(() => {
 				console.log('annotation failed to load')
