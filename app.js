@@ -35,7 +35,7 @@ class Db {
 	}
 	load() {
 
-		var p_dir = 'participant'
+		var p_dir = 'images'
 		var annotation_dir = 'annotation'
 		fs.readdirAsync(p_dir).map(
 			(p_folder) => {
@@ -133,7 +133,7 @@ db.load();
 
 app.use('/static/', express.static('static'))
 app.use('/fonts/', express.static('fonts'))
-app.use('/participant/', express.static('participant'))
+app.use('/images/', express.static('images'))
 app.use('/annotation/', express.static('annotation'))
 app.get('/favicon.ico', (req, res) => {
 	console.log('favicon', res)
@@ -157,10 +157,11 @@ app.get('/participant/:pName', function (req, res) {
 });
 
 app.post('/participant/:pName/save/', function (req, res) {
-	var data = req.body.data;
-	var schema = req.body.schema;
+	var data = req.body.data; // text to go in the csv
+	var schema = req.body.schema; // name of schema in use
+	var tmp = req.body.tmp;
 	var pName = req.params.pName;
-	// console.log(data, schema,pName)
+	console.log(tmp, schema,pName)
 	var schema_filepath = path.join(__dirname, 'schema',schema)
 	fs.statAsync(schema_filepath)
 		.catch({code:'ENOENT'}, (e) => {

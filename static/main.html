@@ -17,6 +17,9 @@
     body {
     	margin: 0px;
     }
+    a {text-decoration:none}
+    button { cursor: pointer; }
+
     .left-sticky {
 		position: absolute;
 		left: 0px;
@@ -40,12 +43,15 @@
 
 	  .right-sticky {
 	  	margin-left: 201px; /* 201 so we can easily find references */
+	  	height: 100%;
+	  	overflow-y:hidden;
+	  	overflow-x:hidden;
 	  }
-	  #right-sticky {
+	  /*#right-sticky {
 	  	overflow-x:hidden;
 	  	overflow-y: auto;
 	  	height: 100%;
-	  }
+	  }*/
 
 	  .background_text {
 	  	color: #999;
@@ -117,6 +123,7 @@
       	border:1px solid silver; 
       	margin-top:10;
       }
+
       /*photoSwipe*/
       #pswp-container {
         position: fixed;
@@ -134,25 +141,119 @@
       	text-align: center;
       	max-width: 1000px;
       }
+
+      /*drag to resize photoswipe element*/
+      #handle {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -4px;
+          height: 8px;
+          cursor: ns-resize;
+          z-index:2;
+      }
+
+      .gallery {
+      	overflow-y:auto;
+      }
 	</style>
 </head>
 <body>
 <div class="left-sticky">
+	<div>
+		<a  href="/">
+			<button type="button" class="menu-button" id="btn-home" title="go back to homepage"><i class="fa fa-home fa-2x"></i> </button>
+		</a> 
+		<button type="button" class="menu-button" id="btn-save" title="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-download" title="download annotations as .csv"><i class="fa fa-download fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-settings" title="settings"><i class="fa fa-cog fa-2x"></i> </button>
+	</div>
 	<!-- new jsonified jstree: -->
 	<div id="jstree_box"  style="display:none;">
-		<a  href="/"><button type="button" class="menu-button" id="btn-home"><i class="fa fa-home fa-2x"></i> </button></a>
-		<button type="button" class="menu-button" id="btn-save"><i class="fa fa-floppy-o fa-2x"></i> </button>
-		<button type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
-		<button type="button" class="menu-button" id="btn-download"><i class="fa fa-download fa-2x"></i> </button>
-		<button type="button" class="menu-button" id="btn-settings"><i class="fa fa-cog fa-2x"></i> </button>
 		<input type="text" id="jstree_searchbox">
 		<div id="jstree">
 		</div>
 	</div>
 </div>
-	<script>
 
-	var highlight_enabled = false;
+<div class="right-sticky" id="right-sticky">
+
+	<div id="pswp-container">
+
+		<!-- Root element of PhotoSwipe. Must have class pswp. -->
+		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+		    <!-- Background of PhotoSwipe. 
+		         It's a separate element as animating opacity is faster than rgba(). -->
+		    <div class="pswp__bg"></div>
+
+		    <!-- Slides wrapper with overflow:hidden. -->
+		    <div class="pswp__scroll-wrap">
+
+		        <!-- Container that holds slides. 
+		            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+		            Don't modify these 3 pswp__item elements, data is added later on. -->
+		        <div class="pswp__container"> 
+		            <div class="pswp__item"></div>
+		            <div class="pswp__item"></div>
+		            <div class="pswp__item"></div>
+		        </div>
+
+		        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+		        <div class="pswp__ui pswp__ui--hidden">
+
+		            <div class="pswp__top-bar">
+
+		                <!--  Controls are self-explanatory. Order can be changed. -->
+
+		                <div class="pswp__counter"></div>
+
+		                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+		                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+		                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+		                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+		                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+		                <!-- element will get class pswp__preloader--active when preloader is running -->
+		                <div class="pswp__preloader">
+		                    <div class="pswp__preloader__icn">
+		                      <div class="pswp__preloader__cut">
+		                        <div class="pswp__preloader__donut"></div>
+		                      </div>
+		                    </div>
+		                </div>
+		            </div>
+
+		            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+		                <div class="pswp__share-tooltip"></div> 
+		            </div>
+
+		            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+		            </button>
+
+		            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+		            </button>
+
+		            <div class="pswp__caption">
+		                <div class="pswp__caption__center"></div>
+		            </div>
+
+		        </div>
+
+		    </div>
+
+		<div id="handle"></div> 
+		</div>
+	</div>
+
+	<div class="gallery">
+	</div>
+</div>
+	<script>
 function byte2Hex(n)
 {
 	var nybHexString = "0123456789ABCDEF";
@@ -359,90 +460,10 @@ function annotate_image(i, label) {
 		})
 	}
 }
-	</script>
 
 
-	<div class="right-sticky" id="right-sticky">
-
-		<div id="pswp-container">
-
-			<!-- Root element of PhotoSwipe. Must have class pswp. -->
-			<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-			    <!-- Background of PhotoSwipe. 
-			         It's a separate element as animating opacity is faster than rgba(). -->
-			    <div class="pswp__bg"></div>
-
-			    <!-- Slides wrapper with overflow:hidden. -->
-			    <div class="pswp__scroll-wrap">
-
-			        <!-- Container that holds slides. 
-			            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-			            Don't modify these 3 pswp__item elements, data is added later on. -->
-			        <div class="pswp__container"> 
-			            <div class="pswp__item"></div>
-			            <div class="pswp__item"></div>
-			            <div class="pswp__item"></div>
-			        </div>
-
-			        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-			        <div class="pswp__ui pswp__ui--hidden">
-
-			            <div class="pswp__top-bar">
-
-			                <!--  Controls are self-explanatory. Order can be changed. -->
-
-			                <div class="pswp__counter"></div>
-
-			                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-			                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-			                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-			                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-			                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-			                <!-- element will get class pswp__preloader--active when preloader is running -->
-			                <div class="pswp__preloader">
-			                    <div class="pswp__preloader__icn">
-			                      <div class="pswp__preloader__cut">
-			                        <div class="pswp__preloader__donut"></div>
-			                      </div>
-			                    </div>
-			                </div>
-			            </div>
-
-			            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-			                <div class="pswp__share-tooltip"></div> 
-			            </div>
-
-			            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-			            </button>
-
-			            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-			            </button>
-
-			            <div class="pswp__caption">
-			                <div class="pswp__caption__center"></div>
-			            </div>
-
-			        </div>
-
-			    </div>
-
-			<div id="handle"></div> 
-			</div>
-		</div>
-
-		<div class="gallery">
-		</div>
-	</div>
-	<script>
-	url = window.location.href.split('/')
+	var url = window.location.href.split('/')
 	var participant_name = url[url.indexOf('participant')+1]
-	// console.log(typeof(window.location.href))
-	// var participant_name = window.location.href.split('/').last()
 	console.log("participant_name",participant_name)
 
 
@@ -457,24 +478,14 @@ function annotate_image(i, label) {
 	var start = 2, end=100;
 	$.post('/participant/'+participant_name+'/images', {start:start, end:end})
 		.done((response) => {
-			// console.log("done", start, end, response)
-			if (0) {
-				var fake_event_id = 0;
-				for(var i=0; i<=end-start;i++ ) {
-					// console.log(response[i], i+start, date_from_filename(response[i]));
-					if (i in response && response[i] != null && response[i]!=undefined) {
-						imgs[i+start] = response[i];
-						evts[i+start] = fake_event_id;
-						
-						if (i > 10 && Math.random() > 0.8) fake_event_id++;
-					}
-				}
-			}
 			for(var i=0; i<=end-start;i++ ) {
-				imgs[i+start] = response[i];
-				evts[i+start] = null
-				img_times[i+start] = date_from_filename(response[i])
-				if (imgs[i+start]!=undefined) create_image(i+start);
+				// if there are not enough images will recieve undefined values
+				if (response[i]!==undefined && response[i]!==null) { 
+					imgs[i+start] = response[i];
+					evts[i+start] = null
+					img_times[i+start] = date_from_filename(response[i])
+					create_image(i+start);
+				}
 			}
 		})
 		.fail((response) => {console.log("post response:",response)});
@@ -508,7 +519,7 @@ function annotate_image(i, label) {
 		str += '<svg width="110" height="30">'
 
 		str += '</svg>'
-		str += '<img class="thumbnail" width="100" height="87" src="'+window.location.href+'thumbnail/'+i+'" >'
+		str += '<img class="thumbnail" width="100" height="87" src="/images/'+participant_name+'/thumbnail/'+i+'" >'
 		str += '<p>' + time.toLocaleTimeString()+'</p></div>'
 		// str += '<p>' + pad_num(image_time[3],2)+':'+ pad_num(image_time[4],2)+':'+pad_num(image_time[5],2)+'</p></div>'
 		// console.log(str)
@@ -584,10 +595,6 @@ function annotate_image(i, label) {
 		container.find('.circle').attr({visibility: !(this_evts[i] !== undefined && (is_first || is_last)) ? "hidden":"" })
 		container.find('.line.left').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_first) ?  "hidden":""})
 		container.find('.line.right').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_last) ?  "hidden":""})
-		// $('.img#'+i).find('p').text(this_evts[i] + " ")
-		if (highlight_enabled) $('.img#'+i).effect("highlight", {}, 1000);
-		// console.log("svg_update i",i )
-		// console.trace()
     }
 
     function arr_max(arr) {
@@ -837,28 +844,10 @@ function annotate_image(i, label) {
         	attrs['y'] = 5
         	$(el).find("svg").append(makeSVG("rect",attrs));
         }
-        if (0) {
-        setTimeout(function() {$('.img#23').find(".split.right").click()} , 3250);
-        setTimeout(function() {$('.img#23').find(".split.right").mouseenter()} , 2000);
-        // // setTimeout(function() {$('.img#23').find(".split.right").mouseleave()} , 600);
 
-
-        setTimeout(function() {$('.img#28').find(".split.left").mouseleave()} , 1550);
-        setTimeout(function() {$('.img#28').find(".split.left").click()} , 1250);
-        setTimeout(function() {$('.img#28').find(".split.left").mouseenter()} , 1200);
-        // setTimeout(function() {$('.img#28').find(".split.left").mouseleave()} , 1600);
-       setTimeout(function() {$('.img#20').find(".circle").mousedown()} , 150);
-       setTimeout(function() {$('.img#20').mouseenter()} , 50);
-       setTimeout(function() {$('.img#21').mouseenter()} , 350);
-       setTimeout(function() {$('.img#22').mouseenter()} , 650);
-       setTimeout(function() {$('.img#23').mouseenter()} , 1250);
-       setTimeout(function() {$('.img#23').find(".circle").mouseup()} , 1850);
-       // setTimeout(function() {$('.img#20').find(".circle").mousedown()} , 250);
-    }
     })
 
 
-	// setInterval(generate_annotation_file, 1000)
 	// SLIDE OUT SIDE ANNOTATION BAR
     var left_col_expanded = false;
     (function() {
@@ -866,7 +855,8 @@ function annotate_image(i, label) {
 		var expand_left_col = function() { // on
 		        // var fn = function() { console.log("done")};
 		        var max_width = Math.min(left_bar_width+left_col_expanded*500, $( window ).width()*0.9);
-		        // console.log(left_col_expanded ? "on" : "off", max_width, $('.left-sticky')[0].scrollWidth)
+		        console.log(left_col_expanded ? "on" : "off", max_width, $('.left-sticky')[0].scrollWidth)
+		        console.log($('.left-sticky')[0].offsetWidth, $('.left-sticky')[0].clientWidth)
 		        $('.left-sticky').stop().animate({
 		        	width:Math.min(max_width, Math.max(left_bar_width, $('.left-sticky')[0].scrollWidth))
 		        }, {duration: 200, done: null});
@@ -886,11 +876,12 @@ function annotate_image(i, label) {
 		    }
 		);
 
+		$("#jstree").on('open_node.jstree', expand_left_col);
+		$("#jstree").on('close_node.jstree', expand_left_col);
 	})();
-	</script>
 
 
-	<script>
+
 	$(document).ready(function() {
 		$(document).on('mouseenter', '.img', set_tooltip);
 		$(document).on('mouseup', '.img', set_tooltip);
@@ -912,22 +903,26 @@ function annotate_image(i, label) {
 		if (!label) label = "none"
 		if (typeof(image_id)=="number") {
 			// console.log("TT", image_id, label)
-			var pos = $(e.target).closest('div.img').offset()
+
+			// var pos = $(e.target).closest('div.img')
+
+			// var pos = $(e.target).closest('div.img').offset()
             // put other effect in when moving over the element
 
             // from e you can get the pageX(left position) and pageY(top position) 
             // im not sure if it was the relative or the absolute position
             // i added 10 pxs on the top and left to show the tooltip a bit after
-            $('.tooltip').css('left', pos.left).css('top', pos.top + 130 ).css('display', 'block');
-			$('.tooltip').text(label)
+            $('.tooltip').css('display', 'block');
+			$('.tooltip').text(label).appendTo($(e.target))
 			$(e.target).closest('div.img').find('p').hide()
+
 		}
 		return true
     }
 	</script>
 	<style>
 	      .tooltip {
-	              position: fixed; /** depends on how it handles the e.pageX and e.pageY **/
+	              position: relative; /** depends on how it handles the e.pageX and e.pageY **/
 	              width: 100;
 	              /*height: 30px;*/
 	              margin: 5px;
@@ -969,6 +964,7 @@ function annotate_image(i, label) {
 				return;
 			}
 			pswpIsOpen = true;
+			$('.gallery').height(200)
 			console.log(index)
 			var slides = imgs.map(function(img) { 
 				return {url: img}
@@ -1044,15 +1040,15 @@ function annotate_image(i, label) {
 				console.log('gettingData',index, item)
 			    // Set image source & size based on real viewport width
 			    if( useLargeImages ) {
-			        item.src = window.location.href+'full/'+imgs[index];
+			        item.src = '/images/'+participant_name+'/full/'+imgs[index];
 			        item.w = img_sizes.full[0],
 			        item.h = img_sizes.full[1]
 			    } else {
-			        item.src = window.location.href+'medium/'+imgs[index];
+			        item.src = '/images/'+participant_name+'/medium/'+imgs[index];
 			        item.w = img_sizes.medium[0],
 			        item.h = img_sizes.medium[1]
 			    }
-		        item.msrc = window.location.href+'thumbnail/'+imgs[index];
+		        item.msrc = '/images/'+participant_name+'/thumbnail/'+imgs[index];
 			    item.title = labels[evts[index]] || ""
 			    // if (labels[evts[index]]) item.title = labels[imgs[index].label_id].text
 			    // else console.log("no img text for ", index, imgs[index])
@@ -1140,8 +1136,8 @@ function annotate_image(i, label) {
 	    	$(".gallery").css({
 		    	marginTop: $("#pswp-container").height(),
 		    	height:$(window).innerHeight()-$("#pswp-container").height(),
-		    	overflowX: 'scroll',
-		    	overflowY: 'hidden'
+		    	overflowX: 'hidden',
+		    	overflowY: 'auto'
 		    })
 	    }
 		// Resize photoswipe div 
@@ -1236,10 +1232,6 @@ function annotate_image(i, label) {
 			if (text[0]!=="startTime, endTime, annotation") return console.log("first row of csv not valid:", text[0])
 			text.splice(0,1);
 
-				 // for (var i in img_times) {
-				 // 	console.log(i, img_times[i].toLocaleTimeString())
-				 // }
-
 			var curr_idx = null;
 			var evt_idx = 0;
 			evts = [];
@@ -1247,7 +1239,7 @@ function annotate_image(i, label) {
 			for (var i in img_times) {curr_idx = parseInt(i); break;} // set to first
 			text.forEach((line, idx) => {
 				var l=line.split(','); // TODO: check for escaped commas
-				if (l.length!==3) return console.log('invalid line:',l)
+				if (l.length!==3) return // empty line
 
 				 var startDate =  new Date(l[0]);
 				 var endDate =  new Date(l[1]);
