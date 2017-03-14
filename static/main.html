@@ -47,11 +47,11 @@
 	  	overflow-y:hidden;
 	  	overflow-x:hidden;
 	  }
-	  /*#right-sticky {
-	  	overflow-x:hidden;
+	  #right-sticky {
+	  	/*overflow-x:hidden;*/
 	  	overflow-y: auto;
-	  	height: 100%;
-	  }*/
+	  	/*height: 100%;*/
+	  }
 
 	  .background_text {
 	  	color: #999;
@@ -482,11 +482,14 @@ function annotate_image(i, label) {
 				// if there are not enough images will recieve undefined values
 				if (response[i]!==undefined && response[i]!==null) { 
 					imgs[i+start] = response[i];
-					evts[i+start] = null
+					evts[i+start] = evts[i+start] || 0;
 					img_times[i+start] = date_from_filename(response[i])
-					create_image(i+start);
 				}
 			}
+			for(var i=0; i<=end-start;i++ ) {
+				create_image(i+start);
+			}
+
 		})
 		.fail((response) => {console.log("post response:",response)});
 
@@ -628,10 +631,12 @@ function annotate_image(i, label) {
 		var start_dir = null;
 		function hoverImg(e) {
 			if (is_dragging) {
+				set_tooltip(e);
+
 				e.preventDefault();
 				var curr_img_id = parseInt($(e.target).closest("div.img")[0].id);
 				if (curr_img_id==prev_hover_id) {
-					return false;
+					return true;
 				} 
 				console.log('hoverImg', curr_img_id, prev_hover_id)
 
@@ -721,7 +726,6 @@ function annotate_image(i, label) {
 						svg_colorize(i, color)
 					}
 				}
-				set_tooltip(e);
 
 				return true;
 			}
@@ -900,9 +904,8 @@ function annotate_image(i, label) {
 		// console.log("evts_fake==null", evts_fake==null)
 		if (evts_fake!==null)  label = labels[evts_fake[image_id]];
 		else label = labels[evts[image_id]];
-		if (!label) label = "none"
+		if (!label) label = "none";
 		if (typeof(image_id)=="number") {
-			// console.log("TT", image_id, label)
 
 			// var pos = $(e.target).closest('div.img')
 
@@ -913,8 +916,8 @@ function annotate_image(i, label) {
             // im not sure if it was the relative or the absolute position
             // i added 10 pxs on the top and left to show the tooltip a bit after
             $('.tooltip').css('display', 'block');
-			$('.tooltip').text(label).appendTo($(e.target))
-			$(e.target).closest('div.img').find('p').hide()
+			$('.tooltip').text(label).appendTo($(e.target).closest('div.img'))
+			$(e.target).closest('div.img').find('p').not('.tooltip').hide()
 
 		}
 		return true

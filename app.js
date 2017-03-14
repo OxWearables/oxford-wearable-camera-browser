@@ -216,8 +216,6 @@ app.post('/participant/:pName/save/', function (req, res) {
 		
 });
 
-
-// app.use(express.json());
 app.post('/participant/:pName/images/', function (req, res) {
 	console.log(req.params)
 	console.log(req.body)
