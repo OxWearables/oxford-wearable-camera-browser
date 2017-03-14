@@ -36,64 +36,72 @@ class Db {
 		this.participant = [];
 	}
 	load() {
-
 		var p_dir = 'images'
 		var annotation_dir = 'annotation'
-		fs.readdirAsync(p_dir).map(
-			(p_folder) => {
-				var sizes = {}
-				console.log(p_folder);
+		Promise.all([fs.mkdirAsync(p_dir),fs.mkdirAsync(annotation_dir)])
+		.catch({code:"EEXIST"}, (e) =>{
+			console.log("folder exists:", e.path	)
+		})
+		.then(()=>{
+			console.log("folder creation done")
+		})
+		.then(
+			fs.readdirAsync(p_dir).map(
+				(p_folder) => {
+					var sizes = {}
+					console.log(p_folder);
 
-				
-				var dir = path.join(p_dir, p_folder)
-
-				if (fs.lstatSync(dir).isDirectory()) {
-					// ensure corresponding annotation directory also exists
-					fs.statAsync(path.join(annotation_dir, p_folder)).catch( {code:'ENOENT'}, (e) => {
-						console.log("creating annotatioin dir:", path.join(annotation_dir, p_folder))
-						fs.mkdir(path.join(annotation_dir, p_folder));
-					})
-					// ensure all size directories exist
-					return Promise.each(
-						['full', 'medium', 'thumbnail'], 
-						(size) => {
-							sizes[size] = [];
-							var subdir = path.join(dir,size);
-							return fs.statAsync(subdir).then( (stats) => {
-								if (!stats.isDirectory()) {
-									// must be a file
-								    console.log('no a dir!' + subdir)
-								    return fs.unlinkAsync(subdir).then(() => {
-								    	fs.mkdir(subdir);
-								    })
-								} else {
-									// console.log('Does exist');
-									return
-								}
-							}).catch({code:'ENOENT'}, (e) => {
-								// doesn't exist
-								console.log('folder not found so creating it: ' + e.path);
-								fs.mkdir(subdir);	
-							}).then( () => {
-								return fs.readdirAsync(subdir).map((f) => {
-									// console.log(f)
-									sizes[size].push(f);
-								})
-							});
-				}).then(() => {
-
-					console.log('is dir')
-					this.participant.push({
-						name:p_folder,
-						dir:dir,
-						sizes:sizes
-					})
-				})
 					
-				
-			}
+					var dir = path.join(p_dir, p_folder)
 
-		}).all().then(() => {
+					if (fs.lstatSync(dir).isDirectory()) {
+						// ensure corresponding annotation directory also exists
+						fs.statAsync(path.join(annotation_dir, p_folder)).catch( {code:'ENOENT'}, (e) => {
+							console.log("creating annotatioin dir:", path.join(annotation_dir, p_folder))
+							fs.mkdir(path.join(annotation_dir, p_folder));
+						})
+						// ensure all size directories exist
+						return Promise.each(
+							['full', 'medium', 'thumbnail'], 
+							(size) => {
+								sizes[size] = [];
+								var subdir = path.join(dir,size);
+								return fs.statAsync(subdir).then( (stats) => {
+									if (!stats.isDirectory()) {
+										// must be a file
+									    console.log('no a dir!' + subdir)
+									    return fs.unlinkAsync(subdir).then(() => {
+									    	fs.mkdir(subdir);
+									    })
+									} else {
+										// console.log('Does exist');
+										return
+									}
+								}).catch({code:'ENOENT'}, (e) => {
+									// doesn't exist
+									console.log('folder not found so creating it: ' + e.path);
+									fs.mkdir(subdir);	
+								}).then( () => {
+									return fs.readdirAsync(subdir).map((f) => {
+										// console.log(f)
+										sizes[size].push(f);
+									})
+								});
+					}).then(() => {
+
+						console.log('is dir')
+						this.participant.push({
+							name:p_folder,
+							dir:dir,
+							sizes:sizes
+						})
+					})
+						
+					
+				}
+
+			}).all()
+		).then(() => {
 			console.log('done reading')
 			console.log(this.participant)
 		}).then(() => {
