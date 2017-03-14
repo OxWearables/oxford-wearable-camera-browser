@@ -45,11 +45,11 @@ class Db {
 		.then(()=>{
 			console.log("folder creation done")
 		})
-		.then(
-			fs.readdirAsync(p_dir).map(
+		.then( () => {
+			return fs.readdirAsync(p_dir).map(
 				(p_folder) => {
 					var sizes = {}
-					console.log(p_folder);
+					console.log("participant folder:", p_folder);
 
 					
 					var dir = path.join(p_dir, p_folder)
@@ -101,7 +101,7 @@ class Db {
 				}
 
 			}).all()
-		).then(() => {
+		}).then(() => {
 			console.log('done reading')
 			console.log(this.participant)
 		}).then(() => {
