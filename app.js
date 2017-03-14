@@ -163,7 +163,11 @@ app.get('/favicon.ico', (req, res) => {
   res.sendFile(__dirname+'/static/favicon.ico')
 })
 app.get('/', function (req, res) {
-  res.send('Hello World!'+db.participant.map( p => '<br><a href="participant/'+p.name+'">'+p.name+' - '+p.sizes.full.length + ' images </a>').reduce((a, b) => a+b));
+	if (db.participant.length>0) {
+	  res.send('Hello World!'+db.participant.map( p => '<br><a href="participant/'+p.name+'">'+p.name+' - '+p.sizes.full.length + ' images </a>').reduce((a, b) => a+b));
+	} else {
+		res.send('Hello World!<br>no participants exist, add images to the images folder to create');
+	}
 })
 
 app.get('/participant/:pName', function (req, res) {
