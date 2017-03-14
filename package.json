@@ -7,8 +7,9 @@
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
+    "jimp": "^0.2.27",
+    "node-gyp": "^3.5.0",
     "reload": "^1.1.1",
-    "sharp": "^0.17.2",
     "watch": "^1.0.2"
   },
   "devDependencies": {},

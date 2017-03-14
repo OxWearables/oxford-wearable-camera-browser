@@ -8,7 +8,9 @@ var reload        = require('reload')
 var bodyParser    = require("body-parser");
 var http          = require('http')
 var watch         = require('watch')
-var sharp         = require('sharp')
+// var sharp         = require('sharp')
+var jimp = require("jimp");
+
 var app           = express()
 
 app.use(bodyParser.json());
@@ -106,18 +108,31 @@ class Db {
 					fs.stat(f_medium, (err, stat) => {
 						if (err!==null && err.code == 'ENOENT') {
 							console.log(p.name, 'medium not exist', f);
-							sharp(path.join(p_dir, p.name, 'full',f))
-								.resize(img_sizes['medium'][0],img_sizes['medium'][1])
-								.toFile(f_medium)
+							// sharp(path.join(p_dir, p.name, 'full',f))
+							// 	.resize(img_sizes['medium'][0],img_sizes['medium'][1])
+							// 	.toFile(f_medium)
+
+							jimp.read(path.join(p_dir, p.name, 'full',f), function(err,img){
+								if (err) throw err;
+								img.resize(img_sizes['medium'][0],img_sizes['medium'][1])
+									.write(f_medium)
+							});
+								// .resize(img_sizes['medium'][0],img_sizes['medium'][1])
+								// .toFile(f_medium)
 						}
 					})
 					var f_thumbnail = path.join(p_dir, p.name, 'thumbnail',f)
 					fs.stat(f_thumbnail, (err, stat) => {
 						if (err!==null && err.code == 'ENOENT') {
 							console.log(p.name, 'thumbnail not exist', f);
-							sharp(path.join(p_dir, p.name, 'full',f))
-								.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
-								.toFile(f_thumbnail)
+							// sharp(path.join(p_dir, p.name, 'full',f))
+							// 	.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
+							// 	.toFile(f_thumbnail)
+							jimp.read(path.join(p_dir, p.name, 'full',f), function(err,img){
+								if (err) throw err;
+								img.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
+									.write(f_thumbnail)
+							});
 						}
 					})
 				})
