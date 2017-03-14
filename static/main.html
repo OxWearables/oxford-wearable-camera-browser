@@ -300,7 +300,7 @@ function get_leaves(schema) {
 var current_schema = null;
 $(function () {
 
-	load_schema('annotation.csv')
+	load_schema('7-class.csv')
 })
 function load_schema(schema) {
 	current_schema = null;
@@ -475,7 +475,7 @@ function annotate_image(i, label) {
 	var labels = {}; // event -> image label
 	var label_to_color = {}; // image label
 
-	var start = 2, end=100;
+	var start = 0, end=200;
 	$.post('/participant/'+participant_name+'/images', {start:start, end:end})
 		.done((response) => {
 			for(var i=0; i<=end-start;i++ ) {
