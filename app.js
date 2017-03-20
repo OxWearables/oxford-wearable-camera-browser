@@ -115,7 +115,7 @@ class Db {
 					// console.log(f_medium)
 					fs.stat(f_medium, (err, stat) => {
 						if (err!==null && err.code == 'ENOENT') {
-							console.log(p.name, 'medium not exist', f);
+							console.log(p.name, 'need to create medium size for:', f);
 							// sharp(path.join(p_dir, p.name, 'full',f))
 							// 	.resize(img_sizes['medium'][0],img_sizes['medium'][1])
 							// 	.toFile(f_medium)
@@ -132,7 +132,7 @@ class Db {
 					var f_thumbnail = path.join(p_dir, p.name, 'thumbnail',f)
 					fs.stat(f_thumbnail, (err, stat) => {
 						if (err!==null && err.code == 'ENOENT') {
-							console.log(p.name, 'thumbnail not exist', f);
+							console.log(p.name, 'need to create thumbnail size for:', f);
 							// sharp(path.join(p_dir, p.name, 'full',f))
 							// 	.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
 							// 	.toFile(f_thumbnail)
