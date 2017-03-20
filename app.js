@@ -109,46 +109,47 @@ class Db {
 			Promise.each(this.participant, (p) => {
 
 				p.sizes.full.forEach((f) => {
-
-
-					var f_medium = path.join(p_dir, p.name, 'medium',f)
-					// console.log(f_medium)
-					fs.stat(f_medium, (err, stat) => {
-						if (err!==null && err.code == 'ENOENT') {
-							console.log(p.name, 'need to create medium size for:', f);
-							// sharp(path.join(p_dir, p.name, 'full',f))
-							// 	.resize(img_sizes['medium'][0],img_sizes['medium'][1])
-							// 	.toFile(f_medium)
-
-							jimp.read(path.join(p_dir, p.name, 'full',f), function(err,img){
-								if (err) throw err;
-								img.resize(img_sizes['medium'][0],img_sizes['medium'][1])
-									.write(f_medium)
-							});
-								// .resize(img_sizes['medium'][0],img_sizes['medium'][1])
-								// .toFile(f_medium)
-						}
-					})
-					var f_thumbnail = path.join(p_dir, p.name, 'thumbnail',f)
-					fs.stat(f_thumbnail, (err, stat) => {
-						if (err!==null && err.code == 'ENOENT') {
-							console.log(p.name, 'need to create thumbnail size for:', f);
-							// sharp(path.join(p_dir, p.name, 'full',f))
-							// 	.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
-							// 	.toFile(f_thumbnail)
-							jimp.read(path.join(p_dir, p.name, 'full',f), function(err,img){
-								if (err) throw err;
-								img.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
-									.write(f_thumbnail)
-							});
-						}
-					})
+					process_full(p.name, p_dir, f)
 				})
 
 			})
 			console.log('all sizes should be created')
 		})
 	}
+}
+
+function process_full(p_name, p_dir, f) {
+	var f_medium = path.join(p_dir, p_name, 'medium',f)
+	// console.log(f_medium)
+	fs.stat(f_medium, (err, stat) => {
+		if (err!==null && err.code == 'ENOENT') {
+			console.log(p_name, 'need to create medium size for:', f);
+			// sharp(path.join(p_dir, p.name, 'full',f))
+			// 	.resize(img_sizes['medium'][0],img_sizes['medium'][1])
+			// 	.toFile(f_medium)
+
+			jimp.read(path.join(p_dir, p_name, 'full',f), function(err,img){
+				if (err) throw err;
+				img.resize(img_sizes['medium'][0],img_sizes['medium'][1])
+					.write(f_medium)
+			});
+			
+		}
+	})
+	var f_thumbnail = path.join(p_dir, p_name, 'thumbnail',f)
+	fs.stat(f_thumbnail, (err, stat) => {
+		if (err!==null && err.code == 'ENOENT') {
+			console.log(p_name, 'need to create thumbnail size for:', f);
+			// sharp(path.join(p_dir, p_name, 'full',f))
+			// 	.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
+			// 	.toFile(f_thumbnail)
+			jimp.read(path.join(p_dir, p_name, 'full',f), function(err,img){
+				if (err) throw err;
+				img.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
+					.write(f_thumbnail)
+			});
+		}
+	})
 }
 
 var db = new Db()
