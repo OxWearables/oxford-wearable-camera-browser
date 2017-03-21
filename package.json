@@ -2,7 +2,7 @@
   "name": "node-image-server",
   "version": "1.0.0",
   "description": "annotate wearable camera images",
-  "main": "app.js",
+  "main"    : "main.js",
   "dependencies": {
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.1",
@@ -12,9 +12,11 @@
     "reload": "^1.1.1",
     "watch": "^1.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "electron": "^1.6.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
   "author": "",
   "license": "ISC"

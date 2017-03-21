@@ -9,7 +9,6 @@ const bodyParser    = require("body-parser");
 const http          = require('http')
 const watch         = require('watch')
 const jimp          = require("jimp");
-
 var app           = express()
 
 app.use(bodyParser.json());
@@ -402,3 +401,4 @@ watch.watchTree(__dirname + "/static", {'interval':0.1}, function (f, curr, prev
 server.listen(app.get('port'), '127.0.0.1', function(){
   console.log("Web server listening on port " + app.get('port'));
 });
+
