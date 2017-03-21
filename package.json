@@ -2,7 +2,8 @@
   "name": "node-image-server",
   "version": "1.0.0",
   "description": "annotate wearable camera images",
-  "main"    : "main.js",
+  "main": "main.js",
+  "productName": "SvenBrowser",
   "dependencies": {
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.1",
