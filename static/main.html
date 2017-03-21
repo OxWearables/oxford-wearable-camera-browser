@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/static/photoswipe/photoswipe.css" />
     <link rel="stylesheet" href="/static/photoswipe/default-skin/default-skin.css"> 
     <link rel="stylesheet" href="/static/font-awesome.css">
-    <link rel="shortcut icon"href="/favicon.png" />
     <style>
     body {
     	margin: 0px;
@@ -1199,7 +1198,7 @@ function annotate_image(i, label) {
 			var curr_evt = null
 			var curr_label = null
 			var curr_start = null
-			var str = "startTime, endTime, annotation\n";
+			var str = "startTime,endTime,annotation\n";
 			console.log("STARTING", curr_evt,curr_start, curr_label)
 
 			var last_idx = -100;
@@ -1236,7 +1235,7 @@ function annotate_image(i, label) {
 		function read_annotation_file(text) {
 			var text = text.split('\n')
 
-			if (text[0]!=="startTime, endTime, annotation") return console.log("first row of csv not valid:", text[0])
+			if (text[0].split(',').map((s)=>s.trim()).join(',')!=="startTime,endTime,annotation") return console.log("first row of csv not valid:", text[0])
 			text.splice(0,1);
 
 			var curr_idx = null;
@@ -1297,6 +1296,39 @@ function annotate_image(i, label) {
 			save_annotation().then(() => {
 				$("#btn-save").find('i').removeClass(temp_icon).addClass('fa-floppy-o')
 			})
+		})
+		$("#btn-download").click(()=>{
+			console.log("download", this)
+			var temp_icon = 'fa-spinner'
+			$("#btn-download").find('i').removeClass('fa-floppy-o').addClass(temp_icon)
+			var csvContent = generate_annotation_file();
+			console.log('csvContent',csvContent)
+			var filename = "annotation.csv";
+			if (1) {
+
+				var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+			    var link = document.createElement("a");
+			    if (link.download !== undefined) { // feature detection
+			        // Browsers that support HTML5 download attribute
+			        var url = URL.createObjectURL(blob);
+			        link.setAttribute("href", url);
+			        link.setAttribute("download", filename);
+			        link.style.visibility = 'hidden';
+			        document.body.appendChild(link);
+			        link.click();
+			        document.body.removeChild(link);
+			    }
+			} else {
+				var encodedUri = encodeURI(csvContent);
+				console.log('encodedUri',encodedUri)
+				var link = document.createElement("a");
+				link.setAttribute("href", encodedUri);
+				link.setAttribute("download", filename);
+				document.body.appendChild(link); // Required for FF
+				link.click();
+				$("#btn-download").find('i').removeClass(temp_icon).addClass('fa-download')
+			}
 		})
 	</script>
 
