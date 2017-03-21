@@ -1,15 +1,14 @@
 'use strict';
 
-var Promise       = require('bluebird');
-const fs          = Promise.promisifyAll(require('fs'));
-const path        = require('path');
-var express       = require('express')
-var reload        = require('reload')
-var bodyParser    = require("body-parser");
-var http          = require('http')
-var watch         = require('watch')
-// var sharp         = require('sharp')
-var jimp = require("jimp");
+const Promise       = require('bluebird');
+const fs            = Promise.promisifyAll(require('fs'));
+const path          = require('path');
+const express       = require('express')
+const reload        = require('reload')
+const bodyParser    = require("body-parser");
+const http          = require('http')
+const watch         = require('watch')
+const jimp          = require("jimp");
 
 var app           = express()
 
