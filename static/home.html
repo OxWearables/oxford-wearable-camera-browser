@@ -1,0 +1,20 @@
+<html>
+    <head>
+      <title>SvenViewer</title>
+
+</head>
+<body>
+test
+<script>
+
+ var remote =require('electron').remote
+
+
+ var dialog = remote.dialog;
+
+  dialog.showOpenDialog({properties: ['openFolder']}, function (fileNames) {
+  	alert(fileNames)
+  }); 
+</script>
+</body>
+</html>

@@ -8,14 +8,28 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
-let mainWindow
+let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 600})
+  win = new BrowserWindow({width: 1024, height:768})
 
   // and load the index.html of the app.
-  win.loadURL('http://127.0.0.1:3000')
+  // win.loadURL('http://127.0.0.1:3000')
+  win.loadURL(url.format({
+    pathname: path.join(__dirname, 'static','home.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+
+  win.webContents.openDevTools()
+  // Emitted when the window is closed.
+  win.on('closed', () => {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    win = null
+  })
 }
 
 app.on('ready', createWindow)
@@ -23,9 +37,10 @@ app.on('ready', createWindow)
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
+  if (win === null) {
     createWindow()
   }
+
 })
 
 // Quit when all windows are closed.
@@ -40,7 +55,7 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
+  if (win === null) {
     createWindow()
   }
 })
