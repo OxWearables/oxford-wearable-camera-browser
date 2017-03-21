@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "./node_modules/.bin/electron-packager . SvenBrowser --ignore 'images/*' --overwrite true",
+    "build": "./node_modules/.bin/electron-packager . SvenBrowser --ignore 'images/*' --overwrite true"
   },
   "author": "Sven Hollowell",
   "license": "ISC"
