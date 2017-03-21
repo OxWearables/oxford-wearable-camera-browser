@@ -1154,9 +1154,15 @@ function annotate_image(i, label) {
 		        isResizing = true;
 		        console.log("resizing")
 		        e.preventDefault();
+			    $(document).on('mousemove', moveResizer); 
+			    $(document).on('mouseup', function (e) {
+			        // stop resizing
+			        isResizing = false;
+			        $(document).off('mousemove', moveResizer)
+			    });
 		    });
 
-		    $(document).on('mousemove', function (e) {
+		    function moveResizer(e) {
 		        // we don't want to do anything if we aren't resizing.
 		        if (!isResizing) 
 		            return;
@@ -1167,10 +1173,8 @@ function annotate_image(i, label) {
 		        setCorrectHeight();
 		        if (pswp) pswp.updateSize(true);
 
-		    }).on('mouseup', function (e) {
-		        // stop resizing
-		        isResizing = false;
-		    });
+		    }
+		    
 		});
 		function first(p){for(var i in p)return i;}
 		
