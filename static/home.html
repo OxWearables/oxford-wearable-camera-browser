@@ -6,17 +6,33 @@
 <body>
 test
 <button onClick="addParticipantFolder()"> Add participant </button>
+<a href="http://127.0.0.1:3000/participant">Go to main </a>
 <script>
 
-var remote =require('electron').remote
 
+
+var remote =require('electron').remote
+const fs = require('fs')
 
 var dialog = remote.dialog;
 function addParticipantFolder() {
-	dialog.showOpenDialog({title: 'Select image folder', properties: ['openDirectory']}, function (fileNames) {
-		alert(fileNames)
+	dialog.showOpenDialog({title: 'Select image folder', properties: ['openDirectory']}, function (folderList) {
+		console.log(folderList)
+		folderList.forEach((folderName) => {
+			console.log("folder:", folderName)
+			fs.readdir(folderName, function(err, dir) {
+				console.log(err, dir)
+			  // es6
+			  for(let filePath of dir) {
+			    console.log(filePath);
+			  }
+			});
+		})
 	}); 
 }
+const ipcRenderer = require('electron').ipcRenderer
+console.log(ipcRenderer)
+console.log(ipcRenderer.sendSync('synchronous-message', 'ping')) // prints "pong"
 </script>
 </body>
 </html>

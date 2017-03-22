@@ -1,11 +1,11 @@
+console.log("start")
 const server = require('./server.js')
 const electron = require('electron')
 // Module to control application life.
-const app = electron.app
+const {app, BrowserWindow} = electron;
 // Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
 require('electron-reload')(__dirname);
-
+console.log("start")
 const path = require('path')
 const url = require('url')
 
@@ -59,4 +59,11 @@ app.on('activate', function () {
   if (win === null) {
     createWindow()
   }
+})
+
+// In main process.
+const ipcMain = require('electron').ipcMain
+ipcMain.on('synchronous-message', (event, arg) => {
+  console.log(arg)  // prints "ping"
+  event.returnValue = 'pong'
 })
