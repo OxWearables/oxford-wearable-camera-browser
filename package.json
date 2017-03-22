@@ -17,7 +17,7 @@
     "electron-packager": "^8.6.0"
   },
   "scripts": {
-    "start": "electron .",
+    "start": "./node_modules/.bin/electron .",
     "build": "./node_modules/.bin/electron-packager . SvenBrowser --ignore 'images/*' --overwrite true"
   },
   "author": "Sven Hollowell",
