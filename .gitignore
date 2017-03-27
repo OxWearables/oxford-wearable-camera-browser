@@ -2,4 +2,7 @@ node_modules
 images
 annotation
 SvenBrowser-win32-x64
+SvenBrowser-win32-ia32
+SvenBrowser-linux-x64
+SvenBrowser-linux-ia32
 npm-debug.log
