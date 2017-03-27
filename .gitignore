@@ -2,3 +2,4 @@ node_modules
 images
 annotation
 SvenBrowser-win32-x64
+npm-debug.log
