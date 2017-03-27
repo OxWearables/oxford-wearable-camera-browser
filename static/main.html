@@ -2,16 +2,22 @@
     <head>
       <title>SvenViewer</title>
 
-	<script src="/static/lib/jquery.min.js"></script>
-	<script src="/static/lib/jquery-ui.js"></script>
-    <script src="/static/lib/jstree.min.js"></script>
-    <script src="/static/lib/reload-client.js"></script>
-    <script src="/static/photoswipe/photoswipe.min.js"></script>
-    <script src="/static/photoswipe/photoswipe-ui-default.min.js"></script>
-    <link rel="stylesheet" href="/static/jstree-style.min.css" />
-    <link rel="stylesheet" href="/static/photoswipe/photoswipe.css" />
-    <link rel="stylesheet" href="/static/photoswipe/default-skin/default-skin.css"> 
-    <link rel="stylesheet" href="/static/font-awesome.css">
+	<script> 
+	const $ = jQuery    = require("jquery");
+	const fs            = require('fs');
+	const path          = require('path');
+	const ipcRenderer   = require('electron').ipcRenderer
+	const { remote } = require('electron')
+	const dialog = remote.dialog
+	</script>
+	<script src="./lib/jquery-ui.js"></script>
+    <script src="./lib/jstree.min.js"></script>
+    <script src="./photoswipe/photoswipe.min.js"></script>
+    <script src="./photoswipe/photoswipe-ui-default.min.js"></script>
+    <link rel="stylesheet" href="./jstree-style.min.css" />
+    <link rel="stylesheet" href="./photoswipe/photoswipe.css" />
+    <link rel="stylesheet" href="./photoswipe/default-skin/default-skin.css"> 
+    <link rel="stylesheet" href="./font-awesome.css">
     <style>
     body {
     	margin: 0px;
@@ -160,7 +166,7 @@
 <body>
 <div class="left-sticky">
 	<div>
-		<a  href="/">
+		<a onClick="remote.getCurrentWindow().loadURL('file://'+path.join(app.getAppPath(), 'static','home.html'));">
 			<button type="button" class="menu-button" id="btn-home" title="go back to homepage"><i class="fa fa-home fa-2x"></i> </button>
 		</a> 
 		<button type="button" class="menu-button" id="btn-save" title="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
@@ -253,6 +259,7 @@
 	</div>
 </div>
 	<script>
+
 function byte2Hex(n)
 {
 	var nybHexString = "0123456789ABCDEF";
@@ -297,144 +304,139 @@ function get_leaves(schema) {
 }
 
 var current_schema = null;
-$(function () {
+ipcRenderer.send('get_schema', '7-class.csv')
+ipcRenderer.on('schema_json', (event, arg) => {
+	current_schema = arg.schema_name;  // assign once done so we can save with correct filename
 
-	load_schema('7-class.csv')
+	load_annotation()
+	load_schema(arg.schema_json)
 })
-function load_schema(schema) {
-	current_schema = null;
-	$.ajax({
-	  dataType: "json",
-	  url: '/schema/'+schema,
-	  success: function(schema_json) {
-	  		current_schema = schema; // assign once done so we can save with correct filename
-	  		load_annotation()
-	  		// console.log(schema_json)
+function load_schema(schema_json) {
+	console.log(schema_json)
 
-	  		// GENERATE COLORS
-	  		var leaves = get_leaves(schema_json);
-	  		// console.log(leaves.length)
-	  		var colors = makeColorGradient(.3,.3,.3,0,2,4, 230,100,leaves.length)
-	  		// console.log(colors)
-	  		// console.log(colors.length)
-	  		leaves.forEach((l, index) => {
-	  			// l.color = colors[index];
-	  			l.li_attr = {style:"background-color:"+colors[index]+";background-image:false; width:24px; border-radius: 16px;"};
-	  			l.icon = false;
-	  			label_to_color[l.text] = colors[index]
+	// GENERATE COLORS
+	var leaves = get_leaves(schema_json);
+	// console.log(leaves.length)
+	var colors = makeColorGradient(.3,.3,.3,0,2,4, 230,100,leaves.length)
+	// console.log(colors)
+	// console.log(colors.length)
+	leaves.forEach((l, index) => {
+		// l.color = colors[index];
+		l.li_attr = {style:"background-color:"+colors[index]+";background-image:false; width:24px; border-radius: 16px;"};
+		l.icon = false;
+		label_to_color[l.text] = colors[index]
 
-	  		})
+	})
 
-	  		// console.log(leaves.slice(0,10))
+		// console.log(leaves.slice(0,10))
 
-			$('#jstree').on('loaded.jstree', function() {
-				$('#jstree_box').show()
-					
-				var timeout = false;
-				var background_text = "search" // to display "greyed out" search string
-				$('#jstree_searchbox').keyup(function () {
-					if(timeout) { clearTimeout(timeout); }
-					timeout = setTimeout(function () {
-						var v = $('#jstree_searchbox').val();
-						$('#jstree').jstree(true).search(v);
-					}, 250);
-				}).focus(function(){
-			  		if ($(this).val() == background_text){
-			    		$(this).val('').removeClass('background_text');
-					}
-			 	}).blur(function(){
-			  		if ($(this).val().length == 0){
-			    		$(this).val(background_text).addClass('background_text');
-					}
-			 	}).val(background_text).addClass('background_text');
-
-
-			}).jstree({
-				"core" : {
-					'data': schema_json.children,
-					"multiple" : false,
-					"animation" : 0,
-					"check_callback" : true,
-					"icons": true
-				},
-				"types": {
-		            "label": {
-		                "icon": "leaf"
-		            }
-		        },
-				"plugins" : [  "unique","search", "types" /*,  "contextmenu"*/  ],
-				"search" :  {
-					"case_insensitive" : true,
-					"show_only_matches":true
-				}
-				
-			}).bind("select_node.jstree", function(e, node) {
-				$("#jstree").jstree(true).toggle_node(node.node);
-			}).bind("dblclick.jstree", function(e, node){
-				$("#jstree").jstree(true).toggle_node(e.target);
-			}).bind("move_node.jstree", function (e, data) {console.log("move_node",e, data)})
-
-			// attach  dragging event
-			// $("#jstree").mousedown(jstree_drag)
-			// $("#jstree").on('open_node.jstree', expand_left_col);
-			// $("#jstree").on('close_node.jstree', expand_left_col);
+	$('#jstree').on('loaded.jstree', function() {
+		$('#jstree_box').show()
 			
-			// $.jstree.defaults.dnd.is_draggable = function(data) { console.log("is_draggable",data); return data[0].original.type === "label"}
-			$('#jstree')
-			    .on('mousedown', function (e) {
-			    	console.log(e.target)
-			    	// console.log($(e.target).hasClass('jstree-leaf'))
-			    	if ($(e.target).hasClass('is_label')) {
-				    	// console.log(e)
+		var timeout = false;
+		var background_text = "search" // to display "greyed out" search string
+		$('#jstree_searchbox').keyup(function () {
+			if(timeout) { clearTimeout(timeout); }
+			timeout = setTimeout(function () {
+				var v = $('#jstree_searchbox').val();
+				$('#jstree').jstree(true).search(v);
+			}, 250);
+		}).focus(function(){
+	  		if ($(this).val() == background_text){
+	    		$(this).val('').removeClass('background_text');
+			}
+	 	}).blur(function(){
+	  		if ($(this).val().length == 0){
+	    		$(this).val(background_text).addClass('background_text');
+			}
+	 	}).val(background_text).addClass('background_text');
 
-				    	// console.log($(this))
-				        return $.vakata.dnd.start(e, { 'jstree' : true, 'obj' : $(e.target), 'nodes' : [{ id : true, text: $(e.target).text() }] }, '<div id="jstree-dnd" class="jstree-default"><i class="jstree-icon jstree-er"></i>' + $(e.target).text() + '</div>');
-				    }
-			    });
-			
-			$(document)
-			    .on('dnd_move.vakata', function (e, data) {
-			        var t = $(data.event.target);
-		            if(t.closest('.img').length) {
-		                data.helper.find('.jstree-icon').removeClass('jstree-er').addClass('jstree-ok');
-		            }
-		            else {
-		                data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
-		            }
-		        
-			    })
-			    .on('dnd_stop.vakata', function (e, data) {
-			    	console.log(data)
-			        var t = $(data.event.target);
-		            if(t.closest('.img').length) {
-		            	img_idx = parseInt(t.closest('.img')[0].id);
-		            	if (!Number.isInteger(img_idx)) {
-		            		console.log("error: img_idx on drop ", img_idx, t.closest('.img')[0])
-		            	}
-		            	event_id = evts[img_idx]
-		            	console.log("event_id", event_id)
-		            	var label = $(data.data.obj[0]).text();
-		            	var event_color = label_to_color[label];
-		            	console.log("label:", label)
 
-		            	if (Number.isInteger(event_id)) {
-		            		evts.forEach((evt, idx) => {
-		            			if (evt==event_id) {
-		            				console.log
-		            				evts[idx] = event_id;
-			            			svg_colorize(idx, event_color)
-			            			$('.img#'+idx).effect("highlight", {color:event_color}, 1000);
-			            		}
-		            		})
-		            	}
-		            	annotate_image(parseInt(t.closest('.img').attr('id')), label)
-		            	console.log(data.data.obj[0])
-		            	set_tooltip(data.event);
-		            }
-		        
-			    });
+	}).jstree({
+		"core" : {
+			'data': schema_json.children,
+			"multiple" : false,
+			"animation" : 0,
+			"check_callback" : true,
+			"icons": true
+		},
+		"types": {
+            "label": {
+                "icon": "leaf"
+            }
+        },
+		"plugins" : [  "unique","search", "types" /*,  "contextmenu"*/  ],
+		"search" :  {
+			"case_insensitive" : true,
+			"show_only_matches":true
 		}
-	});
+		
+	}).bind("select_node.jstree", function(e, node) {
+		$("#jstree").jstree(true).toggle_node(node.node);
+	}).bind("dblclick.jstree", function(e, node){
+		$("#jstree").jstree(true).toggle_node(e.target);
+	}).bind("move_node.jstree", function (e, data) {console.log("move_node",e, data)})
+
+	// attach  dragging event
+	// $("#jstree").mousedown(jstree_drag)
+	// $("#jstree").on('open_node.jstree', expand_left_col);
+	// $("#jstree").on('close_node.jstree', expand_left_col);
+	
+	// $.jstree.defaults.dnd.is_draggable = function(data) { console.log("is_draggable",data); return data[0].original.type === "label"}
+	$('#jstree')
+	    .on('mousedown', function (e) {
+	    	console.log(e.target)
+	    	// console.log($(e.target).hasClass('jstree-leaf'))
+	    	if ($(e.target).hasClass('is_label')) {
+		    	// console.log(e)
+
+		    	// console.log($(this))
+		        return $.vakata.dnd.start(e, { 'jstree' : true, 'obj' : $(e.target), 'nodes' : [{ id : true, text: $(e.target).text() }] }, '<div id="jstree-dnd" class="jstree-default"><i class="jstree-icon jstree-er"></i>' + $(e.target).text() + '</div>');
+		    }
+	    });
+	
+	$(document)
+	    .on('dnd_move.vakata', function (e, data) {
+	        var t = $(data.event.target);
+            if(t.closest('.img').length) {
+                data.helper.find('.jstree-icon').removeClass('jstree-er').addClass('jstree-ok');
+            }
+            else {
+                data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
+            }
+        
+	    })
+	    .on('dnd_stop.vakata', function (e, data) {
+	    	console.log(data)
+	        var t = $(data.event.target);
+            if(t.closest('.img').length) {
+            	img_idx = parseInt(t.closest('.img')[0].id);
+            	if (!Number.isInteger(img_idx)) {
+            		console.log("error: img_idx on drop ", img_idx, t.closest('.img')[0])
+            	}
+            	event_id = evts[img_idx]
+            	console.log("event_id", event_id)
+            	var label = $(data.data.obj[0]).text();
+            	var event_color = label_to_color[label];
+            	console.log("label:", label)
+
+            	if (Number.isInteger(event_id)) {
+            		evts.forEach((evt, idx) => {
+            			if (evt==event_id) {
+            				console.log
+            				evts[idx] = event_id;
+	            			svg_colorize(idx, event_color)
+	            			$('.img#'+idx).effect("highlight", {color:event_color}, 1000);
+	            		}
+            		})
+            	}
+            	annotate_image(parseInt(t.closest('.img').attr('id')), label)
+            	console.log(data.data.obj[0])
+            	set_tooltip(data.event);
+            }
+        
+	    });
+
 }
 
 function annotate_image(i, label) {
@@ -461,8 +463,9 @@ function annotate_image(i, label) {
 }
 
 
-	var url = window.location.href.split('/')
-	var participant_name = url[url.indexOf('participant')+1]
+	// var url = window.location.href.split('/')
+	// console.log("url", url)
+	var participant_name = "sven";// url[url.indexOf('participant')+1]
 	console.log("participant_name",participant_name)
 
 
@@ -475,22 +478,103 @@ function annotate_image(i, label) {
 	var label_to_color = {}; // image label
 
 	var start = 0, end=200;
-	$.post('/participant/'+participant_name+'/images', {start:start, end:end})
-		.done((response) => {
-			for(var i=0; i<=end-start;i++ ) {
-				// if there are not enough images will recieve undefined values
-				if (response[i]!==undefined && response[i]!==null) { 
-					imgs[i+start] = response[i];
-					evts[i+start] = evts[i+start] || 0;
-					img_times[i+start] = date_from_filename(response[i])
-				}
-			}
-			for(var i=0; i<=end-start;i++ ) {
-				create_image(i+start);
-			}
 
+
+
+
+
+	var sizes = {}
+	var p_folder = participant_name
+	console.log("participant folder:", p_folder);
+
+	
+	var dir = path.join('images', p_folder)
+	console.log("participant images directory: ", dir)
+	fs.lstat(dir, ()=>{
+		console.log("is dir"); 
+		// ensure corresponding annotation directory also exists
+		fs.stat(path.join('annotation', p_folder), (err, stats) => {
+			if (err && err.code=='ENOENT') {
+				console.log("creating annotatioin dir:", path.join('annotation', p_folder))
+				fs.mkdirSync(path.join('annotation', p_folder));
+			}
+			// ensure all size directories exist
+			['full', 'medium', 'thumbnail'].forEach( 
+				(size) => {
+					sizes[size] = [];
+					var subdir = path.join(dir,size);
+					fs.stat(subdir, (err, stats) => {
+						if (err) fs.mkdir(subdir);	
+						else {
+							if (!stats.isDirectory()) {
+								// must be a file
+							    console.log('no a dir!' + subdir)
+							    return fs.unlinkAsync(subdir, () => {
+							    	fs.mkdir(subdir);
+							    })
+							} else {
+								console.log('Does exist');
+							}
+						}
+						fs.readdir(subdir, (err, files) => {
+							files.forEach((f, i) => {
+								// console.log(f)
+								sizes[size].push(f);
+								if (size == 'thumbnail') {
+									if (i+start<=end) {
+										imgs[i+start] = f;
+										evts[i+start] = evts[i+start] || 0;
+										img_times[i+start] = date_from_filename(f)
+									}
+								}
+							})
+							if (size == 'thumbnail') {
+								for(var i=0; i<=end-start;i++ ) {
+									create_image(i+start);
+								}
+							}
+						})
+					});
+				}
+			)
 		})
-		.fail((response) => {console.log("post response:",response)});
+	})
+				
+				// $.post('/participant/'+participant_name+'/images', {start:start, end:end})
+	// ipcRenderer.send('get_images', {participant_name: participant_name, start:start, end:end})
+	if (0) ipcMain.on('get_iamges', (event, response) => {
+		for(var i=0; i<=end-start;i++ ) {
+			// if there are not enough images will recieve undefined values
+			if (response[i]!==undefined && response[i]!==null) { 
+				imgs[i+start] = response[i];
+				evts[i+start] = evts[i+start] || 0;
+				img_times[i+start] = date_from_filename(response[i])
+			}
+		}
+		for(var i=0; i<=end-start;i++ ) {
+			create_image(i+start);
+		}
+
+		// .fail((response) => {console.log("post response:",response)});
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	function is_first_(idx) {
@@ -521,7 +605,7 @@ function annotate_image(i, label) {
 		str += '<svg width="110" height="30">'
 
 		str += '</svg>'
-		str += '<img class="thumbnail" width="100" height="87" src="/images/'+participant_name+'/thumbnail/'+i+'" >'
+		str += '<img class="thumbnail" width="100" height="87" src="../images/'+participant_name+'/thumbnail/'+i+'" >'
 		str += '<p>' + time.toLocaleTimeString()+'</p></div>'
 		// str += '<p>' + pad_num(image_time[3],2)+':'+ pad_num(image_time[4],2)+':'+pad_num(image_time[5],2)+'</p></div>'
 		// console.log(str)
@@ -1042,15 +1126,15 @@ function annotate_image(i, label) {
 				console.log('gettingData',index, item)
 			    // Set image source & size based on real viewport width
 			    if( useLargeImages ) {
-			        item.src = '/images/'+participant_name+'/full/'+imgs[index];
+			        item.src = '../images/'+participant_name+'/full/'+imgs[index];
 			        item.w = img_sizes.full[0],
 			        item.h = img_sizes.full[1]
 			    } else {
-			        item.src = '/images/'+participant_name+'/medium/'+imgs[index];
+			        item.src = '../images/'+participant_name+'/medium/'+imgs[index];
 			        item.w = img_sizes.medium[0],
 			        item.h = img_sizes.medium[1]
 			    }
-		        item.msrc = '/images/'+participant_name+'/thumbnail/'+imgs[index];
+		        item.msrc = '../images/'+participant_name+'/thumbnail/'+imgs[index];
 			    item.title = labels[evts[index]] || ""
 			    // if (labels[evts[index]]) item.title = labels[imgs[index].label_id].text
 			    // else console.log("no img text for ", index, imgs[index])
@@ -1069,7 +1153,10 @@ function annotate_image(i, label) {
 		    	// http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
 		    	var container = $('.gallery'),
 		    	    scrollTo = $("div#"+index+".img");
-		    	
+		    	if (scrollTo==undefined || scrollTo.offset() === undefined) {
+		    		console.log("scrollTo undefined!", scrollTo, index, container);
+
+		    	}
 		    	// container.scrollTop(
 		    	//     scrollTargetPos
 		    	// );
@@ -1226,9 +1313,9 @@ function annotate_image(i, label) {
 		}
 
 		function save_annotation() {
-			if (current_schema===null) return console.log("current schema not set (may be mid-load)", current_schema)
+			if (current_schema===null) return alert("current schema not set (may be mid-load)", current_schema)
 			var data = generate_annotation_file();
-			return $.post('/participant/'+participant_name+'/save', {data:data, schema:current_schema})
+			fs.writeFile(path.join('annotation',participant_name,'annotation_'+current_schema ), data)
 
 		}
 
@@ -1282,12 +1369,17 @@ function annotate_image(i, label) {
 
 		}
 		function load_annotation() {
-			$.get('/annotation/'+participant_name+'/annotation_'+current_schema+'',{},(data) => {
-				console.log('loaded annotation')
+			var annotation_file = path.join('annotation',participant_name,'annotation_'+current_schema)
+			fs.readFile(annotation_file, "utf-8", (err, data) => {
+				if (err) throw err;
+				console.log(data);
 				read_annotation_file(data)
-			}).fail(() => {
-				console.log('annotation failed to load')
 			})
+			// fs.('/annotation/'+participant_name+'/annotation_'+current_schema+'',{},(data) => {
+			// 	console.log('loaded annotation')
+			// }).fail(() => {
+			// 	console.log('annotation failed to load')
+			// })
 		}
 		$("#btn-save").click(()=>{
 			console.log("save", this)
@@ -1304,7 +1396,7 @@ function annotate_image(i, label) {
 			var csvContent = generate_annotation_file();
 			console.log('csvContent',csvContent)
 			var filename = "annotation.csv";
-			if (1) {
+			if (0) {
 
 				var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
 
@@ -1319,7 +1411,7 @@ function annotate_image(i, label) {
 			        link.click();
 			        document.body.removeChild(link);
 			    }
-			} else {
+			} else if(0) {
 				var encodedUri = encodeURI(csvContent);
 				console.log('encodedUri',encodedUri)
 				var link = document.createElement("a");
@@ -1328,6 +1420,24 @@ function annotate_image(i, label) {
 				document.body.appendChild(link); // Required for FF
 				link.click();
 				$("#btn-download").find('i').removeClass(temp_icon).addClass('fa-download')
+			} else {
+				dialog.showSaveDialog({
+					title:"Save annotation .csv", 
+					filters:[{name:'csv', extensions:['csv']}],
+					defaultPath:"annotation"
+				}, function (fileName) {
+				       if (fileName === undefined){
+				            console.log("You didn't save the file");
+				            return;
+				       }
+				       // fileName is a string that contains the path and filename created in the save file dialog.  
+				       fs.writeFile(fileName, csvContent, function (err) {
+				           if(err){
+				               alert("An error ocurred creating the file "+ err.message)
+				           }
+				       });
+					$("#btn-download").find('i').removeClass(temp_icon).addClass('fa-download')
+				}); 
 			}
 		})
 	</script>
