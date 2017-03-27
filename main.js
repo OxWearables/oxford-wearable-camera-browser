@@ -1,5 +1,6 @@
 console.log("start")
 const server = require('./server.js')
+const schema = require('./schema.js')
 const electron = require('electron')
 // Module to control application life.
 const {app, BrowserWindow} = electron;
@@ -9,7 +10,7 @@ console.log("start")
 const path = require('path')
 const url = require('url')
 
-let win
+let win = null;
 
 function createWindow () {
   // Create the browser window.
