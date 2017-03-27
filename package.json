@@ -9,13 +9,14 @@
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
     "jimp": "^0.2.27",
+    "jquery": "^3.2.1",
     "reload": "^1.1.1",
-    "watch": "^1.0.2"
+    "watch": "^1.0.2",
+    "electron-reload": "^1.1.0"
   },
   "devDependencies": {
     "electron": "^1.6.2",
-    "electron-packager": "^8.6.0",
-    "electron-reload": "^1.1.0"
+    "electron-packager": "^8.6.0"
   },
   "scripts": {
     "start": "./node_modules/.bin/electron .",
