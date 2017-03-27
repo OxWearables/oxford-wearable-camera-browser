@@ -9,8 +9,8 @@ require('electron-reload')(__dirname);
 console.log("start")
 const path = require('path')
 const url = require('url')
-
 let win = null;
+
 
 function createWindow () {
   // Create the browser window.
@@ -19,7 +19,7 @@ function createWindow () {
   // and load the index.html of the app.
   // win.loadURL('http://127.0.0.1:3000')
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'static','home.html'),
+    pathname: path.join(__dirname, 'static','main.html'),
     protocol: 'file:',
     slashes: true
   }))
@@ -62,9 +62,3 @@ app.on('activate', function () {
   }
 })
 
-// In main process.
-const ipcMain = require('electron').ipcMain
-ipcMain.on('synchronous-message', (event, arg) => {
-  console.log(arg)  // prints "ping"
-  event.returnValue = 'pong'
-})
