@@ -450,7 +450,7 @@ function annotate_image(i, label) {
 }
 
 
-	var participant_name = "sven"; // this will define participant that is loaded
+	var participant_name = "3"; // this will define participant that is loaded
 	console.log("participant_name",participant_name)
 
 
@@ -480,20 +480,34 @@ function annotate_image(i, label) {
 			// svg_update(i)
 			svg_colorize(i, label_to_color[labels[evts[i]]])
 		}
-	
+		setTimeout(reload_all, 1000) 	 // FOR TESTING
 	}
 	// create_all_images()
 
 
 
-	var sizes = {}
-	var p_folder = participant_name
-	console.log("participant folder:", p_folder);
+	var reloaded = false;
+	function reload_all() {
+		if (reloaded) return;
+		participant_name = "sven"
+		p_folder = participant_name
+		start = 0
+		end=200
+		$('.gallery').empty()
+		evts = [];
+		imgs = [];
+		img_times = [];
+		annotations_loaded = false, images_loaded = false;
+		reloaded = true;
+		create_all_images()
+	}
 
-	
-	var dir = path.join('images', p_folder)
-	console.log("participant images directory: ", dir)
+	var sizes = {}
 	function load_images() {
+		var p_folder = participant_name
+		var dir = path.join('images', p_folder)
+		console.log("participant folder:", p_folder);
+		console.log("participant images directory: ", dir)
 		fs.lstat(dir, ()=>{
 			console.log("is dir"); 
 			// ensure corresponding annotation directory also exists
@@ -533,6 +547,7 @@ function annotate_image(i, label) {
 								if (size == 'thumbnail') {
 									images_loaded = true;
 									create_all_images()
+									end = Math.min(files.length-1,end)
 								}
 							})
 						});
@@ -557,7 +572,8 @@ function annotate_image(i, label) {
 
 		var is_first = is_first_(idx);
 		var is_last = is_last_(idx);
-		var time = date_from_filename(i);
+		console.log(idx, imgs[idx])
+		var time = img_times[idx];
 		var label = 'none';
 		var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'">' 
 	 	// if ((e!==undefined && e!==null)) {			 	
