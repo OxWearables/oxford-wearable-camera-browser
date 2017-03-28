@@ -222,7 +222,7 @@
 		                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
 
 		                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-		                <!-- element will get class pswp__preloader--active when preloader is running -->
+		                <!-- element will get class pswp__preloader-active when preloader is running -->
 		                <div class="pswp__preloader">
 		                    <div class="pswp__preloader__icn">
 		                      <div class="pswp__preloader__cut">
@@ -260,36 +260,31 @@
 
 <div class="tooltip">Tooltip</div>
 	<script>
-
-function byte2Hex(n)
-{
+// COLOR utils
+function byte2Hex(n) {
 	var nybHexString = "0123456789ABCDEF";
 	return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
 }
-function RGB2Color(r,g,b)
-  {
-    return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
-  }
-// https://krazydad.com/tutorials/makecolors.php
+function RGB2Color(r,g,b) {
+	return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+}
+
 function makeColorGradient(frequency1, frequency2, frequency3,
 	                           phase1, phase2, phase3,
-	                           center, width, len)
-	{
-	  if (center == undefined)   center = 128;
-	  if (width == undefined)    width = 127;
-	  if (len == undefined)      len = 50;
-	  var output = [];
-	  for (var i = 0; i < len; ++i)
-	  {
-	     var red = Math.sin(frequency1*i + phase1) * width + center;
-	     var grn = Math.sin(frequency2*i + phase2) * width + center;
-	     var blu = Math.sin(frequency3*i + phase3) * width + center;
-	     // var o = 0.5;
-	     // red *= 
-	     output.push(RGB2Color(red,grn,blu));
-	  }
-	   return output
+	                           center, width, len) {
+	// https://krazydad.com/tutorials/makecolors.php
+	if (center == undefined)   center = 128;
+	if (width == undefined)    width = 127;
+	if (len == undefined)      len = 50;
+	var output = [];
+	for (var i = 0; i < len; ++i) {
+		var red = Math.sin(frequency1*i + phase1) * width + center;
+		var grn = Math.sin(frequency2*i + phase2) * width + center;
+		var blu = Math.sin(frequency3*i + phase3) * width + center;
+		output.push(RGB2Color(red,grn,blu));
 	}
+	return output
+}
 
 
 function get_leaves(schema) {
@@ -378,20 +373,10 @@ function load_schema(schema_json) {
 		$("#jstree").jstree(true).toggle_node(e.target);
 	}).bind("move_node.jstree", function (e, data) {console.log("move_node",e, data)})
 
-	// attach  dragging event
-	// $("#jstree").mousedown(jstree_drag)
-	// $("#jstree").on('open_node.jstree', expand_left_col);
-	// $("#jstree").on('close_node.jstree', expand_left_col);
-	
-	// $.jstree.defaults.dnd.is_draggable = function(data) { console.log("is_draggable",data); return data[0].original.type === "label"}
 	$('#jstree')
 	    .on('mousedown', function (e) {
 	    	console.log(e.target)
-	    	// console.log($(e.target).hasClass('jstree-leaf'))
 	    	if ($(e.target).hasClass('is_label')) {
-		    	// console.log(e)
-
-		    	// console.log($(this))
 		        return $.vakata.dnd.start(e, { 'jstree' : true, 'obj' : $(e.target), 'nodes' : [{ id : true, text: $(e.target).text() }] }, '<div id="jstree-dnd" class="jstree-default"><i class="jstree-icon jstree-er"></i>' + $(e.target).text() + '</div>');
 		    }
 	    });
@@ -537,41 +522,6 @@ function annotate_image(i, label) {
 				}
 			)
 		})
-	})
-				
-				// $.post('/participant/'+participant_name+'/images', {start:start, end:end})
-	// ipcRenderer.send('get_images', {participant_name: participant_name, start:start, end:end})
-	if (0) ipcMain.on('get_iamges', (event, response) => {
-		for(var i=0; i<=end-start;i++ ) {
-			// if there are not enough images will recieve undefined values
-			if (response[i]!==undefined && response[i]!==null) { 
-				imgs[i+start] = response[i];
-				evts[i+start] = evts[i+start] || 0;
-				img_times[i+start] = date_from_filename(response[i])
-			}
-		}
-		for(var i=0; i<=end-start;i++ ) {
-			create_image(i+start);
-		}
-
-		// .fail((response) => {console.log("post response:",response)});
-	})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -590,9 +540,7 @@ function annotate_image(i, label) {
 		var is_last = is_last_(idx);
 		var time = date_from_filename(i);
 		var label = 'none';
-		var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'"'//+((i.label_id===null || i.label_id===undefined) ? '' : 'label-id="'+i.label_id+'" ');
-		// str +=' is-last="'+is_last+'" is-first="'+is_first+'" first-id="' + first_id + '"  last-id="' + last_id + '">' 
-		str += '">' 
+		var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'">' 
 	 	// if ((e!==undefined && e!==null)) {			 	
 			// if (!is_last) {
 				 str += '<div style="left:92px;" class="split right" split-dir="right"></div>'
@@ -941,8 +889,8 @@ function annotate_image(i, label) {
 		var expand_left_col = function() { // on
 		        // var fn = function() { console.log("done")};
 		        var max_width = Math.min(left_bar_width+left_col_expanded*500, $( window ).width()*0.9);
-		        console.log(left_col_expanded ? "on" : "off", max_width, $('.left-sticky')[0].scrollWidth)
-		        console.log($('.left-sticky')[0].offsetWidth, $('.left-sticky')[0].clientWidth)
+		        // console.log(left_col_expanded ? "on" : "off", max_width, $('.left-sticky')[0].scrollWidth)
+		        // console.log($('.left-sticky')[0].offsetWidth, $('.left-sticky')[0].clientWidth)
 		        $('.left-sticky').stop().animate({
 		        	width:Math.min(max_width, Math.max(left_bar_width, $('.left-sticky')[0].scrollWidth))
 		        }, {duration: 200, done: null});
@@ -1383,49 +1331,26 @@ function annotate_image(i, label) {
 			var csvContent = generate_annotation_file();
 			console.log('csvContent',csvContent)
 			var filename = "annotation.csv";
-			if (0) {
+			
 
-				var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-
-			    var link = document.createElement("a");
-			    if (link.download !== undefined) { // feature detection
-			        // Browsers that support HTML5 download attribute
-			        var url = URL.createObjectURL(blob);
-			        link.setAttribute("href", url);
-			        link.setAttribute("download", filename);
-			        link.style.visibility = 'hidden';
-			        document.body.appendChild(link);
-			        link.click();
-			        document.body.removeChild(link);
-			    }
-			} else if(0) {
-				var encodedUri = encodeURI(csvContent);
-				console.log('encodedUri',encodedUri)
-				var link = document.createElement("a");
-				link.setAttribute("href", encodedUri);
-				link.setAttribute("download", filename);
-				document.body.appendChild(link); // Required for FF
-				link.click();
+			dialog.showSaveDialog({
+				title:"Save annotation .csv", 
+				filters:[{name:'csv', extensions:['csv']}],
+				defaultPath:"annotation"
+			}, function (fileName) {
+			       if (fileName === undefined){
+			            console.log("You didn't save the file");
+			            return;
+			       }
+			       // fileName is a string that contains the path and filename created in the save file dialog.  
+			       fs.writeFile(fileName, csvContent, function (err) {
+			           if(err){
+			               alert("An error ocurred creating the file "+ err.message)
+			           }
+			       });
 				$("#btn-download").find('i').removeClass(temp_icon).addClass('fa-download')
-			} else {
-				dialog.showSaveDialog({
-					title:"Save annotation .csv", 
-					filters:[{name:'csv', extensions:['csv']}],
-					defaultPath:"annotation"
-				}, function (fileName) {
-				       if (fileName === undefined){
-				            console.log("You didn't save the file");
-				            return;
-				       }
-				       // fileName is a string that contains the path and filename created in the save file dialog.  
-				       fs.writeFile(fileName, csvContent, function (err) {
-				           if(err){
-				               alert("An error ocurred creating the file "+ err.message)
-				           }
-				       });
-					$("#btn-download").find('i').removeClass(temp_icon).addClass('fa-download')
-				}); 
-			}
+			}); 
+
 		})
 	</script>
 
