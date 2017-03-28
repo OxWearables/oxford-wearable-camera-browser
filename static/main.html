@@ -463,9 +463,9 @@ function annotate_image(i, label) {
 	var label_to_color = {}; // image label
 
 	// define how many images we want to display
-	var start = 0, end=200;
 	var annotations_loaded = false, images_loaded = false;
 
+	var start = 0, end=200;
 	// this function ensures that the following happens in order:
 	function create_all_images() {
 		console.log("create_all_images")
@@ -482,7 +482,6 @@ function annotate_image(i, label) {
 		}
 		setTimeout(reload_all, 1000) 	 // FOR TESTING
 	}
-	// create_all_images()
 
 
 
@@ -896,7 +895,6 @@ function annotate_image(i, label) {
         });
 
         function makeSeperator(el, attrs) {
-        	// $(el).find(".line").attr("visibility",'hidden')
         	if (!('fill' in attrs) || attrs['fill']===undefined) attrs['fill'] = fillcol
         	attrs['width'] = 5
         	makeSeperatorLine(el, attrs);
@@ -922,7 +920,6 @@ function annotate_image(i, label) {
     (function() {
 	    var left_bar_width = 201;
 		var expand_left_col = function() { // on
-		        // var fn = function() { console.log("done")};
 		        var max_width = Math.min(left_bar_width+left_col_expanded*500, $( window ).width()*0.9);
 		        // console.log(left_col_expanded ? "on" : "off", max_width, $('.left-sticky')[0].scrollWidth)
 		        // console.log($('.left-sticky')[0].offsetWidth, $('.left-sticky')[0].clientWidth)
@@ -1101,8 +1098,7 @@ function annotate_image(i, label) {
 			    }
 		        item.msrc = '../images/'+participant_name+'/thumbnail/'+imgs[index];
 			    item.title = labels[evts[index]] || ""
-			    // if (labels[evts[index]]) item.title = labels[imgs[index].label_id].text
-			    // else console.log("no img text for ", index, imgs[index])
+
 			});
 
 			var scrollTargetPos = null;
@@ -1326,17 +1322,10 @@ function annotate_image(i, label) {
 				 	else break;
 				 }
 				 end_idx = curr_idx
-				 // console.log('->', startDate.toLocaleTimeString(), " - ", endDate.toLocaleTimeString(), "   ", annotation,"   - ", start_idx, end_idx)
-				 // console.log('->', img_times[start_idx].toLocaleTimeString(), " - ", img_times[end_idx].toLocaleTimeString(), color)
 				 console.log(annotation, startDate.toTimeString().split(" ")[0],"-", endDate.toTimeString().split(" ")[0], "\n", start_idx, end_idx)
 				 evt_idx++;
 			})
 
-			// for (var idx in evts) {
-			// 	idx = parseInt(idx)
-			// 	svg_update(idx)
-			//  	svg_colorize(idx, label_to_color[labels[evts[idx]]])
-			//  }
 
 
 		}
@@ -1350,11 +1339,7 @@ function annotate_image(i, label) {
 				annotations_loaded = true;
 				create_all_images()
 			})
-			// fs.('/annotation/'+participant_name+'/annotation_'+current_schema+'',{},(data) => {
-			// 	console.log('loaded annotation')
-			// }).fail(() => {
-			// 	console.log('annotation failed to load')
-			// })
+
 		}
 		$("#btn-save").click(()=>{
 			console.log("save", this)
