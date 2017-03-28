@@ -258,6 +258,22 @@
 	<div class="gallery">
 	</div>
 </div>
+<style>
+      .tooltip {
+              position: relative; /** depends on how it handles the e.pageX and e.pageY **/
+              width: 100;
+              /*height: 30px;*/
+              margin: 5px;
+              background: #FFF;
+              border-radius:6px;
+              border: 1px solid #000;
+              z-index: 20;
+              text-align: center;
+              display: none; /**let the tooltip be not visable, when startup **/
+              pointer-events:none;   /*css-property that makes events "pass through" an DOM-element  */
+          }
+</style>
+<div class="tooltip">Tooltip</div>
 	<script>
 
 function byte2Hex(n)
@@ -1005,24 +1021,7 @@ function annotate_image(i, label) {
 		}
 		return true
     }
-	</script>
-	<style>
-	      .tooltip {
-	              position: relative; /** depends on how it handles the e.pageX and e.pageY **/
-	              width: 100;
-	              /*height: 30px;*/
-	              margin: 5px;
-	              background: #FFF;
-	              border-radius:6px;
-	              border: 1px solid #000;
-	              z-index: 20;
-	              text-align: center;
-	              display: none; /**let the tooltip be not visable, when startup **/
-	              pointer-events:none;   /*css-property that makes events "pass through" an DOM-element  */
-	          }
-	</style>
-	<div class="tooltip">Tooltip</div>
-	<script>
+
 
 	$(document).on('mousedown','.gallery', function(e) {
 		console.log('openPhotoSwipe(idx)')

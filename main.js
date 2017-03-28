@@ -1,5 +1,3 @@
-console.log("start")
-// const server = require('./server.js')
 const schema = require('./schema.js')
 const electron = require('electron')
 // Module to control application life.
