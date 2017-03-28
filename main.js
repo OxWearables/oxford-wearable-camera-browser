@@ -3,7 +3,7 @@ const electron = require('electron')
 // Module to control application life.
 const {app, BrowserWindow} = electron;
 // Module to create native browser window.
-require('electron-reload')(__dirname);
+require('electron-reload')(__dirname, {ignored: /node_modules|[\/\\]\.|annotation/});
 console.log("start")
 const path = require('path')
 const url = require('url')
