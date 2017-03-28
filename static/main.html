@@ -287,6 +287,15 @@ function makeColorGradient(frequency1, frequency2, frequency3,
 }
 
 
+// SCHEMA loading code
+var current_schema = null;
+ipcRenderer.send('get_schema', '7-class.csv')
+ipcRenderer.on('schema_json', (event, arg) => {
+	current_schema = arg.schema_name;  // assign once done so we can save with correct filename
+	load_schema(arg.schema_json)
+	create_all_images();
+})
+
 function get_leaves(schema) {
 	if ('children' in schema) {
 		var leaves = [];
@@ -299,14 +308,6 @@ function get_leaves(schema) {
 	}
 }
 
-var current_schema = null;
-ipcRenderer.send('get_schema', '7-class.csv')
-ipcRenderer.on('schema_json', (event, arg) => {
-	current_schema = arg.schema_name;  // assign once done so we can save with correct filename
-
-	load_annotation()
-	load_schema(arg.schema_json)
-})
 function load_schema(schema_json) {
 	console.log(schema_json)
 
@@ -461,9 +462,22 @@ function annotate_image(i, label) {
 	var labels = {}; // event -> image label
 	var label_to_color = {}; // image label
 
+	// define how many images we want to display
 	var start = 0, end=200;
+	var annotations_loaded = false, images_loaded = false;
 
 
+		console.log("it's time")
+		for(var i=0; i<=end-start;i++ ) {
+			create_image(i+start);
+		}
+		for(var i=0; i<=end-start;i++ ) {
+			// svg_update(i)
+			svg_colorize(i, label_to_color[labels[evts[i]]])
+		}
+	
+	}
+	// create_all_images()
 
 
 
@@ -474,54 +488,54 @@ function annotate_image(i, label) {
 	
 	var dir = path.join('images', p_folder)
 	console.log("participant images directory: ", dir)
-	fs.lstat(dir, ()=>{
-		console.log("is dir"); 
-		// ensure corresponding annotation directory also exists
-		fs.stat(path.join('annotation', p_folder), (err, stats) => {
-			if (err && err.code=='ENOENT') {
-				console.log("creating annotatioin dir:", path.join('annotation', p_folder))
-				fs.mkdirSync(path.join('annotation', p_folder));
-			}
-			// ensure all size directories exist
-			['full', 'medium', 'thumbnail'].forEach( 
-				(size) => {
-					sizes[size] = [];
-					var subdir = path.join(dir,size);
-					fs.stat(subdir, (err, stats) => {
-						if (err) fs.mkdir(subdir);	
-						else {
-							if (!stats.isDirectory()) {
-								// must be a file
-							    console.log('no a dir!' + subdir)
-							    return fs.unlinkAsync(subdir, () => {
-							    	fs.mkdir(subdir);
-							    })
-							} else {
-								console.log('Does exist');
+	function load_images() {
+		fs.lstat(dir, ()=>{
+			console.log("is dir"); 
+			// ensure corresponding annotation directory also exists
+			fs.stat(path.join('annotation', p_folder), (err, stats) => {
+				if (err && err.code=='ENOENT') {
+					console.log("creating annotatioin dir:", path.join('annotation', p_folder))
+					fs.mkdirSync(path.join('annotation', p_folder));
+				}
+				// ensure all size directories exist
+				['full', 'medium', 'thumbnail'].forEach( 
+					(size) => {
+						sizes[size] = [];
+						var subdir = path.join(dir,size);
+						fs.stat(subdir, (err, stats) => {
+							if (err) fs.mkdir(subdir);	
+							else {
+								if (!stats.isDirectory()) {
+									// must be a file
+								    console.log('no a dir!' + subdir)
+								    return fs.unlinkAsync(subdir, () => {
+								    	fs.mkdir(subdir);
+								    })
+								} else {
+									console.log('Does exist');
+								}
 							}
-						}
-						fs.readdir(subdir, (err, files) => {
-							files.forEach((f, i) => {
-								// console.log(f)
-								sizes[size].push(f);
+							fs.readdir(subdir, (err, files) => {
+								files
+									.sort((a, b)=>(a.slice(17)>b.slice(17)) ? 1 : -1)
+									.forEach((f, i) => {
+										if (size == 'thumbnail') {
+											imgs[i] = f;
+											img_times[i] = date_from_filename(f)
+										}
+									})
+
 								if (size == 'thumbnail') {
-									if (i+start<=end) {
-										imgs[i+start] = f;
-										evts[i+start] = evts[i+start] || 0;
-										img_times[i+start] = date_from_filename(f)
-									}
+									images_loaded = true;
+									create_all_images()
 								}
 							})
-							if (size == 'thumbnail') {
-								for(var i=0; i<=end-start;i++ ) {
-									create_image(i+start);
-								}
-							}
-						})
-					});
-				}
-			)
+						});
+					}
+				)
+			})
 		})
+	}		
 
 
 
@@ -1227,7 +1241,7 @@ function annotate_image(i, label) {
 					if (curr_start!==null) {
 						var end = img_times[i-1];
 						str += curr_start.toISOString() + ',' + end.toISOString() + ',' + curr_label + '\n';
-						console.log(e,i, label, curr_start.toISOString(), end.toISOString())
+						console.log(i, curr_label, curr_start.toTimeString().split(" ")[0], end.toTimeString().split(" ")[0])
 					}
 					curr_label = label;
 					curr_evt = e;
@@ -1247,24 +1261,25 @@ function annotate_image(i, label) {
 			if (current_schema===null) return alert("current schema not set (may be mid-load)", current_schema)
 			var data = generate_annotation_file();
 			return new Promise((resolve, reject) => {
-				fs.writeFile(path.join('annotation',participant_name,'annotation_'+current_schema ), data, () => {
+				console.log("writing annotation to",path.join('annotation',participant_name,'annotation_'+current_schema) )
+				fs.writeFile(path.join('annotation',participant_name,'annotation_'+current_schema ), data, {}, (err, res) => {
+					console.log(err,res)
 					resolve()
 				})
 			})
 
 		}
 
-		function read_annotation_file(text) {
+		function parse_annotation_file(text) {
 			var text = text.split('\n')
 
 			if (text[0].split(',').map((s)=>s.trim()).join(',')!=="startTime,endTime,annotation") return console.log("first row of csv not valid:", text[0])
 			text.splice(0,1);
 
-			var curr_idx = null;
+			var curr_idx = 0;
 			var evt_idx = 0;
 			evts = [];
 			labels = {};
-			for (var i in img_times) {curr_idx = parseInt(i); break;} // set to first
 			text.forEach((line, idx) => {
 				var l=line.split(','); // TODO: check for escaped commas
 				if (l.length!==3) return // empty line
@@ -1291,24 +1306,27 @@ function annotate_image(i, label) {
 				 end_idx = curr_idx
 				 // console.log('->', startDate.toLocaleTimeString(), " - ", endDate.toLocaleTimeString(), "   ", annotation,"   - ", start_idx, end_idx)
 				 // console.log('->', img_times[start_idx].toLocaleTimeString(), " - ", img_times[end_idx].toLocaleTimeString(), color)
-
+				 console.log(annotation, startDate.toTimeString().split(" ")[0],"-", endDate.toTimeString().split(" ")[0], "\n", start_idx, end_idx)
 				 evt_idx++;
 			})
 
-			for (var idx in evts) {
-				idx = parseInt(idx)
-				svg_update(idx)
-			 	svg_colorize(idx, label_to_color[labels[evts[idx]]])
-			 }
+			// for (var idx in evts) {
+			// 	idx = parseInt(idx)
+			// 	svg_update(idx)
+			//  	svg_colorize(idx, label_to_color[labels[evts[idx]]])
+			//  }
 
 
 		}
 		function load_annotation() {
 			var annotation_file = path.join('annotation',participant_name,'annotation_'+current_schema)
+			console.log("reading annotation:", annotation_file)
 			fs.readFile(annotation_file, "utf-8", (err, data) => {
 				if (err) throw err;
 				console.log(data);
-				read_annotation_file(data)
+				parse_annotation_file(data)
+				annotations_loaded = true;
+				create_all_images()
 			})
 			// fs.('/annotation/'+participant_name+'/annotation_'+current_schema+'',{},(data) => {
 			// 	console.log('loaded annotation')
