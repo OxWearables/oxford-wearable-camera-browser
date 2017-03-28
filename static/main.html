@@ -466,6 +466,11 @@ function annotate_image(i, label) {
 	var start = 0, end=200;
 	var annotations_loaded = false, images_loaded = false;
 
+	// this function ensures that the following happens in order:
+	function create_all_images() {
+		console.log("create_all_images")
+		if (images_loaded!==true) {load_images(); return;}
+		if (annotations_loaded!==true) {load_annotation(); return;}
 
 		console.log("it's time")
 		for(var i=0; i<=end-start;i++ ) {
@@ -563,8 +568,8 @@ function annotate_image(i, label) {
 				str += '<div style="left:0px;" class="split left" split-dir="left"></div>'
 			// }
 		// }
-		str += '<svg width="110" height="30">'
 
+		str += '<svg width="110" height="30">'
 		str += '</svg>'
 		str += '<img class="thumbnail" width="100" height="87" src="../images/'+participant_name+'/thumbnail/'+i+'" >'
 		str += '<p>' + time.toLocaleTimeString()+'</p></div>'
@@ -1246,6 +1251,7 @@ function annotate_image(i, label) {
 					curr_label = label;
 					curr_evt = e;
 					curr_start = img_times[i];
+					console.log(i, label, curr_start.toTimeString().split(" ")[0])
 				}
 			})
 			if (last_idx!==-100) {
