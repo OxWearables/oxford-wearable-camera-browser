@@ -164,12 +164,15 @@
 </head>
 <body>
 <div class="left-sticky">
-	<div>
+	<div style="margin-bottom:10px;">
 		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage"><i class="fa fa-home fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-save" title="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
 		<button  onClick="schema_selection_menu();" type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-download" title="download annotations as .csv"><i class="fa fa-download fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-settings" title="settings"><i class="fa fa-cog fa-2x"></i> </button>
+	</div>
+	<div style=" width:100%; text-align:center;">
+		<span style="line-height: 30px; vertical-align: middle;">select participant</span>
 	</div>
 	<!-- new jsonified jstree: -->
 	<div id="jstree_box"  style="display:none;">
@@ -350,12 +353,13 @@ ipcRenderer.on('schema_json', (event, arg) => {
 	// update_view();
 })
 
-var current_participant = "3"; // this will define participant that is loaded
+var current_participant = null; // this will define participant that is loaded
 console.log("current_participant",current_participant)
 
 
-request_schema('7-class.csv')
-update_view();
+// request_schema('7-class.csv')
+// update_view();
+participant_selection_menu();
 // loops through a schema.json to generate array of leaves (end nodes) for color generation
 function get_leaves(schema) {
 	if ('children' in schema) {
