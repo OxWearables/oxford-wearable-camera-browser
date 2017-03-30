@@ -534,7 +534,10 @@ function annotate_image(i, label) {
 	function create_all_images() {
 		console.log("re-creating all images")
 		$('.gallery').empty()
-
+		// emptying the gallery sometimes accidentally deletes the tooltip div, so recreate
+		if ($('.tooltip').length==0) {
+			$('.gallery').append('<div class="tooltip">Tooltip</div>');
+		}
 		for(var i=0; i<=end-start;i++ ) {
 			create_image(i+start);
 		}
