@@ -165,11 +165,9 @@
 <body>
 <div class="left-sticky">
 	<div>
-		<a onClick="remote.getCurrentWindow().loadURL('file://'+path.join(app.getAppPath(), 'static','home.html'));">
-			<button type="button" class="menu-button" id="btn-home" title="go back to homepage"><i class="fa fa-home fa-2x"></i> </button>
-		</a> 
+		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage"><i class="fa fa-home fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-save" title="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
-		<button  onClick="console.log('click');schema_selection_menu();" type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
+		<button  onClick="schema_selection_menu();" type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-download" title="download annotations as .csv"><i class="fa fa-download fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-settings" title="settings"><i class="fa fa-cog fa-2x"></i> </button>
 	</div>
@@ -285,7 +283,32 @@ function makeColorGradient(frequency1, frequency2, frequency3,
 	}
 	return output
 }
+// participant loading code
 
+// keep track of which participant we have currently loaded
+var selecting_participant = false;
+function participant_selection_menu() {
+	if (selecting_participant) {
+		console.log("participant selection menu already open!")
+		return false;
+	}
+	selecting_participant = true;
+	selecting_schema = false;
+
+	var dir = 'images'
+
+	fs.readdir(dir, (err, files) => {
+		var data = [];
+		files.forEach(f=>{
+			console.log(f)
+			// if (f.endsWith('.csv')) {
+				data.push({text:f, icon:false})
+			// }
+		})
+		$('#jstree').jstree(true).settings.core.data = data;
+		$('#jstree').jstree(true).refresh();
+	})
+}
 
 // SCHEMA loading code
 
@@ -298,6 +321,8 @@ function schema_selection_menu() {
 		return false;
 	}
 	selecting_schema = true;
+	selecting_participant = false;
+
 	var dir = 'schema'
 
 	fs.readdir(dir, (err, files) => {
@@ -325,8 +350,8 @@ ipcRenderer.on('schema_json', (event, arg) => {
 	// update_view();
 })
 
-var participant_name = "3"; // this will define participant that is loaded
-console.log("participant_name",participant_name)
+var current_participant = "3"; // this will define participant that is loaded
+console.log("current_participant",current_participant)
 
 
 request_schema('7-class.csv')
@@ -343,11 +368,11 @@ function get_leaves(schema) {
 		return [schema];
 	}
 }
-
+var current_schema_json = null;
 // applies color to leaves, then loads jstree and binds drag/drop events
 function load_schema(schema_json) {
 	console.log(schema_json)
-
+	current_schema_json = schema_json;
 	// GENERATE COLORS
 	var leaves = get_leaves(schema_json);
 	// console.log(leaves.length)
@@ -433,6 +458,21 @@ $('#jstree')
     			$('#jstree').jstree(true).refresh();
     			request_schema(schema_name)
 	    	}
+    	} else if (selecting_participant) {
+    		if ($(e.target).hasClass('jstree-anchor')) {
+	    		selecting_participant = false;
+    			var participant_name = $(e.target).text();
+    			if (participant_name!==current_participant) {
+	    			$('#jstree').jstree(true).settings.core.data = [{text:'loading '+participant_name+'...'}];
+	    			$('#jstree').jstree(true).refresh();
+
+	    			request_participant(participant_name)
+	    			load_schema(current_schema_json);
+
+    			} else {
+    				load_schema(current_schema_json);
+    			}
+    		}
     	} else {
 	    	if ($(e.target).hasClass('is_label')) {
 		        return $.vakata.dnd.start(e, { 'jstree' : true, 'obj' : $(e.target), 'nodes' : [{ id : true, text: $(e.target).text() }] }, '<div id="jstree-dnd" class="jstree-default"><i class="jstree-icon jstree-er"></i>' + $(e.target).text() + '</div>');
@@ -546,28 +586,27 @@ function annotate_image(i, label) {
 			svg_colorize(i, label_to_color[labels[evts[i]]])
 		}
 		images_created = true;
+		update_view();
 	}
 
 
-	var reloaded = false;
-	function reload_all() {
-		if (reloaded) return;
-		participant_name = "sven"
-		p_folder = participant_name
+	function request_participant(participant_name) {
+		console.log("request_participant", participant_name)
+		current_participant = participant_name;
+		p_folder = current_participant;
 		start = 0
 		end=200
 		$('.gallery').empty()
 		evts = [];
 		imgs = [];
 		img_times = [];
-		annotations_loaded = false, images_loaded = false;
-		reloaded = true;
+		annotations_loaded = false, images_loaded = false, images_created=false;
 		update_view()
 	}
 
 	var sizes = {}
 	function load_images() {
-		var p_folder = participant_name
+		var p_folder = current_participant
 		var dir = path.join('images', p_folder)
 		console.log("participant folder:", p_folder);
 		console.log("participant images directory: ", dir)
@@ -650,7 +689,7 @@ function annotate_image(i, label) {
 
 		str += '<svg width="110" height="30">'
 		str += '</svg>'
-		str += '<img class="thumbnail" width="100" height="87" src="../images/'+participant_name+'/thumbnail/'+i+'" >'
+		str += '<img class="thumbnail" width="100" height="87" src="../images/'+current_participant+'/thumbnail/'+i+'" >'
 		str += '<p>' + time.toLocaleTimeString()+'</p></div>'
 		// str += '<p>' + pad_num(image_time[3],2)+':'+ pad_num(image_time[4],2)+':'+pad_num(image_time[5],2)+'</p></div>'
 		// console.log(str)
@@ -1155,15 +1194,15 @@ function annotate_image(i, label) {
 				console.log('gettingData',index, item)
 			    // Set image source & size based on real viewport width
 			    if( useLargeImages ) {
-			        item.src = '../images/'+participant_name+'/full/'+imgs[index];
+			        item.src = '../images/'+current_participant+'/full/'+imgs[index];
 			        item.w = img_sizes.full[0],
 			        item.h = img_sizes.full[1]
 			    } else {
-			        item.src = '../images/'+participant_name+'/medium/'+imgs[index];
+			        item.src = '../images/'+current_participant+'/medium/'+imgs[index];
 			        item.w = img_sizes.medium[0],
 			        item.h = img_sizes.medium[1]
 			    }
-		        item.msrc = '../images/'+participant_name+'/thumbnail/'+imgs[index];
+		        item.msrc = '../images/'+current_participant+'/thumbnail/'+imgs[index];
 			    item.title = labels[evts[index]] || ""
 
 			});
@@ -1346,8 +1385,8 @@ function annotate_image(i, label) {
 			if (current_schema===null) return alert("current schema not set (may be mid-load)", current_schema)
 			var data = generate_annotation_file();
 			return new Promise((resolve, reject) => {
-				console.log("writing annotation to",path.join('annotation',participant_name,'annotation_'+current_schema) )
-				fs.writeFile(path.join('annotation',participant_name,'annotation_'+current_schema ), data, {}, (err, res) => {
+				console.log("writing annotation to",path.join('annotation',current_participant,'annotation_'+current_schema) )
+				fs.writeFile(path.join('annotation',current_participant,'annotation_'+current_schema ), data, {}, (err, res) => {
 					console.log(err,res)
 					resolve()
 				})
@@ -1412,7 +1451,7 @@ function annotate_image(i, label) {
 
 		}
 		function load_annotation() {
-			var annotation_file = path.join('annotation',participant_name,'annotation_'+current_schema)
+			var annotation_file = path.join('annotation',current_participant,'annotation_'+current_schema)
 			console.log("reading annotation:", annotation_file)
 			fs.readFile(annotation_file, "utf-8", (err, data) => {
 				if (err) {
