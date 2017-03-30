@@ -1502,6 +1502,10 @@ function annotate_image(i, label) {
 			}); 
 
 		})
+
+		// fix for when annotation bar accidentally scrolls to the left
+		var left_sticky = $('.left-sticky');
+		left_sticky.bind('scroll',()=>{if (left_sticky.scrollLeft()!==0) {left_sticky.scrollLeft(0);}})
 	</script>
 
 </body>
