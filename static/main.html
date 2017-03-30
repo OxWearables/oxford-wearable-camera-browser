@@ -169,7 +169,7 @@
 			<button type="button" class="menu-button" id="btn-home" title="go back to homepage"><i class="fa fa-home fa-2x"></i> </button>
 		</a> 
 		<button type="button" class="menu-button" id="btn-save" title="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
-		<button type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
+		<button  onClick="console.log('click');schema_selection_menu();" type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-download" title="download annotations as .csv"><i class="fa fa-download fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-settings" title="settings"><i class="fa fa-cog fa-2x"></i> </button>
 	</div>
@@ -288,14 +288,50 @@ function makeColorGradient(frequency1, frequency2, frequency3,
 
 
 // SCHEMA loading code
-var current_schema = null;
-ipcRenderer.send('get_schema', '7-class.csv')
+
+// keep track of which schema we have currently loaded
+var current_schema = null; 
+var selecting_schema = false;
+function schema_selection_menu() {
+	if (selecting_schema) {
+		console.log("schema selection menu already open!")
+		return false;
+	}
+	selecting_schema = true;
+	var dir = 'schema'
+
+	fs.readdir(dir, (err, files) => {
+		var data = []
+		files.forEach(f=>{
+			console.log(f)
+			if (f.endsWith('.csv')) {
+				data.push({text:f, icon:false})
+			}
+		})
+		$('#jstree').jstree(true).settings.core.data = data;
+		$('#jstree').jstree(true).refresh();
+	})
+}
+// this will load any schema that is in /schema/ folder (must be existing file and in correct fomat)
+function request_schema(schema_name) {
+	// current_schema = null;
+	current_schema = schema_name;
+	selecting_schema = false;
+	ipcRenderer.send('get_schema', schema_name)
+}
 ipcRenderer.on('schema_json', (event, arg) => {
 	current_schema = arg.schema_name;  // assign once done so we can save with correct filename
 	load_schema(arg.schema_json)
-	create_all_images();
+	// update_view();
 })
 
+var participant_name = "3"; // this will define participant that is loaded
+console.log("participant_name",participant_name)
+
+
+request_schema('7-class.csv')
+update_view();
+// loops through a schema.json to generate array of leaves (end nodes) for color generation
 function get_leaves(schema) {
 	if ('children' in schema) {
 		var leaves = [];
@@ -308,6 +344,7 @@ function get_leaves(schema) {
 	}
 }
 
+// applies color to leaves, then loads jstree and binds drag/drop events
 function load_schema(schema_json) {
 	console.log(schema_json)
 
@@ -325,106 +362,125 @@ function load_schema(schema_json) {
 
 	})
 
-		// console.log(leaves.slice(0,10))
-
-	$('#jstree').on('loaded.jstree', function() {
-		$('#jstree_box').show()
-			
-		var timeout = false;
-		var background_text = "search" // to display "greyed out" search string
-		$('#jstree_searchbox').keyup(function () {
-			if(timeout) { clearTimeout(timeout); }
-			timeout = setTimeout(function () {
-				var v = $('#jstree_searchbox').val();
-				$('#jstree').jstree(true).search(v);
-			}, 250);
-		}).focus(function(){
-	  		if ($(this).val() == background_text){
-	    		$(this).val('').removeClass('search-grey-text');
-			}
-	 	}).blur(function(){
-	  		if ($(this).val().length == 0){
-	    		$(this).val(background_text).addClass('search-grey-text');
-			}
-	 	}).val(background_text).addClass('search-grey-text');
+	$('#jstree').jstree(true).settings.core.data = schema_json.children;
+	$('#jstree').jstree(true).refresh();
+}
 
 
-	}).jstree({
-		"core" : {
-			'data': schema_json.children,
-			"multiple" : false,
-			"animation" : 0,
-			"check_callback" : true,
-			"icons": true
-		},
-		"types": {
-            "label": {
-                "icon": "leaf"
-            }
-        },
-		"plugins" : [  "unique","search", "types" /*,  "contextmenu"*/  ],
-		"search" :  {
-			"case_insensitive" : true,
-			"show_only_matches":true
-		}
+$('#jstree').on('loaded.jstree', function() {
+	$('#jstree_box').show()
 		
-	}).bind("select_node.jstree", function(e, node) {
-		$("#jstree").jstree(true).toggle_node(node.node);
-	}).bind("dblclick.jstree", function(e, node){
-		$("#jstree").jstree(true).toggle_node(e.target);
-	}).bind("move_node.jstree", function (e, data) {console.log("move_node",e, data)})
+	var timeout = false;
+	var background_text = "search" // to display "greyed out" search string
+	$('#jstree_searchbox').keyup(function () {
+		if(timeout) { clearTimeout(timeout); }
+		timeout = setTimeout(function () {
+			var v = $('#jstree_searchbox').val();
+			$('#jstree').jstree(true).search(v);
+		}, 250);
+	}).focus(function(){
+  		if ($(this).val() == background_text){
+    		$(this).val('').removeClass('search-grey-text');
+		}
+ 	}).blur(function(){
+  		if ($(this).val().length == 0){
+    		$(this).val(background_text).addClass('search-grey-text');
+		}
+ 	}).val(background_text).addClass('search-grey-text');
 
-	$('#jstree')
-	    .on('mousedown', function (e) {
-	    	console.log(e.target)
+
+}).jstree({
+	"core" : {
+		'data': [{text:'loading schema..'}], //schema_json.children,
+		"multiple" : false,
+		"animation" : 0,
+		"check_callback" : true,
+		"icons": true
+	},
+	"types": {
+        "label": {
+            "icon": "leaf"
+        }
+    },
+	"plugins" : [  "unique","search", "types" /*,  "contextmenu"*/  ],
+	"search" :  {
+		"case_insensitive" : true,
+		"show_only_matches":true
+	}
+	
+}).bind("select_node.jstree", function(e, node) {
+	$("#jstree").jstree(true).toggle_node(node.node);
+}).bind("dblclick.jstree", function(e, node){
+	$("#jstree").jstree(true).toggle_node(e.target);
+}).bind("move_node.jstree", function (e, data) {console.log("move_node",e, data)})
+
+$('#jstree')
+    .on('mousedown', function (e) {
+    	console.log("clicked jstree", e.target, selecting_schema)
+    	if (selecting_schema) {
+    		if ($(e.target).hasClass('jstree-anchor')) {
+	    		selecting_schema = false;
+    			var schema_name = $(e.target).text();
+    			if (schema_name!==current_schema) {
+    				// NOTE ensure load_annotation has correct 'current_schema' to work with
+    				current_schema = schema_name;
+    				annotations_loaded = false;
+    				images_created = false;
+    				update_view();
+    			}
+				current_schema = schema_name;
+    			$('#jstree').jstree(true).settings.core.data = [{text:'loading '+schema_name+'...'}];
+    			$('#jstree').jstree(true).refresh();
+    			request_schema(schema_name)
+	    	}
+    	} else {
 	    	if ($(e.target).hasClass('is_label')) {
 		        return $.vakata.dnd.start(e, { 'jstree' : true, 'obj' : $(e.target), 'nodes' : [{ id : true, text: $(e.target).text() }] }, '<div id="jstree-dnd" class="jstree-default"><i class="jstree-icon jstree-er"></i>' + $(e.target).text() + '</div>');
 		    }
-	    });
-	
-	$(document)
-	    .on('dnd_move.vakata', function (e, data) {
-	        var t = $(data.event.target);
-            if(t.closest('.img').length) {
-                data.helper.find('.jstree-icon').removeClass('jstree-er').addClass('jstree-ok');
-            }
-            else {
-                data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
-            }
-        
-	    })
-	    .on('dnd_stop.vakata', function (e, data) {
-	    	console.log(data)
-	        var t = $(data.event.target);
-            if(t.closest('.img').length) {
-            	img_idx = parseInt(t.closest('.img')[0].id);
-            	if (!Number.isInteger(img_idx)) {
-            		console.log("error: img_idx on drop ", img_idx, t.closest('.img')[0])
-            	}
-            	event_id = evts[img_idx]
-            	console.log("event_id", event_id)
-            	var label = $(data.data.obj[0]).text();
-            	var event_color = label_to_color[label];
-            	console.log("label:", label)
+    	}
+    });
 
-            	if (Number.isInteger(event_id)) {
-            		evts.forEach((evt, idx) => {
-            			if (evt==event_id) {
-            				console.log
-            				evts[idx] = event_id;
-	            			svg_colorize(idx, event_color)
-	            			$('.img#'+idx).effect("highlight", {color:event_color}, 1000);
-	            		}
-            		})
-            	}
-            	annotate_image(parseInt(t.closest('.img').attr('id')), label)
-            	console.log(data.data.obj[0])
-            	set_tooltip(data.event);
-            }
-        
-	    });
+$(document)
+    .on('dnd_move.vakata', function (e, data) {
+        var t = $(data.event.target);
+        if(t.closest('.img').length) {
+            data.helper.find('.jstree-icon').removeClass('jstree-er').addClass('jstree-ok');
+        }
+        else {
+            data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
+        }
+    
+    })
+    .on('dnd_stop.vakata', function (e, data) {
+    	console.log(data)
+        var t = $(data.event.target);
+        if(t.closest('.img').length) {
+        	img_idx = parseInt(t.closest('.img')[0].id);
+        	if (!Number.isInteger(img_idx)) {
+        		console.log("error: img_idx on drop ", img_idx, t.closest('.img')[0])
+        	}
+        	event_id = evts[img_idx]
+        	console.log("event_id", event_id)
+        	var label = $(data.data.obj[0]).text();
+        	var event_color = label_to_color[label];
+        	console.log("label:", label)
 
-}
+        	if (Number.isInteger(event_id)) {
+        		evts.forEach((evt, idx) => {
+        			if (evt==event_id) {
+        				console.log
+        				evts[idx] = event_id;
+            			svg_colorize(idx, event_color)
+            			$('.img#'+idx).effect("highlight", {color:event_color}, 1000);
+            		}
+        		})
+        	}
+        	annotate_image(parseInt(t.closest('.img').attr('id')), label)
+        	console.log(data.data.obj[0])
+        	set_tooltip(data.event);
+        }
+    
+    });
 
 function annotate_image(i, label) {
 	var e = evts[i];
@@ -450,10 +506,6 @@ function annotate_image(i, label) {
 }
 
 
-	var participant_name = "3"; // this will define participant that is loaded
-	console.log("participant_name",participant_name)
-
-
 	// all should be same length
 	var imgs = []; 
 	var img_times = []; 
@@ -463,16 +515,26 @@ function annotate_image(i, label) {
 	var label_to_color = {}; // image label
 
 	// define how many images we want to display
-	var annotations_loaded = false, images_loaded = false;
+	var annotations_loaded = false, images_loaded = false, images_created = false;
 
 	var start = 0, end=200;
+
 	// this function ensures that the following happens in order:
-	function create_all_images() {
-		console.log("create_all_images")
+	function update_view() {
+		console.log("update_view")
 		if (images_loaded!==true) {load_images(); return;}
 		if (annotations_loaded!==true) {load_annotation(); return;}
+		if (images_created!==true) {create_all_images(); return;}
 
-		console.log("it's time")
+		console.log("all done with update_view")
+
+		// setTimeout(reload_all, 1000) 	 // FOR TESTING
+	}
+
+	function create_all_images() {
+		console.log("re-creating all images")
+		$('.gallery').empty()
+
 		for(var i=0; i<=end-start;i++ ) {
 			create_image(i+start);
 		}
@@ -480,9 +542,8 @@ function annotate_image(i, label) {
 			// svg_update(i)
 			svg_colorize(i, label_to_color[labels[evts[i]]])
 		}
-		setTimeout(reload_all, 1000) 	 // FOR TESTING
+		images_created = true;
 	}
-
 
 
 	var reloaded = false;
@@ -498,7 +559,7 @@ function annotate_image(i, label) {
 		img_times = [];
 		annotations_loaded = false, images_loaded = false;
 		reloaded = true;
-		create_all_images()
+		update_view()
 	}
 
 	var sizes = {}
@@ -545,7 +606,7 @@ function annotate_image(i, label) {
 
 								if (size == 'thumbnail') {
 									images_loaded = true;
-									create_all_images()
+									update_view()
 									end = Math.min(files.length-1,end)
 								}
 							})
@@ -571,7 +632,7 @@ function annotate_image(i, label) {
 
 		var is_first = is_first_(idx);
 		var is_last = is_last_(idx);
-		console.log(idx, imgs[idx])
+		// console.log(idx, imgs[idx])
 		var time = img_times[idx];
 		var label = 'none';
 		var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'">' 
@@ -664,12 +725,15 @@ function annotate_image(i, label) {
 		container.find('.line.right').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_last) ?  "hidden":""})
     }
 
+    // used for finding the 'max' of the evts array, so we can create sequentially higher event indices
     function arr_max(arr) {
+    	if (arr.length===0) return 0; // not technically correct 
     	return arr.reduce(function (p, v) {
     	    return ( p > v ? p : v ); // get max value
     	});
     }
     function arr_min(arr) {
+    	if (arr.length===0) return 0;
     	return arr.reduce(function (p, v) {
     	    return ( p < v ? p : v ); // get max value
     	});
@@ -1325,7 +1389,22 @@ function annotate_image(i, label) {
 				 console.log(annotation, startDate.toTimeString().split(" ")[0],"-", endDate.toTimeString().split(" ")[0], "\n", start_idx, end_idx)
 				 evt_idx++;
 			})
-
+			curr_idx = 0;
+			while (curr_idx<imgs.length) {
+				if (evts[curr_idx]==undefined) {
+					console.log("missing event at :", curr_idx)
+					labels[evt_idx] = "undefined";
+					evts[curr_idx] = evt_idx;
+					curr_idx++;
+					while(curr_idx<imgs.length && evts[curr_idx]==undefined) {
+						evts[curr_idx] = evt_idx;
+						curr_idx++;
+					}
+					evt_idx++;
+				} else {
+					curr_idx++;
+				}
+			}
 
 
 		}
@@ -1333,11 +1412,15 @@ function annotate_image(i, label) {
 			var annotation_file = path.join('annotation',participant_name,'annotation_'+current_schema)
 			console.log("reading annotation:", annotation_file)
 			fs.readFile(annotation_file, "utf-8", (err, data) => {
-				if (err) throw err;
+				if (err) {
+					console.log('annotation file does not exist, start a new one!');
+					data = "startTime,endTime,annotation";
+					// throw err
+				}
 				console.log(data);
 				parse_annotation_file(data)
 				annotations_loaded = true;
-				create_all_images()
+				update_view()
 			})
 
 		}
