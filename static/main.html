@@ -360,16 +360,16 @@ function request_schema(schema_name) {
 ipcRenderer.on('schema_json', (event, arg) => {
 	current_schema = arg.schema_name;  // assign once done so we can save with correct filename
 	load_schema(arg.schema_json)
+	participant_selection_menu();
 	// update_view();
 })
 
 var current_participant = null; // this will define participant that is loaded
 console.log("current_participant",current_participant)
 
-
-// request_schema('7-class.csv')
+// update_view()
+request_schema('7-class.csv')
 // update_view();
-participant_selection_menu();
 // loops through a schema.json to generate array of leaves (end nodes) for color generation
 function get_leaves(schema) {
 	if ('children' in schema) {
@@ -569,7 +569,10 @@ function annotate_image(i, label) {
 	var label_to_color = {}; // image label
 
 	// define how many images we want to display
-	var annotations_loaded = false, images_loaded = false, images_created = false;
+	var annotations_loaded = false, 
+	images_loaded = false, 
+	images_created = false,
+	images_colorized = false;
 
 	var start = 0, end=200;
 
@@ -579,6 +582,7 @@ function annotate_image(i, label) {
 		if (images_loaded!==true) {load_images(); return;}
 		if (annotations_loaded!==true) {load_annotation(); return;}
 		if (images_created!==true) {create_all_images(); return;}
+		if (images_colorized!==true) {colorize_all_images(); return;}
 
 		console.log("all done with update_view")
 
@@ -595,15 +599,21 @@ function annotate_image(i, label) {
 		for(var i=0; i<=end-start;i++ ) {
 			create_image(i+start);
 		}
+		images_created = true;
+		images_colorized = false;
+		update_view();
+	}
+
+	function colorize_all_images() {
+		console.log("colorize_all_images", label_to_color)
+		console.log(labels)
 		for(var i=0; i<=end-start;i++ ) {
 			// svg_update(i)
 			svg_colorize(i, label_to_color[labels[evts[i]]])
 		}
-		images_created = true;
+		images_colorized = true;
 		update_view();
 	}
-
-
 	function request_participant(participant_name) {
 		console.log("request_participant", participant_name)
 		current_participant = participant_name;
@@ -620,6 +630,8 @@ function annotate_image(i, label) {
 
 	var sizes = {}
 	function load_images() {
+		if (current_participant===null) {participant_selection_menu(); return;}
+
 		var p_folder = current_participant
 		var dir = path.join('images', p_folder)
 		console.log("participant folder:", p_folder);
@@ -1205,7 +1217,7 @@ function annotate_image(i, label) {
 
 			// gettingData event fires each time PhotoSwipe retrieves image source & size
 			pswp.listen('gettingData', function(index, item) {
-				console.log('gettingData',index, item)
+				// console.log('gettingData',index, item)
 			    // Set image source & size based on real viewport width
 			    if( useLargeImages ) {
 			        item.src = '../images/'+current_participant+'/full/'+imgs[index];
@@ -1429,7 +1441,6 @@ function annotate_image(i, label) {
 
 				 }
 				 labels[evt_idx] = annotation;
-				 color = label_to_color[annotation];
 				 while(true) {
 				 	if (img_times[curr_idx] < startDate) curr_idx++;
 				 	else break;
@@ -1476,6 +1487,7 @@ function annotate_image(i, label) {
 				console.log(data);
 				parse_annotation_file(data)
 				annotations_loaded = true;
+				images_colorized = false;
 				update_view()
 			})
 
