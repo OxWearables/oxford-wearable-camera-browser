@@ -165,14 +165,14 @@
 <body>
 <div class="left-sticky">
 	<div style="margin-bottom:10px;">
-		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage"><i class="fa fa-home fa-2x"></i> </button>
-		<button type="button" class="menu-button" id="btn-save" title="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
-		<button  onClick="schema_selection_menu();" type="button" class="menu-button" id="btn-book?"><i class="fa fa-address-book fa-2x"></i> </button>
-		<button type="button" class="menu-button" id="btn-download" title="download annotations as .csv"><i class="fa fa-download fa-2x"></i> </button>
-		<button type="button" class="menu-button" id="btn-settings" title="settings"><i class="fa fa-cog fa-2x"></i> </button>
+		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage" help-text="participant selection"><i class="fa fa-home fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-save" title="save annotations"  help-text="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
+		<button  onClick="schema_selection_menu();" type="button" class="menu-button" id="btn-book?"  help-text="schema selection"><i class="fa fa-address-book fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-download" title="download annotations as .csv"  help-text="download annotation .csv"><i class="fa fa-download fa-2x"></i> </button>
+		<button type="button" class="menu-button" id="btn-settings" title="settings"  help-text="settings (coming soon)"><i class="fa fa-cog fa-2x"></i> </button>
 	</div>
 	<div style=" width:100%; text-align:center;">
-		<span style="line-height: 30px; vertical-align: middle;">select participant</span>
+		<span id="help-text" style="line-height: 30px; vertical-align: middle;">select participant</span>
 	</div>
 	<!-- new jsonified jstree: -->
 	<div id="jstree_box"  style="display:none;">
@@ -261,6 +261,16 @@
 
 <div class="tooltip">Tooltip</div>
 	<script>
+// Helper text
+$(function() {
+	var helpText = "";
+	$('.menu-button').mouseenter((e) => {
+		console.log($(e.target).attr('help-text'))
+		$('#help-text').text( $(e.target).attr('help-text'))
+	})
+	
+})
+
 // COLOR utils
 function byte2Hex(n) {
 	var nybHexString = "0123456789ABCDEF";
