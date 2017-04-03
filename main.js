@@ -1,4 +1,5 @@
 const schema = require('./schema.js')
+const image_resize = require('./image_resize.js')
 const electron = require('electron')
 // Module to control application life.
 const {app, BrowserWindow} = electron;
@@ -22,7 +23,7 @@ function createWindow () {
     slashes: true
   }))
 
-  win.webContents.openDevTools()
+  // win.webContents.openDevTools()
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -32,7 +33,14 @@ function createWindow () {
   })
 }
 
-app.on('ready', createWindow)
+var resize_operation = image_resize.resize_outstanding();
+app.on('ready', ()=>{
+  console.log("ready.. but waiting for resizing of images to be done.")
+  resize_operation.then(()=>{
+    console.log("all resizing done!")
+    createWindow();
+  })
+})
 
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
