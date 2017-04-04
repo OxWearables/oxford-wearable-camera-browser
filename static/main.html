@@ -179,6 +179,10 @@
 		<input type="text" id="jstree_searchbox">
 		<div id="jstree">
 		</div>
+		<div id="jstree-bottom-box" style="border-top: 1px solid #1d1d1b; display:none; margin: 5px;">
+			<span>create new participant</span>
+			<input type="text" id="create_participant">
+		</div>
 	</div>
 </div>
 
@@ -261,6 +265,20 @@
 
 <div class="tooltip">Tooltip</div>
 	<script>
+
+// Create participant box
+$(function() {
+	var background_text = "participant name"
+	$('#create_participant').focus(function(){
+			if ($(this).val() == background_text){
+			$(this).val('').removeClass('search-grey-text');
+		}
+		}).blur(function(){
+			if ($(this).val().length == 0){
+			$(this).val(background_text).addClass('search-grey-text');
+		}
+	}).val(background_text).addClass('search-grey-text');
+})
 // Helper text
 $(function() {
 	var helpText = "";
@@ -328,6 +346,7 @@ function participant_selection_menu() {
 		$('#jstree').jstree(true).settings.core.data = data;
 		$('#jstree').jstree(true).refresh();
 	})
+	$('#jstree-bottom-box').show();
 }
 
 // SCHEMA loading code
@@ -342,6 +361,7 @@ function schema_selection_menu() {
 	}
 	selecting_schema = true;
 	selecting_participant = false;
+	$('#jstree-bottom-box').hide();
 
 	var dir = 'schema'
 
@@ -489,6 +509,8 @@ $('#jstree')
 	    			$('#jstree').jstree(true).refresh();
 
 	    			request_participant(participant_name)
+	    			$('#jstree-bottom-box').hide();
+
 	    			load_schema(current_schema_json);
 
     			} else {
@@ -500,10 +522,14 @@ $('#jstree')
     				console.log(filePaths)
     				var nodes = [];
     				filePaths.forEach((f) => {
-    					nodes.push({text:path.basename(f), icon:false})
+    					if (f.toLowerCase().endsWith('.jpg')) {
+	    					nodes.push({text:path.basename(f), icon:false});
+	    				}
     				})
 
 		    		selecting_participant = false;
+		    		$('#jstree-bottom-box').hide();
+
     				$('#jstree').jstree(true).settings.core.data = nodes;
     				$('#jstree').jstree(true).refresh();
     			})
