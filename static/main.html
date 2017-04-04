@@ -303,7 +303,7 @@ var selecting_participant = false;
 function participant_selection_menu() {
 	if (selecting_participant) {
 		console.log("participant selection menu already open!")
-		return false;
+		// return false;
 	}
 	selecting_participant = true;
 	selecting_schema = false;
@@ -315,9 +315,10 @@ function participant_selection_menu() {
 		files.forEach(f=>{
 			console.log(f)
 			// if (f.endsWith('.csv')) {
-				data.push({text:f, icon:false})
+				data.push({text:f, icon:false, a_attr:{"option-type":"participant"}})
 			// }
 		})
+		data.push({text:"(add new participant)", icon:false, a_attr:{"option-type":"add_participant"}})
 		$('#jstree').jstree(true).settings.core.data = data;
 		$('#jstree').jstree(true).refresh();
 	})
@@ -343,7 +344,7 @@ function schema_selection_menu() {
 		files.forEach(f=>{
 			console.log(f)
 			if (f.endsWith('.csv')) {
-				data.push({text:f, icon:false})
+				data.push({text:f, icon:false, a_attr:{"option-type":"schema"}})
 			}
 		})
 		$('#jstree').jstree(true).settings.core.data = data;
@@ -456,8 +457,9 @@ $('#jstree').on('loaded.jstree', function() {
 $('#jstree')
     .on('mousedown', function (e) {
     	console.log("clicked jstree", e.target, selecting_schema)
-    	if (selecting_schema) {
-    		if ($(e.target).hasClass('jstree-anchor')) {
+    	var option_type = $(e.target).attr("option-type")
+		if (option_type!==undefined && $(e.target).hasClass('jstree-anchor')) {
+	    	if (option_type=="schema") {
 	    		selecting_schema = false;
     			var schema_name = $(e.target).text();
     			if (schema_name!==current_schema) {
@@ -471,9 +473,8 @@ $('#jstree')
     			$('#jstree').jstree(true).settings.core.data = [{text:'loading '+schema_name+'...'}];
     			$('#jstree').jstree(true).refresh();
     			request_schema(schema_name)
-	    	}
-    	} else if (selecting_participant) {
-    		if ($(e.target).hasClass('jstree-anchor')) {
+	    	
+	    	} else if (option_type=="participant") {
 	    		selecting_participant = false;
     			var participant_name = $(e.target).text();
     			if (participant_name!==current_participant) {
@@ -486,6 +487,12 @@ $('#jstree')
     			} else {
     				load_schema(current_schema_json);
     			}
+    		} else if (option_type=="add_participant") {
+	    		selecting_participant = false;
+    			dialog.showOpenDialog({properties:["multiSelections "]}, (filePaths) => {
+    				console.log(filePaths)
+    			})
+
     		}
     	} else {
 	    	if ($(e.target).hasClass('is_label')) {
