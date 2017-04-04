@@ -319,6 +319,7 @@ function participant_selection_menu() {
 			// }
 		})
 		data.push({text:"(add new participant)", icon:false, a_attr:{"option-type":"add_participant"}})
+		data.push({text:"(link new participant)", icon:false, a_attr:{"option-type":"link_participant"}})
 		$('#jstree').jstree(true).settings.core.data = data;
 		$('#jstree').jstree(true).refresh();
 	})
@@ -340,14 +341,14 @@ function schema_selection_menu() {
 	var dir = 'schema'
 
 	fs.readdir(dir, (err, files) => {
-		var data = []
+		var nodes = []
 		files.forEach(f=>{
 			console.log(f)
 			if (f.endsWith('.csv')) {
-				data.push({text:f, icon:false, a_attr:{"option-type":"schema"}})
+				nodes.push({text:f, icon:false, a_attr:{"option-type":"schema"}})
 			}
 		})
-		$('#jstree').jstree(true).settings.core.data = data;
+		$('#jstree').jstree(true).settings.core.data = nodes;
 		$('#jstree').jstree(true).refresh();
 	})
 }
@@ -361,7 +362,8 @@ function request_schema(schema_name) {
 ipcRenderer.on('schema_json', (event, arg) => {
 	current_schema = arg.schema_name;  // assign once done so we can save with correct filename
 	load_schema(arg.schema_json)
-	participant_selection_menu();
+	images_colorized = false;
+	if (current_participant===null)	participant_selection_menu();
 	// update_view();
 })
 
@@ -488,11 +490,28 @@ $('#jstree')
     				load_schema(current_schema_json);
     			}
     		} else if (option_type=="add_participant") {
-	    		selecting_participant = false;
-    			dialog.showOpenDialog({properties:["multiSelections "]}, (filePaths) => {
+    			dialog.showOpenDialog({properties:['openFile','multiSelections']}, (filePaths) => {
+    				if (filePaths===undefined) {console.log("no files selected");return;}
     				console.log(filePaths)
-    			})
+    				var nodes = [];
+    				filePaths.forEach((f) => {
+    					nodes.push({text:path.basename(f), icon:false})
+    				})
 
+		    		selecting_participant = false;
+    				$('#jstree').jstree(true).settings.core.data = nodes;
+    				$('#jstree').jstree(true).refresh();
+    			})
+    		} else if (option_type=="link_participant") {
+    			dialog.showOpenDialog({properties:['openDirectory']}, (folderPath) => {
+    				console.log("opened folder", folderPath)
+    				if (folderPath.length===1) {
+	    				var new_participant_name = "newtest";
+	    				console.log("fs.symlinkSync",folderPath[0], path.join( "images",new_participant_name))
+	    				fs.symlinkSync(folderPath[0], path.join("images",new_participant_name), "junction")
+	    				participant_selection_menu();
+	    			}
+    			})
     		}
     	} else {
 	    	if ($(e.target).hasClass('is_label')) {
@@ -670,6 +689,8 @@ function annotate_image(i, label) {
 								}
 							}
 							fs.readdir(subdir, (err, files) => {
+								if (err) console.log(err);
+								if (files===undefined || files.length==0) return console.log("no files in folder!")
 								files
 									.sort((a, b)=>(a.slice(17)>b.slice(17)) ? 1 : -1)
 									.forEach((f, i) => {
@@ -1420,7 +1441,7 @@ function annotate_image(i, label) {
 			return new Promise((resolve, reject) => {
 				console.log("writing annotation to",path.join('annotation',current_participant,'annotation_'+current_schema) )
 				fs.writeFile(path.join('annotation',current_participant,'annotation_'+current_schema ), data, {}, (err, res) => {
-					console.log(err,res)
+					console.log("saved annotation, err:",err,"res:",res)
 					resolve()
 				})
 			})
