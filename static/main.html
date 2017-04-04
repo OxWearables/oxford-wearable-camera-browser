@@ -164,15 +164,15 @@
 </head>
 <body>
 <div class="left-sticky">
+	<div style=" width:100%; text-align:center;margin-top:10px;">
+		<span id="help-text" style="line-height: 20px; vertical-align: middle;">select participant</span>
+	</div>
 	<div style="margin-bottom:10px;">
 		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage" help-text="participant selection"><i class="fa fa-home fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-save" title="save annotations"  help-text="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
 		<button  onClick="schema_selection_menu();" type="button" class="menu-button" id="btn-book?"  help-text="schema selection"><i class="fa fa-address-book fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-download" title="download annotations as .csv"  help-text="download annotation .csv"><i class="fa fa-download fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-settings" title="settings"  help-text="settings (coming soon)"><i class="fa fa-cog fa-2x"></i> </button>
-	</div>
-	<div style=" width:100%; text-align:center;">
-		<span id="help-text" style="line-height: 30px; vertical-align: middle;">select participant</span>
 	</div>
 	<!-- new jsonified jstree: -->
 	<div id="jstree_box"  style="display:none;">
@@ -264,9 +264,14 @@
 // Helper text
 $(function() {
 	var helpText = "";
-	$('.menu-button').mouseenter((e) => {
-		console.log($(e.target).attr('help-text'))
-		$('#help-text').text( $(e.target).attr('help-text'))
+	$('.menu-button').hover((e) => {
+		console.log("mouseeneter")
+		var newtext = $(e.target).closest("button").attr('help-text')
+		if (newtext==undefined) console.log(e.target);
+		else console.log(newtext)
+		$('#help-text').text( newtext)
+	}, (e) => {
+		$('#help-text').text(current_participant===null ? "select participant" : "participant: "+current_participant);
 	})
 	
 })
