@@ -180,7 +180,7 @@
 		<div id="jstree">
 		</div>
 		<div id="jstree-bottom-box" style="border-top: 1px solid #1d1d1b; display:none; margin: 5px;">
-			<span>create new participant</span>
+			<span id='bottom-box-text'>create new participant</span>
 			<input type="text" id="create_participant">
 		</div>
 	</div>
@@ -706,6 +706,7 @@ function annotate_image(i, label) {
 					(size) => {
 						sizes[size] = [];
 						var subdir = path.join(dir,size);
+						if (size=='full') subdir = dir;
 						fs.stat(subdir, (err, stats) => {
 							if (err) fs.mkdir(subdir);	
 							else {
@@ -1279,7 +1280,7 @@ function annotate_image(i, label) {
 				// console.log('gettingData',index, item)
 			    // Set image source & size based on real viewport width
 			    if( useLargeImages ) {
-			        item.src = '../images/'+current_participant+'/full/'+imgs[index];
+			        item.src = '../images/'+current_participant+'/'+imgs[index];
 			        item.w = img_sizes.full[0],
 			        item.h = img_sizes.full[1]
 			    } else {
