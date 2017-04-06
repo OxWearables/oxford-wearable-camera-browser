@@ -43,6 +43,7 @@ function resize_outstanding() {
 						(size) => {
 							sizes[size] = [];
 							var subdir = path.join(dir,size);
+							if (size=='full') subdir = dir;
 							return fs.statAsync(subdir).then( (stats) => {
 								if (!stats.isDirectory()) {
 									// must be a file
@@ -111,7 +112,7 @@ var Image_processor = {
 	},
 	process_image: function(size, f, p_name)  {
 		Image_processor.busy = true;
-		jimp.read(path.join('images', p_name, 'full',f))
+		jimp.read(path.join('images', p_name,f))
 			.then((img) => {
 			// if (err) throw err;
 			img.resize(img_sizes[size][0],img_sizes[size][1])
@@ -154,9 +155,9 @@ function imagesModified(state, f) {
 	var rel_dir = path.dirname(rel_f);
 	console.log(rel_dir)
 	var p_name = rel_dir.split(path.sep, 1)[0];
-	console.log("participant:", p_name)
 	var size = rel_dir.slice(p_name.length+1);
-	if (size=='full') {
+	console.log("participant:", p_name, "rel_dir=",rel_dir)
+	if (size=='') {
 		if (state='added') {
 			// console.log(db.participants[p_name].sizes.full)
 			var filename = path.basename(f);
