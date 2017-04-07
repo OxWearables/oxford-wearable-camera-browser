@@ -179,9 +179,10 @@
 		<input type="text" id="jstree_searchbox">
 		<div id="jstree">
 		</div>
-		<div id="jstree-bottom-box" style="border-top: 1px solid #1d1d1b; display:none; margin: 5px;">
+		<div id="jstree-bottom-box" style="border-top: 1px solid #1d1d1b; display:none; margin: 5px;width:200;">
 			<span id='bottom-box-text'>create new participant</span>
-			<input type="text" id="create_participant">
+			<input type="text" id="bottom-box-input">
+			<button id="bottom-box-button" style="display:none"> <i class="fa fa-plus"></i> </button>
 		</div>
 	</div>
 </div>
@@ -269,7 +270,7 @@
 // Create participant box
 $(function() {
 	var background_text = "participant name"
-	$('#create_participant').focus(function(){
+	$('#bottom-box-input').focus(function(){
 			if ($(this).val() == background_text){
 			$(this).val('').removeClass('search-grey-text');
 		}
@@ -523,12 +524,22 @@ $('#jstree')
     				var nodes = [];
     				filePaths.forEach((f) => {
     					if (f.toLowerCase().endsWith('.jpg')) {
-	    					nodes.push({text:path.basename(f), icon:false});
+	    					nodes.push({text:path.basename(f), icon:"fa fa-picture-o"});
+	    				} else {
+	    					nodes.push({text:path.basename(f), icon:"fa fa-times"});
 	    				}
     				})
-
+    				if (nodes.length==0) nodes.push({text:"(no images found)", icon:false});
 		    		selecting_participant = false;
-		    		$('#jstree-bottom-box').hide();
+		    		$('#jstree-bottom-box').show();
+		    		$('#bottom-box-text').text("confirm and resize images?");
+		    		$('#bottom-box-button').show();
+		    		$('#bottom-box-input').hide();
+					$('#bottom-box-button').click(()=>{
+						console.log(remote)
+						console.log(remote.image_resize)
+			    		$('#bottom-box-button').hide();
+					})
 
     				$('#jstree').jstree(true).settings.core.data = nodes;
     				$('#jstree').jstree(true).refresh();

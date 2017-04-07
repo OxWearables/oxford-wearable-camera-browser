@@ -5,6 +5,12 @@ const path          = require('path');
 const watch         = require('watch')
 const jimp          = require("jimp");
 
+const ipcMain = require('electron').ipcMain
+ipcMain.on('resize_image', (event, arg) => {
+  console.log('resize_image', arg)
+  imagesModified("added",arg)
+})
+
 
 // for resizing
 var img_sizes = {
