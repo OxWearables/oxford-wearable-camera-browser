@@ -3,14 +3,17 @@ const Promise       = require('bluebird');
 const fs            = Promise.promisifyAll(require('fs'));
 const path          = require('path');
 const watch         = require('watch')
-const jimp          = require("jimp");
+const jimp          = Promise.promisifyAll(require("jimp"));
 
 const ipcMain = require('electron').ipcMain
 ipcMain.on('resize_image', (event, arg) => {
   console.log('resize_image', arg)
   imagesModified("added",arg)
 })
-
+ipcMain.on('resize_status', (event, arg) => {
+  console.log('resize_status', arg)
+  event.sender.send('resize_status', {queue:Image_processor.queue, busy: Image_processor.busy})
+})
 
 // for resizing
 var img_sizes = {
@@ -26,7 +29,7 @@ function resize_outstanding() {
 		console.log("folder exists:", e.path	)
 	})
 	.then(()=>{
-		console.log("folder creation done")
+		console.log("'images' and 'annotation' folders found..")
 	})
 	.then( () => {
 		return fs.readdirAsync('images').map(
@@ -36,8 +39,8 @@ function resize_outstanding() {
 
 				
 				var dir = path.join('images', p_folder)
-
-				if (fs.lstatSync(dir).isDirectory()) {
+				var stat = fs.lstatSync(dir);
+				if (stat.isDirectory() || stat.isSymbolicLink()) {
 					// ensure corresponding annotation directory also exists
 					fs.statAsync(path.join('annotation', p_folder)).catch( {code:'ENOENT'}, (e) => {
 						console.log("creating annotatioin dir:", path.join('annotation', p_folder))
@@ -113,16 +116,19 @@ var Image_processor = {
 	busy:false,
 	process_next: function() {
 		var queue_item = Image_processor.queue.pop();
-		console.log(queue_item)
+		console.log("process_next", queue_item)
 		Image_processor.process_image(queue_item[0],queue_item[1],queue_item[2])
 	},
 	process_image: function(size, f, p_name)  {
 		Image_processor.busy = true;
 		jimp.read(path.join('images', p_name,f))
 			.then((img) => {
-			// if (err) throw err;
-			img.resize(img_sizes[size][0],img_sizes[size][1])
-				.write(path.join('images', p_name, size,f))
+				// if (err) throw err;
+				img.resize(img_sizes[size][0],img_sizes[size][1])
+					.write(path.join('images', p_name, size,f))
+			}
+		).catch((e) =>{
+			console.log("error resizing image",f, e);
 		}).then(()=>{
 			if (Image_processor.queue.length>0) Image_processor.process_next();
 			else {
@@ -178,33 +184,45 @@ function imagesModified(state, f) {
 }
 function process_full(p_name, f, queue) {
 	// var queue = [];
+	var f_full = path.join('images', p_name, f)
 	var f_medium = path.join('images', p_name, 'medium',f)
 	var f_thumbnail = path.join('images', p_name, 'thumbnail',f)
 	// console.log(f_medium)
-	return Promise.all([
-	fs.statAsync(f_medium).catch({code:'ENOENT'}, (err) => {
-		// .then( (err, stat) => {
-		if (err!==null && err.code == 'ENOENT') {
-			console.log(p_name, 'need to create medium size for:', f);
-			// sharp(path.join('images', p.name, 'full',f))
-			// 	.resize(img_sizes['medium'][0],img_sizes['medium'][1])
-			// 	.toFile(f_medium)
-			queue.push(['medium', f, p_name])
-			
-		}
-	}),
-	fs.statAsync(f_thumbnail).catch({code:'ENOENT'}, (err) => {
-		// .then( (err, stat) => {
-		if (err!==null && err.code == 'ENOENT') {
-			console.log(p_name, 'need to create thumbnail size for:', f);
-			// sharp(path.join('images', p_name, 'full',f))
-			// 	.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
-			// 	.toFile(f_thumbnail)
-			queue.push(['thumbnail', f, p_name])
+	return fs.lstatAsync(f_full).catch({code:'ENOENT'},()=> {
 
+		console.log("no such file to resize:",f_full)
+	}).then((stat)=>{
+		if (!stat.isFile()) {
+			console.log("file is dir:", f_full)
+			return;
 		}
+		console.log("file exists",f_full, "checking if we need resizing..")
+		return Promise.all([
+			fs.statAsync(f_medium).catch({code:'ENOENT'}, (err) => {
+				// .then( (err, stat) => {
+				if (err!==null && err.code == 'ENOENT') {
+					console.log(p_name, 'need to create medium size for:', f);
+					// sharp(path.join('images', p.name, 'full',f))
+					// 	.resize(img_sizes['medium'][0],img_sizes['medium'][1])
+					// 	.toFile(f_medium)
+					queue.push(['medium', f, p_name])
+					
+				}
+			}),
+			fs.statAsync(f_thumbnail).catch({code:'ENOENT'}, (err) => {
+				// .then( (err, stat) => {
+
+				if (err!==null && err.code == 'ENOENT') {
+					console.log(p_name, 'need to create thumbnail size for:', f);
+					// sharp(path.join('images', p_name, 'full',f))
+					// 	.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
+					// 	.toFile(f_thumbnail)
+					queue.push(['thumbnail', f, p_name])
+
+				}
+			})
+		])
 	})
-	])
 }
 
 exports.resize_outstanding = resize_outstanding

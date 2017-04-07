@@ -170,7 +170,7 @@
 	<div style="margin-bottom:10px;">
 		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage" help-text="participant selection"><i class="fa fa-users fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-save" title="save annotations"  help-text="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
-		<button  onClick="schema_selection_menu();" type="button" class="menu-button" id="btn-book?"  help-text="schema selection"><i class="fa fa-address-book fa-2x"></i> </button>
+		<button  onClick="schema_selection_menu();" type="button" class="menu-button" id="btn-book?"  help-text="schema selection"><i class="fa fa-book fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-download" title="download annotations as .csv"  help-text="download annotation .csv"><i class="fa fa-download fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-settings" title="settings"  help-text="settings (coming soon)"><i class="fa fa-cog fa-2x"></i> </button>
 	</div>
@@ -339,11 +339,11 @@ function participant_selection_menu() {
 		files.forEach(f=>{
 			console.log(f)
 			// if (f.endsWith('.csv')) {
-				data.push({text:f, icon:"fa fa-user", a_attr:{"option-type":"participant"}})
+				data.push({text:f, icon:"fa fa-user fa-fw", a_attr:{"option-type":"participant"}})
 			// }
 		})
-		data.push({text:"(add new participant)", icon:"fa fa-user-plus", a_attr:{"option-type":"add_participant"}})
-		data.push({text:"(link new participant)", icon:"fa fa-user-circle-o", a_attr:{"option-type":"link_participant"}})
+		data.push({text:"(add new participant)", icon:"fa fa-user-plus fa-fw", a_attr:{"option-type":"add_participant"}})
+		data.push({text:"(link new participant)", icon:"fa fa-user-circle-o fa-fw", a_attr:{"option-type":"link_participant"}})
 		$('#jstree').jstree(true).settings.core.data = data;
 		$('#jstree').jstree(true).refresh();
 	})
@@ -371,7 +371,7 @@ function schema_selection_menu() {
 		files.forEach(f=>{
 			console.log(f)
 			if (f.endsWith('.csv')) {
-				nodes.push({text:f, icon:false, a_attr:{"option-type":"schema"}})
+				nodes.push({text:f, icon:"fa fa-file-text fa-fw", a_attr:{"option-type":"schema"}})
 			}
 		})
 		$('#jstree').jstree(true).settings.core.data = nodes;
@@ -391,6 +391,10 @@ ipcRenderer.on('schema_json', (event, arg) => {
 	images_colorized = false;
 	if (current_participant===null)	participant_selection_menu();
 	// update_view();
+})
+
+ipcRenderer.on('resize_status', (event, arg) => {
+	console.log('resize_status', arg)
 })
 
 var current_participant = null; // this will define participant that is loaded
@@ -1565,7 +1569,7 @@ function annotate_image(i, label) {
 		}
 		$("#btn-save").click(()=>{
 			console.log("save", this)
-			var temp_icon = 'fa-spinner'
+			var temp_icon = 'fa-spinner fa-pulse'
 			$("#btn-save").find('i').removeClass('fa-floppy-o').addClass(temp_icon)
 			save_annotation().then(() => {
 				$("#btn-save").find('i').removeClass(temp_icon).addClass('fa-floppy-o')
@@ -1573,7 +1577,7 @@ function annotate_image(i, label) {
 		})
 		$("#btn-download").click(()=>{
 			console.log("download", this)
-			var temp_icon = 'fa-spinner'
+			var temp_icon = 'fa-spinner fa-pulse'
 			$("#btn-download").find('i').removeClass('fa-floppy-o').addClass(temp_icon)
 			var csvContent = generate_annotation_file();
 			console.log('csvContent',csvContent)
