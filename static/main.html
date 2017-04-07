@@ -168,7 +168,7 @@
 		<span id="help-text" style="line-height: 20px; vertical-align: middle;">select participant</span>
 	</div>
 	<div style="margin-bottom:10px;">
-		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage" help-text="participant selection"><i class="fa fa-home fa-2x"></i> </button>
+		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage" help-text="participant selection"><i class="fa fa-users fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-save" title="save annotations"  help-text="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
 		<button  onClick="schema_selection_menu();" type="button" class="menu-button" id="btn-book?"  help-text="schema selection"><i class="fa fa-address-book fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-download" title="download annotations as .csv"  help-text="download annotation .csv"><i class="fa fa-download fa-2x"></i> </button>
@@ -339,11 +339,11 @@ function participant_selection_menu() {
 		files.forEach(f=>{
 			console.log(f)
 			// if (f.endsWith('.csv')) {
-				data.push({text:f, icon:false, a_attr:{"option-type":"participant"}})
+				data.push({text:f, icon:"fa fa-user", a_attr:{"option-type":"participant"}})
 			// }
 		})
-		data.push({text:"(add new participant)", icon:false, a_attr:{"option-type":"add_participant"}})
-		data.push({text:"(link new participant)", icon:false, a_attr:{"option-type":"link_participant"}})
+		data.push({text:"(add new participant)", icon:"fa fa-user-plus", a_attr:{"option-type":"add_participant"}})
+		data.push({text:"(link new participant)", icon:"fa fa-user-circle-o", a_attr:{"option-type":"link_participant"}})
 		$('#jstree').jstree(true).settings.core.data = data;
 		$('#jstree').jstree(true).refresh();
 	})
