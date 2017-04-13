@@ -1,11 +1,11 @@
-# node-image-server
+# Node-image-server
 A wearable camera image browser & annotation tool
 
 ## Usage
 
 ![SvenBrowser](http://i.imgur.com/YSqfTL7.png)
 
-[see a demo video](http://i.imgur.com/o0BtSQZ.gif)
+[See a demo video](http://i.imgur.com/o0BtSQZ.gif)
 
 ## Custom schemas
 
