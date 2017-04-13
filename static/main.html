@@ -1524,7 +1524,9 @@ function annotate_image(i, label) {
 		}
 
 		function save_annotation() {
-			if (current_schema===null) return alert("current schema not set (may be mid-load)", current_schema)
+
+			if (current_participant===null) {return alert("current participant not set (may be mid-load)")}
+			if (current_schema===null) return alert("current schema not set (may be mid-load)")
 			var data = generate_annotation_file();
 			return new Promise((resolve, reject) => {
 				console.log("writing annotation to",path.join('annotation',current_participant,'annotation_'+current_schema) )
