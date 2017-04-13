@@ -168,21 +168,11 @@ setInterval(() => {
 	}
 }, 1000)
 
-watch.watchTree(__dirname + "/images", {'interval':1}, function (f, curr, prev) {
-	if (typeof f == "object" && prev === null && curr === null) {
-	  // Finished walking the tree
-	} else if (prev === null) {
-	  console.log('new file added:', f)
-	  imagesModified('added',f)
-	} else if (curr.nlink === 0) {
-	  console.log('file removed:', f)
-	  imagesModified('deleted',f)
-	  // f was removed
-	} else {
-	  console.log('file modified:', f)
-	  // f was changed
-	}
-})
+
+
+function filename_is_image(filename) {
+	return filename.toLowerCase().endsWith('.jpg') || filename.toLowerCase().endsWith('.jpeg');
+}
 
 function imagesModified(state, f) {
 	var rel_f = path.relative(path.join(__dirname,'images'), f);
@@ -196,11 +186,11 @@ function imagesModified(state, f) {
 		if (state='added') {
 			// console.log(db.participants[p_name].sizes.full)
 			var filename = path.basename(f);
-			process_full(p_name, filename, Image_processor.queue)
+			if (filename_is_image(filename)) {
+				process_full(p_name, filename, Image_processor.queue)
+			}
 		}
 	}
-
-
 	
 	// console.log(path.parse(rel_f))
 	// if (rel_f.startsWith(path.join('images')) )
@@ -212,14 +202,13 @@ function process_full(p_name, f, queue) {
 	var f_thumbnail = path.join('images', p_name, 'thumbnail',f)
 	// console.log(f_medium)
 	return fs.lstatAsync(f_full).catch({code:'ENOENT'},()=> {
-
 		console.log("no such file to resize:",f_full)
 	}).then((stat)=>{
-		if (!stat.isFile()) {
+		if (stat===undefined || !stat.isFile()) {
 			console.log("file is dir:", f_full)
 			return;
 		}
-		console.log("file exists",f_full, "checking if we need resizing..")
+		// console.log("file exists",f_full, "checking if we need resizing..")
 		return Promise.all([
 			fs.statAsync(f_medium).catch({code:'ENOENT'}, (err) => {
 				// .then( (err, stat) => {
