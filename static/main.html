@@ -1610,13 +1610,19 @@ function annotate_image(i, label) {
 			})
 
 		}
-		$("#btn-save").click(()=>{
-			console.log("save", this)
+
+		function save_action() {
+			console.log("save")
 			var temp_icon = 'fa-spinner fa-pulse'
 			$("#btn-save").find('i').removeClass('fa-floppy-o').addClass(temp_icon)
-			save_annotation().then(() => {
+			var save_promise = save_annotation()
+			if (!save_promise) $("#btn-save").find('i').removeClass(temp_icon).addClass('fa-floppy-o')
+			else save_promise.then(() => {
 				$("#btn-save").find('i').removeClass(temp_icon).addClass('fa-floppy-o')
 			})
+		}
+		$("#btn-save").click(()=>{
+			save_action();
 		})
 		$("#btn-download").click(()=>{
 			console.log("download", this)
