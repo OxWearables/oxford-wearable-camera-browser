@@ -1504,9 +1504,9 @@ function annotate_image(i, label) {
 				// console.log(i, e, label)
 				if (curr_evt!== e || label !== curr_label) {
 					if (curr_start!==null) {
-						var end = img_times[i-1];
-						str += curr_start.toISOString() + ',' + end.toISOString() + ',' + curr_label + '\n';
-						console.log(i, curr_label, curr_start.toTimeString().split(" ")[0], end.toTimeString().split(" ")[0])
+						var last_time = img_times[i-1];
+						str += curr_start.toISOString() + ',' + last_time.toISOString() + ',' + curr_label + '\n';
+						console.log(i, curr_label, curr_start.toTimeString().split(" ")[0], last_time.toTimeString().split(" ")[0])
 					}
 					curr_label = label;
 					curr_evt = e;
@@ -1515,9 +1515,9 @@ function annotate_image(i, label) {
 				}
 			})
 			if (last_idx!==-100) {
-				var end = img_times[last_idx];
-				console.log("end:", last_idx, end)
-				str += curr_start.toISOString() + ',' + end.toISOString() + ',' + curr_label + '\n';
+				var last_time = img_times[last_idx];
+				console.log("last_time:", last_idx, last_time)
+				str += curr_start.toISOString() + ',' + last_time.toISOString() + ',' + curr_label + '\n';
 			}
 			console.log(str)
 			return str
