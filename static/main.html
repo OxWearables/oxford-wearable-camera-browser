@@ -388,9 +388,9 @@ function request_schema(schema_name) {
 	// current_schema = null;
 	current_schema = schema_name;
 	selecting_schema = false;
-	ipcRenderer.send('get_schema', schema_name)
+	ipc.send('get_schema', schema_name)
 }
-ipcRenderer.on('schema_json', (event, arg) => {
+ipc.on('schema_json', (event, arg) => {
 	current_schema = arg.schema_name;  // assign once done so we can save with correct filename
 	load_schema(arg.schema_json)
 	images_colorized = false;
@@ -454,6 +454,9 @@ var current_schema_json = null;
 // applies color to leaves, then loads jstree and binds drag/drop events
 function load_schema(schema_json) {
 	console.log(schema_json)
+	if (schema_json===null) {
+		schema_selection_menu()
+	}
 	current_schema_json = schema_json;
 	// GENERATE COLORS
 	var leaves = get_leaves(schema_json);
