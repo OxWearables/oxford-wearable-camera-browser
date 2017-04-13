@@ -1477,12 +1477,12 @@ function annotate_image(i, label) {
 			var delta = e.originalEvent.deltaY;
 			delta = Math.min(1,Math.max(-1, Math.round(delta/100)))
 			if (pswp) {
-				var top_index = imgs.lastIndexOf(imgs.slice(-1)[0]);
-				var bottom_index = parseInt(first(imgs));
+				var top_index = end//imgs.lastIndexOf(imgs.slice(-1)[0]);
+				var bottom_index = start//parseInt(first(imgs));
 				var new_index = pswp.getCurrentIndex()+delta;
 				if (new_index > top_index) new_index = new_index - top_index + bottom_index
 				else if (new_index < bottom_index) new_index = new_index + top_index - bottom_index
-				console.log(top_index ,bottom_index ,new_index)
+				// console.log(top_index ,bottom_index ,new_index)
 				pswp.goTo(new_index);
 			}
 			return false;
