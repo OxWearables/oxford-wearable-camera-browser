@@ -35,7 +35,7 @@
 		width: 201px;
 		height: 100%;
 		z-index:10;
-		background-color: rgba(247, 245, 232, 0.9);;
+		background-color: rgba(247, 245, 232, 0.9);
     	padding-right: 1px;
 	    box-sizing: border-box;
 	    margin: 0px;
@@ -259,7 +259,12 @@
 		<div id="handle"></div> 
 		</div>
 	</div>
-
+	<div style="text-align:center;">
+		<div id="resize-status" style="display: inline-block;margin:auto; padding:10px;  margin-top: -10px; text-align:center;background-color:ee9f4e; border-radius: 5px; border: 1px solid #282826;">
+			<span id="resize-span" style="">loading images..</span>
+			<button onClick="ipc.send('resize_disable'); $('resize-status').hide();" style="width:auto;" type="button" class="menu-button" id="btn-settings" title="disable resize"  help-text="disable resizing"><i class="fa fa-times fa-2x"></i> Disable resizing </button>
+		</div>
+	</div>
 	<div class="gallery">
 	</div>
 </div>
@@ -393,8 +398,38 @@ ipcRenderer.on('schema_json', (event, arg) => {
 	// update_view();
 })
 
-ipcRenderer.on('resize_status', (event, arg) => {
+function resizing_status(busy, text){
+	if (busy) {
+		// $('.right-sticky').css({backgroundColor:'#282826'})
+		$('#resize-status').show()
+		$('#resize-span').empty()
+		if (text) text.forEach((t) => {
+			console.log(t)
+			$('#resize-span').append( $("<p></p>").text(t) );
+		})
+	} else {
+		// $('.right-sticky').css({backgroundColor:'#FFFFFF'})
+		$('#resize-status').hide()
+	}
+}
+
+resizing_status(true);
+ipc.send('resize_status');
+ipc.on('resize_status', (event, arg) => {
 	console.log('resize_status', arg)
+	var text = [];
+	text.push(arg.queue.length + " images in queue.")
+	if (arg.queue.length>0) {
+		var last_item = arg.queue[arg.queue.length-1];
+		text.push("participant=" + last_item[2])
+		text.push("size=" + last_item[0])
+		text.push("filename=" + last_item[1])
+	}
+
+	resizing_status(arg.queue.length > 0 && arg.disabled!==true, text)
+	// if (arg.queue.length>0 && arg.queue.busy==false) {
+	// 	setTimeout(() => {ipc.send('resize_status');}, 250)
+	// }
 })
 
 var current_participant = null; // this will define participant that is loaded
