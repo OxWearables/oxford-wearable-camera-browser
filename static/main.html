@@ -1311,10 +1311,15 @@ function annotate_image(i, label) {
 				    // optionally get horizontal scroll
 
 				    // get position of element relative to viewport
-				    var rect = thumbnail.getBoundingClientRect(); 
 
+				    if (thumbnail!==undefined) {
+					    var rect = thumbnail.getBoundingClientRect(); 
+					    return {x:rect.left - 201, y:rect.top + pageYScroll, w:rect.width};
+					}
+					else {
+						return {};
+					}
 				    // w = width
-				    return {x:rect.left - 201, y:rect.top + pageYScroll, w:rect.width};
 
 				},
 				history: false,
