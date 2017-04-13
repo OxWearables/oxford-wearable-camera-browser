@@ -466,6 +466,7 @@ function load_schema(schema_json) {
 	console.log(schema_json)
 	if (schema_json===null) {
 		schema_selection_menu()
+		return;
 	}
 	current_schema_json = schema_json;
 	// GENERATE COLORS
