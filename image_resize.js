@@ -6,13 +6,22 @@ const watch         = require('watch')
 const jimp          = Promise.promisifyAll(require("jimp"));
 
 const ipcMain = require('electron').ipcMain
+ipcMain.on('resize_disable', (event, arg) => {
+	Image_processor.disabled = true;
+});
 ipcMain.on('resize_image', (event, arg) => {
   console.log('resize_image', arg)
   imagesModified("added",arg)
 })
+ipcMain.on('resize_outstanding', (event, arg) => {
+  console.log('resize_outstanding', arg)
+  resize_outstanding("added",arg)
+})
+var event_sender = null;
 ipcMain.on('resize_status', (event, arg) => {
-  console.log('resize_status', arg)
-  event.sender.send('resize_status', {queue:Image_processor.queue, busy: Image_processor.busy})
+  console.log('resize_status')
+  event_sender = event.sender;
+  event.sender.send('resize_status', {queue:Image_processor.queue, busy: Image_processor.busy, disabled: Image_processor.disabled})
 })
 
 // for resizing
@@ -137,9 +146,12 @@ function resize_outstanding() {
 var Image_processor = {
 	queue: [],
 	busy:false,
+	disabled:false,
 	process_next: function() {
+		if (Image_processor.disabled) return;
 		var queue_item = Image_processor.queue.pop();
 		console.log("process_next", queue_item)
+		if (event_sender!==null) event_sender.send('resize_status', {queue:Image_processor.queue, busy: Image_processor.busy});
 		Image_processor.process_image(queue_item[0],queue_item[1],queue_item[2])
 	},
 	process_image: function(size, f, p_name)  {
@@ -163,7 +175,7 @@ var Image_processor = {
 	}
 }
 setInterval(() => {
-	if (!Image_processor.busy && Image_processor.queue.length>0) {
+	if (!Image_processor.busy && !Image_processor.disabled && Image_processor.queue.length>0) {
 		Image_processor.process_next()
 	}
 }, 1000)
