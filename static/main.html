@@ -707,7 +707,11 @@ function annotate_image(i, label) {
 	// this function ensures that the following happens in order:
 	function update_view() {
 		console.log("update_view")
-		if (images_loaded!==true) {load_images(); return;}
+		if (images_loaded!==true) {
+			if (pswp!==undefined && pswpIsOpen) pswp.close(); 
+			load_images(); 
+			return;
+		}
 		if (annotations_loaded!==true) {load_annotation(); return;}
 		if (images_created!==true) {create_all_images(); return;}
 		if (images_colorized!==true) {colorize_all_images(); return;}
