@@ -6,7 +6,7 @@
 	const $ = jQuery    = require("jquery");
 	const fs            = require('fs');
 	const path          = require('path');
-	const ipcRenderer   = require('electron').ipcRenderer
+	const ipc   = require('electron').ipcRenderer
 	const { remote } = require('electron')
 	const dialog = remote.dialog
 	</script>
@@ -330,6 +330,8 @@ function makeColorGradient(frequency1, frequency2, frequency3,
 }
 // participant loading code
 
+// TEMP variable to disable participant adding
+var debug_no_adding = true;
 // keep track of which participant we have currently loaded
 var selecting_participant = false;
 function participant_selection_menu() {
@@ -350,12 +352,16 @@ function participant_selection_menu() {
 				data.push({text:f, icon:"fa fa-user fa-fw", a_attr:{"option-type":"participant"}})
 			// }
 		})
-		data.push({text:"(add new participant)", icon:"fa fa-user-plus fa-fw", a_attr:{"option-type":"add_participant"}})
-		data.push({text:"(link new participant)", icon:"fa fa-user-circle-o fa-fw", a_attr:{"option-type":"link_participant"}})
+		if (!debug_no_adding) {
+			data.push({text:"(add images)", icon:"fa fa-user-plus fa-fw", a_attr:{"option-type":"add_participant"}})
+			data.push({text:"(link new participant)", icon:"fa fa-user-circle-o fa-fw", a_attr:{"option-type":"link_participant"}})
+		}
 		$('#jstree').jstree(true).settings.core.data = data;
 		$('#jstree').jstree(true).refresh();
 	})
-	$('#jstree-bottom-box').show();
+	if (!debug_no_adding) {
+		$('#jstree-bottom-box').show();
+	}
 }
 
 // SCHEMA loading code
@@ -370,9 +376,10 @@ function schema_selection_menu() {
 	}
 	selecting_schema = true;
 	selecting_participant = false;
-	$('#jstree-bottom-box').hide();
-
-	var dir = 'schema'
+	if (!debug_no_adding) {
+		$('#jstree-bottom-box').hide();
+	}
+	var dir = './schema'
 
 	fs.readdir(dir, (err, files) => {
 		var nodes = []
@@ -555,8 +562,9 @@ $('#jstree')
 	    			$('#jstree').jstree(true).refresh();
 
 	    			request_participant(participant_name)
-	    			$('#jstree-bottom-box').hide();
-
+	    			if (!debug_no_adding) {
+		    			$('#jstree-bottom-box').hide();
+					}
 	    			load_schema(current_schema_json);
 
     			} else {
@@ -576,7 +584,9 @@ $('#jstree')
     				})
     				if (nodes.length==0) nodes.push({text:"(no images found)", icon:false});
 		    		selecting_participant = false;
-		    		$('#jstree-bottom-box').show();
+		    		if (!debug_no_adding) {
+			    		$('#jstree-bottom-box').show();
+			    	}
 		    		$('#bottom-box-text').text("confirm and resize images?");
 		    		$('#bottom-box-button').show();
 		    		$('#bottom-box-input').hide();
@@ -781,7 +791,7 @@ function annotate_image(i, label) {
 							}
 							fs.readdir(subdir, (err, files) => {
 								if (err) console.log(err);
-								if (files===undefined || files.length==0) return console.log("no files in folder!")
+								if (files===undefined || files.length==0) return console.log("no files in folder!", subdir)
 								files
 									.sort((a, b)=>(a.slice(17)>b.slice(17)) ? 1 : -1)
 									.forEach((f, i) => {
@@ -1361,7 +1371,6 @@ function annotate_image(i, label) {
 			pswp.listen('afterChange', function() {
 
 		    	var index = pswp.getCurrentIndex()
-
 		    	// http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
 		    	var container = $('.gallery'),
 		    	    scrollTo = $("div#"+index+".img");
