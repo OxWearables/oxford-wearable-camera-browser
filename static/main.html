@@ -735,7 +735,7 @@ function annotate_image(i, label) {
 		console.log(labels)
 		for(var i=0; i<=end-start;i++ ) {
 			// svg_update(i)
-			svg_colorize(i, label_to_color[labels[evts[i]]])
+			svg_colorize(i+start, label_to_color[labels[evts[i+start]]])
 		}
 		images_colorized = true;
 		update_view();
