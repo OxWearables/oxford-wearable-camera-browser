@@ -271,7 +271,10 @@
 
 <div class="tooltip">Tooltip</div>
 	<script>
-
+var debug_is_built = !(process.execPath.split('\\')[process.execPath.split('\\').length-1]=="electron.exe");
+var img_dir = (debug_is_built ? '../../':'') +'../images/';
+var schema_dir = (debug_is_built ? '../../':'') +'../images/';
+// alert(debug_is_built, img_dir)
 // Create participant box
 $(function() {
 	var background_text = "participant name"
@@ -745,7 +748,7 @@ function annotate_image(i, label) {
 	function load_images() {
 		if (current_participant===null) {participant_selection_menu(); return;}
 
-		var p_folder = current_participant
+		var p_folder = current_participant;
 		var dir = path.join('images', p_folder)
 		console.log("participant folder:", p_folder);
 		console.log("participant images directory: ", dir)
@@ -831,7 +834,7 @@ function annotate_image(i, label) {
 
 		str += '<svg width="110" height="30">'
 		str += '</svg>'
-		str += '<img class="thumbnail" width="100" height="87" src="../images/'+current_participant+'/thumbnail/'+i+'" >'
+		str += '<img class="thumbnail" width="100" height="87" src="' + img_dir +current_participant+'/thumbnail/'+i+'" >'
 		str += '<p>' + time.toLocaleTimeString()+'</p></div>'
 		// str += '<p>' + pad_num(image_time[3],2)+':'+ pad_num(image_time[4],2)+':'+pad_num(image_time[5],2)+'</p></div>'
 		// console.log(str)
@@ -1336,15 +1339,15 @@ function annotate_image(i, label) {
 				// console.log('gettingData',index, item)
 			    // Set image source & size based on real viewport width
 			    if( useLargeImages ) {
-			        item.src = '../images/'+current_participant+'/'+imgs[index];
+			        item.src = img_dir+current_participant+'/'+imgs[index];
 			        item.w = img_sizes.full[0],
 			        item.h = img_sizes.full[1]
 			    } else {
-			        item.src = '../images/'+current_participant+'/medium/'+imgs[index];
+			        item.src = img_dir+current_participant+'/medium/'+imgs[index];
 			        item.w = img_sizes.medium[0],
 			        item.h = img_sizes.medium[1]
 			    }
-		        item.msrc = '../images/'+current_participant+'/thumbnail/'+imgs[index];
+		        item.msrc = img_dir+current_participant+'/thumbnail/'+imgs[index];
 			    item.title = labels[evts[index]] || ""
 
 			});

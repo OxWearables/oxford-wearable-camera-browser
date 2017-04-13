@@ -187,7 +187,7 @@ function filename_is_image(filename) {
 }
 
 function imagesModified(state, f) {
-	var rel_f = path.relative(path.join(__dirname,'images'), f);
+	var rel_f = path.relative('./images', f);
 	console.log(state, rel_f)
 	var rel_dir = path.dirname(rel_f);
 	console.log(rel_dir)
