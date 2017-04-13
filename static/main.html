@@ -756,6 +756,16 @@ function annotate_image(i, label) {
 		update_view()
 	}
 
+	function more_images(newstart, newend) {
+		start = newstart || 200;
+		end = newend || 400;
+		// images_loaded = false;
+		images_created = false;
+		images_colorized = false;
+		update_view();
+
+	}
+
 	var sizes = {}
 	function load_images() {
 		if (current_participant===null) {participant_selection_menu(); return;}
