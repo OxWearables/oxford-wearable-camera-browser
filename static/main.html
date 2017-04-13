@@ -584,15 +584,7 @@ $('#jstree')
     				$('#jstree').jstree(true).refresh();
     			})
     		} else if (option_type=="link_participant") {
-    			dialog.showOpenDialog({properties:['openDirectory']}, (folderPath) => {
-    				console.log("opened folder", folderPath)
-    				if (folderPath.length===1) {
-	    				var new_participant_name = "newtest";
-	    				console.log("fs.symlinkSync",folderPath[0], path.join( "images",new_participant_name))
-	    				fs.symlinkSync(folderPath[0], path.join("images",new_participant_name), "junction")
-	    				participant_selection_menu();
-	    			}
-    			})
+    			link_participant();
     		}
     	} else {
 	    	if ($(e.target).hasClass('is_label')) {
@@ -601,6 +593,17 @@ $('#jstree')
     	}
     });
 
+function link_participant() {
+	dialog.showOpenDialog({properties:['openDirectory']}, (folderPath) => {
+		console.log("opened folder", folderPath)
+		if (folderPath.length===1) {
+			var new_participant_name = "bike ride";
+			console.log("fs.symlinkSync",folderPath[0], path.join( "images",new_participant_name))
+			fs.symlinkSync(folderPath[0], path.join("images",new_participant_name), "junction")
+			participant_selection_menu();
+		}
+	})
+}
 $(document)
     .on('dnd_move.vakata', function (e, data) {
         var t = $(data.event.target);
