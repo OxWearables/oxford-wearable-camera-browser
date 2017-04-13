@@ -9,3 +9,4 @@ npm install
 ```
 npm start
 ```
+![demo video](http://i.imgur.com/o0BtSQZ.gif)
