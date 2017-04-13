@@ -23,7 +23,7 @@ function createWindow () {
     slashes: true
   }))
 
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -33,7 +33,7 @@ function createWindow () {
   })
 }
 
-var resize_operation = image_resize.resize_outstanding();
+var resize_operation = image_resize.initialize();
 app.on('ready', ()=>{
   console.log("ready.. but waiting for resizing of images to be done.")
   resize_operation.then(()=>{

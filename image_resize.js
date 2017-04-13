@@ -22,15 +22,36 @@ var img_sizes = {
 	full: [2592,1936]
 }
 
-function resize_outstanding() {
-	var participants = [];
-	return Promise.all([fs.mkdirAsync('images'),fs.mkdirAsync('annotation')])
+function initialize() {
+	// must be done at start of application 
+	return Promise.all([fs.mkdirAsync('./images'),fs.mkdirAsync('./annotation')])
 	.catch({code:"EEXIST"}, (e) =>{
 		console.log("folder exists:", e.path	)
 	})
 	.then(()=>{
 		console.log("'images' and 'annotation' folders found..")
-	})
+	}).then(()=>{
+		watch.watchTree("./images", {'interval':1}, function (f, curr, prev) {
+			if (typeof f == "object" && prev === null && curr === null) {
+			  // Finished walking the tree
+			} else if (prev === null) {
+			  console.log('new file added:', f)
+			  imagesModified('added',f)
+			} else if (curr.nlink === 0) {
+			  console.log('file removed:', f)
+			  imagesModified('deleted',f)
+			  // f was removed
+			} else {
+			  console.log('file modified:', f)
+			  // f was changed
+			}
+		})
+	}).then(resize_outstanding)
+}
+
+function resize_outstanding() {
+	var participants = [];
+	return Promise.resolve()
 	.then( () => {
 		return fs.readdirAsync('images').map(
 			(p_folder) => {
@@ -96,14 +117,16 @@ function resize_outstanding() {
 		var queue = [];
 		Promise.each(participants, (p) => {
 
-			console.log("all", p.sizes.full.length)
+			console.log(p.name, "has", p.sizes.full.length, "images")
 			return Promise.map(p.sizes.full,
 			// p.sizes.full.forEach(
 				(f) => {
 					// console.log(f)
-				return process_full(p.name, f, Image_processor.queue);
-				
-			})
+					if (filename_is_image(f)) {
+						return process_full(p.name, f, Image_processor.queue);
+					}
+				}
+			)
 		}).then( ()=>{
 			console.log(Image_processor.queue.length +  " images in resizing queue")
 		})
@@ -226,3 +249,4 @@ function process_full(p_name, f, queue) {
 }
 
 exports.resize_outstanding = resize_outstanding
+exports.initialize = initialize
