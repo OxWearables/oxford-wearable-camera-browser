@@ -11,6 +11,9 @@ A wearable camera image browser & annotation tool
 
 The browser comes with two schema .csv files, one with 7 classes of activity to choose from, and a more detailed schema based on the [Compendium of Physical Activities](https://sites.google.com/site/compendiumofphysicalactivities/). If you wish to define your own simply copy one of these, and add/remove rows as you see fit. You can use either a text editor (Notepad), or Excel. If using Excel make sure to save as .csv. 
 
+Excel will repeatedly warn about saving a .csv file, ignore these messages (select yes).
+![excel warning](http://i.imgur.com/xcJ34yk.png)
+
 ### Special characters
 Semicolons (;) are use to define folders, e.g.
 ```
