@@ -24,9 +24,10 @@ function parse_schema(fn) {
         text: 'root node',
         children: []
       }
+      data += '\r'
       data.split('\n').forEach(line => { 
         var currPos = json.children;
-        if (line.length>0) line.split(';').forEach(val => {
+        if (line.length>0 && /\w/.test(line)) line.split(';').forEach(val => {
           // console.log(currPos)
           var child = currPos.find(e => e.text === val);
           if (child === undefined) {
