@@ -328,6 +328,19 @@ function makeColorGradient(frequency1, frequency2, frequency3,
 	}
 	return output
 }
+if (0) {
+	// this code to test and tweak the color generation
+	var j = 60;
+	while (j--) {
+		n = j;
+		i = n;
+		freq = .3*20/n
+		cols =  makeColorGradient(freq,freq,freq,0,2,4, 128,100,n)
+		while(i--) {
+			$("body").prepend($('<div style="position:fixed; top:'+10*j+'px; left: 0px; width:10px;height:20px; margin-left:'+i*10+';background-color:'+cols[i]+'; z-index:500;"></div>'))
+		}
+	}
+}
 // participant loading code
 
 // TEMP variable to disable participant adding
