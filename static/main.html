@@ -1114,6 +1114,7 @@ function annotate_image(i, label) {
 				evts_fake = null;
 				console.log('mouseup')
 				set_tooltip(e);
+				save_action();
 			}
 		})
 
@@ -1146,6 +1147,7 @@ function annotate_image(i, label) {
         	changed.forEach(function(i) {
         		svg_update(i)
         	})
+        	save_action();
         	
         	// Event.split(dir, {{id}},event_id, image_id).then(reload_images)
         	return 0;
