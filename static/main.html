@@ -482,17 +482,20 @@ function load_schema(schema_json) {
 		return;
 	}
 	current_schema_json = schema_json;
-	// GENERATE COLORS
+	// flattens all leaves into 1-d array (instead of nested)
 	var leaves = get_leaves(schema_json);
-	// console.log(leaves.length)
-	var colors = makeColorGradient(.3,.3,.3,0,2,4, 230,100,leaves.length)
-	// console.log(colors)
+
+	// GENERATE COLORS
+	var n = leaves.length;
+	freq = .3*20/n;
+	var colors =  makeColorGradient(freq,freq,freq,0,2,4, 128,100,n)
+	
 	// console.log(colors.length)
 	leaves.forEach((l, index) => {
 		// l.color = colors[index];
 		l.li_attr = {style:"background-color:"+colors[index]+";background-image:false; width:24px; border-radius: 16px;"};
 		l.icon = false;
-		label_to_color[l.text] = colors[index]
+		label_to_color[l.a_attr.label] = colors[index]
 
 	})
 
@@ -655,7 +658,9 @@ $(document)
         	}
         	event_id = evts[img_idx]
         	console.log("event_id", event_id)
-        	var label = $(data.data.obj[0]).text();
+        	var label = $(data.data.obj[0]).attr('label');
+        	console.log($(data.data.obj[0]).attr('label'))
+        	// console.log($(data.data.obj[0]).firwst('a'))
         	var event_color = label_to_color[label];
         	console.log("label:", label)
 
@@ -1261,16 +1266,13 @@ function annotate_image(i, label) {
 		if (!label) label = "none";
 		if (typeof(image_id)=="number") {
 
-			// var pos = $(e.target).closest('div.img')
-
-			// var pos = $(e.target).closest('div.img').offset()
-            // put other effect in when moving over the element
-
+			// .slice(-1).pop() = get last element
+			var label_text = label.split(';').slice(-1).pop()
             // from e you can get the pageX(left position) and pageY(top position) 
             // im not sure if it was the relative or the absolute position
             // i added 10 pxs on the top and left to show the tooltip a bit after
             $('.tooltip').css('display', 'block');
-			$('.tooltip').text(label).appendTo($(e.target).closest('div.img'))
+			$('.tooltip').text(label_text).appendTo($(e.target).closest('div.img'))
 			$(e.target).closest('div.img').find('p').not('.tooltip').hide()
 
 		}
