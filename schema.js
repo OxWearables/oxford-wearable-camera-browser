@@ -35,7 +35,8 @@ function parse_schema(fn) {
               currPos.push({
                 'text': val.slice(0, -1), // remove trailing return
                 'a_attr': {
-                  'class':'is_label'
+                  'class':'is_label',
+                  'label':line
                 },
                 'icon':false
               });
