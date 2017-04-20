@@ -277,7 +277,7 @@ var schema_dir = (debug_is_built ? '../../':'') +'../images/';
 // alert(debug_is_built, img_dir)
 // Create participant box
 $(function() {
-	var background_text = "participant name"
+	var background_text = "participant name";
 	$('#bottom-box-input').focus(function(){
 			if ($(this).val() == background_text){
 			$(this).val('').removeClass('search-grey-text');
@@ -287,21 +287,21 @@ $(function() {
 			$(this).val(background_text).addClass('search-grey-text');
 		}
 	}).val(background_text).addClass('search-grey-text');
-})
+});
 // Helper text
 $(function() {
 	var helpText = "";
 	$('.menu-button').hover((e) => {
-		console.log("mouseeneter")
-		var newtext = $(e.target).closest("button").attr('help-text')
+		console.log("mouseeneter");
+		var newtext = $(e.target).closest("button").attr('help-text');
 		if (newtext==undefined) console.log(e.target);
-		else console.log(newtext)
-		$('#help-text').text( newtext)
+		else console.log(newtext);
+		$('#help-text').text( newtext);
 	}, (e) => {
 		$('#help-text').text(current_participant===null ? "select participant" : "participant: "+current_participant);
-	})
+	});
 	
-})
+});
 
 // COLOR utils
 function byte2Hex(n) {
@@ -326,7 +326,7 @@ function makeColorGradient(frequency1, frequency2, frequency3,
 		var blu = Math.sin(frequency3*i + phase3) * width + center;
 		output.push(RGB2Color(red,grn,blu));
 	}
-	return output
+	return output;
 }
 if (0) {
 	// this code to test and tweak the color generation
@@ -334,10 +334,10 @@ if (0) {
 	while (j--) {
 		n = j;
 		i = n;
-		freq = .3*20/n
-		cols =  makeColorGradient(freq,freq,freq,0,2,4, 128,100,n)
+		freq = .3*20/n;
+		cols =  makeColorGradient(freq,freq,freq,0,2,4, 128,100,n);
 		while(i--) {
-			$("body").prepend($('<div style="position:fixed; top:'+10*j+'px; left: 0px; width:10px;height:20px; margin-left:'+i*10+';background-color:'+cols[i]+'; z-index:500;"></div>'))
+			$("body").prepend($('<div style="position:fixed; top:'+10*j+'px; left: 0px; width:10px;height:20px; margin-left:'+i*10+';background-color:'+cols[i]+'; z-index:500;"></div>'));
 		}
 	}
 }
@@ -349,29 +349,29 @@ var debug_no_adding = true;
 var selecting_participant = false;
 function participant_selection_menu() {
 	if (selecting_participant) {
-		console.log("participant selection menu already open!")
+		console.log("participant selection menu already open!");
 		// return false;
 	}
 	selecting_participant = true;
 	selecting_schema = false;
 
-	var dir = 'images'
+	var dir = 'images';
 
 	fs.readdir(dir, (err, files) => {
 		var data = [];
 		files.forEach(f=>{
-			console.log(f)
+			console.log(f);
 			// if (f.endsWith('.csv')) {
-				data.push({text:f, icon:"fa fa-user fa-fw", a_attr:{"option-type":"participant"}})
+				data.push({text:f, icon:"fa fa-user fa-fw", a_attr:{"option-type":"participant"}});
 			// }
-		})
+		});
 		if (!debug_no_adding) {
-			data.push({text:"(add images)", icon:"fa fa-user-plus fa-fw", a_attr:{"option-type":"add_participant"}})
-			data.push({text:"(link new participant)", icon:"fa fa-user-circle-o fa-fw", a_attr:{"option-type":"link_participant"}})
+			data.push({text:"(add images)", icon:"fa fa-user-plus fa-fw", a_attr:{"option-type":"add_participant"}});
+			data.push({text:"(link new participant)", icon:"fa fa-user-circle-o fa-fw", a_attr:{"option-type":"link_participant"}});
 		}
 		$('#jstree').jstree(true).settings.core.data = data;
 		$('#jstree').jstree(true).refresh();
-	})
+	});
 	if (!debug_no_adding) {
 		$('#jstree-bottom-box').show();
 	}
@@ -384,7 +384,7 @@ var current_schema = null;
 var selecting_schema = false;
 function schema_selection_menu() {
 	if (selecting_schema) {
-		console.log("schema selection menu already open!")
+		console.log("schema selection menu already open!");
 		return false;
 	}
 	selecting_schema = true;
@@ -392,81 +392,81 @@ function schema_selection_menu() {
 	if (!debug_no_adding) {
 		$('#jstree-bottom-box').hide();
 	}
-	var dir = './schema'
+	var dir = './schema';
 
 	fs.readdir(dir, (err, files) => {
-		var nodes = []
+		var nodes = [];
 		files.forEach(f=>{
-			console.log(f)
+			console.log(f);
 			if (f.endsWith('.csv')) {
-				nodes.push({text:f, icon:"fa fa-file-text fa-fw", a_attr:{"option-type":"schema"}})
+				nodes.push({text:f, icon:"fa fa-file-text fa-fw", a_attr:{"option-type":"schema"}});
 			}
-		})
+		});
 		$('#jstree').jstree(true).settings.core.data = nodes;
 		$('#jstree').jstree(true).refresh();
-	})
+	});
 }
 // this will load any schema that is in /schema/ folder (must be existing file and in correct fomat)
 function request_schema(schema_name) {
 	// current_schema = null;
 	current_schema = schema_name;
 	selecting_schema = false;
-	ipc.send('get_schema', schema_name)
+	ipc.send('get_schema', schema_name);
 }
 ipc.on('schema_json', (event, arg) => {
 	current_schema = arg.schema_name;  // assign once done so we can save with correct filename
-	load_schema(arg.schema_json)
+	load_schema(arg.schema_json);
 	images_colorized = false;
 	if (current_participant===null)	participant_selection_menu();
 	// update_view();
-})
+});
 
 function resizing_status(busy, text){
 	if (busy) {
 		// $('.right-sticky').css({backgroundColor:'#282826'})
-		$('#resize-status').show()
-		$('#resize-span').empty()
+		$('#resize-status').show();
+		$('#resize-span').empty();
 		if (text) text.forEach((t) => {
-			console.log(t)
+			console.log(t);
 			$('#resize-span').append( $("<p></p>").text(t) );
-		})
+		});
 	} else {
 		// $('.right-sticky').css({backgroundColor:'#FFFFFF'})
-		$('#resize-status').hide()
+		$('#resize-status').hide();
 	}
 }
 
 resizing_status(true);
 ipc.send('resize_status');
 ipc.on('resize_status', (event, arg) => {
-	console.log('resize_status', arg)
+	console.log('resize_status', arg);
 	var text = [];
-	text.push(arg.queue.length + " images in queue.")
+	text.push(arg.queue.length + " images in queue.");
 	if (arg.queue.length>0) {
 		var last_item = arg.queue[arg.queue.length-1];
-		text.push("participant=" + last_item[2])
-		text.push("size=" + last_item[0])
-		text.push("filename=" + last_item[1])
+		text.push("participant=" + last_item[2]);
+		text.push("size=" + last_item[0]);
+		text.push("filename=" + last_item[1]);
 	}
 
-	resizing_status(arg.queue.length > 0 && arg.disabled!==true, text)
+	resizing_status(arg.queue.length > 0 && arg.disabled!==true, text);
 	// if (arg.queue.length>0 && arg.queue.busy==false) {
 	// 	setTimeout(() => {ipc.send('resize_status');}, 250)
 	// }
-})
+});
 
 var current_participant = null; // this will define participant that is loaded
-console.log("current_participant",current_participant)
+console.log("current_participant",current_participant);
 
 // update_view()
-request_schema('7-class.csv')
+request_schema('7-class.csv');
 // update_view();
 // loops through a schema.json to generate array of leaves (end nodes) for color generation
 function get_leaves(schema) {
 	if ('children' in schema) {
 		var leaves = [];
 		schema.children.forEach((c) => {
-			leaves.push.apply(leaves, get_leaves(c))
+			leaves.push.apply(leaves, get_leaves(c));
 		});
 		return leaves;
 	} else {
@@ -476,9 +476,9 @@ function get_leaves(schema) {
 var current_schema_json = null;
 // applies color to leaves, then loads jstree and binds drag/drop events
 function load_schema(schema_json) {
-	console.log(schema_json)
+	console.log(schema_json);
 	if (schema_json===null) {
-		schema_selection_menu()
+		schema_selection_menu();
 		return;
 	}
 	current_schema_json = schema_json;
@@ -488,16 +488,16 @@ function load_schema(schema_json) {
 	// GENERATE COLORS
 	var n = leaves.length;
 	freq = .3*20/n;
-	var colors =  makeColorGradient(freq,freq,freq,0,2,4, 128,100,n)
+	var colors =  makeColorGradient(freq,freq,freq,0,2,4, 128,100,n);
 	
 	// console.log(colors.length)
 	leaves.forEach((l, index) => {
 		// l.color = colors[index];
 		l.li_attr = {style:"background-color:"+colors[index]+";background-image:false; width:24px; border-radius: 16px;"};
 		l.icon = false;
-		label_to_color[l.a_attr.label] = colors[index]
+		label_to_color[l.a_attr.label] = colors[index];
 
-	})
+	});
 
 	$('#jstree').jstree(true).settings.core.data = schema_json.children;
 	$('#jstree').jstree(true).refresh();
@@ -505,10 +505,10 @@ function load_schema(schema_json) {
 
 
 $('#jstree').on('loaded.jstree', function() {
-	$('#jstree_box').show()
+	$('#jstree_box').show();
 		
 	var timeout = false;
-	var background_text = "search" // to display "greyed out" search string
+	var background_text = "search"; // to display "greyed out" search string
 	$('#jstree_searchbox').keyup(function () {
 		if(timeout) { clearTimeout(timeout); }
 		timeout = setTimeout(function () {
@@ -549,12 +549,12 @@ $('#jstree').on('loaded.jstree', function() {
 	$("#jstree").jstree(true).toggle_node(node.node);
 }).bind("dblclick.jstree", function(e, node){
 	$("#jstree").jstree(true).toggle_node(e.target);
-}).bind("move_node.jstree", function (e, data) {console.log("move_node",e, data)})
+}).bind("move_node.jstree", function (e, data) {console.log("move_node",e, data);});
 
 $('#jstree')
     .on('mousedown', function (e) {
-    	console.log("clicked jstree", e.target, selecting_schema)
-    	var option_type = $(e.target).attr("option-type")
+    	console.log("clicked jstree", e.target, selecting_schema);
+    	var option_type = $(e.target).attr("option-type");
 		if (option_type!==undefined && $(e.target).hasClass('jstree-anchor')) {
 	    	if (option_type=="schema") {
 	    		selecting_schema = false;
@@ -569,7 +569,7 @@ $('#jstree')
 				current_schema = schema_name;
     			$('#jstree').jstree(true).settings.core.data = [{text:'loading '+schema_name+'...'}];
     			$('#jstree').jstree(true).refresh();
-    			request_schema(schema_name)
+    			request_schema(schema_name);
 	    	
 	    	} else if (option_type=="participant") {
 	    		selecting_participant = false;
@@ -578,7 +578,7 @@ $('#jstree')
 	    			$('#jstree').jstree(true).settings.core.data = [{text:'loading '+participant_name+'...'}];
 	    			$('#jstree').jstree(true).refresh();
 
-	    			request_participant(participant_name)
+	    			request_participant(participant_name);
 	    			if (!debug_no_adding) {
 		    			$('#jstree-bottom-box').hide();
 					}
@@ -590,7 +590,7 @@ $('#jstree')
     		} else if (option_type=="add_participant") {
     			dialog.showOpenDialog({properties:['openFile','multiSelections']}, (filePaths) => {
     				if (filePaths===undefined) {console.log("no files selected");return;}
-    				console.log(filePaths)
+    				console.log(filePaths);
     				var nodes = [];
     				filePaths.forEach((f) => {
     					if (f.toLowerCase().endsWith('.jpg')) {
@@ -598,7 +598,7 @@ $('#jstree')
 	    				} else {
 	    					nodes.push({text:path.basename(f), icon:"fa fa-times"});
 	    				}
-    				})
+    				});
     				if (nodes.length==0) nodes.push({text:"(no images found)", icon:false});
 		    		selecting_participant = false;
 		    		if (!debug_no_adding) {
@@ -608,14 +608,14 @@ $('#jstree')
 		    		$('#bottom-box-button').show();
 		    		$('#bottom-box-input').hide();
 					$('#bottom-box-button').click(()=>{
-						console.log(remote)
-						console.log(remote.image_resize)
+						console.log(remote);
+						console.log(remote.image_resize);
 			    		$('#bottom-box-button').hide();
-					})
+					});
 
     				$('#jstree').jstree(true).settings.core.data = nodes;
     				$('#jstree').jstree(true).refresh();
-    			})
+    			});
     		} else if (option_type=="link_participant") {
     			link_participant();
     		}
@@ -628,14 +628,14 @@ $('#jstree')
 
 function link_participant() {
 	dialog.showOpenDialog({properties:['openDirectory']}, (folderPath) => {
-		console.log("opened folder", folderPath)
+		console.log("opened folder", folderPath);
 		if (folderPath.length===1) {
 			var new_participant_name = "bike ride";
-			console.log("fs.symlinkSync",folderPath[0], path.join( "images",new_participant_name))
-			fs.symlinkSync(folderPath[0], path.join("images",new_participant_name), "junction")
+			console.log("fs.symlinkSync",folderPath[0], path.join( "images",new_participant_name));
+			fs.symlinkSync(folderPath[0], path.join("images",new_participant_name), "junction");
 			participant_selection_menu();
 		}
-	})
+	});
 }
 $(document)
     .on('dnd_move.vakata', function (e, data) {
@@ -649,33 +649,33 @@ $(document)
     
     })
     .on('dnd_stop.vakata', function (e, data) {
-    	console.log(data)
+    	console.log(data);
         var t = $(data.event.target);
         if(t.closest('.img').length) {
         	img_idx = parseInt(t.closest('.img')[0].id);
         	if (!Number.isInteger(img_idx)) {
-        		console.log("error: img_idx on drop ", img_idx, t.closest('.img')[0])
+        		console.log("error: img_idx on drop ", img_idx, t.closest('.img')[0]);
         	}
-        	event_id = evts[img_idx]
-        	console.log("event_id", event_id)
+        	event_id = evts[img_idx];
+        	console.log("event_id", event_id);
         	var label = $(data.data.obj[0]).attr('label');
-        	console.log($(data.data.obj[0]).attr('label'))
+        	console.log($(data.data.obj[0]).attr('label'));
         	// console.log($(data.data.obj[0]).firwst('a'))
         	var event_color = label_to_color[label];
-        	console.log("label:", label)
+        	console.log("label:", label);
 
         	if (Number.isInteger(event_id)) {
         		evts.forEach((evt, idx) => {
         			if (evt==event_id) {
-        				console.log
+        				console.log;
         				evts[idx] = event_id;
-            			svg_colorize(idx, event_color)
+            			svg_colorize(idx, event_color);
             			$('.img#'+idx).effect("highlight", {color:event_color}, 1000);
             		}
-        		})
+        		});
         	}
-        	annotate_image(parseInt(t.closest('.img').attr('id')), label)
-        	console.log(data.data.obj[0])
+        	annotate_image(parseInt(t.closest('.img').attr('id')), label);
+        	console.log(data.data.obj[0]);
         	set_tooltip(data.event);
         }
     
@@ -696,1026 +696,1026 @@ function annotate_image(i, label) {
 			}
 		}
 		labels[new_e] = label;
-		new_color = label_to_color[label]
+		new_color = label_to_color[label];
 		changed.forEach(function(i) {
-			svg_update(i)
-			svg_colorize(i, new_color)
-		})
+			svg_update(i);
+			svg_colorize(i, new_color);
+		});
 	}
 	save_action();
 }
 
 
-	// all should be same length
-	var imgs = []; 
-	var img_times = []; 
-	var evts = []; // event-id
-	var evts_fake = null; // temp for dragging, evts is cloned from this on release
-	var labels = {}; // event -> image label
-	var label_to_color = {}; // image label
+// all should be same length
+var imgs = []; 
+var img_times = []; 
+var evts = []; // event-id
+var evts_fake = null; // temp for dragging, evts is cloned from this on release
+var labels = {}; // event -> image label
+var label_to_color = {}; // image label
 
-	// define how many images we want to display
-	var annotations_loaded = false, 
-	images_loaded = false, 
-	images_created = false,
+// define how many images we want to display
+var annotations_loaded = false, 
+images_loaded = false, 
+images_created = false,
+images_colorized = false;
+
+var start = 0, end=200;
+
+// this function ensures that the following happens in order:
+function update_view() {
+	console.log("update_view");
+	if (images_loaded!==true) {
+		if (pswp!==undefined && pswpIsOpen) pswp.close(); 
+		load_images(); 
+		return;
+	}
+	if (annotations_loaded!==true) {load_annotation(); return;}
+	if (images_created!==true) {create_all_images(); return;}
+	if (images_colorized!==true) {colorize_all_images(); return;}
+
+	console.log("all done with update_view");
+
+	// setTimeout(reload_all, 1000) 	 // FOR TESTING
+}
+
+function create_all_images() {
+	console.log("re-creating all images");
+	$('.gallery').empty();
+	// emptying the gallery sometimes accidentally deletes the tooltip div, so recreate
+	if ($('.tooltip').length==0) {
+		$('.gallery').append('<div class="tooltip">Tooltip</div>');
+	}
+	for(var i=0; i<=end-start;i++ ) {
+		create_image(i+start);
+	}
+	images_created = true;
 	images_colorized = false;
+	update_view();
+}
 
-	var start = 0, end=200;
-
-	// this function ensures that the following happens in order:
-	function update_view() {
-		console.log("update_view")
-		if (images_loaded!==true) {
-			if (pswp!==undefined && pswpIsOpen) pswp.close(); 
-			load_images(); 
-			return;
-		}
-		if (annotations_loaded!==true) {load_annotation(); return;}
-		if (images_created!==true) {create_all_images(); return;}
-		if (images_colorized!==true) {colorize_all_images(); return;}
-
-		console.log("all done with update_view")
-
-		// setTimeout(reload_all, 1000) 	 // FOR TESTING
+function colorize_all_images() {
+	console.log("colorize_all_images", label_to_color);
+	console.log(labels);
+	for(var i=0; i<=end-start;i++ ) {
+		// svg_update(i)
+		svg_colorize(i+start, label_to_color[labels[evts[i+start]]]);
 	}
+	images_colorized = true;
+	update_view();
+}
+function request_participant(participant_name) {
+	console.log("request_participant", participant_name);
+	current_participant = participant_name;
+	p_folder = current_participant;
+	start = 0;
+	end=200;
+	$('.gallery').empty();
+	evts = [];
+	imgs = [];
+	img_times = [];
+	annotations_loaded = false, images_loaded = false, images_created=false;
+	update_view();
+}
 
-	function create_all_images() {
-		console.log("re-creating all images")
-		$('.gallery').empty()
-		// emptying the gallery sometimes accidentally deletes the tooltip div, so recreate
-		if ($('.tooltip').length==0) {
-			$('.gallery').append('<div class="tooltip">Tooltip</div>');
-		}
-		for(var i=0; i<=end-start;i++ ) {
-			create_image(i+start);
-		}
-		images_created = true;
-		images_colorized = false;
-		update_view();
-	}
+function more_images(newstart, newend) {
+	start = newstart || 200;
+	end = newend || 400;
+	// images_loaded = false;
+	images_created = false;
+	images_colorized = false;
+	update_view();
 
-	function colorize_all_images() {
-		console.log("colorize_all_images", label_to_color)
-		console.log(labels)
-		for(var i=0; i<=end-start;i++ ) {
-			// svg_update(i)
-			svg_colorize(i+start, label_to_color[labels[evts[i+start]]])
-		}
-		images_colorized = true;
-		update_view();
-	}
-	function request_participant(participant_name) {
-		console.log("request_participant", participant_name)
-		current_participant = participant_name;
-		p_folder = current_participant;
-		start = 0
-		end=200
-		$('.gallery').empty()
-		evts = [];
-		imgs = [];
-		img_times = [];
-		annotations_loaded = false, images_loaded = false, images_created=false;
-		update_view()
-	}
+}
 
-	function more_images(newstart, newend) {
-		start = newstart || 200;
-		end = newend || 400;
-		// images_loaded = false;
-		images_created = false;
-		images_colorized = false;
-		update_view();
+var sizes = {};
+function load_images() {
+	if (current_participant===null) {participant_selection_menu(); return;}
 
-	}
-
-	var sizes = {}
-	function load_images() {
-		if (current_participant===null) {participant_selection_menu(); return;}
-
-		var p_folder = current_participant;
-		var dir = path.join('images', p_folder)
-		console.log("participant folder:", p_folder);
-		console.log("participant images directory: ", dir)
-		fs.lstat(dir, ()=>{
-			console.log("is dir"); 
-			// ensure corresponding annotation directory also exists
-			fs.stat(path.join('annotation', p_folder), (err, stats) => {
-				if (err && err.code=='ENOENT') {
-					console.log("creating annotatioin dir:", path.join('annotation', p_folder))
-					fs.mkdirSync(path.join('annotation', p_folder));
-				}
-				// ensure all size directories exist
-				['full', 'medium', 'thumbnail'].forEach( 
-					(size) => {
-						sizes[size] = [];
-						var subdir = path.join(dir,size);
-						if (size=='full') subdir = dir;
-						fs.stat(subdir, (err, stats) => {
-							if (err) fs.mkdir(subdir);	
-							else {
-								if (!stats.isDirectory()) {
-									// must be a file
-								    console.log('no a dir!' + subdir)
-								    return fs.unlinkAsync(subdir, () => {
-								    	fs.mkdir(subdir);
-								    })
-								} else {
-									console.log('Does exist');
-								}
+	var p_folder = current_participant;
+	var dir = path.join('images', p_folder);
+	console.log("participant folder:", p_folder);
+	console.log("participant images directory: ", dir);
+	fs.lstat(dir, ()=>{
+		console.log("is dir"); 
+		// ensure corresponding annotation directory also exists
+		fs.stat(path.join('annotation', p_folder), (err, stats) => {
+			if (err && err.code=='ENOENT') {
+				console.log("creating annotatioin dir:", path.join('annotation', p_folder));
+				fs.mkdirSync(path.join('annotation', p_folder));
+			}
+			// ensure all size directories exist
+			['full', 'medium', 'thumbnail'].forEach( 
+				(size) => {
+					sizes[size] = [];
+					var subdir = path.join(dir,size);
+					if (size=='full') subdir = dir;
+					fs.stat(subdir, (err, stats) => {
+						if (err) fs.mkdir(subdir);	
+						else {
+							if (!stats.isDirectory()) {
+								// must be a file
+							    console.log('no a dir!' + subdir);
+							    return fs.unlinkAsync(subdir, () => {
+							    	fs.mkdir(subdir);
+							    });
+							} else {
+								console.log('Does exist');
 							}
-							fs.readdir(subdir, (err, files) => {
-								if (err) console.log(err);
-								if (files===undefined || files.length==0) return console.log("no files in folder!", subdir)
-								files
-									.sort((a, b)=>(a.slice(17)>b.slice(17)) ? 1 : -1)
-									.forEach((f, i) => {
-										if (size == 'thumbnail') {
-											imgs[i] = f;
-											img_times[i] = date_from_filename(f)
-										}
-									})
+						}
+						fs.readdir(subdir, (err, files) => {
+							if (err) console.log(err);
+							if (files===undefined || files.length==0) return console.log("no files in folder!", subdir);
+							files
+								.sort((a, b)=>(a.slice(17)>b.slice(17)) ? 1 : -1)
+								.forEach((f, i) => {
+									if (size == 'thumbnail') {
+										imgs[i] = f;
+										img_times[i] = date_from_filename(f);
+									}
+								});
 
-								if (size == 'thumbnail') {
-									images_loaded = true;
-									update_view()
-									end = Math.min(files.length-1,end)
-								}
-							})
+							if (size == 'thumbnail') {
+								images_loaded = true;
+								update_view();
+								end = Math.min(files.length-1,end);
+							}
 						});
-					}
-				)
-			})
-		})
-	}		
+					});
+				}
+			);
+		});
+	});
+}		
 
 
 
 
-	function is_first_(idx) {
-		return evts[idx]!==null && evts[idx] !== evts[idx-1];
-	}
-	function is_last_(idx) {
-		return evts[idx]!==null && evts[idx] !== evts[idx+1];
-	}
-	function create_image(idx) { 
-		var i = imgs[idx];
-		var e = evts[idx];
+function is_first_(idx) {
+	return evts[idx]!==null && evts[idx] !== evts[idx-1];
+}
+function is_last_(idx) {
+	return evts[idx]!==null && evts[idx] !== evts[idx+1];
+}
+function create_image(idx) { 
+	var i = imgs[idx];
+	var e = evts[idx];
 
-		var is_first = is_first_(idx);
-		var is_last = is_last_(idx);
-		// console.log(idx, imgs[idx])
-		var time = img_times[idx];
-		var label = 'none';
-		var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'">' 
-	 	// if ((e!==undefined && e!==null)) {			 	
-			// if (!is_last) {
-				 str += '<div style="left:92px;" class="split right" split-dir="right"></div>'
-			// }
-			// if (!is_first) {
-				str += '<div style="left:0px;" class="split left" split-dir="left"></div>'
-			// }
+	var is_first = is_first_(idx);
+	var is_last = is_last_(idx);
+	// console.log(idx, imgs[idx])
+	var time = img_times[idx];
+	var label = 'none';
+	var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'">'; 
+ 	// if ((e!==undefined && e!==null)) {			 	
+		// if (!is_last) {
+			 str += '<div style="left:92px;" class="split right" split-dir="right"></div>';
 		// }
+		// if (!is_first) {
+			str += '<div style="left:0px;" class="split left" split-dir="left"></div>';
+		// }
+	// }
 
-		str += '<svg width="110" height="30">'
-		str += '</svg>'
-		str += '<img class="thumbnail" width="100" height="87" src="' + img_dir +current_participant+'/thumbnail/'+i+'" >'
-		str += '<p>' + time.toLocaleTimeString()+'</p></div>'
-		// str += '<p>' + pad_num(image_time[3],2)+':'+ pad_num(image_time[4],2)+':'+pad_num(image_time[5],2)+'</p></div>'
-		// console.log(str)
-		$('.gallery').append(str);
-		svg_ize($('.img#'+idx), idx, is_first, is_last);
-	}
+	str += '<svg width="110" height="30">';
+	str += '</svg>';
+	str += '<img class="thumbnail" width="100" height="87" src="' + img_dir +current_participant+'/thumbnail/'+i+'" >';
+	str += '<p>' + time.toLocaleTimeString()+'</p></div>';
+	// str += '<p>' + pad_num(image_time[3],2)+':'+ pad_num(image_time[4],2)+':'+pad_num(image_time[5],2)+'</p></div>'
+	// console.log(str)
+	$('.gallery').append(str);
+	svg_ize($('.img#'+idx), idx, is_first, is_last);
+}
 
-	function date_from_filename(n) {
-	    // console.log(n.slice(6,9))
-	    return new Date(
-	        n.slice(17,21), // year
-	        parseInt(n.slice(21,23))-1 , // month
-	        n.slice(23,25), // day
-	        n.slice(26,28), // hour
-	        n.slice(28,30), // minutes
-	        n.slice(30,32), // seconds
-	        n.slice(6,9) // this is the photo's sequence number, used as a tiebreaker millisecond value for photos with the same timestamp 
-	    ); 
-	}
+function date_from_filename(n) {
+    // console.log(n.slice(6,9))
+    return new Date(
+        n.slice(17,21), // year
+        parseInt(n.slice(21,23))-1 , // month
+        n.slice(23,25), // day
+        n.slice(26,28), // hour
+        n.slice(28,30), // minutes
+        n.slice(30,32), // seconds
+        n.slice(6,9) // this is the photo's sequence number, used as a tiebreaker millisecond value for photos with the same timestamp 
+    ); 
+}
 
-	/////// SVG stuff
+/////// SVG stuff
 
-	function svg_colorize(i, color) {
-		if (color===undefined) color = fillcol;
-		el = $("div.img#"+i);
-		el.find(".line").css({fill:color})
-		el.find(".circle").css({stroke:color})
-		el.find(".seperator").css({stroke:color})
-	}
+function svg_colorize(i, color) {
+	if (color===undefined) color = fillcol;
+	el = $("div.img#"+i);
+	el.find(".line").css({fill:color});
+	el.find(".circle").css({stroke:color});
+	el.find(".seperator").css({stroke:color});
+}
 
-	// SVG's must have their attributes set in a special way (not just insert raw html) which these methods facilitate
-	var fillcol = 'lightblue';
-	function makeCircle(el, visible) {
-		el.append(makeSVG("circle", {"cx":55, "cy":15, "r":10, "class":"circle", "visibility": visible===false ? "": "hidden"}));
-	}
-	function makeLine(el, attrs, visible) {
-		attrs['class'] = ( ('class' in attrs) ? attrs['class']+' ' : '' ) + 'line'
-		attrs['visibility'] = visible===false ? "": "hidden";
-		attrs['height'] = 5
-		attrs['fill'] = fillcol
-		attrs['y'] = 12.5
-		attrs['z-index'] = 5
-		// console.log(attrs)
-		el.prepend(makeSVG("rect",attrs));
-	}
-	function makeSVG(tag, attrs) {
-        var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
-        for (var k in attrs)
-            el.setAttribute(k, attrs[k]);
-        return el;
-    }
-
-
-    function svg_ize(el, i, is_first, is_last) {
-    	// console.log(el, i)
-    	var container = el.find("svg")
-    	// var img = imgs[i];
-    	// console.log(el,i, img[0],img[5])
-    	makeCircle(container,!(evts[i] !== undefined && (is_first || is_last)))
-		// console.log(i,  is_first ? "hidden":"" , is_last  ? "hidden":"", is_first, is_last)
-		makeLine(container, {width:im_half, x:0, nx:0, id:i, class:'left'}, is_first)
-		makeLine(container, {width:im_half, x:im_half, id:i, class:'right'}, is_last)
-		// el.find('p').text(evts[i])
-    }	
-    function svg_update(i, this_evts) {
-    	if (typeof(i)=="string") throw Error("no string indexes!!")
-    	if (this_evts===undefined)  this_evts = evts;
-    	var container = $('.img#'+i).find('svg');
-    	var is_first =  this_evts[i]!==null && this_evts[i] !== this_evts[i-1];
-    	var is_last =  this_evts[i]!==null && this_evts[i] !== this_evts[i+1];
-    	// console.log(i, is_first, is_last)
-		// console.log("svg_", i, this_evts[i-1], this_evts[i], this_evts[i+1], is_first, is_last)
-		container.find('.circle').attr({visibility: !(this_evts[i] !== undefined && (is_first || is_last)) ? "hidden":"" })
-		container.find('.line.left').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_first) ?  "hidden":""})
-		container.find('.line.right').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_last) ?  "hidden":""})
-    }
-
-    // used for finding the 'max' of the evts array, so we can create sequentially higher event indices
-    function arr_max(arr) {
-    	if (arr.length===0) return 0; // not technically correct 
-    	return arr.reduce(function (p, v) {
-    	    return ( p > v ? p : v ); // get max value
-    	});
-    }
-    function arr_min(arr) {
-    	if (arr.length===0) return 0;
-    	return arr.reduce(function (p, v) {
-    	    return ( p < v ? p : v ); // get max value
-    	});
-    }
+// SVG's must have their attributes set in a special way (not just insert raw html) which these methods facilitate
+var fillcol = 'lightblue';
+function makeCircle(el, visible) {
+	el.append(makeSVG("circle", {"cx":55, "cy":15, "r":10, "class":"circle", "visibility": visible===false ? "": "hidden"}));
+}
+function makeLine(el, attrs, visible) {
+	attrs['class'] = ( ('class' in attrs) ? attrs['class']+' ' : '' ) + 'line';
+	attrs.visibility = visible===false ? "": "hidden";
+	attrs.height = 5;
+	attrs.fill = fillcol;
+	attrs.y = 12.5;
+	attrs['z-index'] = 5;
+	// console.log(attrs)
+	el.prepend(makeSVG("rect",attrs));
+}
+function makeSVG(tag, attrs) {
+    var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs)
+        el.setAttribute(k, attrs[k]);
+    return el;
+}
 
 
+function svg_ize(el, i, is_first, is_last) {
+	// console.log(el, i)
+	var container = el.find("svg");
+	// var img = imgs[i];
+	// console.log(el,i, img[0],img[5])
+	makeCircle(container,!(evts[i] !== undefined && (is_first || is_last)));
+	// console.log(i,  is_first ? "hidden":"" , is_last  ? "hidden":"", is_first, is_last)
+	makeLine(container, {width:im_half, x:0, nx:0, id:i, class:'left'}, is_first);
+	makeLine(container, {width:im_half, x:im_half, id:i, class:'right'}, is_last);
+	// el.find('p').text(evts[i])
+}	
+function svg_update(i, this_evts) {
+	if (typeof(i)=="string") throw Error("no string indexes!!");
+	if (this_evts===undefined)  this_evts = evts;
+	var container = $('.img#'+i).find('svg');
+	var is_first =  this_evts[i]!==null && this_evts[i] !== this_evts[i-1];
+	var is_last =  this_evts[i]!==null && this_evts[i] !== this_evts[i+1];
+	// console.log(i, is_first, is_last)
+	// console.log("svg_", i, this_evts[i-1], this_evts[i], this_evts[i+1], is_first, is_last)
+	container.find('.circle').attr({visibility: !(this_evts[i] !== undefined && (is_first || is_last)) ? "hidden":"" });
+	container.find('.line.left').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_first) ?  "hidden":""});
+	container.find('.line.right').attr({visibility: (this_evts[i]===null || this_evts[i]===undefined || is_last) ?  "hidden":""});
+}
+
+// used for finding the 'max' of the evts array, so we can create sequentially higher event indices
+function arr_max(arr) {
+	if (arr.length===0) return 0; // not technically correct 
+	return arr.reduce(function (p, v) {
+	    return ( p > v ? p : v ); // get max value
+	});
+}
+function arr_min(arr) {
+	if (arr.length===0) return 0;
+	return arr.reduce(function (p, v) {
+	    return ( p < v ? p : v ); // get max value
+	});
+}
 
 
 
 
 
 
-    var is_dragging = false;
-	var im_half = 55;
-    var im_width_both = 110;
-    // SPLIT IMAGES CODE
-	$(function() {
-		var start_img_id = null;
-		var start_evt_id = null;
-		var start_is_first = null;
-		var start_is_last = null;
-		var prev_hover_id = null;
-		var start_dir = null;
-		function hoverImg(e) {
-			if (is_dragging) {
-				set_tooltip(e);
 
-				e.preventDefault();
-				var curr_img_id = parseInt($(e.target).closest("div.img")[0].id);
-				if (curr_img_id==prev_hover_id) {
-					return true;
-				} 
-				console.log('hoverImg', curr_img_id, prev_hover_id)
 
-				// var hasChanged = false;
-				var other_event = undefined;
-				// var internal = false;
+var is_dragging = false;
+var im_half = 55;
+var im_width_both = 110;
+// SPLIT IMAGES CODE
+$(function() {
+	var start_img_id = null;
+	var start_evt_id = null;
+	var start_is_first = null;
+	var start_is_last = null;
+	var prev_hover_id = null;
+	var start_dir = null;
+	function hoverImg(e) {
+		if (is_dragging) {
+			set_tooltip(e);
 
-				// FIGURE OUT STATE FOR MOVE
-				var state = "";
-				if (start_dir==0) {
-					other_event= start_evt_id
-					state = "both"
-				} else if (curr_img_id == start_img_id) {
-					other_event = start_evt_id;
-					state = "same"
-				} else if ((curr_img_id - start_img_id)*start_dir > 0 ) {
-					other_event= evts[start_img_id+Math.sign(curr_img_id - start_img_id)*-1];
-					if (curr_img_id > start_img_id) state = "internal right" 
-					else state = "internal left"
-				} else  {
-					other_event = start_evt_id;
-					if (curr_img_id > start_img_id) state = "external right" 
-					else state = "external left"
-				} 
-				console.log(state, other_event)
-				prev_hover_id = curr_img_id;
-
-				// LIMIT POSITION OF DRAG IF INTERNAL
-				if (state == "internal left") curr_img_id =  Math.max(start_edge, curr_img_id)
-				if (state == "internal right") curr_img_id =  Math.min(start_edge, curr_img_id)
-				// GENERATE LIST OF CHANGED IMGS
-				// DOM MANIPULATION IS INEFFICIENT, ONLY CHANGED WHERE TRUE IN ARRAY
-				var START = Math.min(start_img_id, curr_img_id);
-				var END = Math.max(start_img_id, curr_img_id);
-				var changed = [];
-
-				var evts_min = arr_min(Object.keys(evts).map(Number))
-				var evts_max = arr_max(Object.keys(evts).map(Number))
-				console.log("evts min max",evts_min, evts_max)
-				if (state.startsWith("internal")) {
-					// INTERNAL DRAGS DO NOT EFFECT THE DRAGGED IMG
-					for (var i = evts_min;  i<=evts_max; i++) {
-						var new_val = undefined;
-						if (i >= START && i <= END) {
-							if (i != curr_img_id) new_val = other_event;
-							else new_val = start_evt_id;
-						} else {
-							new_val = evts[i];
-						}
-						if (evts_fake[i] !== new_val) {
-							changed[i] = true;
-							evts_fake[i] = new_val
-						} else {
-							changed[i] = false;
-						}
-					}
-				} else {
-					for (var i = evts_min;  i<=evts_max; i++) {
-						var new_val = undefined;
-						if (i >= START && i <= END) {
-							new_val = other_event;
-						} else {
-							new_val = evts[i];
-						}
-						if (evts_fake[i] !== new_val) {
-							changed[i] = true;
-							evts_fake[i] = new_val
-						} else {
-							changed[i] = false;
-						}
-					}
-				}
-				if (changed.length == 0) {
-					// console.log("no change: ", changed)
-					return true; 
-				}
-
-				// FOR EACH IMG MUST REDRAW IF IT OR ANY NEIGHTBOURING IMGS ARE CHANGED
-				var changed_min = arr_min(Object.keys(changed).map(Number))
-				var changed_max = arr_max(Object.keys(changed).map(Number))
-				console.log("changed min max", changed_min, changed_max)
-				for (var i = changed_min;  i<=changed_max; i++) {
-					if (changed[i-1] === true || changed[i] === true || changed[i+1] ===true) {
-						svg_update(i, evts_fake)
-						color = label_to_color[labels[evts_fake[i]]]
-						console.log(i, color, evts_fake[i], labels[evts_fake[i]])
-						svg_colorize(i, color)
-					}
-				}
-
+			e.preventDefault();
+			var curr_img_id = parseInt($(e.target).closest("div.img")[0].id);
+			if (curr_img_id==prev_hover_id) {
 				return true;
+			} 
+			console.log('hoverImg', curr_img_id, prev_hover_id);
+
+			// var hasChanged = false;
+			var other_event;
+			// var internal = false;
+
+			// FIGURE OUT STATE FOR MOVE
+			var state = "";
+			if (start_dir==0) {
+				other_event= start_evt_id;
+				state = "both";
+			} else if (curr_img_id == start_img_id) {
+				other_event = start_evt_id;
+				state = "same";
+			} else if ((curr_img_id - start_img_id)*start_dir > 0 ) {
+				other_event= evts[start_img_id+Math.sign(curr_img_id - start_img_id)*-1];
+				if (curr_img_id > start_img_id) state = "internal right"; 
+				else state = "internal left";
+			} else  {
+				other_event = start_evt_id;
+				if (curr_img_id > start_img_id) state = "external right"; 
+				else state = "external left";
+			} 
+			console.log(state, other_event);
+			prev_hover_id = curr_img_id;
+
+			// LIMIT POSITION OF DRAG IF INTERNAL
+			if (state == "internal left") curr_img_id =  Math.max(start_edge, curr_img_id);
+			if (state == "internal right") curr_img_id =  Math.min(start_edge, curr_img_id);
+			// GENERATE LIST OF CHANGED IMGS
+			// DOM MANIPULATION IS INEFFICIENT, ONLY CHANGED WHERE TRUE IN ARRAY
+			var START = Math.min(start_img_id, curr_img_id);
+			var END = Math.max(start_img_id, curr_img_id);
+			var changed = [];
+
+			var evts_min = arr_min(Object.keys(evts).map(Number));
+			var evts_max = arr_max(Object.keys(evts).map(Number));
+			console.log("evts min max",evts_min, evts_max);
+			if (state.startsWith("internal")) {
+				// INTERNAL DRAGS DO NOT EFFECT THE DRAGGED IMG
+				for (var i = evts_min;  i<=evts_max; i++) {
+					var new_val;
+					if (i >= START && i <= END) {
+						if (i != curr_img_id) new_val = other_event;
+						else new_val = start_evt_id;
+					} else {
+						new_val = evts[i];
+					}
+					if (evts_fake[i] !== new_val) {
+						changed[i] = true;
+						evts_fake[i] = new_val;
+					} else {
+						changed[i] = false;
+					}
+				}
+			} else {
+				for (var i = evts_min;  i<=evts_max; i++) {
+					var new_val;
+					if (i >= START && i <= END) {
+						new_val = other_event;
+					} else {
+						new_val = evts[i];
+					}
+					if (evts_fake[i] !== new_val) {
+						changed[i] = true;
+						evts_fake[i] = new_val;
+					} else {
+						changed[i] = false;
+					}
+				}
 			}
+			if (changed.length == 0) {
+				// console.log("no change: ", changed)
+				return true; 
+			}
+
+			// FOR EACH IMG MUST REDRAW IF IT OR ANY NEIGHTBOURING IMGS ARE CHANGED
+			var changed_min = arr_min(Object.keys(changed).map(Number));
+			var changed_max = arr_max(Object.keys(changed).map(Number));
+			console.log("changed min max", changed_min, changed_max);
+			for (var i = changed_min;  i<=changed_max; i++) {
+				if (changed[i-1] === true || changed[i] === true || changed[i+1] ===true) {
+					svg_update(i, evts_fake);
+					color = label_to_color[labels[evts_fake[i]]];
+					console.log(i, color, evts_fake[i], labels[evts_fake[i]]);
+					svg_colorize(i, color);
+				}
+			}
+
+			return true;
 		}
+	}
 
-		$(document).on('mousedown', 'circle', function(e) {
-			e.preventDefault()
-			is_dragging = true;
-			evts_fake = evts.slice(); // copy
-			start_img_id = parseInt($(e.target).closest("div.img")[0].id);
-			start_evt_id = evts[start_img_id]
-			start_edge = null;
-			start_is_first = is_first_(start_img_id);
-			start_is_last = is_last_(start_img_id);
+	$(document).on('mousedown', 'circle', function(e) {
+		e.preventDefault();
+		is_dragging = true;
+		evts_fake = evts.slice(); // copy
+		start_img_id = parseInt($(e.target).closest("div.img")[0].id);
+		start_evt_id = evts[start_img_id];
+		start_edge = null;
+		start_is_first = is_first_(start_img_id);
+		start_is_last = is_last_(start_img_id);
 
-			evts.forEach((evt, i) =>{
-				if (evt==start_evt_id) {
-					if (start_is_first && (start_edge === null || i > start_edge)) start_edge = i;
-					if (start_is_last && (start_edge === null || i < start_edge)) start_edge = i;
-				}
-			}) 
-
-			start_dir = (start_is_first && start_is_last) ? 0 : (start_is_first ? 1 : -1) 
-			// console.log('start_is_first',start_is_first, 'start_is_last',start_is_last, 'start_dir',start_dir)
-			// console.log("start_edge",start_edge)
-			$(document).on('mouseenter', 'div.img', hoverImg);
-		}); 
-		
-		$(document).on('mouseup', function(e) {
-			if (is_dragging) {
-				e.preventDefault();
-				$(document).off('mouseenter', 'div.img', hoverImg);
-				is_dragging = false;
-				start_img_id = null;
-				start_evt_id = null;
-				start_is_first = null;
-				start_is_last = null;
-				start_dir = null;
-				for (var v in evts_fake) {
-					v = parseInt(v)
-					if (evts[v] != evts_fake[v]) console.log(v, evts[v], evts_fake[v], typeof(v))
-					evts[v] = evts_fake[v]
-				}
-				// evts = evts_fake.slice();
-				evts_fake = null;
-				console.log('mouseup')
-				set_tooltip(e);
-				save_action();
+		evts.forEach((evt, i) =>{
+			if (evt==start_evt_id) {
+				if (start_is_first && (start_edge === null || i > start_edge)) start_edge = i;
+				if (start_is_last && (start_edge === null || i < start_edge)) start_edge = i;
 			}
-		})
+		}); 
 
-        $(document).on('click', '.split', function(e) {
-        	// if (!$(e.target).hasClass("split")) return 0;
-        	var me = $(e.target)
-        	var image_id = parseInt(me.closest("div.img").attr("id"));
-        	var event_id = evts[image_id];
-        	// console.log("ids:",image_id, event_id)
-        	var dir = me.attr("split-dir") == "left" ? 1 : -1;
-        	if ((is_first_(image_id) && dir==1) || (is_last_(image_id) && dir==-1)) return 0;
-        	e.preventDefault();
+		start_dir = (start_is_first && start_is_last) ? 0 : (start_is_first ? 1 : -1); 
+		// console.log('start_is_first',start_is_first, 'start_is_last',start_is_last, 'start_dir',start_dir)
+		// console.log("start_edge",start_edge)
+		$(document).on('mouseenter', 'div.img', hoverImg);
+	}); 
+	
+	$(document).on('mouseup', function(e) {
+		if (is_dragging) {
+			e.preventDefault();
+			$(document).off('mouseenter', 'div.img', hoverImg);
+			is_dragging = false;
+			start_img_id = null;
+			start_evt_id = null;
+			start_is_first = null;
+			start_is_last = null;
+			start_dir = null;
+			for (var v in evts_fake) {
+				v = parseInt(v);
+				if (evts[v] != evts_fake[v]) console.log(v, evts[v], evts_fake[v], typeof(v));
+				evts[v] = evts_fake[v];
+			}
+			// evts = evts_fake.slice();
+			evts_fake = null;
+			console.log('mouseup');
+			set_tooltip(e);
+			save_action();
+		}
+	});
 
-        	$(".fake.seperator").remove()
+    $(document).on('click', '.split', function(e) {
+    	// if (!$(e.target).hasClass("split")) return 0;
+    	var me = $(e.target);
+    	var image_id = parseInt(me.closest("div.img").attr("id"));
+    	var event_id = evts[image_id];
+    	// console.log("ids:",image_id, event_id)
+    	var dir = me.attr("split-dir") == "left" ? 1 : -1;
+    	if ((is_first_(image_id) && dir==1) || (is_last_(image_id) && dir==-1)) return 0;
+    	e.preventDefault();
 
-
-    		var new_event_id = arr_max(evts)+1;
-        	var i = image_id;
-    		// console.log("dir:", i, dir, new_event_id);
-        	var changed = [i-dir, i];
-        	
-        	console.log(i, evts[i], event_id)
-        	while (evts[i] == event_id) {
-	        	changed.push(i);
-        		evts[i] = new_event_id;
-        		i += dir;
-        	}
-        	// give new event same label as old event
-        	if (event_id in labels) labels[new_event_id] = labels[event_id]
-        	changed.forEach(function(i) {
-        		svg_update(i)
-        	})
-        	save_action();
-        	
-        	// Event.split(dir, {{id}},event_id, image_id).then(reload_images)
-        	return 0;
-        }).on('mouseenter', '.split', function(e){ 
-        	if (is_dragging) return true; // true allows jquery event bubbling up
-        	var img = $(e.target).closest("div.img")
-        	var image_id = parseInt(img.attr("id"));
-        	var dir = $(e.target).attr("split-dir");
-        	// console.log(image_id, ".split dir:", dir, is_first_(image_id), is_last_(image_id) )
-        	if ((is_first_(image_id) && dir=="left") || (is_last_(image_id) && dir=="right")) return true;
-        	// console.log(labels[evts[image_id]])
-        	var color = label_to_color[labels[evts[image_id]]]
-        	if (dir=="left") {
-        		makeSeperator(img, {'x':10,'fill':color})
-        		makeSeperator(img.prev("div.img"), {'x':im_width_both-10,'fill':color})
-        	} 
-        	if (dir=="right") {
-        		makeSeperator(img, {'x':im_width_both-10,'fill':color})
-        		makeSeperator(img.next("div.img"), {'x':10,'fill':color})
-        	}
-        }).on('mouseleave', '.split', function(e) { // hover off
-        	var img = $(e.target).closest("div.img")
-        	$(".fake.seperator").remove()
-        });
-
-        function makeSeperator(el, attrs) {
-        	if (!('fill' in attrs) || attrs['fill']===undefined) attrs['fill'] = fillcol
-        	attrs['width'] = 5
-        	makeSeperatorLine(el, attrs);
-        	if (attrs['x'] > im_half) attrs['x'] += 5;
-        	else attrs['x'] -= 10;
-        	attrs['fill'] = 'white'
-        	attrs['width'] = 10
-        	makeSeperatorLine(el, attrs);
-        }
-        	
-        function makeSeperatorLine(el, attrs) {
-        	attrs['class'] = 'fake seperator'
-        	attrs['height'] = 20
-        	attrs['y'] = 5
-        	$(el).find("svg").append(makeSVG("rect",attrs));
-        }
-
-    })
+    	$(".fake.seperator").remove();
 
 
-	// SLIDE OUT SIDE ANNOTATION BAR
-    var left_col_expanded = false;
-    (function() {
-	    var left_bar_width = 201;
-		var expand_left_col = function() { // on
-		        var max_width = Math.min(left_bar_width+left_col_expanded*500, $( window ).width()*0.9);
-		        // console.log(left_col_expanded ? "on" : "off", max_width, $('.left-sticky')[0].scrollWidth)
-		        // console.log($('.left-sticky')[0].offsetWidth, $('.left-sticky')[0].clientWidth)
-		        $('.left-sticky').stop().animate({
-		        	width:Math.min(max_width, Math.max(left_bar_width, $('.left-sticky')[0].scrollWidth))
-		        }, {duration: 200, done: null});
-		    }
-		$('.left-sticky').hover(
-		    function() { // on
-		        // console.log('hover', is_dragging);
-		        if (!is_dragging) {
-			        left_col_expanded = true;
-			        expand_left_col();
-			    }
-		    }, 
-		    function() { // off
-		        // console.log('hover off');
-		        left_col_expanded = false;
+		var new_event_id = arr_max(evts)+1;
+    	var i = image_id;
+		// console.log("dir:", i, dir, new_event_id);
+    	var changed = [i-dir, i];
+    	
+    	console.log(i, evts[i], event_id);
+    	while (evts[i] == event_id) {
+        	changed.push(i);
+    		evts[i] = new_event_id;
+    		i += dir;
+    	}
+    	// give new event same label as old event
+    	if (event_id in labels) labels[new_event_id] = labels[event_id];
+    	changed.forEach(function(i) {
+    		svg_update(i);
+    	});
+    	save_action();
+    	
+    	// Event.split(dir, {{id}},event_id, image_id).then(reload_images)
+    	return 0;
+    }).on('mouseenter', '.split', function(e){ 
+    	if (is_dragging) return true; // true allows jquery event bubbling up
+    	var img = $(e.target).closest("div.img");
+    	var image_id = parseInt(img.attr("id"));
+    	var dir = $(e.target).attr("split-dir");
+    	// console.log(image_id, ".split dir:", dir, is_first_(image_id), is_last_(image_id) )
+    	if ((is_first_(image_id) && dir=="left") || (is_last_(image_id) && dir=="right")) return true;
+    	// console.log(labels[evts[image_id]])
+    	var color = label_to_color[labels[evts[image_id]]];
+    	if (dir=="left") {
+    		makeSeperator(img, {'x':10,'fill':color});
+    		makeSeperator(img.prev("div.img"), {'x':im_width_both-10,'fill':color});
+    	} 
+    	if (dir=="right") {
+    		makeSeperator(img, {'x':im_width_both-10,'fill':color});
+    		makeSeperator(img.next("div.img"), {'x':10,'fill':color});
+    	}
+    }).on('mouseleave', '.split', function(e) { // hover off
+    	var img = $(e.target).closest("div.img");
+    	$(".fake.seperator").remove();
+    });
+
+    function makeSeperator(el, attrs) {
+    	if (!('fill' in attrs) || attrs.fill===undefined) attrs.fill = fillcol;
+    	attrs.width = 5;
+    	makeSeperatorLine(el, attrs);
+    	if (attrs.x > im_half) attrs.x += 5;
+    	else attrs.x -= 10;
+    	attrs.fill = 'white';
+    	attrs.width = 10;
+    	makeSeperatorLine(el, attrs);
+    }
+    	
+    function makeSeperatorLine(el, attrs) {
+    	attrs['class'] = 'fake seperator';
+    	attrs.height = 20;
+    	attrs.y = 5;
+    	$(el).find("svg").append(makeSVG("rect",attrs));
+    }
+
+});
+
+
+// SLIDE OUT SIDE ANNOTATION BAR
+var left_col_expanded = false;
+(function() {
+    var left_bar_width = 201;
+	var expand_left_col = function() { // on
+	        var max_width = Math.min(left_bar_width+left_col_expanded*500, $( window ).width()*0.9);
+	        // console.log(left_col_expanded ? "on" : "off", max_width, $('.left-sticky')[0].scrollWidth)
+	        // console.log($('.left-sticky')[0].offsetWidth, $('.left-sticky')[0].clientWidth)
+	        $('.left-sticky').stop().animate({
+	        	width:Math.min(max_width, Math.max(left_bar_width, $('.left-sticky')[0].scrollWidth))
+	        }, {duration: 200, done: null});
+	    };
+	$('.left-sticky').hover(
+	    function() { // on
+	        // console.log('hover', is_dragging);
+	        if (!is_dragging) {
+		        left_col_expanded = true;
 		        expand_left_col();
 		    }
-		);
-
-		$("#jstree").on('open_node.jstree', expand_left_col);
-		$("#jstree").on('close_node.jstree', expand_left_col);
-	})();
-
-
-
-	$(document).ready(function() {
-		$(document).on('mouseenter', '.img', set_tooltip);
-		$(document).on('mouseup', '.img', set_tooltip);
-
-
-        $(document).on('mouseleave', '.img', function(e) { 
-            $('.tooltip').css('display', 'none');
-            $(e.target).closest('div.img')
-            $(e.target).closest('div.img').find('p').show()
-        });
-
-    });
-	function set_tooltip(e) {
-		// console.log("tooltip")
-		var image_id = parseInt($(e.target).closest('div.img').attr('id'));
-		// console.log("evts_fake==null", evts_fake==null)
-		if (evts_fake!==null)  label = labels[evts_fake[image_id]];
-		else label = labels[evts[image_id]];
-		if (!label) label = "none";
-		if (typeof(image_id)=="number") {
-
-			// .slice(-1).pop() = get last element
-			var label_text = label.split(';').slice(-1).pop()
-            // from e you can get the pageX(left position) and pageY(top position) 
-            // im not sure if it was the relative or the absolute position
-            // i added 10 pxs on the top and left to show the tooltip a bit after
-            $('.tooltip').css('display', 'block');
-			$('.tooltip').text(label_text).appendTo($(e.target).closest('div.img'))
-			$(e.target).closest('div.img').find('p').not('.tooltip').hide()
-
-		}
-		return true
-    }
-
-
-	$(document).on('mousedown','.gallery', function(e) {
-		console.log('openPhotoSwipe(idx)')
-	})
-	$(document).on('mousedown','.thumbnail', function(e) {
-		console.log('openPhotoSwipe(idx)')
-		if (e.which!==1) return; 
-		var idx = parseInt($(this).closest(".img").attr("id"))
-		openPhotoSwipe(idx)
-
-	})
-	var img_sizes = {
-		thumbnail: [100, 87],
-		medium: [864,645],
-		full: [2592,1936]
-	}
-	    // stop loading more images when pswp is open
-	    var pswpIsOpen = false;
-	    var pswp;
-
-	    // $(function() {slides = new Array(imgs.length)})
-		function openPhotoSwipe(index) {
-			if (pswpIsOpen) {
-				pswp.goTo(index);
-				return;
-			}
-			pswpIsOpen = true;
-			$('.gallery').height(200)
-			console.log(index)
-			var slides = imgs.map(function(img) { 
-				return {url: img}
-			});
-		    $(".right-sticky").removeClass('full-height')
-			console.log(slides)
-			var pswpElement = document.querySelectorAll('.pswp')[0];
-			var options = {
-				shareEl: false,
-				tapToClose: false,
-				index: index,
-				loop:true,
-				getThumbBoundsFn: function(index) {
-
-				    // find thumbnail element
-				    var thumbnail = $("div#"+index+".img").find(".thumbnail")[0];
-				    // get window scroll Y
-				    var pageYScroll = window.pageYOffset || document.documentElement.scrollTop; 
-				    // optionally get horizontal scroll
-
-				    // get position of element relative to viewport
-
-				    if (thumbnail!==undefined) {
-					    var rect = thumbnail.getBoundingClientRect(); 
-					    return {x:rect.left - 201, y:rect.top + pageYScroll, w:rect.width};
-					}
-					else {
-						return {};
-					}
-				    // w = width
-
-				},
-				history: false,
-				closeOnVerticalDrag: false,
-				closeOnScroll: false
-				// modal: true
-			}
-			pswp = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, slides, options);
-			// create variable that will store real size of viewport
-			var realViewportWidth,
-			    useLargeImages = false,
-			    firstResize = true,
-			    imageSrcWillChange;
-
-			// beforeResize event fires each time size of gallery viewport updates
-			pswp.listen('beforeResize', function() {
-			    // calculate real pixels when size changes
-			    realViewportWidth = pswp.viewportSize.x * window.devicePixelRatio;
-
-			    // Code below is needed if you want image to switch dynamically on window.resize
-
-			    // Find out if current images need to be changed
-			    if(useLargeImages && realViewportWidth < img_sizes.medium[0]) {
-			        useLargeImages = false;
-			        imageSrcWillChange = true;
-			    } else if(!useLargeImages && realViewportWidth >= img_sizes.medium[0]) {
-			        useLargeImages = true;
-			        imageSrcWillChange = true;
-			    }
-
-			    // Invalidate items only when source is changed and when it's not the first update
-			    if(imageSrcWillChange && !firstResize) {
-			        // invalidateCurrItems sets a flag on slides that are in DOM,
-			        // which will force update of content (image) on window.resize.
-			        pswp.invalidateCurrItems();
-			    }
-
-			    if(firstResize) {
-			        firstResize = false;
-			    }
-
-			    imageSrcWillChange = false;
-
-			});
-
-
-			// gettingData event fires each time PhotoSwipe retrieves image source & size
-			pswp.listen('gettingData', function(index, item) {
-				// console.log('gettingData',index, item)
-			    // Set image source & size based on real viewport width
-			    if( useLargeImages ) {
-			        item.src = img_dir+current_participant+'/'+imgs[index];
-			        item.w = img_sizes.full[0],
-			        item.h = img_sizes.full[1]
-			    } else {
-			        item.src = img_dir+current_participant+'/medium/'+imgs[index];
-			        item.w = img_sizes.medium[0],
-			        item.h = img_sizes.medium[1]
-			    }
-		        item.msrc = img_dir+current_participant+'/thumbnail/'+imgs[index];
-			    item.title = labels[evts[index]] || ""
-
-			});
-
-			var scrollTargetPos = null;
-			// pswp.listen('beforeChange', function() {
-			// 	var img = pswp.currItem;
-			// 	if (img.label_id!=null) img.title = labels[img.label_id].text
-			// });
-
-			pswp.listen('afterChange', function() {
-
-		    	var index = pswp.getCurrentIndex()
-		    	// http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
-		    	var container = $('.gallery'),
-		    	    scrollTo = $("div#"+index+".img");
-		    	if (scrollTo==undefined || scrollTo.offset() === undefined) {
-		    		console.log("scrollTo undefined!", scrollTo, index, container);
-
-		    	}
-		    	// container.scrollTop(
-		    	//     scrollTargetPos
-		    	// );
-
-		    	// Or you can animate the scrolling:
-		    	if (scrollTo.offset().top - container.offset().top + container.scrollTop()!=scrollTargetPos) {
-			    	scrollTargetPos = scrollTo.offset().top - container.offset().top + container.scrollTop();
-			    	container.stop().animate({
-			    	    scrollTop: scrollTargetPos
-			    	})
-		    	}
-		    	// var bgcol = scrollTo.css("background-color")
-		    	scrollTo.stop(undefined, true)
-		    	scrollTo.effect('highlight',{color:'lightblue'}, 1000)
-		    })
-		    // store the original scroll postion
-		    var originalScroll = $(window).scrollTop();
-
-		    $("#pswp-container").css('z-index',2);
-		    
-		    setCorrectHeight();
-
-		    $(pswpElement).show();
-
-
-		    pswp.listen('close', function(){
-				
-			    $(".gallery").css({
-			    	marginTop: '', 
-			    	height: '',
-			    	overflowY: ''
-		    	})
-
-
-
-			    var index = pswp.getCurrentIndex()
-
-			    // http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
-
-			    var scrollTo = $("div.img#"+index);
-
-			    console.log("index",index, "offset:", originalScroll)
-			    $(document).scrollTop(originalScroll )
-			    $(window).unbind("resize",setCorrectHeight)
-
-			});
-
-
-		    pswp.listen('destroy', function(){
-			    $("#pswp-container").css('z-index',-10);
-			    $(pswpElement).hide();
-			    pswpIsOpen = false;
-			    console.log("scrolling back again!",originalScroll)
-			    $(".right-sticky").addClass('full-height')
-			    // $(document).scrollTop(originalScroll )
-			});
-
-		    pswp.init();
-		}
-
-		$(window).bind("resize",function() {if (pswpIsOpen) setCorrectHeight()})
-
-		// sets the container underneath photoswipe to fill the remaining space
-	    function setCorrectHeight() {
-	    	console.log("setCorrectHeight")
-	    	$(".gallery").css({
-		    	marginTop: $("#pswp-container").height(),
-		    	height:$(window).innerHeight()-$("#pswp-container").height(),
-		    	overflowX: 'hidden',
-		    	overflowY: 'auto'
-		    })
+	    }, 
+	    function() { // off
+	        // console.log('hover off');
+	        left_col_expanded = false;
+	        expand_left_col();
 	    }
-		// Resize photoswipe div 
-		$(function () {
-			var isResizing = false;
+	);
 
-		    var handle = $('#handle'),
-		    	container = $("#pswp-container");
+	$("#jstree").on('open_node.jstree', expand_left_col);
+	$("#jstree").on('close_node.jstree', expand_left_col);
+})();
 
-		    handle.on('mousedown', function (e) {
-		        isResizing = true;
-		        console.log("resizing")
-		        e.preventDefault();
-			    $(document).on('mousemove', moveResizer); 
-			    $(document).on('mouseup', function (e) {
-			        // stop resizing
-			        isResizing = false;
-			        $(document).off('mousemove', moveResizer)
-			    });
-		    });
 
-		    function moveResizer(e) {
-		        // we don't want to do anything if we aren't resizing.
-		        if (!isResizing) 
-		            return;
-		        
-		        var offsetBottom = e.clientY + container.offset().top ;
-		        console.log("resizing move", e.clientY,  offsetBottom)
-		        container.css('height', offsetBottom)
-		        setCorrectHeight();
-		        if (pswp) pswp.updateSize(true);
 
-		    }
-		    
-		});
-		function first(p){for(var i in p)return i;}
+$(document).ready(function() {
+	$(document).on('mouseenter', '.img', set_tooltip);
+	$(document).on('mouseup', '.img', set_tooltip);
+
+
+    $(document).on('mouseleave', '.img', function(e) { 
+        $('.tooltip').css('display', 'none');
+        $(e.target).closest('div.img');
+        $(e.target).closest('div.img').find('p').show();
+    });
+
+});
+function set_tooltip(e) {
+	// console.log("tooltip")
+	var image_id = parseInt($(e.target).closest('div.img').attr('id'));
+	// console.log("evts_fake==null", evts_fake==null)
+	if (evts_fake!==null)  label = labels[evts_fake[image_id]];
+	else label = labels[evts[image_id]];
+	if (!label) label = "none";
+	if (typeof(image_id)=="number") {
+
+		// .slice(-1).pop() = get last element
+		var label_text = label.split(';').slice(-1).pop();
+        // from e you can get the pageX(left position) and pageY(top position) 
+        // im not sure if it was the relative or the absolute position
+        // i added 10 pxs on the top and left to show the tooltip a bit after
+        $('.tooltip').css('display', 'block');
+		$('.tooltip').text(label_text).appendTo($(e.target).closest('div.img'));
+		$(e.target).closest('div.img').find('p').not('.tooltip').hide();
+
+	}
+	return true;
+}
+
+
+$(document).on('mousedown','.gallery', function(e) {
+	console.log('openPhotoSwipe(idx)');
+});
+$(document).on('mousedown','.thumbnail', function(e) {
+	console.log('openPhotoSwipe(idx)');
+	if (e.which!==1) return; 
+	var idx = parseInt($(this).closest(".img").attr("id"));
+	openPhotoSwipe(idx);
+
+});
+var img_sizes = {
+	thumbnail: [100, 87],
+	medium: [864,645],
+	full: [2592,1936]
+};
+// stop loading more images when pswp is open
+var pswpIsOpen = false;
+var pswp;
+
+// $(function() {slides = new Array(imgs.length)})
+function openPhotoSwipe(index) {
+	if (pswpIsOpen) {
+		pswp.goTo(index);
+		return;
+	}
+	pswpIsOpen = true;
+	$('.gallery').height(200);
+	console.log(index);
+	var slides = imgs.map(function(img) { 
+		return {url: img};
+	});
+    $(".right-sticky").removeClass('full-height');
+	console.log(slides);
+	var pswpElement = document.querySelectorAll('.pswp')[0];
+	var options = {
+		shareEl: false,
+		tapToClose: false,
+		index: index,
+		loop:true,
+		getThumbBoundsFn: function(index) {
+
+		    // find thumbnail element
+		    var thumbnail = $("div#"+index+".img").find(".thumbnail")[0];
+		    // get window scroll Y
+		    var pageYScroll = window.pageYOffset || document.documentElement.scrollTop; 
+		    // optionally get horizontal scroll
+
+		    // get position of element relative to viewport
+
+		    if (thumbnail!==undefined) {
+			    var rect = thumbnail.getBoundingClientRect(); 
+			    return {x:rect.left - 201, y:rect.top + pageYScroll, w:rect.width};
+			}
+			else {
+				return {};
+			}
+		    // w = width
+
+		},
+		history: false,
+		closeOnVerticalDrag: false,
+		closeOnScroll: false
+		// modal: true
+	};
+	pswp = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, slides, options);
+	// create variable that will store real size of viewport
+	var realViewportWidth,
+	    useLargeImages = false,
+	    firstResize = true,
+	    imageSrcWillChange;
+
+	// beforeResize event fires each time size of gallery viewport updates
+	pswp.listen('beforeResize', function() {
+	    // calculate real pixels when size changes
+	    realViewportWidth = pswp.viewportSize.x * window.devicePixelRatio;
+
+	    // Code below is needed if you want image to switch dynamically on window.resize
+
+	    // Find out if current images need to be changed
+	    if(useLargeImages && realViewportWidth < img_sizes.medium[0]) {
+	        useLargeImages = false;
+	        imageSrcWillChange = true;
+	    } else if(!useLargeImages && realViewportWidth >= img_sizes.medium[0]) {
+	        useLargeImages = true;
+	        imageSrcWillChange = true;
+	    }
+
+	    // Invalidate items only when source is changed and when it's not the first update
+	    if(imageSrcWillChange && !firstResize) {
+	        // invalidateCurrItems sets a flag on slides that are in DOM,
+	        // which will force update of content (image) on window.resize.
+	        pswp.invalidateCurrItems();
+	    }
+
+	    if(firstResize) {
+	        firstResize = false;
+	    }
+
+	    imageSrcWillChange = false;
+
+	});
+
+
+	// gettingData event fires each time PhotoSwipe retrieves image source & size
+	pswp.listen('gettingData', function(index, item) {
+		// console.log('gettingData',index, item)
+	    // Set image source & size based on real viewport width
+	    if( useLargeImages ) {
+	        item.src = img_dir+current_participant+'/'+imgs[index];
+	        item.w = img_sizes.full[0],
+	        item.h = img_sizes.full[1];
+	    } else {
+	        item.src = img_dir+current_participant+'/medium/'+imgs[index];
+	        item.w = img_sizes.medium[0],
+	        item.h = img_sizes.medium[1];
+	    }
+        item.msrc = img_dir+current_participant+'/thumbnail/'+imgs[index];
+	    item.title = labels[evts[index]] || "";
+
+	});
+
+	var scrollTargetPos = null;
+	// pswp.listen('beforeChange', function() {
+	// 	var img = pswp.currItem;
+	// 	if (img.label_id!=null) img.title = labels[img.label_id].text
+	// });
+
+	pswp.listen('afterChange', function() {
+
+    	var index = pswp.getCurrentIndex();
+    	// http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
+    	var container = $('.gallery'),
+    	    scrollTo = $("div#"+index+".img");
+    	if (scrollTo==undefined || scrollTo.offset() === undefined) {
+    		console.log("scrollTo undefined!", scrollTo, index, container);
+
+    	}
+    	// container.scrollTop(
+    	//     scrollTargetPos
+    	// );
+
+    	// Or you can animate the scrolling:
+    	if (scrollTo.offset().top - container.offset().top + container.scrollTop()!=scrollTargetPos) {
+	    	scrollTargetPos = scrollTo.offset().top - container.offset().top + container.scrollTop();
+	    	container.stop().animate({
+	    	    scrollTop: scrollTargetPos
+	    	});
+    	}
+    	// var bgcol = scrollTo.css("background-color")
+    	scrollTo.stop(undefined, true);
+    	scrollTo.effect('highlight',{color:'lightblue'}, 1000);
+    });
+    // store the original scroll postion
+    var originalScroll = $(window).scrollTop();
+
+    $("#pswp-container").css('z-index',2);
+    
+    setCorrectHeight();
+
+    $(pswpElement).show();
+
+
+    pswp.listen('close', function(){
 		
-		$("#pswp-container").on('wheel', function(e) {
-			var delta = e.originalEvent.deltaY;
-			delta = Math.min(1,Math.max(-1, Math.round(delta/100)))
-			if (pswp) {
-				var top_index = end//imgs.lastIndexOf(imgs.slice(-1)[0]);
-				var bottom_index = start//parseInt(first(imgs));
-				var new_index = pswp.getCurrentIndex()+delta;
-				if (new_index > top_index) new_index = new_index - top_index + bottom_index
-				else if (new_index < bottom_index) new_index = new_index + top_index - bottom_index
-				// console.log(top_index ,bottom_index ,new_index)
-				pswp.goTo(new_index);
-			}
-			return false;
-		});
+	    $(".gallery").css({
+	    	marginTop: '', 
+	    	height: '',
+	    	overflowY: ''
+    	});
 
-		function generate_annotation_file() {
-			var first = function(elements) {return elements.find(function(element) { return !!element })};
 
-			var curr_evt = null
-			var curr_label = null
-			var curr_start = null
-			var str = "startTime,endTime,annotation\n";
-			console.log("STARTING", curr_evt,curr_start, curr_label)
 
-			var last_idx = -100;
-			evts.forEach((e, i) => {
-				last_idx = Math.max(i, last_idx)
-				var label = labels[e];
-				// console.log(i, e, label)
-				if (curr_evt!== e || label !== curr_label) {
-					if (curr_start!==null) {
-						var last_time = img_times[i-1];
-						str += curr_start.toISOString() + ',' + last_time.toISOString() + ',' + curr_label + '\n';
-						console.log(i, curr_label, curr_start.toTimeString().split(" ")[0], last_time.toTimeString().split(" ")[0])
-					}
-					curr_label = label;
-					curr_evt = e;
-					curr_start = img_times[i];
-					console.log(i, label, curr_start.toTimeString().split(" ")[0])
-				}
-			})
-			if (last_idx!==-100) {
-				var last_time = img_times[last_idx];
-				console.log("last_time:", last_idx, last_time)
+	    var index = pswp.getCurrentIndex();
+
+	    // http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
+
+	    var scrollTo = $("div.img#"+index);
+
+	    console.log("index",index, "offset:", originalScroll);
+	    $(document).scrollTop(originalScroll );
+	    $(window).unbind("resize",setCorrectHeight);
+
+	});
+
+
+    pswp.listen('destroy', function(){
+	    $("#pswp-container").css('z-index',-10);
+	    $(pswpElement).hide();
+	    pswpIsOpen = false;
+	    console.log("scrolling back again!",originalScroll);
+	    $(".right-sticky").addClass('full-height');
+	    // $(document).scrollTop(originalScroll )
+	});
+
+    pswp.init();
+}
+
+$(window).bind("resize",function() {if (pswpIsOpen) setCorrectHeight();});
+
+// sets the container underneath photoswipe to fill the remaining space
+function setCorrectHeight() {
+	console.log("setCorrectHeight");
+	$(".gallery").css({
+    	marginTop: $("#pswp-container").height(),
+    	height:$(window).innerHeight()-$("#pswp-container").height(),
+    	overflowX: 'hidden',
+    	overflowY: 'auto'
+    });
+}
+// Resize photoswipe div 
+$(function () {
+	var isResizing = false;
+
+    var handle = $('#handle'),
+    	container = $("#pswp-container");
+
+    handle.on('mousedown', function (e) {
+        isResizing = true;
+        console.log("resizing");
+        e.preventDefault();
+	    $(document).on('mousemove', moveResizer); 
+	    $(document).on('mouseup', function (e) {
+	        // stop resizing
+	        isResizing = false;
+	        $(document).off('mousemove', moveResizer);
+	    });
+    });
+
+    function moveResizer(e) {
+        // we don't want to do anything if we aren't resizing.
+        if (!isResizing) 
+            return;
+        
+        var offsetBottom = e.clientY + container.offset().top ;
+        console.log("resizing move", e.clientY,  offsetBottom);
+        container.css('height', offsetBottom);
+        setCorrectHeight();
+        if (pswp) pswp.updateSize(true);
+
+    }
+    
+});
+function first(p){for(var i in p)return i;}
+
+$("#pswp-container").on('wheel', function(e) {
+	var delta = e.originalEvent.deltaY;
+	delta = Math.min(1,Math.max(-1, Math.round(delta/100)));
+	if (pswp) {
+		var top_index = end;//imgs.lastIndexOf(imgs.slice(-1)[0]);
+		var bottom_index = start;//parseInt(first(imgs));
+		var new_index = pswp.getCurrentIndex()+delta;
+		if (new_index > top_index) new_index = new_index - top_index + bottom_index;
+		else if (new_index < bottom_index) new_index = new_index + top_index - bottom_index;
+		// console.log(top_index ,bottom_index ,new_index)
+		pswp.goTo(new_index);
+	}
+	return false;
+});
+
+function generate_annotation_file() {
+	var first = function(elements) {return elements.find(function(element) { return !!element; });};
+
+	var curr_evt = null;
+	var curr_label = null;
+	var curr_start = null;
+	var str = "startTime,endTime,annotation\n";
+	console.log("STARTING", curr_evt,curr_start, curr_label);
+
+	var last_idx = -100;
+	evts.forEach((e, i) => {
+		last_idx = Math.max(i, last_idx);
+		var label = labels[e];
+		// console.log(i, e, label)
+		if (curr_evt!== e || label !== curr_label) {
+			if (curr_start!==null) {
+				var last_time = img_times[i-1];
 				str += curr_start.toISOString() + ',' + last_time.toISOString() + ',' + curr_label + '\n';
+				console.log(i, curr_label, curr_start.toTimeString().split(" ")[0], last_time.toTimeString().split(" ")[0]);
 			}
-			console.log(str)
-			return str
+			curr_label = label;
+			curr_evt = e;
+			curr_start = img_times[i];
+			console.log(i, label, curr_start.toTimeString().split(" ")[0]);
 		}
+	});
+	if (last_idx!==-100) {
+		var last_time = img_times[last_idx];
+		console.log("last_time:", last_idx, last_time);
+		str += curr_start.toISOString() + ',' + last_time.toISOString() + ',' + curr_label + '\n';
+	}
+	console.log(str);
+	return str;
+}
 
-		function save_annotation() {
+function save_annotation() {
 
-			if (current_participant===null) {return alert("current participant not set (may be mid-load)")}
-			if (current_schema===null) return alert("current schema not set (may be mid-load)")
-			var data = generate_annotation_file();
-			return new Promise((resolve, reject) => {
-				console.log("writing annotation to",path.join('annotation',current_participant,'annotation_'+current_schema) )
-				fs.writeFile(path.join('annotation',current_participant,'annotation_'+current_schema ), data, {}, (err, res) => {
-					console.log("saved annotation, err:",err,"res:",res)
-					resolve()
-				})
-			})
-
-		}
-
-		function parse_annotation_file(text) {
-			var text = text.split('\n')
-
-			if (text[0].split(',').map((s)=>s.trim()).join(',')!=="startTime,endTime,annotation") return console.log("first row of csv not valid:", text[0])
-			text.splice(0,1);
-
-			var curr_idx = 0;
-			var evt_idx = 0;
-			evts = [];
-			labels = {};
-			text.forEach((line, idx) => {
-				var l=line.split(','); // TODO: check for escaped commas
-				if (l.length!==3) return // empty line
-
-				 var startDate =  new Date(l[0]);
-				 var endDate =  new Date(l[1]);
-				 var annotation = l[2]==="undefined" ? undefined : l[2];
-				 if (annotation!==undefined) {
-
-				 }
-				 labels[evt_idx] = annotation;
-				 while(true) {
-				 	if (img_times[curr_idx] < startDate) curr_idx++;
-				 	else break;
-				 }
-				 start_idx = curr_idx
-				 while(true) {
-				 	evts[curr_idx] = evt_idx;
-
-				 	if (img_times[curr_idx] < endDate) curr_idx++;
-				 	else break;
-				 }
-				 end_idx = curr_idx
-				 console.log(annotation, startDate.toTimeString().split(" ")[0],"-", endDate.toTimeString().split(" ")[0], "\n", start_idx, end_idx)
-				 evt_idx++;
-			})
-			curr_idx = 0;
-			while (curr_idx<imgs.length) {
-				if (evts[curr_idx]==undefined) {
-					console.log("missing event at :", curr_idx)
-					labels[evt_idx] = "undefined";
-					evts[curr_idx] = evt_idx;
-					curr_idx++;
-					while(curr_idx<imgs.length && evts[curr_idx]==undefined) {
-						evts[curr_idx] = evt_idx;
-						curr_idx++;
-					}
-					evt_idx++;
-				} else {
-					curr_idx++;
-				}
-			}
-
-
-		}
-		function load_annotation() {
-			var annotation_file = path.join('annotation',current_participant,'annotation_'+current_schema)
-			console.log("reading annotation:", annotation_file)
-			fs.readFile(annotation_file, "utf-8", (err, data) => {
-				if (err) {
-					console.log('annotation file does not exist, start a new one!');
-					data = "startTime,endTime,annotation";
-					// throw err
-				}
-				console.log(data);
-				parse_annotation_file(data)
-				annotations_loaded = true;
-				images_colorized = false;
-				update_view()
-			})
-
-		}
-
-		function save_action() {
-			console.log("save")
-			var temp_icon = 'fa-spinner fa-pulse'
-			$("#btn-save").find('i').removeClass('fa-floppy-o').addClass(temp_icon)
-			var save_promise = save_annotation()
-			if (!save_promise) $("#btn-save").find('i').removeClass(temp_icon).addClass('fa-floppy-o')
-			else save_promise.then(() => {
-				$("#btn-save").find('i').removeClass(temp_icon).addClass('fa-floppy-o')
-			})
-		}
-		$("#btn-save").click(()=>{
-			save_action();
-		})
-		$("#btn-download").click(()=>{
-			console.log("download", this)
-			var temp_icon = 'fa-spinner fa-pulse'
-			$("#btn-download").find('i').removeClass('fa-floppy-o').addClass(temp_icon)
-			var csvContent = generate_annotation_file();
-			console.log('csvContent',csvContent)
-			var filename = "annotation.csv";
-			
-
-			dialog.showSaveDialog({
-				title:"Save annotation .csv", 
-				filters:[{name:'csv', extensions:['csv']}],
-				defaultPath:"annotation"
-			}, function (fileName) {
-			       if (fileName === undefined){
-			            console.log("You didn't save the file");
-			            return;
-			       }
-			       // fileName is a string that contains the path and filename created in the save file dialog.  
-			       fs.writeFile(fileName, csvContent, function (err) {
-			           if(err){
-			               alert("An error ocurred creating the file "+ err.message)
-			           }
-			       });
-				$("#btn-download").find('i').removeClass(temp_icon).addClass('fa-download')
-			}); 
-
-		})
-
-		// fix for when annotation bar accidentally scrolls to the left
-		var left_sticky = $('.left-sticky');
-		left_sticky.bind('scroll',()=>{if (left_sticky.scrollLeft()!==0) {left_sticky.scrollLeft(0);}})
-
-		// hotkey to open dev-tools / reload since shortcut dissapears on build
-		document.addEventListener("keydown", function (e) {
-			if (e.which === 123) {
-				remote.getCurrentWindow().toggleDevTools();
-			} else if (e.which === 116) {
-				location.reload();
-			}
+	if (current_participant===null) {return alert("current participant not set (may be mid-load)");}
+	if (current_schema===null) return alert("current schema not set (may be mid-load)");
+	var data = generate_annotation_file();
+	return new Promise((resolve, reject) => {
+		console.log("writing annotation to",path.join('annotation',current_participant,'annotation_'+current_schema) );
+		fs.writeFile(path.join('annotation',current_participant,'annotation_'+current_schema ), data, {}, (err, res) => {
+			console.log("saved annotation, err:",err,"res:",res);
+			resolve();
 		});
+	});
+
+}
+
+function parse_annotation_file(text) {
+	var text = text.split('\n');
+
+	if (text[0].split(',').map((s)=>s.trim()).join(',')!=="startTime,endTime,annotation") return console.log("first row of csv not valid:", text[0]);
+	text.splice(0,1);
+
+	var curr_idx = 0;
+	var evt_idx = 0;
+	evts = [];
+	labels = {};
+	text.forEach((line, idx) => {
+		var l=line.split(','); // TODO: check for escaped commas
+		if (l.length!==3) return; // empty line
+
+		 var startDate =  new Date(l[0]);
+		 var endDate =  new Date(l[1]);
+		 var annotation = l[2]==="undefined" ? undefined : l[2];
+		 if (annotation!==undefined) {
+
+		 }
+		 labels[evt_idx] = annotation;
+		 while(true) {
+		 	if (img_times[curr_idx] < startDate) curr_idx++;
+		 	else break;
+		 }
+		 start_idx = curr_idx;
+		 while(true) {
+		 	evts[curr_idx] = evt_idx;
+
+		 	if (img_times[curr_idx] < endDate) curr_idx++;
+		 	else break;
+		 }
+		 end_idx = curr_idx;
+		 console.log(annotation, startDate.toTimeString().split(" ")[0],"-", endDate.toTimeString().split(" ")[0], "\n", start_idx, end_idx);
+		 evt_idx++;
+	});
+	curr_idx = 0;
+	while (curr_idx<imgs.length) {
+		if (evts[curr_idx]==undefined) {
+			console.log("missing event at :", curr_idx);
+			labels[evt_idx] = "undefined";
+			evts[curr_idx] = evt_idx;
+			curr_idx++;
+			while(curr_idx<imgs.length && evts[curr_idx]==undefined) {
+				evts[curr_idx] = evt_idx;
+				curr_idx++;
+			}
+			evt_idx++;
+		} else {
+			curr_idx++;
+		}
+	}
+
+
+}
+function load_annotation() {
+	var annotation_file = path.join('annotation',current_participant,'annotation_'+current_schema);
+	console.log("reading annotation:", annotation_file);
+	fs.readFile(annotation_file, "utf-8", (err, data) => {
+		if (err) {
+			console.log('annotation file does not exist, start a new one!');
+			data = "startTime,endTime,annotation";
+			// throw err
+		}
+		console.log(data);
+		parse_annotation_file(data);
+		annotations_loaded = true;
+		images_colorized = false;
+		update_view();
+	});
+
+}
+
+function save_action() {
+	console.log("save");
+	var temp_icon = 'fa-spinner fa-pulse';
+	$("#btn-save").find('i').removeClass('fa-floppy-o').addClass(temp_icon);
+	var save_promise = save_annotation();
+	if (!save_promise) $("#btn-save").find('i').removeClass(temp_icon).addClass('fa-floppy-o');
+	else save_promise.then(() => {
+		$("#btn-save").find('i').removeClass(temp_icon).addClass('fa-floppy-o');
+	});
+}
+$("#btn-save").click(()=>{
+	save_action();
+});
+$("#btn-download").click(()=>{
+	console.log("download", this);
+	var temp_icon = 'fa-spinner fa-pulse';
+	$("#btn-download").find('i').removeClass('fa-floppy-o').addClass(temp_icon);
+	var csvContent = generate_annotation_file();
+	console.log('csvContent',csvContent);
+	var filename = "annotation.csv";
+	
+
+	dialog.showSaveDialog({
+		title:"Save annotation .csv", 
+		filters:[{name:'csv', extensions:['csv']}],
+		defaultPath:"annotation"
+	}, function (fileName) {
+	       if (fileName === undefined){
+	            console.log("You didn't save the file");
+	            return;
+	       }
+	       // fileName is a string that contains the path and filename created in the save file dialog.  
+	       fs.writeFile(fileName, csvContent, function (err) {
+	           if(err){
+	               alert("An error ocurred creating the file "+ err.message);
+	           }
+	       });
+		$("#btn-download").find('i').removeClass(temp_icon).addClass('fa-download');
+	}); 
+
+});
+
+// fix for when annotation bar accidentally scrolls to the left
+var left_sticky = $('.left-sticky');
+left_sticky.bind('scroll',()=>{if (left_sticky.scrollLeft()!==0) {left_sticky.scrollLeft(0);}});
+
+// hotkey to open dev-tools / reload since shortcut dissapears on build
+document.addEventListener("keydown", function (e) {
+	if (e.which === 123) {
+		remote.getCurrentWindow().toggleDevTools();
+	} else if (e.which === 116) {
+		location.reload();
+	}
+});
 	</script>
 
 </body>

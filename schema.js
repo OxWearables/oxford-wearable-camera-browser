@@ -1,6 +1,6 @@
-const ipcMain = require('electron').ipcMain
-const path = require('path')
-const Promise = require('bluebird')
+const ipcMain = require('electron').ipcMain;
+const path = require('path');
+const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
 
 
@@ -9,11 +9,11 @@ const fs = Promise.promisifyAll(require('fs'));
 
 // main endpoint, arg is the filename of the schema .csv in the schemas subdirectory
 ipcMain.on('get_schema', (event, arg) => {
-  console.log('get_schema', arg)
+  console.log('get_schema', arg);
   parse_schema(path.join('schema', arg)).then(
     parsedCsv => event.sender.send('schema_json', {schema_json:parsedCsv, schema_name: arg})
   );
-})
+});
 
 String.prototype.last = Array.prototype.last = function(){
     return this[this.length - 1];
@@ -23,8 +23,8 @@ function parse_schema(fn) {
       var json = {
         text: 'root node',
         children: []
-      }
-      data += '\r'
+      };
+      data += '\r';
       data.split('\n').forEach(line => { 
         var currPos = json.children;
         if (line.length>0 && /\w/.test(line)) line.split(';').forEach(val => {
@@ -51,10 +51,10 @@ function parse_schema(fn) {
             }
             currPos = currPos.last().children;
           } else {
-            currPos = child.children
+            currPos = child.children;
           }
-        })
-      })
+        });
+      });
       return json;
-    })
+    });
 }
