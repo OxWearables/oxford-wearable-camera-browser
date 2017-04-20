@@ -6,9 +6,9 @@
 	const $ = jQuery    = require("jquery");
 	const fs            = require('fs');
 	const path          = require('path');
-	const ipc   = require('electron').ipcRenderer
-	const { remote } = require('electron')
-	const dialog = remote.dialog
+	const ipc   = require('electron').ipcRenderer;
+	const { remote } = require('electron');
+	const dialog = remote.dialog;
 	</script>
 	<script src="./lib/jquery-ui.js"></script>
     <script src="./lib/jstree.min.js"></script>
@@ -164,10 +164,10 @@
 </head>
 <body>
 <div class="left-sticky">
-	<div style=" width:100%; text-align:center;margin-top:10px;">
+	<div style=" width:192px; text-align:center;margin-top:10px;">
 		<span id="help-text" style="line-height: 20px; vertical-align: middle;">select participant</span>
 	</div>
-	<div style="margin-bottom:10px;">
+	<div style="margin-bottom:10px;width:192px;">
 		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage" help-text="participant selection"><i class="fa fa-users fa-2x"></i> </button>
 		<button type="button" class="menu-button" id="btn-save" title="save annotations"  help-text="save annotations"><i class="fa fa-floppy-o fa-2x"></i> </button>
 		<button  onClick="schema_selection_menu();" type="button" class="menu-button" id="btn-book?"  help-text="schema selection"><i class="fa fa-book fa-2x"></i> </button>
@@ -283,7 +283,7 @@ $(function() {
 			$(this).val('').removeClass('search-grey-text');
 		}
 		}).blur(function(){
-			if ($(this).val().length == 0){
+			if ($(this).val().length === 0){
 			$(this).val(background_text).addClass('search-grey-text');
 		}
 	}).val(background_text).addClass('search-grey-text');
@@ -294,7 +294,7 @@ $(function() {
 	$('.menu-button').hover((e) => {
 		console.log("mouseeneter");
 		var newtext = $(e.target).closest("button").attr('help-text');
-		if (newtext==undefined) console.log(e.target);
+		if (newtext===undefined) console.log(e.target);
 		else console.log(newtext);
 		$('#help-text').text( newtext);
 	}, (e) => {
@@ -316,9 +316,9 @@ function makeColorGradient(frequency1, frequency2, frequency3,
 	                           phase1, phase2, phase3,
 	                           center, width, len) {
 	// https://krazydad.com/tutorials/makecolors.php
-	if (center == undefined)   center = 128;
-	if (width == undefined)    width = 127;
-	if (len == undefined)      len = 50;
+	if (center === undefined)   center = 128;
+	if (width === undefined)    width = 127;
+	if (len === undefined)      len = 50;
 	var output = [];
 	for (var i = 0; i < len; ++i) {
 		var red = Math.sin(frequency1*i + phase1) * width + center;
@@ -520,7 +520,7 @@ $('#jstree').on('loaded.jstree', function() {
     		$(this).val('').removeClass('search-grey-text');
 		}
  	}).blur(function(){
-  		if ($(this).val().length == 0){
+  		if ($(this).val().length === 0){
     		$(this).val(background_text).addClass('search-grey-text');
 		}
  	}).val(background_text).addClass('search-grey-text');
@@ -599,7 +599,7 @@ $('#jstree')
 	    					nodes.push({text:path.basename(f), icon:"fa fa-times"});
 	    				}
     				});
-    				if (nodes.length==0) nodes.push({text:"(no images found)", icon:false});
+    				if (nodes.length===0) nodes.push({text:"(no images found)", icon:false});
 		    		selecting_participant = false;
 		    		if (!debug_no_adding) {
 			    		$('#jstree-bottom-box').show();
@@ -667,7 +667,6 @@ $(document)
         	if (Number.isInteger(event_id)) {
         		evts.forEach((evt, idx) => {
         			if (evt==event_id) {
-        				console.log;
         				evts[idx] = event_id;
             			svg_colorize(idx, event_color);
             			$('.img#'+idx).effect("highlight", {color:event_color}, 1000);
@@ -688,19 +687,13 @@ function annotate_image(i, label) {
 		labels[evts[i]] = label; // new event -> label
 	} else {
 		var new_e = arr_max(evts)+1;
-		var changed = [];
 		for (var v in evts) {
 			if (evts[v] == e) {
 				evts[v] = new_e;
-				changed.push[v];
 			}
 		}
 		labels[new_e] = label;
 		new_color = label_to_color[label];
-		changed.forEach(function(i) {
-			svg_update(i);
-			svg_colorize(i, new_color);
-		});
 	}
 	save_action();
 }
@@ -743,7 +736,7 @@ function create_all_images() {
 	console.log("re-creating all images");
 	$('.gallery').empty();
 	// emptying the gallery sometimes accidentally deletes the tooltip div, so recreate
-	if ($('.tooltip').length==0) {
+	if ($('.tooltip').length===0) {
 		$('.gallery').append('<div class="tooltip">Tooltip</div>');
 	}
 	for(var i=0; i<=end-start;i++ ) {
@@ -774,7 +767,9 @@ function request_participant(participant_name) {
 	evts = [];
 	imgs = [];
 	img_times = [];
-	annotations_loaded = false, images_loaded = false, images_created=false;
+	annotations_loaded = false;
+	images_loaded = false;
+	images_created=false;
 	update_view();
 }
 
@@ -825,7 +820,7 @@ function load_images() {
 						}
 						fs.readdir(subdir, (err, files) => {
 							if (err) console.log(err);
-							if (files===undefined || files.length==0) return console.log("no files in folder!", subdir);
+							if (files===undefined || files.length===0) return console.log("no files in folder!", subdir);
 							files
 								.sort((a, b)=>(a.slice(17)>b.slice(17)) ? 1 : -1)
 								.forEach((f, i) => {
@@ -994,7 +989,7 @@ $(function() {
 
 			e.preventDefault();
 			var curr_img_id = parseInt($(e.target).closest("div.img")[0].id);
-			if (curr_img_id==prev_hover_id) {
+			if (curr_img_id===prev_hover_id) {
 				return true;
 			} 
 			console.log('hoverImg', curr_img_id, prev_hover_id);
@@ -1005,7 +1000,7 @@ $(function() {
 
 			// FIGURE OUT STATE FOR MOVE
 			var state = "";
-			if (start_dir==0) {
+			if (start_dir===0) {
 				other_event= start_evt_id;
 				state = "both";
 			} else if (curr_img_id == start_img_id) {
@@ -1034,11 +1029,11 @@ $(function() {
 
 			var evts_min = arr_min(Object.keys(evts).map(Number));
 			var evts_max = arr_max(Object.keys(evts).map(Number));
+			var new_val;
 			console.log("evts min max",evts_min, evts_max);
 			if (state.startsWith("internal")) {
 				// INTERNAL DRAGS DO NOT EFFECT THE DRAGGED IMG
 				for (var i = evts_min;  i<=evts_max; i++) {
-					var new_val;
 					if (i >= START && i <= END) {
 						if (i != curr_img_id) new_val = other_event;
 						else new_val = start_evt_id;
@@ -1054,7 +1049,6 @@ $(function() {
 				}
 			} else {
 				for (var i = evts_min;  i<=evts_max; i++) {
-					var new_val;
 					if (i >= START && i <= END) {
 						new_val = other_event;
 					} else {
@@ -1068,7 +1062,7 @@ $(function() {
 					}
 				}
 			}
-			if (changed.length == 0) {
+			if (changed.length === 0) {
 				// console.log("no change: ", changed)
 				return true; 
 			}
@@ -1389,11 +1383,11 @@ function openPhotoSwipe(index) {
 	    // Set image source & size based on real viewport width
 	    if( useLargeImages ) {
 	        item.src = img_dir+current_participant+'/'+imgs[index];
-	        item.w = img_sizes.full[0],
+	        item.w = img_sizes.full[0];
 	        item.h = img_sizes.full[1];
 	    } else {
 	        item.src = img_dir+current_participant+'/medium/'+imgs[index];
-	        item.w = img_sizes.medium[0],
+	        item.w = img_sizes.medium[0];
 	        item.h = img_sizes.medium[1];
 	    }
         item.msrc = img_dir+current_participant+'/thumbnail/'+imgs[index];
@@ -1413,7 +1407,7 @@ function openPhotoSwipe(index) {
     	// http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
     	var container = $('.gallery'),
     	    scrollTo = $("div#"+index+".img");
-    	if (scrollTo==undefined || scrollTo.offset() === undefined) {
+    	if (scrollTo===undefined || scrollTo.offset() === undefined) {
     		console.log("scrollTo undefined!", scrollTo, index, container);
 
     	}
@@ -1590,7 +1584,7 @@ function save_annotation() {
 }
 
 function parse_annotation_file(text) {
-	var text = text.split('\n');
+	text = text.split('\n');
 
 	if (text[0].split(',').map((s)=>s.trim()).join(',')!=="startTime,endTime,annotation") return console.log("first row of csv not valid:", text[0]);
 	text.splice(0,1);
@@ -1627,12 +1621,12 @@ function parse_annotation_file(text) {
 	});
 	curr_idx = 0;
 	while (curr_idx<imgs.length) {
-		if (evts[curr_idx]==undefined) {
+		if (evts[curr_idx]===undefined) {
 			console.log("missing event at :", curr_idx);
 			labels[evt_idx] = "undefined";
 			evts[curr_idx] = evt_idx;
 			curr_idx++;
-			while(curr_idx<imgs.length && evts[curr_idx]==undefined) {
+			while(curr_idx<imgs.length && evts[curr_idx]===undefined) {
 				evts[curr_idx] = evt_idx;
 				curr_idx++;
 			}
