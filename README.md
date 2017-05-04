@@ -62,7 +62,7 @@ Annotations can be downloaded as a .csv file by pressing the 'downward-arrow' bu
 All the annotations are stored in the 'annotations' folder. The files are not large so this folder can be copied if you want to back up your work. If you want to restore a specific one e.g. annotations for 'sven' using the 7-class.csv schema, then copy the file `/annotation/sven/annotation_7-class.csv` (while the browser is closed).
 ## Custom schemas
 
-The browser comes with two schema .csv files, which can be modified, copied or deleted. The annotations are simply one annotation per-line. If you wish to define your own schema simply copy one of the existing ones, and add/remove rows as you see fit. You can use either a text editor (Notepad), or Excel. If using Excel make sure to save as .csv, as .xls files will not be recognised. 
+The browser comes with two schema .csv files, which can be modified, copied or deleted. They can be seen in the 'schema' folder and opened with notepad. The annotations are simply one annotation per-line, e.g. to add a new 'walking' annotation simply add a line with 'walking'. If you wish to define your own schema simply copy one of the existing ones, and add/remove rows as you see fit. You can use either a text editor (Notepad), or Excel. If using Excel make sure to save as .csv filetype, as .xls files will not be recognised. 
 
 Excel may warn you when saving a .csv file, ignore these messages (select yes).
 ![excel warning](http://i.imgur.com/xcJ34yk.png)
