@@ -4,6 +4,7 @@ const fs            = Promise.promisifyAll(require('fs'));
 const path          = require('path');
 const watch         = require('watch');
 const jimp          = Promise.promisifyAll(require("jimp"));
+const ExifImage     = require('exif').ExifImage;
 
 const ipcMain = require('electron').ipcMain;
 ipcMain.on('resize_disable', (event, arg) => {
@@ -207,6 +208,30 @@ function imagesModified(state, f) {
 	// console.log(path.parse(rel_f))
 	// if (rel_f.startsWith(path.join('images')) )
 }
+
+
+function date_from_filename(n) {
+    return new Date(
+        n.slice(17,21), // year
+        parseInt(n.slice(21,23))-1 , // month
+        n.slice(23,25), // day
+        n.slice(26,28), // hour
+        n.slice(28,30), // minutes
+        n.slice(30,32), // seconds
+        n.slice(6,9) // this is the photo's sequence number, used as a tiebreaker millisecond value for photos with the same timestamp 
+    ); 
+}
+function pad(num, len) {
+	var str = "" + num;
+	var pad = Array(len+1).join('0')
+	return pad.substring(0, pad.length - str.length) + str;
+}
+function date_to_filename(d) {
+    return "B00000895_21I7IV_"+pad(d.getYear,4)+
+    	pad(d.getMonth(),2)+pad(d.getDay(),2)+"_"+
+    	pad(d.getHour(),2)+pad(d.getMinute(),2)+pad(d.getSecond(),2)+"A.JPG";
+}
+
 function process_full(p_name, f, queue) {
 	// var queue = [];
 	var f_full = path.join('images', p_name, f);
@@ -220,32 +245,66 @@ function process_full(p_name, f, queue) {
 			console.log("file is dir:", f_full);
 			return;
 		}
-		// console.log("file exists",f_full, "checking if we need resizing..")
-		return Promise.all([
-			fs.statAsync(f_medium).catch({code:'ENOENT'}, (err) => {
-				// .then( (err, stat) => {
-				if (err!==null && err.code == 'ENOENT') {
-					console.log(p_name, 'need to create medium size for:', f);
-					// sharp(path.join('images', p.name, 'full',f))
-					// 	.resize(img_sizes['medium'][0],img_sizes['medium'][1])
-					// 	.toFile(f_medium)
-					queue.push(['medium', f, p_name]);
-					
-				}
-			}),
-			fs.statAsync(f_thumbnail).catch({code:'ENOENT'}, (err) => {
-				// .then( (err, stat) => {
+		
+		var filenameChange;
+		if (isNaN( date_from_filename(f).getTime())) {
+			// filename not valid so we need to change it
+			console.log(stat)
+			filenameChange = new Promise(function(resolve, reject) {
+				try {
+				    new ExifImage({ image : f_full }, function (error, exifData) {
+				        if (error)
+				            console.log('Error: '+error.message);
+				        else {
 
-				if (err!==null && err.code == 'ENOENT') {
-					console.log(p_name, 'need to create thumbnail size for:', f);
-					// sharp(path.join('images', p_name, 'full',f))
-					// 	.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
-					// 	.toFile(f_thumbnail)
-					queue.push(['thumbnail', f, p_name]);
+				        }
+			            console.log("exifData",exifData); // Do something with your data!
+				    });
+				} catch (error) {
+				    console.log('Error: ' + error.message);
+				    if (stat.mtime && !isNaN(new Date(util.inspect(stats.mtime)).getTime())) {
+				    	var dateTime = new Date(util.inspect(stats.mtime))
+				    	console.log("dateTime",dateTime)
+						resolve(dateTime)
+				    } else {
 
-				}
+				    }
+				} 
+			}).then(function(new_filename) {
+				return new Promise()
 			})
-		]);
+		} else {
+			filenameChange = new Promise().resolve(f);
+		}
+		console.log(filenameChange)
+		// console.log("file exists",f_full, "checking if we need resizing..")
+		return filenameChange.then(function(f) {
+			Promise.all([
+				fs.statAsync(f_medium).catch({code:'ENOENT'}, (err) => {
+					// .then( (err, stat) => {
+					if (err!==null && err.code == 'ENOENT') {
+						console.log(p_name, 'need to create medium size for:', f);
+						// sharp(path.join('images', p.name, 'full',f))
+						// 	.resize(img_sizes['medium'][0],img_sizes['medium'][1])
+						// 	.toFile(f_medium)
+						queue.push(['medium', f, p_name]);
+						
+					}
+				}),
+				fs.statAsync(f_thumbnail).catch({code:'ENOENT'}, (err) => {
+					// .then( (err, stat) => {
+
+					if (err!==null && err.code == 'ENOENT') {
+						console.log(p_name, 'need to create thumbnail size for:', f);
+						// sharp(path.join('images', p_name, 'full',f))
+						// 	.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
+						// 	.toFile(f_thumbnail)
+						queue.push(['thumbnail', f, p_name]);
+
+					}
+				})
+			])
+		});
 	});
 }
 

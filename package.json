@@ -7,12 +7,13 @@
   "dependencies": {
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.1",
+    "electron-reload": "^1.1.0",
+    "exif": "^0.6.0",
     "express": "^4.14.1",
     "jimp": "^0.2.27",
     "jquery": "^3.2.1",
     "reload": "^1.1.1",
-    "watch": "^1.0.2",
-    "electron-reload": "^1.1.0"
+    "watch": "^1.0.2"
   },
   "devDependencies": {
     "electron": "^1.6.2",
