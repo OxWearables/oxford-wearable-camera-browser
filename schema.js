@@ -36,7 +36,7 @@ function parse_schema(fn) {
                 'text': val.slice(0, -1), // remove trailing return
                 'a_attr': {
                   'class':'is_label',
-                  'label':line
+                  'label':line.trim()
                 },
                 'icon':false
               });
