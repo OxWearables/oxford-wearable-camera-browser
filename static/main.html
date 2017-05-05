@@ -271,10 +271,12 @@
 
 <div class="tooltip">Tooltip</div>
 	<script>
+// true if running from .exe, false if running from 'npm start'
 var debug_is_built = !(process.execPath.split('\\')[process.execPath.split('\\').length-1]=="electron.exe");
+// image folder will be in a different place on build
 var img_dir = (debug_is_built ? '../../':'') +'../images/';
 var schema_dir = (debug_is_built ? '../../':'') +'../images/';
-// alert(debug_is_built, img_dir)
+
 // Create participant box
 $(function() {
 	var background_text = "participant name";
@@ -492,12 +494,18 @@ function load_schema(schema_json) {
 	
 	// console.log(colors.length)
 	leaves.forEach((l, index) => {
-		// l.color = colors[index];
-		l.li_attr = {style:"background-color:"+colors[index]+";background-image:false; width:24px; border-radius: 16px;"};
+		var label = l.a_attr.label;
+		if (label == 'no-label' || label == 'undefined') {
+			label_to_color[label] = '#111'
+		} else {
+			label_to_color[label] = colors[index];
+		}
+		l.li_attr = {style:"background-color:"+label_to_color[label]+";background-image:false; width:24px; border-radius: 16px;"};
 		l.icon = false;
-		label_to_color[l.a_attr.label] = colors[index];
-
 	});
+	label_to_color[undefined] = '#111'
+
+	
 
 	$('#jstree').jstree(true).settings.core.data = schema_json.children;
 	$('#jstree').jstree(true).refresh();
@@ -827,6 +835,7 @@ function load_images() {
 									if (size == 'thumbnail') {
 										imgs[i] = f;
 										img_times[i] = date_from_filename(f);
+										if (isNaN(img_times[i].getTime())) console.log("is NaT", f, date_from_filename(f))
 									}
 								});
 
