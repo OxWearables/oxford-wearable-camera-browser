@@ -4,7 +4,8 @@ const fs            = Promise.promisifyAll(require('fs'));
 const path          = require('path');
 const watch         = require('watch');
 const jimp          = Promise.promisifyAll(require("jimp"));
-const ExifImage     = require('exif').ExifImage;
+const exifParser    = require('exif-parser');
+const util          = require('util');
 
 const ipcMain = require('electron').ipcMain;
 ipcMain.on('resize_disable', (event, arg) => {
@@ -188,6 +189,7 @@ function filename_is_image(filename) {
 }
 
 function imagesModified(state, f) {
+	// triggered by fileWatch
 	var rel_f = path.relative('./images', f);
 	console.log(state, rel_f);
 	var rel_dir = path.dirname(rel_f);
@@ -204,11 +206,7 @@ function imagesModified(state, f) {
 			}
 		}
 	}
-	
-	// console.log(path.parse(rel_f))
-	// if (rel_f.startsWith(path.join('images')) )
 }
-
 
 function date_from_filename(n) {
     return new Date(
@@ -221,90 +219,101 @@ function date_from_filename(n) {
         n.slice(6,9) // this is the photo's sequence number, used as a tiebreaker millisecond value for photos with the same timestamp 
     ); 
 }
-function pad(num, len) {
-	var str = "" + num;
+
+// pad string/number with zeros
+function pad(str, len) {
+	str = "" + str;
 	var pad = Array(len+1).join('0')
 	return pad.substring(0, pad.length - str.length) + str;
 }
+
 function date_to_filename(d) {
-    return "B00000895_21I7IV_"+pad(d.getYear,4)+
+    return "AUTO_"+pad(d.getMilliseconds(),4)+"_RENAME_"+pad(d.getYear(),4)+
     	pad(d.getMonth(),2)+pad(d.getDay(),2)+"_"+
-    	pad(d.getHour(),2)+pad(d.getMinute(),2)+pad(d.getSecond(),2)+"A.JPG";
+    	pad(d.getHours(),2)+pad(d.getMinutes(),2)+pad(d.getSeconds(),2)+"A.JPG";
 }
 
 function process_full(p_name, f, queue) {
-	// var queue = [];
+
 	var f_full = path.join('images', p_name, f);
 	var f_medium = path.join('images', p_name, 'medium',f);
 	var f_thumbnail = path.join('images', p_name, 'thumbnail',f);
-	// console.log(f_medium)
-	return fs.lstatAsync(f_full).catch({code:'ENOENT'},()=> {
-		console.log("no such file to resize:",f_full);
-	}).then((stat)=>{
-		if (stat===undefined || !stat.isFile()) {
-			console.log("file is dir:", f_full);
-			return;
-		}
-		
-		var filenameChange;
+	
+	return Promise.all([
+		fs.lstatAsync(f_full).catch({code:'ENOENT'},()=> {
+			console.log("no such file to resize:",f_full);
+		}).then((stat)=>{
+			if (stat===undefined || !stat.isFile()) {
+				console.log("file is dir:", f_full);
+				throw new Error({code: "EISDIR"});
+			}
+			return stat
+		}),
+		// ensure subfolders exist (for adding images while running)
+		fs.mkdirAsync(path.join('images', p_name, 'medium')).catch({code:'EEXIST'}, ()=>{}),
+		fs.mkdirAsync(path.join('images', p_name, 'thumbnail')).catch({code:'EEXIST'}, ()=>{})
+	]).then((stat)=>{
+		stat = stat[0] // Promise.all returns array of promises
+		// var filenameChange;
 		if (isNaN( date_from_filename(f).getTime())) {
-			// filename not valid so we need to change it
-			console.log(stat)
-			filenameChange = new Promise(function(resolve, reject) {
+			console.log("filename:", f, "not valid, will be renamed")
+			return new Promise(function(resolve, reject) {
+				// get date from either EXIF (ideally) or 'last modified' property
 				try {
-				    new ExifImage({ image : f_full }, function (error, exifData) {
-				        if (error)
-				            console.log('Error: '+error.message);
-				        else {
+					var parser = exifParser.create(fs.readFileSync(f_full));
+					var result = parser.parse();
+					var dateTime = new Date(result.tags.DateTimeOriginal*1000);
+					if (!isNaN(dateTime.getTime())) {
+						resolve(dateTime)
+					} else {
+						throw new Error()
+					}
 
-				        }
-			            console.log("exifData",exifData); // Do something with your data!
-				    });
 				} catch (error) {
-				    console.log('Error: ' + error.message);
-				    if (stat.mtime && !isNaN(new Date(util.inspect(stats.mtime)).getTime())) {
-				    	var dateTime = new Date(util.inspect(stats.mtime))
+				    if (stat.mtime && !isNaN(new Date(util.inspect(stat.mtime)).getTime())) {
+				    	var dateTime = new Date(util.inspect(stat.mtime))
 				    	console.log("dateTime",dateTime)
 						resolve(dateTime)
 				    } else {
-
+				    	reject("Error no EXIF or date modified for image:", f)
 				    }
 				} 
-			}).then(function(new_filename) {
-				return new Promise()
+			}).then(function(dateTime) {
+				// rename file based on date, will then be picked up as new file by fileWatcher
+				console.log("dateTime",dateTime)
+				var new_filename = date_to_filename(dateTime);
+				console.log("new_filename",new_filename)
+				var f_full_new = path.join('images', p_name, new_filename);
+				f_medium = path.join('images', p_name, 'medium',new_filename);
+				f_thumbnail = path.join('images', p_name, 'thumbnail',new_filename);
+				return new Promise(function(resolve, reject) {
+					fs.rename(f_full, f_full_new, function (err) {
+					  if (err) throw err;
+					  f_full = f_full_new;
+					  console.log('renamed complete', f_full);
+					  imagesModified('added',f_full);
+					  resolve(new_filename);
+					});
+				})
 			})
 		} else {
-			filenameChange = new Promise().resolve(f);
-		}
-		console.log(filenameChange)
-		// console.log("file exists",f_full, "checking if we need resizing..")
-		return filenameChange.then(function(f) {
+			// generate resized thumbnails
 			Promise.all([
 				fs.statAsync(f_medium).catch({code:'ENOENT'}, (err) => {
-					// .then( (err, stat) => {
 					if (err!==null && err.code == 'ENOENT') {
 						console.log(p_name, 'need to create medium size for:', f);
-						// sharp(path.join('images', p.name, 'full',f))
-						// 	.resize(img_sizes['medium'][0],img_sizes['medium'][1])
-						// 	.toFile(f_medium)
 						queue.push(['medium', f, p_name]);
-						
 					}
 				}),
 				fs.statAsync(f_thumbnail).catch({code:'ENOENT'}, (err) => {
-					// .then( (err, stat) => {
-
 					if (err!==null && err.code == 'ENOENT') {
 						console.log(p_name, 'need to create thumbnail size for:', f);
-						// sharp(path.join('images', p_name, 'full',f))
-						// 	.resize(img_sizes['thumbnail'][0],img_sizes['thumbnail'][1])
-						// 	.toFile(f_thumbnail)
 						queue.push(['thumbnail', f, p_name]);
 
 					}
 				})
 			])
-		});
+		}
 	});
 }
 
