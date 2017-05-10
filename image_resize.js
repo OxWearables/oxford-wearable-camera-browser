@@ -264,6 +264,7 @@ function process_full(p_name, f, queue) {
 					var result = parser.parse();
 					var dateTime = new Date(result.tags.DateTimeOriginal*1000);
 					if (!isNaN(dateTime.getTime())) {
+				    	console.log("found EXIF datetime",dateTime)
 						resolve(dateTime)
 					} else {
 						throw new Error()
