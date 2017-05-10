@@ -233,6 +233,12 @@ function date_to_filename(d) {
     	pad(d.getHours(),2)+pad(d.getMinutes(),2)+pad(d.getSeconds(),2)+"A.JPG";
 }
 
+// Date without timezone .. since EXIF doesn't support timezone information
+// http://stackoverflow.com/questions/2771609/how-to-ignore-users-time-zone-and-force-date-use-specific-time-zone
+function date_remove_timezone(date) {
+  return new Date(date.getTime() + (new Date().getTimezoneOffset() * 60 * 1000));
+};
+
 function process_full(p_name, f, queue) {
 
 	var f_full = path.join('images', p_name, f);
@@ -262,7 +268,7 @@ function process_full(p_name, f, queue) {
 				try {
 					var parser = exifParser.create(fs.readFileSync(f_full));
 					var result = parser.parse();
-					var dateTime = new Date(result.tags.DateTimeOriginal*1000);
+					var dateTime = date_remove_timezone(new Date(result.tags.DateTimeOriginal*1000));
 					if (!isNaN(dateTime.getTime())) {
 				    	console.log("found EXIF datetime",dateTime)
 						resolve(dateTime)
