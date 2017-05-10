@@ -228,7 +228,7 @@ function pad(str, len) {
 }
 
 function date_to_filename(d) {
-    return "AUTO_"+pad(d.getMilliseconds(),4)+"_RENAME_"+pad(d.getYear(),4)+
+    return "AUTO_"+pad(d.getMilliseconds(),4)+"_RENAME_"+pad(d.getFullYear(),4)+
     	pad(d.getMonth(),2)+pad(d.getDay(),2)+"_"+
     	pad(d.getHours(),2)+pad(d.getMinutes(),2)+pad(d.getSeconds(),2)+"A.JPG";
 }
