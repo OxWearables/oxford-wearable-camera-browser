@@ -276,10 +276,11 @@ function process_full(p_name, f, queue) {
 				    	console.log("found EXIF datetime",dateTime)
 						resolve(dateTime)
 					} else {
-						throw new Error()
+						throw new Error('Invalid EXIF Date')
 					}
 
-				} catch (error) {
+				} 
+				catch (error) {
 				    if (stat.mtime && !isNaN(new Date(util.inspect(stat.mtime)).getTime())) {
 				    	var dateTime = new Date(util.inspect(stat.mtime))
 				    	console.log("dateTime",dateTime)
