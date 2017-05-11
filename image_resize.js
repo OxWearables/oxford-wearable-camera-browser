@@ -26,6 +26,10 @@ ipcMain.on('resize_status', (event, arg) => {
   event.sender.send('resize_status', {queue:Image_processor.queue, busy: Image_processor.busy, disabled: Image_processor.disabled});
 });
 
+process.on("unhandledRejection", function(reason, promise) {
+    console.log("Possibly Unhandled Rejection", JSON.stringify(reason), JSON.stringify(promise)); 
+});
+
 // for resizing
 var img_sizes = {
 	thumbnail: [100, 87],
