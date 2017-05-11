@@ -249,7 +249,10 @@ function process_full(p_name, f, queue) {
 		fs.lstatAsync(f_full).catch({code:'ENOENT'},()=> {
 			console.log("no such file to resize:",f_full);
 		}).then((stat)=>{
-			if (stat===undefined || !stat.isFile()) {
+			if (stat===undefined) {
+				throw new Error({code:'FNOTEXIST'})
+			}
+			else if (!stat.isFile()) {
 				console.log("file is dir:", f_full);
 				throw new Error({code: "EISDIR"});
 			}
@@ -321,6 +324,10 @@ function process_full(p_name, f, queue) {
 				})
 			])
 		}
+	}).catch({code:'FNOTEXIST'}, () => {
+		console.log("skipping file (no longer exists)",p,f)
+	}).catch({code:'EISDIR'}, () => {
+		console.log("skipping file (is directory)",p,f)
 	});
 }
 
