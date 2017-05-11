@@ -90,7 +90,7 @@ function resize_outstanding() {
 									// must be a file
 								    console.log('no a dir!' + subdir);
 								    return fs.unlinkAsync(subdir).then(() => {
-								    	fs.mkdir(subdir);
+								    	return fs.mkdirAsync(subdir);
 								    });
 								} else {
 									// console.log('Does exist');
@@ -99,7 +99,7 @@ function resize_outstanding() {
 							}).catch({code:'ENOENT'}, (e) => {
 								// doesn't exist
 								console.log('folder not found so creating it: ' + e.path);
-								fs.mkdir(subdir);	
+								return fs.mkdirAsync(subdir);	
 							}).then( () => {
 								return fs.readdirAsync(subdir).map((f) => {
 									// console.log(f)
