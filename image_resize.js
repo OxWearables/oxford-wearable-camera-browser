@@ -294,6 +294,13 @@ function process_full(p_name, f, queue) {
 				    }
 				} 
 			}).then(function(dateTime) {
+				// date will not have any millisecond value, so we must use the filename to give a unique name
+				var f_number = f.match(/\d/g).join("");
+				if (parseInt(f_number, 10)!==NaN) {
+					// as long as there is a sequence number in the image name
+					// this will also eliminate 99% of naming conflicts
+					dateTime.setMilliseconds(Math.abs(parseInt(f_number, 10) % 1000))
+				}
 				// rename file based on date, will then be picked up as new file by fileWatcher
 				console.log("dateTime",dateTime)
 				var new_filename = date_to_filename(dateTime);
