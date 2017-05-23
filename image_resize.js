@@ -242,7 +242,13 @@ function date_to_filename(d) {
 function date_remove_timezone(date) {
   return new Date(date.getTime() + (new Date().getTimezoneOffset() * 60 * 1000));
 };
-
+fs.existsAsync = function(path){
+  return fs.openAsync(path, "r").then(function(stats){
+    return true
+  }).catch(function(stats){
+    return false
+  })
+}
 function process_full(p_name, f, queue) {
 
 	var f_full = path.join('images', p_name, f);
@@ -303,20 +309,44 @@ function process_full(p_name, f, queue) {
 				}
 				// rename file based on date, will then be picked up as new file by fileWatcher
 				console.log("dateTime",dateTime)
-				var new_filename = date_to_filename(dateTime);
-				console.log("new_filename",new_filename)
-				var f_full_new = path.join('images', p_name, new_filename);
-				f_medium = path.join('images', p_name, 'medium',new_filename);
-				f_thumbnail = path.join('images', p_name, 'thumbnail',new_filename);
-				return new Promise(function(resolve, reject) {
-					fs.rename(f_full, f_full_new, function (err) {
-					  if (err) throw err;
-					  f_full = f_full_new;
-					  console.log('renamed complete', f_full);
-					  imagesModified('added',f_full);
-					  resolve(new_filename);
-					});
-				})
+				// we may have two images with the same date, in which case we need to find non-conflicting filenames
+				var numTries = 0;
+
+				function recursive_rename(dateTime) {
+					var new_filename = date_to_filename(dateTime);
+					console.log("new_filename",new_filename)
+					var f_full_new = path.join('images', p_name, new_filename);
+					f_medium = path.join('images', p_name, 'medium',new_filename);
+					f_thumbnail = path.join('images', p_name, 'thumbnail',new_filename);
+					return new Promise(function(resolve, reject) {
+						console.log("attempting rename", f_full_new)
+						fs.existsAsync(f_full_new).then((exists)=>{
+							if (!exists) {
+								fs.rename(f_full, f_full_new, function (err) {
+								  if (err) reject(err);
+								  f_full = f_full_new;
+								  console.log('renamed complete', f_full);
+								  imagesModified('added',f_full);
+								  resolve(new_filename);
+								})
+							} else {
+								reject({code:'EPERM'});
+							}
+						})
+					}).catch({code:"EPERM"},(e)=>{
+						console.log("already have filename",new_filename)
+						numTries++;
+						if (numTries>50) {
+							console.log("tried too many times")
+							throw (e)
+						}
+						dateTime = new Date(dateTime.getTime()+1);
+						return recursive_rename(dateTime)
+					}).catch((e)=>{
+						console.log("uncaught error in rename",e)
+					})
+				}
+				return recursive_rename(dateTime)
 			})
 		} else {
 			// generate resized thumbnails
