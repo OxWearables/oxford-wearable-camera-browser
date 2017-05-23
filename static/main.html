@@ -9,6 +9,8 @@
 	const ipc   = require('electron').ipcRenderer;
 	const { remote } = require('electron');
 	const dialog = remote.dialog;
+	const {webFrame} = require('electron')
+
 	</script>
 	<script src="./lib/jquery-ui.js"></script>
     <script src="./lib/jstree.min.js"></script>
@@ -271,6 +273,7 @@
 
 <div class="tooltip">Tooltip</div>
 	<script>
+
 // true if running from .exe, false if running from 'npm start'
 var debug_is_built = !(process.execPath.split('\\')[process.execPath.split('\\').length-1]=="electron.exe");
 // image folder will be in a different place on build
@@ -1315,7 +1318,7 @@ function openPhotoSwipe(index) {
 		return {url: img};
 	});
     $(".right-sticky").removeClass('full-height');
-	console.log(slides);
+	// console.log(slides);
 	var pswpElement = document.querySelectorAll('.pswp')[0];
 	var options = {
 		shareEl: false,
@@ -1719,6 +1722,21 @@ document.addEventListener("keydown", function (e) {
 		location.reload();
 	}
 });
+
+// ZOOM in and out
+$(document).keypress(function(e) {
+	// Ctrl+Q
+	if (e.charCode==17 && e.ctrlKey==true) {
+		e.preventDefault()
+		webFrame.setZoomFactor(webFrame.getZoomFactor()-0.1)
+	}
+	// Ctrl+E (since W will close the browser in debug build)
+	if (e.charCode==5 && e.ctrlKey==true) {
+		e.preventDefault()
+		webFrame.setZoomFactor(webFrame.getZoomFactor()+0.1)
+	}
+});
+
 	</script>
 
 </body>
