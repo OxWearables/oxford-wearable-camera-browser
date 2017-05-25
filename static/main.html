@@ -160,6 +160,12 @@
               display: none; /**let the tooltip be not visable, when startup **/
               pointer-events:none;   /*css-property that makes events "pass through" an DOM-element  */
           }
+     .selectedImg {
+     	background-color: lightblue;
+     	border: 1px solid black;
+     	margin-top:-1px;
+     	margin-left:-1px;
+     }
 	</style>
 </head>
 <body>
@@ -1433,7 +1439,9 @@ function openPhotoSwipe(index) {
     	}
     	// var bgcol = scrollTo.css("background-color")
     	scrollTo.stop(undefined, true);
-    	scrollTo.effect('highlight',{color:'lightblue'}, 1000);
+    	// scrollTo.effect('highlight',{color:'lightblue'}, 1000);
+    	$('div.img.selectedImg').removeClass('selectedImg')
+    	scrollTo.addClass('selectedImg');
     });
     // store the original scroll postion
     var originalScroll = $(window).scrollTop();
@@ -1462,7 +1470,8 @@ function openPhotoSwipe(index) {
 	    var scrollTo = $("div.img#"+index);
 
 	    console.log("index",index, "offset:", originalScroll);
-	    $(document).scrollTop(originalScroll );
+	    console.log("index",index, "offset:", scrollTo.offset().top);
+	    $(".right-sticky").scrollTop(scrollTo.offset().top );
 	    $(window).unbind("resize",setCorrectHeight);
 
 	});
@@ -1470,9 +1479,9 @@ function openPhotoSwipe(index) {
 
     pswp.listen('destroy', function(){
 	    $("#pswp-container").css('z-index',-10);
+	    // console.log("scrolling back again!",originalScroll);
 	    $(pswpElement).hide();
 	    pswpIsOpen = false;
-	    console.log("scrolling back again!",originalScroll);
 	    $(".right-sticky").addClass('full-height');
 	    // $(document).scrollTop(originalScroll )
 	});
