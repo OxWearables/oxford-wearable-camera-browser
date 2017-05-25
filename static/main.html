@@ -968,14 +968,15 @@ function svg_update(i, this_evts) {
 
 // used for finding the 'max' of the evts array, so we can create sequentially higher event indices
 function arr_max(arr) {
-	if (arr.length===0) return 0; // not technically correct 
-	return arr.reduce(function (p, v) {
+	console.log(arr, arr.filter((p)=>!isNaN(p)))
+	if (arr.filter((p)=>!isNaN(p)).length===0) return 0; // not technically correct 
+	return arr.filter((p)=>!isNaN(p)).reduce(function (p, v) {
 	    return ( p > v ? p : v ); // get max value
 	});
 }
 function arr_min(arr) {
-	if (arr.length===0) return 0;
-	return arr.reduce(function (p, v) {
+	if (arr.filter((p)=>!isNaN(p)).length===0) return 0;
+	return arr.filter((p)=>!isNaN(p)).reduce(function (p, v) {
 	    return ( p < v ? p : v ); // get max value
 	});
 }
