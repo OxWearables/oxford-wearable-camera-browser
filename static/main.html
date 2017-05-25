@@ -1015,6 +1015,8 @@ $(function() {
 			// var internal = false;
 
 			// FIGURE OUT STATE FOR MOVE
+			// internal = draggin event to be shorter (so need to move other event in)
+			// external = making event longer (so need to move other event out of the way)
 			var state = "";
 			if (start_dir===0) {
 				other_event= start_evt_id;
@@ -1031,6 +1033,9 @@ $(function() {
 				if (curr_img_id > start_img_id) state = "external right"; 
 				else state = "external left";
 			} 
+			if (other_event===undefined || other_event===null) {
+				other_event = arr_max(evts)+1;
+			}
 			console.log(state, other_event);
 			prev_hover_id = curr_img_id;
 
