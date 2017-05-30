@@ -167,6 +167,14 @@
      	border: 1px solid black;
      	margin:-1px;
      }
+     .load-more-img {
+     	width:100px;
+     	height:42px;
+     }
+     .load-more-img img {
+     	border-radius: 5px;
+     	border: 2px solid #FFF;
+     }
 	</style>
 </head>
 <body>
@@ -729,7 +737,8 @@ images_loaded = false,
 images_created = false,
 images_colorized = false;
 
-var start = 0, end=200;
+var NUM_IMAGES_AT_ONCE = 200;
+var start = 0, end=NUM_IMAGES_AT_ONCE;
 
 // this function ensures that the following happens in order:
 function update_view() {
@@ -755,11 +764,29 @@ function create_all_images() {
 	if ($('.tooltip').length===0) {
 		$('.gallery').append('<div class="tooltip">Tooltip</div>');
 	}
+	end = Math.min(end, imgs.length-1)
+	// only create nav if we need to 
+	if (imgs.length>NUM_IMAGES_AT_ONCE) {
+		$('.gallery').append('<div class="navigation" style="top:0px;height:42px;"></div>')
+	}
 	for(var i=0; i<=end-start;i++ ) {
 		create_image(i+start);
 	}
+	if (imgs.length>NUM_IMAGES_AT_ONCE) {
+		$('.gallery').append('<div class="navigation" style="bottom:0px;height:42px;float: left;width:100%;"></div>')
+	}
 	images_created = true;
 	images_colorized = false;
+
+	
+	if (start>0) {
+		var str = '<div class="load-more-img" style="float:left;"><img src="load_back.png" onclick="load_back_images()" /></div>'
+		$('.navigation').append(str);
+	}
+	if (imgs.length-1>end) {
+		var str = '<div class="load-more-img" style="float:right;"><img src="load_more.png" onclick="load_more_images()" /></div>'
+		$('.navigation').append(str);
+	}
 	update_view();
 }
 
@@ -767,7 +794,6 @@ function colorize_all_images() {
 	console.log("colorize_all_images", label_to_color);
 	console.log(labels);
 	for(var i=0; i<=end-start;i++ ) {
-		// svg_update(i)
 		svg_colorize(i+start, label_to_color[labels[evts[i+start]]]);
 	}
 	images_colorized = true;
@@ -778,7 +804,7 @@ function request_participant(participant_name) {
 	current_participant = participant_name;
 	p_folder = current_participant;
 	start = 0;
-	end=200;
+	end=NUM_IMAGES_AT_ONCE;
 	$('.gallery').empty();
 	evts = [];
 	imgs = [];
@@ -789,16 +815,20 @@ function request_participant(participant_name) {
 	update_view();
 }
 
-function more_images(newstart, newend) {
-	start = newstart || 200;
-	end = newend || 400;
-	// images_loaded = false;
+function load_more_images() {
+	start = Math.min(imgs.length-NUM_IMAGES_AT_ONCE, start+NUM_IMAGES_AT_ONCE);
+	end = start+NUM_IMAGES_AT_ONCE;
 	images_created = false;
 	images_colorized = false;
 	update_view();
-
 }
-
+function load_back_images() {
+	start = Math.min(start-NUM_IMAGES_AT_ONCE); 
+	end = start+NUM_IMAGES_AT_ONCE; 
+	images_created = false;
+	images_colorized = false;
+	update_view();
+}
 var sizes = {};
 function load_images() {
 	if (current_participant===null) {participant_selection_menu(); return;}
@@ -879,14 +909,11 @@ function create_image(idx) {
 	var time = img_times[idx];
 	var label = 'none';
 	var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'">'; 
- 	// if ((e!==undefined && e!==null)) {			 	
-		// if (!is_last) {
-			 str += '<div style="left:92px;" class="split right" split-dir="right"></div>';
-		// }
-		// if (!is_first) {
-			str += '<div style="left:0px;" class="split left" split-dir="left"></div>';
-		// }
-	// }
+
+	str += '<div style="left:92px;" class="split right" split-dir="right"></div>';
+
+	str += '<div style="left:0px;" class="split left" split-dir="left"></div>';
+
 
 	str += '<svg width="110" height="30">';
 	str += '</svg>';
