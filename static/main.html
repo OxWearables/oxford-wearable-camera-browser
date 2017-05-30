@@ -1439,14 +1439,15 @@ function openPhotoSwipe(index) {
     	scrollTo.effect('highlight',{color:'lightblue'}, 1000);
     });
     // store the original scroll postion
-    var originalScroll = $(window).scrollTop();
-
+    var originalScroll =  $("div.right-sticky").scrollTop();
+	    console.log("originalScroll", originalScroll);
+    
     $("#pswp-container").css('z-index',2);
     
     setCorrectHeight();
 
     $(pswpElement).show();
-
+    var originalGalleryScroll = null; 
 
     pswp.listen('close', function(){
 		
@@ -1462,10 +1463,10 @@ function openPhotoSwipe(index) {
 
 	    // http://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
 
-	    var scrollTo = $("div.img#"+index);
+	    var scrollTo = $("div.img#"+index).offset().top;
+	    console.log("scrolling back again!", scrollTo);
+	    $("div.right-sticky").scrollTop(scrollTo);
 
-	    console.log("index",index, "offset:", originalScroll);
-	    $(document).scrollTop(originalScroll );
 	    $(window).unbind("resize",setCorrectHeight);
 
 	});
@@ -1475,7 +1476,6 @@ function openPhotoSwipe(index) {
 	    $("#pswp-container").css('z-index',-10);
 	    $(pswpElement).hide();
 	    pswpIsOpen = false;
-	    console.log("scrolling back again!",originalScroll);
 	    $(".right-sticky").addClass('full-height');
 	    // $(document).scrollTop(originalScroll )
 	});
