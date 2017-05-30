@@ -63,8 +63,7 @@ function initialize() {
 		});
 	}).then(()=>{
 		fs.statAsync('./no_resize_check.txt').catch({code:'ENOENT'},()=>{
-			resize_outstanding()
-			return Promise.resolve('resizing outstanding images!');
+			return resize_outstanding().then(Promise.resolve('resizing outstanding images!'));
 		})
 	});
 }
