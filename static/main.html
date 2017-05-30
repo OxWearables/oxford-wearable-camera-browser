@@ -162,6 +162,12 @@
               display: none; /**let the tooltip be not visable, when startup **/
               pointer-events:none;   /*css-property that makes events "pass through" an DOM-element  */
           }
+     .selectedImg {
+     	background-color: lightblue;
+     	border: 1px solid black;
+     	margin-top:-1px;
+     	margin-left:-1px;
+     }
 	</style>
 </head>
 <body>
@@ -965,14 +971,15 @@ function svg_update(i, this_evts) {
 
 // used for finding the 'max' of the evts array, so we can create sequentially higher event indices
 function arr_max(arr) {
-	if (arr.length===0) return 0; // not technically correct 
-	return arr.reduce(function (p, v) {
+	console.log(arr, arr.filter((p)=>!isNaN(p)))
+	if (arr.filter((p)=>!isNaN(p)).length===0) return 0; // not technically correct 
+	return arr.filter((p)=>!isNaN(p)).reduce(function (p, v) {
 	    return ( p > v ? p : v ); // get max value
 	});
 }
 function arr_min(arr) {
-	if (arr.length===0) return 0;
-	return arr.reduce(function (p, v) {
+	if (arr.filter((p)=>!isNaN(p)).length===0) return 0;
+	return arr.filter((p)=>!isNaN(p)).reduce(function (p, v) {
 	    return ( p < v ? p : v ); // get max value
 	});
 }
@@ -1011,6 +1018,8 @@ $(function() {
 			// var internal = false;
 
 			// FIGURE OUT STATE FOR MOVE
+			// internal = draggin event to be shorter (so need to move other event in)
+			// external = making event longer (so need to move other event out of the way)
 			var state = "";
 			if (start_dir===0) {
 				other_event= start_evt_id;
@@ -1027,6 +1036,9 @@ $(function() {
 				if (curr_img_id > start_img_id) state = "external right"; 
 				else state = "external left";
 			} 
+			if (other_event===undefined || other_event===null) {
+				other_event = arr_max(evts)+1;
+			}
 			console.log(state, other_event);
 			prev_hover_id = curr_img_id;
 
@@ -1436,7 +1448,9 @@ function openPhotoSwipe(index) {
     	}
     	// var bgcol = scrollTo.css("background-color")
     	scrollTo.stop(undefined, true);
-    	scrollTo.effect('highlight',{color:'lightblue'}, 1000);
+    	// scrollTo.effect('highlight',{color:'lightblue'}, 1000);
+    	$('div.img.selectedImg').removeClass('selectedImg')
+    	scrollTo.addClass('selectedImg');
     });
     // store the original scroll postion
     var originalScroll =  $("div.right-sticky").scrollTop();
@@ -1474,6 +1488,7 @@ function openPhotoSwipe(index) {
 
     pswp.listen('destroy', function(){
 	    $("#pswp-container").css('z-index',-10);
+	    // console.log("scrolling back again!",originalScroll);
 	    $(pswpElement).hide();
 	    pswpIsOpen = false;
 	    $(".right-sticky").addClass('full-height');
