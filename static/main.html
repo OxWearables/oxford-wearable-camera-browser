@@ -179,8 +179,8 @@
 </head>
 <body>
 <div class="left-sticky">
-	<div style=" width:192px; text-align:center;margin-top:10px;">
-		<span id="help-text" style="line-height: 20px; vertical-align: middle;">select participant</span>
+	<div style=" width:192px; text-align:center;margin-top:10px;height:40px;">
+		<span id="help-text" style="line-height: 20px; vertical-align: middle;height: 40px;">select participant</span>
 	</div>
 	<div style="margin-bottom:10px;width:192px;">
 		<button  onClick="participant_selection_menu();" type="button" class="menu-button" id="btn-home" title="go back to homepage" help-text="participant selection"><i class="fa fa-users fa-2x"></i> </button>
@@ -316,7 +316,7 @@ $(function() {
 		else console.log(newtext);
 		$('#help-text').text( newtext);
 	}, (e) => {
-		$('#help-text').text(current_participant===null ? "select participant" : "participant: "+current_participant);
+		$('#help-text').text(selecting_schema===true ? "current schema: "+current_schema : current_participant===null ? "select participant" : "participant: "+current_participant);
 	});
 	
 });
@@ -429,6 +429,7 @@ function request_schema(schema_name) {
 	// current_schema = null;
 	current_schema = schema_name;
 	selecting_schema = false;
+	$('.menu-button').trigger('mouseleave');
 	ipc.send('get_schema', schema_name);
 }
 ipc.on('schema_json', (event, arg) => {
