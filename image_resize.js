@@ -61,7 +61,12 @@ function initialize() {
 			  // f was changed
 			}
 		});
-	}).then(resize_outstanding);
+	}).then(()=>{
+		fs.statAsync('./no_resize_check.txt').catch({code:'ENOENT'},()=>{
+			resize_outstanding()
+			return Promise.resolve('resizing outstanding images!');
+		})
+	});
 }
 
 function resize_outstanding() {
