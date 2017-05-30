@@ -1592,7 +1592,7 @@ function generate_annotation_file() {
 	var curr_evt = null;
 	var curr_label = null;
 	var curr_start = null;
-	var str = "startTime,endTime,annotation\n";
+	var str = "startTime,endTime,duration,annotation\n";
 	console.log("STARTING", curr_evt,curr_start, curr_label);
 
 	var last_idx = -100;
@@ -1603,7 +1603,7 @@ function generate_annotation_file() {
 		if (curr_evt!== e || label !== curr_label) {
 			if (curr_start!==null) {
 				var last_time = img_times[i-1];
-				str += curr_start.toISOString() + ',' + last_time.toISOString() + ',' + curr_label + '\n';
+				str += curr_start.toISOString() + ',' + last_time.toISOString() + ',' +(last_time-curr_start)/1000 +',' + curr_label + '\n';
 				console.log(i, curr_label, curr_start.toTimeString().split(" ")[0], last_time.toTimeString().split(" ")[0]);
 			}
 			curr_label = label;
@@ -1615,7 +1615,7 @@ function generate_annotation_file() {
 	if (last_idx!==-100) {
 		var last_time = img_times[last_idx];
 		console.log("last_time:", last_idx, last_time);
-		str += curr_start.toISOString() + ',' + last_time.toISOString() + ',' + curr_label + '\n';
+		str += curr_start.toISOString() + ',' + last_time.toISOString() + ','+(last_time-curr_start)/1000+"," + curr_label + '\n';
 	}
 	console.log(str);
 	return str;
@@ -1638,8 +1638,11 @@ function save_annotation() {
 
 function parse_annotation_file(text) {
 	text = text.split('\n');
-
-	if (text[0].split(',').map((s)=>s.trim()).join(',')!=="startTime,endTime,annotation") return console.log("first row of csv not valid:", text[0]);
+	var header = text[0].split(',').map((s)=>s.trim()).join(',');
+	var annotationCol = 2;
+	if (header=="startTime,endTime,duration,annotation") {
+		annotationCol = 3;
+	} else if (header!=="startTime,endTime,annotation") return console.log("first row of csv not valid:", text[0]);
 	text.splice(0,1);
 
 	var curr_idx = 0;
@@ -1648,11 +1651,11 @@ function parse_annotation_file(text) {
 	labels = {};
 	text.forEach((line, idx) => {
 		var l=line.split(','); // TODO: check for escaped commas
-		if (l.length!==3) return; // empty line
+		if (l.length!==annotationCol+1) return; // empty line
 
 		 var startDate =  new Date(l[0]);
 		 var endDate =  new Date(l[1]);
-		 var annotation = l[2]==="undefined" ? undefined : l[2];
+		 var annotation = l[annotationCol]==="undefined" ? undefined : l[annotationCol];
 		 if (annotation!==undefined) {
 
 		 }
