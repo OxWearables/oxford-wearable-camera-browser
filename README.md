@@ -1,4 +1,4 @@
-# Node-image-server
+# Oxford wearable camera browser
 A wearable camera image browser & annotation tool. If you find this tool helpful, please use the following citations:
 
 [Willetts, Hollowell, Aslett, Holmes, & Doherty. Statistical machine learning of sleep and physical activity phenotypes from sensor data in 96,609 UK Biobank participants. bioRxiv 187625 (2017). doi:10.1101/187625](http://www.biorxiv.org/content/early/2017/09/12/187625)
