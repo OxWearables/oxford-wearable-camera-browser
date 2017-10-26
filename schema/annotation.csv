@@ -1,0 +1,412 @@
+home activity;child/elderly/pet care;child care;5181 walking and carrying child
+home activity;child/elderly/pet care;child care;5183 standing holding child
+home activity;child/elderly/pet care;child care;5185 child care sitting/kneeling occasional lifting
+home activity;child/elderly/pet care;child care;5186 child care standing occasional lifting
+home activity;child/elderly/pet care;child care;5188 reclining with baby
+home activity;child/elderly/pet care;elderly care;5200 helping with bathing/dressing/moving into and out of bed only activities
+home activity;child/elderly/pet care;elderly care;5205 helping with feeding/combing hair
+home activity;child/elderly/pet care;pet care;5053 feeding household animals
+home activity;child/elderly/pet care;pet care;5195 standing bathing dog
+home activity;child/elderly/pet care;pet care;5197  household animal care aside from feeding
+home activity;eating;13030 eating sitting alone or with someone
+home activity;eating;13035 eating standing alone or with others
+home activity;home repair;indoor;5160 standing light effort tasks
+home activity;home repair;indoor;6080 caulking chinking log cabin
+home activity;home repair;indoor;6110 excavating garage
+home activity;home repair;indoor;6120 hanging storm windows
+home activity;home repair;indoor;6122 hanging sheet rock inside house
+home activity;home repair;indoor;6124 hammering nails
+home activity;home repair;indoor;6126 home repair miscellaneous
+home activity;home repair;indoor;6130 laying or removing carpet
+home activity;home repair;indoor;6140 laying tile or linoleum/repairing appliances
+home activity;home repair;indoor;6144 repairing appliances
+home activity;home repair;indoor;6165 painting
+home activity;home repair;indoor;6167 plumbing
+home activity;home repair;indoor;6190 sanding floors with a power sander
+home activity;home repair;indoor;6205 sharpening tools
+home activity;home repair;outdoor;6010 airplane repair
+home activity;home repair;outdoor;6020 automobile body work
+home activity;home repair;outdoor;6040 carpentry general workshop
+home activity;home repair;outdoor;6100 cleaning gutters
+home activity;home repair;outdoor;6150 painting outside home
+home activity;home repair;outdoor;6170 putting on and removal of tarp - sailboat
+home activity;home repair;outdoor;6180 roofing
+home activity;home repair;outdoor;6200 scraping and painting sailboat or powerboat
+home activity;home repair;outdoor;6210 spreading dirt with a shovel
+home activity;home repair;outdoor;6220 washing and waxing hull of sailboat or airplane
+home activity;home repair;outdoor;6225 washing and waxing car
+home activity;home repair;outdoor;6230 washing fence painting fence
+home activity;household chores;grocery shopping;5060 shopping
+home activity;household chores;house cleaning;floors;5010 cleaning sweeping carpet or floors
+home activity;household chores;house cleaning;floors;5024 polishing floors using electric polishing machine
+home activity;household chores;house cleaning;floors;5131 scrubbing floors on hands and knees scrubbing bathroom bathtub
+home activity;household chores;house cleaning;floors;5140 sweeping garage sidewalk or outside of house
+home activity;household chores;house cleaning;furniture;5020 cleaning heavy such as car/windows/garage
+home activity;household chores;house cleaning;furniture;5032 dusting or polishing furniture
+home activity;household chores;house cleaning;miscellaneous;5100 making bed/changing linens
+home activity;household chores;house cleaning;miscellaneous;5110 maple syruping/sugar bushing
+home activity;household chores;house cleaning;miscellaneous;5148 watering plants
+home activity;household chores;house cleaning;miscellaneous;5149 building a fire inside
+home activity;household chores;preparing meals/cooking/washing dishes;5035 cleaning up table after meal implied walking (e.g. leaving from eating table to the kitchen)
+home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+home activity;household chores;preparing meals/cooking/washing dishes;5044 butchering animals small
+home activity;household chores;preparing meals/cooking/washing dishes;5045 butchering animals large
+home activity;household chores;preparing meals/cooking/washing dishes;5051 serving food/setting table implied walking and standing
+home activity;household chores;washing/ironing/mending clothes;5048 tanning hides
+home activity;household chores;washing/ironing/mending clothes;5070 ironing
+home activity;household chores;washing/ironing/mending clothes;5080 knitting sewing sitting
+home activity;household chores;washing/ironing/mending clothes;5082 sewing with a machine
+home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
+home activity;household chores;washing/ironing/mending clothes;5092 washing clothes by hand (with or without hanging wash)
+home activity;household chores;washing/ironing/mending clothes;5095 putting away /gathering clothes involving walking
+home activity;lawn and garden;gardening service;8050 digging spading filling garden compositing
+home activity;lawn and garden;gardening service;8055 driving tractor
+home activity;lawn and garden;gardening service;8060 gardening with heavy power tools tilling a garden chain saw
+home activity;lawn and garden;gardening service;8192 shovelling dirt or mud
+home activity;lawn and garden;gardening service;8200 shovelling snow by hand
+home activity;lawn and garden;gardening service;8220 walking applying fertilizer or seeding a lawn push applicator
+home activity;lawn and garden;gardening service;8230 watering garden
+home activity;lawn and garden;gardening service;8245 gardening/picking up fruits vegetables flowers
+home activity;lawn and garden;lawn care service;8070 irrigation channels opening and closing ports
+home activity;lawn and garden;lawn care service;8080 laying crushed rock
+home activity;lawn and garden;lawn care service;8090 laying sod
+home activity;lawn and garden;lawn care service;8095 mowing lawn
+home activity;lawn and garden;lawn care service;8130 operating snow blower walking
+home activity;lawn and garden;lawn care service;8135 planting potting transplanting seedlings or plants
+home activity;lawn and garden;lawn care service;8165 raking lawn
+home activity;lawn and garden;lawn care service;8180 riding snow blower
+home activity;lawn and garden;lawn care service;8230 watering lawn
+home activity;lawn and garden;tree and shrub service;8009 carrying loading or stacking wood loading/unloading or carrying lumber light
+home activity;lawn and garden;tree and shrub service;8019 chopping wood splitting logs
+home activity;lawn and garden;tree and shrub service;8025 clearing light brush thinning garden
+home activity;lawn and garden;tree and shrub service;8058 felling trees small-medium size
+home activity;lawn and garden;tree and shrub service;8150 planting trees
+home activity;lawn and garden;tree and shrub service;8190 sacking grass leaves
+home activity;lawn and garden;tree and shrub service;8210 trimming shrubs or trees manual cutter
+home activity;lawn and garden;tree and shrub service;8215 trimming shrubs or trees power cutter using leaf blower edge
+home activity;leisure;activities for maintenance of a household;miscellaneous;9010 board game/card/chess playing sitting
+home activity;leisure;activities for maintenance of a household;miscellaneous;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person
+home activity;leisure;activities for maintenance of a household;miscellaneous;9101 retreat/family reunion activities playing games with more than one person
+home activity;leisure;activities for maintenance of a household;with animals;5190 sitting playing with animals active periods
+home activity;leisure;activities for maintenance of a household;with animals;5191 standing playing with animals active periods
+home activity;leisure;activities for maintenance of a household;with animals;5192 walking/running playing with animals active periods
+home activity;leisure;activities for maintenance of a household;with children;5170 sitting playing with child(ren)
+home activity;leisure;activities for maintenance of a household;with children;5171 standing playing with child(ren)
+home activity;leisure;activities for maintenance of a household;with children;5175 walking/running playing with child(ren)
+home activity;leisure;individual activities;10074 playing musical instruments
+home activity;leisure;individual activities;12025 jogging in place
+home activity;leisure;individual activities;2064 home exercise
+home activity;leisure;individual activities;9075 sitting arts and crafts carving/wood weaving/spinning wool
+home activity;leisure;individual activities;9085 standing arts and crafts/sand painting/carving weaving
+home activity;miscellaneous;5025 (generic) multiple household tasks all at once including standing/lifting/sitting
+home activity;miscellaneous;sitting;11580 office/computer work general
+home activity;miscellaneous;sitting;5080 sitting non-desk work (with or without eating at the same time)
+home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+home activity;miscellaneous;sitting;9045 sitting playing traditional video game computer game
+home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+home activity;miscellaneous;standing;5146 standing packing/unpacking household items occasional lifting
+home activity;miscellaneous;standing;9020 standing writing/drawing/painting
+home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+home activity;miscellaneous;standing;9071 (generic) standing miscellaneous
+home activity;miscellaneous;walking;17140 using crutches or frame
+home activity;miscellaneous;walking;17150 walking household without observable loads
+home activity;miscellaneous;walking;5121 walking with moving and lifting loads such as bikes and furniture
+home activity;miscellaneous;walking;5147 walking moving away light items (pens/papers/keys not included)
+home activity;miscellaneous;walking;5165 (generic) walking non-cleaning task such as closing windows lock door putting away items
+home activity;self care;13000 getting ready for bed standing
+home activity;self care;13009 toilet eliminating or squatting
+home activity;self care;13010 bathing
+home activity;self care;13020 dressing/undressing
+home activity;self care;13036 taking medication
+home activity;self care;13040 (generic) self care such as grooming/washing hands/shaving/brushing teeth/putting on make-up not eliminating and bathing (not necessary in the toilet)
+home activity;self care;13045 hairstyling standing
+home activity;self care;13046 having hair or nails done by someone else sitting
+home activity;self care;13050 showering/towelling off implied standing
+leisure;dancing;3010 ballet modern or jazz general rehearsal or class
+leisure;dancing;3014 tap dancing
+leisure;dancing;3015 aerobic general
+leisure;dancing;3019 bench step class
+leisure;dancing;3025 ethnic or cultural dancing such as Greek Middle Eastern hula salsa merengue bamba y plena flamenco belly and swing
+leisure;dancing;3031 disco folk/Irish step dancing/line dancing/polka contra country
+leisure;dancing;3038 ballroom dancing competitive
+leisure;dancing;3040 ballroom pleasure
+leisure;eating;not-social;13030 eating sitting indoor/outdoor
+leisure;eating;not-social;13035 eating standing indoor/outdoor
+leisure;eating;not-social;5060 buying foods or drinks as a takeaway
+leisure;eating;social;13030 eating sitting indoor/outdoor
+leisure;eating;social;13035 eating standing indoor/outdoor
+leisure;eating;social;5060 buying foods or drinks as a takeaway
+leisure;miscellaneous;sitting;0010 sitting / lying dialysis
+leisure;miscellaneous;sitting;21000 sitting meeting
+leisure;miscellaneous;sitting;21005 (generic) sitting light office writing typing work
+leisure;miscellaneous;sitting;21016 sitting child care only active periods
+leisure;miscellaneous;sitting;5080 sitting non-desk work (with or without eating at the same time)
+leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+leisure;miscellaneous;standing;0011 standing dialysis
+leisure;miscellaneous;standing;21017 standing child care only active periods
+leisure;miscellaneous;standing;9020 standing writing/drawing/painting
+leisure;miscellaneous;standing;9050 standing talking in person/using a phone/smartphone/tablet
+leisure;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+leisure;miscellaneous;standing;9071 (generic) standing miscellaneous
+leisure;miscellaneous;walking;0012 walking dialysis
+leisure;miscellaneous;walking;12170 running stairs up
+leisure;miscellaneous;walking;17020 carrying load downstairs
+leisure;miscellaneous;walking;17025 carrying load upstairs
+leisure;miscellaneous;walking;17031 loading /unloading a car implied walking
+leisure;miscellaneous;walking;17070 descending stairs
+leisure;miscellaneous;walking;17100 pushing or pulling stroller with child or walking with children
+leisure;miscellaneous;walking;17105 pushing a wheelchair non-occupational
+leisure;miscellaneous;walking;17133 walking upstairs
+leisure;miscellaneous;walking;21070 (generic) walking and occasional standing (no more than two consecutive images)
+leisure;miscellaneous;walking;5060 shopping miscellaneous
+leisure;music playing;10010 accordion sitting
+leisure;music playing;10040 drums sitting
+leisure;music playing;10074 playing musical instruments
+leisure;music playing;10130 marching band
+leisure;recreation;indoor;12025 jogging in place
+leisure;recreation;indoor;15180 darts wall
+leisure;recreation;indoor;15380 saddling cleaning grooming harnessing and unharnessing horse
+leisure;recreation;indoor;15440 juggling
+leisure;recreation;indoor;15570 shuffleboard
+leisure;recreation;indoor;15590 skating roller
+leisure;recreation;indoor;15645 sports spectator very excited emotional physically moving
+leisure;recreation;indoor;2140 video exercise workouts TV conditioning programmes
+leisure;recreation;indoor;9000 board game/chess/card game playing sitting
+leisure;recreation;indoor;9005 casino gambling standing
+leisure;recreation;indoor;9020 drawing writing painting standing
+leisure;recreation;indoor;9045 sitting playing traditional video game computer game
+leisure;recreation;indoor;9075 sitting arts and crafts carving/wood weaving/spinning wool
+leisure;recreation;indoor;9085 standing arts and crafts sand painting carving weaving
+leisure;recreation;indoor;9101 retreat/family reunion activities involving playing games with children
+leisure;recreation;indoor;9115 sport spectator sitting
+leisure;recreation;outdoor;12010 jogging/walking combination
+leisure;recreation;outdoor;15180 darts lawn
+leisure;recreation;outdoor;15335 high ropes course multiple elements
+leisure;recreation;outdoor;15440 juggling
+leisure;recreation;outdoor;15533 rock or mountain climbing
+leisure;recreation;outdoor;15645 sports spectator very excited emotional physically moving
+leisure;recreation;outdoor;15645 sports spectator very excited emotional physically moving
+leisure;recreation;outdoor;17010 backpacking
+leisure;recreation;outdoor;17033 climbing hills
+leisure;recreation;outdoor;2008 army type obstacle course exercise boot camp training program
+leisure;recreation;outdoor;5171 standing playing with child(ren)
+leisure;recreation;outdoor;5175 walking/running playing with child(ren)
+leisure;recreation;outdoor;9110 camping
+leisure;recreation;outdoor;9115 sport spectator sitting
+leisure;religious activities;20000 sitting in church in service attending a ceremony sitting quietly
+leisure;religious activities;20001 sitting playing an instrument at church
+leisure;religious activities;20005 sitting in church talking or singing attending a ceremony sitting active
+leisure;religious activities;20025 kneeling in church or at home praying
+leisure;religious activities;20030 standing talking in church
+leisure;religious activities;20039 walking/standing combination for religious purposes usher
+leisure;religious activities;20040 praising with dance or run spiritual dancing in church
+leisure;religious activities;20060 cleaning church
+leisure;religious activities;20061 yard work at church
+leisure;religious activities;20065 standing e.g. lifting heavy objects assembling
+leisure;sports;ball games;15055 basketball general
+leisure;sports;ball games;15075 basketball wheelchair
+leisure;sports;ball games;15080 billiards
+leisure;sports;ball games;15090 bowling
+leisure;sports;ball games;15130 broomball
+leisure;sports;ball games;15150 cricket batting bowling fielding
+leisure;sports;ball games;15160 croquet
+leisure;sports;ball games;15170 curling
+leisure;sports;ball games;15235 football or baseball playing catch
+leisure;sports;ball games;15255 golf
+leisure;sports;ball games;15310 hacky sack
+leisure;sports;ball games;15320 handball
+leisure;sports;ball games;15350 hockey field
+leisure;sports;ball games;15360 hockey ice
+leisure;sports;ball games;15420 jai alai
+leisure;sports;ball games;15450 kickball
+leisure;sports;ball games;15500 paddleball
+leisure;sports;ball games;15510 polo on horseback
+leisure;sports;ball games;15530 racquetball
+leisure;sports;ball games;15610 soccer casual
+leisure;sports;ball games;15620 softball or baseball
+leisure;sports;ball games;15650 squash
+leisure;sports;ball games;15660 table tennis ping pong
+leisure;sports;ball games;15680 tennis doubles
+leisure;sports;ball games;15690 tennis singles
+leisure;sports;ball games;15710 volleyball
+leisure;sports;ball games;15731 Wally ball
+leisure;sports;biking and racing;automobile traveling;15190 drag racing pushing or driving a car
+leisure;sports;biking and racing;automobile traveling;15192 auto racing open wheel
+leisure;sports;biking and racing;automobile traveling;15470 moto-cross off-road motor sports all-terrain vehicle general
+leisure;sports;biking and racing;cycling;1009 bicycling mountain
+leisure;sports;biking and racing;cycling;1010 bicycling for pleasure
+leisure;sports;biking and racing;cycling;1070 unicycling
+leisure;sports;conditioning;2008 army type obstacle course exercise boot camp training program
+leisure;sports;conditioning;2010 bicycling stationary
+leisure;sports;conditioning;2019 bicycling stationary RPM/Spin bike class
+leisure;sports;conditioning;2022 calisthenics
+leisure;sports;conditioning;2035 circuit training
+leisure;sports;conditioning;2048 elliptical trainer
+leisure;sports;conditioning;2050 resistance training
+leisure;sports;conditioning;2060 health club exercise
+leisure;sports;conditioning;2065 stair-treadmill ergometer general
+leisure;sports;conditioning;2068 rope skipping general
+leisure;sports;conditioning;2070 rowing stationary ergometer
+leisure;sports;conditioning;2080 ski machine
+leisure;sports;conditioning;2085 slide board exercise
+leisure;sports;conditioning;2110 teaching exercise class
+leisure;sports;conditioning;2112 therapeutic exercise ball Fit ball exercise
+leisure;sports;conditioning;2115 upper body exercise arm ergometer
+leisure;sports;conditioning;2120 water aerobics water calisthenics water exercise
+leisure;sports;conditioning;2135 whirlpool sitting
+leisure;sports;conditioning;2140 video exercise workouts TV conditioning programmes
+leisure;sports;conditioning;2150 yoga Hatha
+leisure;sports;conditioning;2205 native New Zealander physical activities (e.g. Haka Taiahab) general vigo
+leisure;sports;fighting sports;15100 boxing in ring
+leisure;sports;fighting sports;15110 boxing punching bag
+leisure;sports;fighting sports;15200 fencing
+leisure;sports;fighting sports;15425 martial arts slower pace
+leisure;sports;fighting sports;15430 martial arts moderate pace
+leisure;sports;fishing and hunting;4001 fishing
+leisure;sports;fishing and hunting;4050 fishing in stream in waders
+leisure;sports;fishing and hunting;4081 dragging carcass
+leisure;sports;fishing and hunting;4085 hunting large game from a hunting stand limited walking
+leisure;sports;fishing and hunting;4086 hunting large game from a car plane or boat
+leisure;sports;fishing and hunting;4090 hunting duck wading
+leisure;sports;fishing and hunting;4100 hunting general
+leisure;sports;fishing and hunting;4124 trapping game
+leisure;sports;fishing and hunting;4125 hunting hiking with hunting gear
+leisure;sports;fishing and hunting;4130 pistol shooting or trap shooting standing
+leisure;sports;gymnasium and athletics;athletics;12010 jogging/walking combination
+leisure;sports;gymnasium and athletics;athletics;12150 running
+leisure;sports;gymnasium and athletics;athletics;17110 race walking
+leisure;sports;gymnasium and athletics;athletics;track and field;15732 shot discus hammer throw
+leisure;sports;gymnasium and athletics;athletics;track and field;15733 high jump/long jump/triple jump/javelin/pole vault etc.
+leisure;sports;gymnasium and athletics;athletics;track and field;15734 steeplechase hurdles
+leisure;sports;gymnasium and athletics;gymnasium;15138 cheerleading gymnastic moves
+leisure;sports;gymnasium and athletics;gymnasium;15300 gymnastics
+leisure;sports;gymnasium and athletics;gymnasium;15700 trampoline
+leisure;sports;miscellaneous;15010 archery non-hunting
+leisure;sports;miscellaneous;15140 coaching football soccer basketball baseball swimming etc.
+leisure;sports;miscellaneous;15240 Frisbee playing
+leisure;sports;miscellaneous;15340 hang gliding
+leisure;sports;miscellaneous;15370 horseback riding
+leisure;sports;miscellaneous;15552 rope jumping
+leisure;sports;miscellaneous;15590 skating roller
+leisure;sports;miscellaneous;15670 tai chi/gi gong standing
+leisure;sports;miscellaneous;15670 tai chi/qi gong sitting
+leisure;sports;miscellaneous;17082 hiking or walking at a normal pace through fields and hillsides
+leisure;sports;water activities;18010 boating power driving
+leisure;sports;water activities;18012 boating power passenger
+leisure;sports;water activities;18070 canoeing/rowing
+leisure;sports;water activities;18110 paddling boat
+leisure;sports;water activities;18120 sailing boat and board sailing windsurfing ice sailing
+leisure;sports;water activities;18150 skiing water or wakeboarding
+leisure;sports;winter activities;19005 dog sledding mushing
+leisure;sports;winter activities;19006 dog sledding passenger
+leisure;sports;winter activities;19010 moving ice house set up/drill holes
+leisure;sports;winter activities;19030 skating ice
+leisure;sports;winter activities;19075 skiing
+leisure;sports;winter activities;19180 sledding tobogganing bobsledding luge
+leisure;sports;winter activities;19190 snow shoeing
+leisure;sports;winter activities;19200 snowmobiling driving
+leisure;sports;winter activities;19202 snowmobiling passenger
+leisure;sports;winter activities;19252 snow shovelling by hand
+leisure;sports;winter activities;19260 snow blower walking and pushing
+occupation;agriculture/forestry/fishing;11170 driving tasks
+occupation;agriculture/forestry/fishing;11180 feeding small animals
+occupation;agriculture/forestry/fishing;11190 feeding cattle horses
+occupation;agriculture/forestry/fishing;11191 hauling water general
+occupation;agriculture/forestry/fishing;11192 taking care of animals
+occupation;agriculture/forestry/fishing;11195 rice planting grain milling activities
+occupation;agriculture/forestry/fishing;11210 milking by hand cleaning pails
+occupation;agriculture/forestry/fishing;11220 milking by machine
+occupation;agriculture/forestry/fishing;11247 fishing commercial
+occupation;agriculture/forestry/fishing;11260 forestry ax chopping
+occupation;agriculture/forestry/fishing;11264 forestry
+occupation;agriculture/forestry/fishing;11510 orange grove work picking fruit
+occupation;agriculture/forestry/fishing;11540 shovelling digging ditches
+occupation;construction;11030 building road driving heavy machinery
+occupation;construction;11040 carpentry
+occupation;construction;11050 carrying heavy loads
+occupation;construction;11120 construction outside remodelling new structures
+occupation;construction;11482 masonry concrete
+occupation;construction;11708 steel mill
+occupation;construction;11780 using heavy power tools such as pneumatic tools
+occupation;installation/maintenance/repair;11415 lawn keeper yard work
+occupation;installation/maintenance/repair;11420 locksmith
+occupation;installation/maintenance/repair;11514 painting house furniture
+occupation;installation/maintenance/repair;11516 plumbing activities
+occupation;installation/maintenance/repair;11530 shoe repair
+occupation;interruption;miscellaneous;13009 toilet break
+occupation;interruption;miscellaneous;5041 kitchen activity in the working place
+occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+occupation;interruption;sitting;13030 eating sitting
+occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+occupation;interruption;sitting;9060 sitting without observable/identifiable activities
+occupation;interruption;standing;13035 eating standing
+occupation;interruption;standing;9015 standing scanning documents
+occupation;interruption;standing;9020 standing writing/drawing/painting
+occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+occupation;interruption;standing;9070 standing reading or without observable/identifiable activities
+occupation;interruption;standing;9071 (generic) standing miscellaneous
+occupation;interruption;walking;11003 active workstation treadmill desk walking
+occupation;interruption;walking;11791 walking on job in office or lab area
+occupation;interruption;walking;11795 walking on job and carrying light objects such as boxes or pushing trolleys
+occupation;interruption;walking;17070 walking downstairs
+occupation;interruption;walking;17133 walking upstairs
+occupation;manufacturing;11010 bakery
+occupation;manufacturing;11020 bookbinding
+occupation;manufacturing;11115 chef
+occupation;manufacturing;11135 engineer
+occupation;manufacturing;11370 furriery
+occupation;manufacturing;11430 machine tooling
+occupation;manufacturing;11520 printing paper industry worker standing
+occupation;manufacturing;11730 tailoring
+occupation;miscellaneous;11380 horse grooming
+occupation;miscellaneous;11381 horse feeding watering cleaning stalls
+occupation;miscellaneous;11410 horse racing walking
+occupation;miscellaneous;11475 (generic) manual labour
+occupation;miscellaneous;11500 (generic) operating heavy duty equipment automated not driving
+occupation;miscellaneous;11593 teaching stretching or yoga or light effort exercise class
+occupation;miscellaneous;11615 (generic) standing lifting items continuously with limited walking
+occupation;miscellaneous;11870 working in scene shop theatre actor backstage employee
+occupation;office and administrative support;11580 office/computer work general
+occupation;office and administrative support;11600 (generic) standing tasks such as store clerk/librarian/packing boxes/repair heavy parts
+occupation;personal services;11378 hairstylist
+occupation;personal services;11413 kitchen maid
+occupation;personal services;11418 laundry worker
+occupation;personal services;11485 massage therapist
+occupation;public admin/education/health;education;9065 students/attending seminars or talks
+occupation;public admin/education/health;education;9071 teaching standing
+occupation;public admin/education/health;health;11615 nursing patient care
+occupation;public admin/education/health;public admin and defence;11240 fire fighter
+occupation;public admin/education/health;public admin and defence;11526 driving police car sitting
+occupation;public admin/education/health;public admin and defence;11527 riding in a police car
+occupation;public admin/education/health;public admin and defence;17090 military marching
+occupation;public admin/education/health;sports;15140 coaching football soccer basketball baseball swimming etc.
+occupation;public admin/education/health;sports;2110 teaching exercise class
+occupation;transportation and material moving;11006 airline flight attendant
+occupation;transportation and material moving;11035 building road directing traffic standing
+occupation;transportation and material moving;11375 garbage collector walking dumping bins into truck
+occupation;transportation and material moving;11529 postal carrier walking to deliver mail
+occupation;transportation and material moving;11766 truck driving loading and unloading truck tying down load standing walking and carrying load
+occupation;transportation and material moving;11767 truck driving delivery truck/tax/shuttlebus/school bus
+occupation;transportation and material moving;16035 pulling rickshaw
+transportation;private transportation;1010 bicycling
+transportation;private transportation;1070 unicycling
+transportation;private transportation;16010 driving automobile or light truck (not a semi)
+transportation;private transportation;16015 riding in a car or truck
+transportation;private transportation;16020 flying helicopter
+transportation;private transportation;16030 motor scooter motorcycle
+transportation;public transportation;16016 riding in a bus or train
+transportation;public transportation;16020 flying airplane
+transportation;waiting;7021 sitting
+transportation;waiting;7040 standing in a line
+transportation;walking;12150 running
+transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+transportation;walking;17165 walking the dog
+transportation;walking;17250 walking as the single means to a destination not to work or class
+transportation;walking;17270 walking as the single means to work or class (not from)
+transportation;walking;9050 standing miscellaneous (talking to others etc.)
+uncodeable;0001 camera taken off
+uncodeable;0002 image dark/blurred/obscured

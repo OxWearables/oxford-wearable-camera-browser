@@ -1,0 +1,104 @@
+participant,startTime,endTime,source,annotation
+p003,14/10/2014 08:34:45,14/10/2014 08:36:24,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 08:36:49,14/10/2014 08:59:59,images,transportation;private transportation;1010 bicycling
+p003,14/10/2014 09:00:22,14/10/2014 09:08:14,images,transportation;private transportation;1010 bicycling
+p003,14/10/2014 09:08:39,14/10/2014 09:11:52,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+p003,14/10/2014 09:12:17,14/10/2014 09:40:49,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 09:41:12,14/10/2014 09:47:31,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 09:47:53,14/10/2014 09:50:57,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 09:51:19,14/10/2014 09:52:26,images,occupation;interruption;13030 eating sitting
+p003,14/10/2014 09:52:49,14/10/2014 09:58:46,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 09:59:09,14/10/2014 10:00:46,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 10:01:33,14/10/2014 10:13:47,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 10:14:08,14/10/2014 10:14:13,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
+p003,14/10/2014 10:14:14,14/10/2014 10:14:16,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 10:14:46,14/10/2014 10:18:05,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 10:18:29,14/10/2014 10:21:59,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 10:22:22,14/10/2014 10:25:29,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
+p003,14/10/2014 10:25:54,14/10/2014 10:28:16,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 10:28:41,14/10/2014 10:30:10,images,occupation;interruption;9070 standing reading or without obvious activities
+p003,14/10/2014 10:30:56,14/10/2014 10:32:53,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 10:33:15,14/10/2014 10:36:19,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p003,14/10/2014 10:36:44,14/10/2014 10:54:59,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p003,14/10/2014 10:55:21,14/10/2014 10:58:41,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p003,14/10/2014 10:59:17,14/10/2014 11:07:31,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p003,14/10/2014 11:07:55,14/10/2014 11:09:06,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 11:09:31,14/10/2014 11:59:34,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 12:00:07,14/10/2014 12:08:14,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 12:09:22,14/10/2014 12:12:06,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 12:12:30,14/10/2014 12:20:35,images,occupation;interruption;13030 eating sitting
+p003,14/10/2014 12:20:59,14/10/2014 12:23:00,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 12:23:23,14/10/2014 12:27:38,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 12:28:01,14/10/2014 12:29:11,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
+p003,14/10/2014 12:29:35,14/10/2014 12:32:18,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 12:32:41,14/10/2014 12:33:51,images,occupation;interruption;9020 standing writing/drawing/painting
+p003,14/10/2014 12:34:15,14/10/2014 12:35:00,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 12:35:25,14/10/2014 12:44:33,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 12:44:56,14/10/2014 12:58:47,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 12:59:35,14/10/2014 13:02:00,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 13:02:24,14/10/2014 13:38:26,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 13:38:50,14/10/2014 13:40:29,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 13:40:52,14/10/2014 13:55:02,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 13:55:34,14/10/2014 14:00:12,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 14:00:35,14/10/2014 14:03:00,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
+p003,14/10/2014 14:03:24,14/10/2014 14:10:34,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 14:10:58,14/10/2014 14:17:59,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 14:18:24,14/10/2014 14:25:42,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 14:26:29,14/10/2014 14:29:22,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 14:29:45,14/10/2014 14:34:55,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
+p003,14/10/2014 14:35:29,14/10/2014 14:39:35,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 14:39:59,14/10/2014 14:42:23,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 14:42:45,14/10/2014 14:59:48,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 15:00:10,14/10/2014 15:04:45,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 15:05:08,14/10/2014 15:07:55,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 15:08:20,14/10/2014 15:10:41,images,occupation;interruption;11795 walking on job and carrying light objects such as boxes or pushing trolleys
+p003,14/10/2014 15:11:04,14/10/2014 15:17:12,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 15:17:36,14/10/2014 15:20:00,images,occupation;interruption;11795 walking on job and carrying light objects such as boxes or pushing trolleys
+p003,14/10/2014 15:20:25,14/10/2014 15:22:05,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 15:22:28,14/10/2014 15:36:44,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 15:37:10,14/10/2014 15:38:16,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 15:38:48,14/10/2014 15:59:42,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 16:00:05,14/10/2014 16:06:03,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 16:06:28,14/10/2014 16:11:22,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 16:11:45,14/10/2014 16:30:01,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 16:30:25,14/10/2014 16:36:03,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 16:36:26,14/10/2014 16:37:12,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 16:37:38,14/10/2014 16:49:47,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 16:50:11,14/10/2014 16:55:00,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 16:55:23,14/10/2014 17:01:07,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 17:01:30,14/10/2014 17:02:40,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 17:03:06,14/10/2014 17:06:24,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 17:06:47,14/10/2014 17:09:52,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 17:10:18,14/10/2014 17:11:58,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 17:12:21,14/10/2014 17:29:20,images,transportation;private transportation;1010 bicycling
+p003,14/10/2014 17:29:21,14/10/2014 17:33:15,nonWear, <unknown>
+p003,14/10/2014 17:33:16,14/10/2014 17:35:17,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+p003,14/10/2014 17:36:26,14/10/2014 17:58:42,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 17:59:37,14/10/2014 18:08:56,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 18:09:18,14/10/2014 18:10:28,images,occupation;interruption;9060 (generic) sitting without observable activities
+p003,14/10/2014 18:10:51,14/10/2014 18:12:13,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 18:12:36,14/10/2014 18:13:25,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 18:13:50,14/10/2014 18:16:13,images,occupation;interruption;9070 standing reading or without obvious activities
+p003,14/10/2014 18:16:37,14/10/2014 18:43:56,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 18:44:19,14/10/2014 18:45:33,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 18:46:07,14/10/2014 18:59:53,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 19:00:16,14/10/2014 19:01:02,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 19:01:25,14/10/2014 19:03:53,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 19:04:17,14/10/2014 19:05:13,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 19:05:39,14/10/2014 19:14:53,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 19:16:13,14/10/2014 19:17:47,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 19:18:11,14/10/2014 19:18:58,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 19:19:22,14/10/2014 19:20:33,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 19:20:56,14/10/2014 19:59:55,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 20:00:26,14/10/2014 20:16:08,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 20:16:31,14/10/2014 20:17:58,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 20:18:46,14/10/2014 20:20:55,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p003,14/10/2014 20:21:19,14/10/2014 20:33:05,images,occupation;office and administrative support;11580 office wok/computer work general
+p003,14/10/2014 20:33:28,14/10/2014 20:35:02,images,occupation;interruption;11791 walking on job in office or lab area
+p003,14/10/2014 20:35:49,14/10/2014 20:59:40,images,transportation;private transportation;1010 bicycling
+p003,14/10/2014 21:00:03,14/10/2014 21:12:34,images,transportation;private transportation;1010 bicycling
+p003,14/10/2014 21:13:21,14/10/2014 21:15:09,images,leisure;miscellaneous;5060 shopping miscellaneous
+p003,14/10/2014 21:15:32,14/10/2014 21:48:58,images,transportation;private transportation;1010 bicycling
+p003,14/10/2014 21:49:44,14/10/2014 21:59:53,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 22:00:16,14/10/2014 22:02:36,images,uncodeable;0002 image dark/blurred/obscured
+p003,14/10/2014 22:03:12,14/10/2014 22:03:20,images,leisure;miscellaneous;standing;9070 standing reading or without obvious activities

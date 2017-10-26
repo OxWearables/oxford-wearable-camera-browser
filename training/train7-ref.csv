@@ -1,0 +1,103 @@
+participant,startTime,endTime,source,annotation
+p004,14/10/2014 08:21:48,14/10/2014 08:23:22,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p004,14/10/2014 08:23:45,14/10/2014 08:27:24,images,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+p004,14/10/2014 08:27:47,14/10/2014 08:28:56,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable activities
+p004,14/10/2014 08:29:19,14/10/2014 08:36:42,images,home activity;miscellaneous;walking;5165 (generic) walking non-cleaning task such as closing windows lock door putting away items
+p004,14/10/2014 08:37:11,14/10/2014 08:40:23,images,transportation;walking;17250 walking as the single means to a destination not to work or class
+p004,14/10/2014 08:40:46,14/10/2014 08:42:18,images,leisure;eating;5060 buying foods or drinks as a takeaway
+p004,14/10/2014 08:42:43,14/10/2014 08:47:29,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+p004,14/10/2014 08:47:31,14/10/2014 08:59:50,images,transportation;waiting;7021 sitting
+p004,14/10/2014 09:00:12,14/10/2014 09:01:47,images,transportation;walking;9050 standing miscellaneous (talking to others etc.)
+p004,14/10/2014 09:02:10,14/10/2014 09:14:18,images,transportation;waiting;7021 sitting
+p004,14/10/2014 09:14:41,14/10/2014 09:17:03,images,transportation;waiting;7040 standing in a line
+p004,14/10/2014 09:17:25,14/10/2014 09:22:10,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 09:22:37,14/10/2014 09:24:28,images,transportation;public transportation;16016 riding in a bus or train
+p004,14/10/2014 09:25:17,14/10/2014 09:26:29,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+p004,14/10/2014 09:27:16,14/10/2014 09:28:30,images,occupation;interruption;11791 walking on job in office or lab area
+p004,14/10/2014 09:29:18,14/10/2014 09:30:50,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 09:31:15,14/10/2014 09:34:03,images,occupation;interruption;11791 walking on job in office or lab area
+p004,14/10/2014 09:34:26,14/10/2014 09:42:25,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 09:42:49,14/10/2014 09:47:30,images,occupation;interruption;11791 walking on job in office or lab area
+p004,14/10/2014 09:47:53,14/10/2014 09:57:38,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 09:58:10,14/10/2014 10:00:28,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
+p004,14/10/2014 10:01:14,14/10/2014 10:49:21,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 10:49:44,14/10/2014 10:59:56,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 11:00:19,14/10/2014 11:59:37,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 12:00:00,14/10/2014 12:24:55,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 12:25:19,14/10/2014 12:37:45,images,occupation;interruption;13030 eating sitting
+p004,14/10/2014 12:38:10,14/10/2014 12:39:28,images,occupation;interruption;17133 walking upstairs
+p004,14/10/2014 12:39:54,14/10/2014 12:43:03,images,occupation;interruption;5041 kitchen activity in the working place
+p004,14/10/2014 12:43:28,14/10/2014 12:59:54,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 13:00:19,14/10/2014 14:05:14,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 14:06:02,14/10/2014 14:07:15,images,occupation;interruption;5041 kitchen activity in the working place
+p004,14/10/2014 14:07:39,14/10/2014 14:10:20,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 14:10:43,14/10/2014 14:21:46,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 14:22:09,14/10/2014 14:42:13,images,occupation;interruption;11585 sitting meeting/talking to colleagues with or without eating
+p004,14/10/2014 14:42:37,14/10/2014 14:59:53,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 15:00:26,14/10/2014 15:25:11,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 15:25:36,14/10/2014 15:27:11,images,occupation;interruption;11791 walking on job in office or lab area
+p004,14/10/2014 15:27:35,14/10/2014 15:52:10,images,occupation;interruption;13030 eating sitting
+p004,14/10/2014 15:52:35,14/10/2014 15:57:32,images,occupation;interruption;11791 walking on job in office or lab area
+p004,14/10/2014 15:58:19,14/10/2014 16:01:02,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 16:01:25,14/10/2014 16:08:51,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p004,14/10/2014 16:09:15,14/10/2014 16:11:38,images,occupation;interruption;11791 walking on job in office or lab area
+p004,14/10/2014 16:12:02,14/10/2014 16:13:59,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 16:14:22,14/10/2014 16:16:20,images,occupation;interruption;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+p004,14/10/2014 16:16:43,14/10/2014 16:39:54,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 16:40:18,14/10/2014 16:41:06,images,occupation;interruption;9060 (generic) sitting without observable activities
+p004,14/10/2014 16:41:28,14/10/2014 16:59:43,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 17:00:06,14/10/2014 17:49:01,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 17:49:23,14/10/2014 17:51:18,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 17:51:41,14/10/2014 17:52:52,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 17:53:38,14/10/2014 17:54:23,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 17:54:47,14/10/2014 17:55:56,images,occupation;office and administrative support;11580 office wok/computer work general
+p004,14/10/2014 17:56:20,14/10/2014 17:57:30,images,occupation;interruption;11791 walking on job in office or lab area
+p004,14/10/2014 17:57:31,14/10/2014 18:00:56,nonWear, <unknown>
+p004,14/10/2014 18:00:57,14/10/2014 18:00:57,images,occupation;interruption;11791 walking on job in office or lab area
+p004,14/10/2014 18:01:20,14/10/2014 18:04:44,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+p004,14/10/2014 18:05:40,14/10/2014 18:12:20,images,transportation;public transportation;16016 riding in a bus or train
+p004,14/10/2014 18:12:21,14/10/2014 18:15:50,nonWear, <unknown>
+p004,14/10/2014 18:15:51,14/10/2014 18:33:22,images,leisure;miscellaneous;walking;5060 shopping miscellaneous
+p004,14/10/2014 18:33:45,14/10/2014 18:34:32,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 18:34:57,14/10/2014 18:37:15,images,leisure;miscellaneous;walking;5060 shopping miscellaneous
+p004,14/10/2014 18:39:28,14/10/2014 18:43:21,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 18:43:44,14/10/2014 18:47:38,images,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+p004,14/10/2014 18:48:03,14/10/2014 18:48:52,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+p004,14/10/2014 18:49:15,14/10/2014 18:50:02,images,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+p004,14/10/2014 18:50:25,14/10/2014 18:59:45,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+p004,14/10/2014 19:00:31,14/10/2014 19:03:11,images,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
+p004,14/10/2014 19:03:35,14/10/2014 19:30:24,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+p004,14/10/2014 19:30:47,14/10/2014 19:31:56,images,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+p004,14/10/2014 19:32:20,14/10/2014 19:41:20,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+p004,14/10/2014 19:41:44,14/10/2014 19:42:53,images,home activity;miscellaneous;standing;9050 standing talking in person on the phone/computer (skype chatting) or using a mobileo phone/smartphone/tablet
+p004,14/10/2014 19:43:16,14/10/2014 19:54:38,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+p004,14/10/2014 19:55:02,14/10/2014 20:12:40,images,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+p004,14/10/2014 20:13:04,14/10/2014 20:14:37,images,home activity;miscellaneous;standing;9070 standing reading or without obvious activities
+p004,14/10/2014 20:15:00,14/10/2014 20:33:07,images,home activity;leisure;activities for maintenance of a household;miscellaneous;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person
+p004,14/10/2014 20:33:30,14/10/2014 20:44:12,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+p004,14/10/2014 20:44:35,14/10/2014 20:46:32,images,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+p004,14/10/2014 20:46:55,14/10/2014 20:48:50,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 20:49:13,14/10/2014 20:50:45,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
+p004,14/10/2014 20:51:07,14/10/2014 20:53:31,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 20:55:01,14/10/2014 20:58:15,images,leisure;miscellaneous;walking;5060 shopping miscellaneous
+p004,14/10/2014 20:58:38,14/10/2014 20:59:51,images,leisure;eating;13030 eating sitting indoor/outdoor
+p004,14/10/2014 21:00:15,14/10/2014 21:15:37,images,leisure;eating;13030 eating sitting indoor/outdoor
+p004,14/10/2014 21:15:38,14/10/2014 21:44:17,images,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+p004,14/10/2014 21:45:03,14/10/2014 21:46:37,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p004,14/10/2014 21:47:03,14/10/2014 21:51:48,images,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
+p004,14/10/2014 21:52:13,14/10/2014 21:57:01,images,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
+p004,14/10/2014 21:57:25,14/10/2014 22:05:21,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 22:05:44,14/10/2014 22:10:31,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p004,14/10/2014 22:10:55,14/10/2014 22:11:44,images,home activity;household chores;house cleaning;miscellaneous;5100 making bed/changing linens
+p004,14/10/2014 22:12:07,14/10/2014 22:18:47,images,uncodeable;0002 image dark/blurred/obscured
+p004,14/10/2014 22:19:12,14/10/2014 22:23:34,images,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+p004,14/10/2014 22:23:56,14/10/2014 22:32:38,images,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+p004,14/10/2014 22:33:23,14/10/2014 22:34:35,images,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+p004,14/10/2014 22:34:58,14/10/2014 22:36:10,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+p004,14/10/2014 22:36:34,14/10/2014 22:37:21,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
+p004,14/10/2014 22:37:44,14/10/2014 22:42:34,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p004,14/10/2014 22:42:57,14/10/2014 22:45:20,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
+p004,14/10/2014 22:45:44,14/10/2014 22:47:05,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable activities
+p004,14/10/2014 22:47:30,14/10/2014 22:51:54,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+p004,14/10/2014 22:52:17,14/10/2014 22:53:26,images,home activity;miscellaneous;sitting;21010 sitting non-desk work (with or without eating at the same time)
+p004,14/10/2014 22:53:54,14/10/2014 22:58:58,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities

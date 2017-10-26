@@ -1,0 +1,72 @@
+participant,startTime,endTime,source,annotation
+p005,04/11/2014 07:15:52,04/11/2014 07:15:53,images,home activity;miscellaneous;standing;9070 standing reading or without obvious activities
+p005,04/11/2014 07:15:54,04/11/2014 07:16:49,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p005,04/11/2014 07:17:35,04/11/2014 07:18:52,images,uncodeable;0002 image dark/blurred/obscured
+p005,04/11/2014 07:19:15,04/11/2014 07:59:35,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
+p005,04/11/2014 08:00:08,04/11/2014 08:54:06,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
+p005,04/11/2014 08:54:32,04/11/2014 09:02:31,images,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
+p005,04/11/2014 09:03:16,04/11/2014 09:05:11,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p005,04/11/2014 09:05:39,04/11/2014 09:08:48,images,transportation;walking;17250 walking as the single means to a destination not to work or class
+p005,04/11/2014 09:09:13,04/11/2014 09:30:27,images,leisure;sports;conditioning;2065 stair-treadmill ergometer general
+p005,04/11/2014 09:30:51,04/11/2014 09:33:06,images,transportation;walking;17250 walking as the single means to a destination not to work or class
+p005,04/11/2014 09:33:53,04/11/2014 09:40:08,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p005,04/11/2014 09:40:30,04/11/2014 09:47:45,images,uncodeable;0002 image dark/blurred/obscured
+p005,04/11/2014 09:48:08,04/11/2014 09:50:03,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p005,04/11/2014 09:50:27,04/11/2014 09:51:36,images,home activity;self care;13040 (generic) self care such as grooming/washing hands/shaving/brushing teeth/putting on make-up not eliminating and bathing (not necessary in the toilet)
+p005,04/11/2014 09:52:00,04/11/2014 09:56:15,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p005,04/11/2014 09:56:37,04/11/2014 09:58:10,images,home activity;eating;13035 eating standing alone or with others
+p005,04/11/2014 09:58:33,04/11/2014 10:36:55,images,transportation;walking;17270 walking as the single means to work or class (not from)
+p005,04/11/2014 10:37:18,04/11/2014 10:46:16,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 10:46:40,04/11/2014 10:47:27,images,occupation;interruption;11791 walking on job in office or lab area
+p005,04/11/2014 10:47:51,04/11/2014 10:48:59,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 10:49:21,04/11/2014 10:52:21,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
+p005,04/11/2014 10:52:45,04/11/2014 10:53:57,images,occupation;interruption;11791 walking on job in office or lab area
+p005,04/11/2014 10:54:20,04/11/2014 10:57:46,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p005,04/11/2014 10:58:11,04/11/2014 11:00:09,images,occupation;interruption;5041 kitchen activity in the working place
+p005,04/11/2014 11:00:33,04/11/2014 11:01:19,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 11:01:44,04/11/2014 11:59:38,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 12:00:02,04/11/2014 12:02:43,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 12:03:06,04/11/2014 12:10:56,images,occupation;interruption;11791 walking on job in office or lab area
+p005,04/11/2014 12:11:19,04/11/2014 12:22:18,images,occupation;interruption;13030 eating sitting
+p005,04/11/2014 12:22:19,04/11/2014 12:38:43,images,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+p005,04/11/2014 12:39:29,04/11/2014 12:41:49,images,occupation;interruption;11791 walking on job in office or lab area
+p005,04/11/2014 12:42:11,04/11/2014 12:59:56,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 13:00:30,04/11/2014 13:59:59,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 14:00:22,04/11/2014 14:05:18,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 14:05:43,04/11/2014 14:06:51,images,occupation;interruption;13009 toilet break
+p005,04/11/2014 14:07:39,04/11/2014 14:08:47,images,occupation;interruption;11791 walking on job in office or lab area
+p005,04/11/2014 14:09:10,04/11/2014 14:15:19,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 14:15:42,04/11/2014 14:22:18,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p005,04/11/2014 14:22:42,04/11/2014 14:59:28,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 15:00:01,04/11/2014 15:05:49,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 15:06:12,04/11/2014 15:07:19,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
+p005,04/11/2014 15:07:41,04/11/2014 15:11:43,images,occupation;interruption;11585 sitting meeting/talking to colleagues with or without eating
+p005,04/11/2014 15:12:07,04/11/2014 15:14:31,images,occupation;interruption;9070 standing reading or without obvious activities
+p005,04/11/2014 15:14:58,04/11/2014 15:17:55,images,occupation;interruption;9015 standing scanning documents
+p005,04/11/2014 15:18:25,04/11/2014 15:50:15,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 15:50:39,04/11/2014 15:53:20,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p005,04/11/2014 15:53:43,04/11/2014 15:55:39,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
+p005,04/11/2014 15:56:02,04/11/2014 16:10:24,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p005,04/11/2014 16:10:46,04/11/2014 16:13:24,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
+p005,04/11/2014 16:13:47,04/11/2014 16:29:41,images,occupation;office and administrative support;11580 office wok/computer work general
+p005,04/11/2014 16:30:04,04/11/2014 16:38:36,images,occupation;interruption;11791 walking on job in office or lab area
+p005,04/11/2014 16:40:52,04/11/2014 16:41:15,images,uncodeable;0002 image dark/blurred/obscured
+p005,04/11/2014 16:41:16,04/11/2014 17:16:39,transportation;walking;17250 walking as the single means to a destination not to work or class
+p005,04/11/2014 17:16:40,04/11/2014 17:18:08,images,uncodeable;0002 image dark/blurred/obscured
+p005,04/11/2014 17:18:31,04/11/2014 17:21:34,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p005,04/11/2014 17:21:57,04/11/2014 17:24:12,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
+p005,04/11/2014 17:24:35,04/11/2014 17:25:43,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+p005,04/11/2014 17:26:05,04/11/2014 17:54:57,images,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+p005,04/11/2014 17:55:19,04/11/2014 17:56:03,images,uncodeable;0002 image dark/blurred/obscured
+p005,04/11/2014 17:56:32,04/11/2014 17:59:53,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
+p005,04/11/2014 18:00:16,04/11/2014 19:30:43,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
+p005,04/11/2014 19:31:11,04/11/2014 19:49:46,images,uncodeable;0002 image dark/blurred/obscured
+p005,04/11/2014 19:50:10,04/11/2014 20:41:00,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
+p005,04/11/2014 20:41:24,04/11/2014 20:42:34,images,uncodeable;0002 image dark/blurred/obscured
+p005,04/11/2014 20:43:09,04/11/2014 20:44:45,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
+p005,04/11/2014 20:45:30,04/11/2014 20:49:21,images,home activity;self care;13040 (generic) self care such as grooming/washing hands/shaving/brushing teeth/putting on make-up not eliminating and bathing (not necessary in the toilet)
+p005,04/11/2014 20:49:43,04/11/2014 20:52:00,images,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
+p005,04/11/2014 20:52:22,04/11/2014 20:56:38,images,uncodeable;0002 image dark/blurred/obscured
+p005,04/11/2014 20:57:04,04/11/2014 20:58:17,images,home activity;self care;13000 getting ready for bed standing
+p005,04/11/2014 20:58:44,04/11/2014 20:59:41,images,uncodeable;0002 image dark/blurred/obscured
+p005,04/11/2014 21:00:14,04/11/2014 21:20:29,images,uncodeable;0002 image dark/blurred/obscured
