@@ -134,13 +134,13 @@ python kappaScoring.py /..path../train4-Aiden.csv
 ```
 
 
-## Development
+# Development
 To work on this project `git clone` this repository and use the `npm start` command to run a test instance, the program will automatically reboot after any changes to source code. Most application logic is in `/static/main.html`, except image resizing and schema parsing which live in `/image_resize.js` and `/schema.js`. Once built there are no external dependencies, however development requires node.js and npm installed. Run `npm install` to install required modules. This program is written in [Electron](https://electron.atom.io/), so a good read of their docs is recommended.
 
 To build a distributable program for your OS run `npm run-script build`. This will generate e.g. OxfordImageBrowser-win32-x64 (if you are on 64-bit windows).
 
 
-## Special errors
+# Special errors
 We don't want anyone to lose their work, so if the annotation file fails to save (for whatever reason; hard drive failiure, networked drive cutting out, or someone renamed the annotation folder), we warn them and backup the work. We turn the background orange and save a copy of the current annotations to the root folder... if that save *also* doesn't work then we turn the background red! The annotation file will appear at the side so you can copy paste it and save it yourself.
 
 To restore the backup you should go into the annotation folder, then go into the participant folder. Start annotating again to generate a new annotation file (.csv) and then close the browser, open the .csv in notepad, copy in your backup, and save and close.. now when you start the browser the data should be restored.
