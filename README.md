@@ -65,7 +65,7 @@ Then update `file_paths.json`, to link to the root folder of participant images 
 ```
 {
 	"IMAGE_DIR":"C:\\study\\images\\",
-	"ANNOTATION_DIR":"C:\\study\\annotation\\",
+	"ANNOTATION_DIR":"C:\\study\\annotations\\",
 	"RESIZING_ENABLED":false
 }
 ```

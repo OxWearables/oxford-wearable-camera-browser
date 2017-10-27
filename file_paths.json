@@ -1,0 +1,5 @@
+{
+    "IMAGE_DIR":"C:\\study\\images\\",
+    "ANNOTATION_DIR":"C:\\study\\annotations\\",
+    "RESIZING_ENABLED":true
+}
