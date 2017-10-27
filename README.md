@@ -5,13 +5,57 @@ A wearable camera image browser & annotation tool. If you find this tool helpful
 
 [Doherty, Moulin, & Smeaton (2011) Automatically Assisting Human Memory: A SenseCam Browser. Memory: Special Issue on SenseCam: The Future of Everyday Research? Taylor and Francis, 19(7), 785-795](http://www.tandfonline.com/doi/abs/10.1080/09658211.2010.509732)
 
-## Usage
-
 ![Browser](http://i.imgur.com/YSqfTL7.png)
 
 [See a demo video](http://i.imgur.com/o0BtSQZ.gif)
 
-## Adding a new participant
+
+## Installation
+This project relies on [Electron](https://electron.atom.io/) and Node.js, so first you need to install [npm (node pacakage manager)](https://docs.npmjs.com/getting-started/installing-node). Then proceed as follows:
+```bash
+# 1. Download/clone this git repo
+git clone git@github.com:activityMonitoring/oxford-wearable-camera-browser.git
+
+# 2. Install npm package dependencies
+npm install
+
+# 3. Open/run browser
+npm start
+```
+
+
+## Adding data from a new participant
+Your study should have data stored as follows:
+```python
+path/<studyName>/
+    annotations/
+    images/
+        participant1/
+            B00000895_21I7IV_20170314_134417E.JPG
+            B00000895_21I7IV_20170314_134447E.JPG
+            ...
+            B00000895_21I7IV_20170314_233239E.JPG
+        participant2/
+            AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
+            ...
+            AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
+        ...
+        participantN/
+            AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
+            ...
+            AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
+```
+
+Then update `file_paths.json`, to link to the root folder of participant images and annotation on your local or network drive. For example:
+```
+{
+	"IMAGE_DIR":"C:\\study\\images\\",
+	"ANNOTATION_DIR":"C:\\study\\annotation\\",
+	"RESIZING_ENABLED":false
+}
+```
+Note you need to use two `\\` instead of `\` as this is a json file.
+`"RESIZING_ENABLED":false` will disable resizing images on startup. Useful if you already know your images have been resizind and don't want to wait for it to check every folder. If your images aren't already resized, look at the utilities folder for the write-thumbnail-commands.py script to resize images before loading them into the browser; this is MUCH faster than letting the browser resize images.
 
 Each participant has their own folder in the 'images' directory. Create a new folder (Windows: `Ctrl-shift-N`), with the name of the participant.
 
