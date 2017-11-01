@@ -845,6 +845,9 @@ function load_back_images() {
 	images_colorized = false;
 	update_view();
 }
+function checkJPG(file) {
+  return file.toLowerCase().endsWith('.jpg');
+}
 var sizes = {};
 function load_images() {
 	if (current_participant===null) {participant_selection_menu(); return;}
@@ -881,16 +884,17 @@ function load_images() {
 							}
 						}
 						fs.readdir(subdir, (err, files) => {
-							if (err) console.log(err);
-							if (files===undefined || files.length===0) return console.log("no files in folder!", subdir);
+              if (err) console.log(err);
+              files = files.filter(checkJPG);
+              if (files===undefined || files.length===0) return console.log("no files in folder!", subdir);
 							files
 								.sort((a, b)=>(a.slice(17)>b.slice(17)) ? 1 : -1)
-								.forEach((f, i) => {
-									if (size == 'thumbnail') {
-										imgs[i] = f;
-										img_times[i] = date_from_filename(f);
-										if (isNaN(img_times[i].getTime())) console.log("is NaT", f, date_from_filename(f))
-									}
+                .forEach((f, i) => {
+                  if (size == 'thumbnail') {
+                    imgs[i] = f;
+                    img_times[i] = date_from_filename(f);
+                    if (isNaN(img_times[i].getTime())) console.log("is NaT", f, img_times[i], imgs[i], date_from_filename(f))
+                  }
 								});
 
 							if (size == 'thumbnail') {
@@ -923,7 +927,7 @@ function create_image(idx) {
 	var is_last = is_last_(idx);
 	// console.log(idx, imgs[idx])
 	var time = img_times[idx];
-	var label = 'none';
+  var label = 'none';
 	var str = '<div class="img" id="'+idx+'" image-id="'+idx+'" event-id="'+(e===null ? "" : e) +'">'; 
 
 	str += '<div style="left:92px;" class="split right" split-dir="right"></div>';
