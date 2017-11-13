@@ -10,18 +10,22 @@ Where YYYY, MM, DD, HH, MM, SS are: year, month, day, hour, minute, second. The 
 In future the metadata 'Date Created' of the file will be used if the name is not the correct format.
 
 
-## Browser automated resizing
-After updating file_paths.json open the browser and it should begin creating 'thumbnail' and 'medium' size images. This may take some time but only needs to be done once. You should see a screen like the below, and when the queue is empty click on the participant to see the images.
-
-![resizing screen](http://i.imgur.com/5XIcP9a.png)
-
-### Tip to speed up resizing of images
-It is much faster to use the utility linux/mac script below to resize a participant's images:
+### Resizing input images
+The browser needs 3 copies of images at: 1) full resolution, 2) medium-size resolution, and 3) thumbnail resolution. Your input folder will have full-resolution images, but generally the medium + thumbnail folders need to be generated. The best way to do this in linux/mac environments is to run the scrip below:
 ```bash
+# To generate thumbnail cmds for a participant's images run:
 bash utilities/create_thumbnails.sh /study/camera/P001/
+#   input = <study folder>
+#   output = <study folder>/medium/ - dir with medium-size images
+#             <study folder>/thumbnail/ - dir with thumbnail size images
 ```
 
-If you have many participants images to resize, please refer to the [utilities](utilities/readme.md) page where the ... python script writes out the above list of commands for each participant and the GNU parallel command then processes the commands in parallel.
+If you have many participants images to resize, please refer to the [utilities](utilities/README.md) page where the write-thumbnail-cmds.py python script can automate this for many participants at a time.
+
+## Browser automated resizing
+If the above does not work (e.g. you need to do this on a Windows machine), update file_paths.json file to set image resizing to True. Then you can open the browser and it should begin creating 'thumbnail' and 'medium' size images. This may take a considerable amount of time but only needs to be done once. You should see a screen like the below, and when the queue is empty click on the participant to see the images.
+
+![resizing screen](http://i.imgur.com/5XIcP9a.png)
 
 
 ## Removing participants' data
