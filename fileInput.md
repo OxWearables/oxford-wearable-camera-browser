@@ -15,6 +15,14 @@ After updating file_paths.json open the browser and it should begin creating 'th
 
 ![resizing screen](http://i.imgur.com/5XIcP9a.png)
 
+### Tip to speed up resizing of images
+It is much faster to use the utility linux/mac script below to resize a participant's images:
+```bash
+bash utilities/create_thumbnails.sh /study/camera/P001/
+```
+
+If you have many participants images to resize, please refer to the [utilities](utilities/readme.md) page where the ... python script writes out the above list of commands for each participant and the GNU parallel command then processes the commands in parallel.
+
 
 ## Removing participants' data
 To remove a participant, simply delete their images folder while the browser is not running. If you have made any annotations they will also have a participant folder in the 'annotations' folder, so after it is backed up delete this too.
