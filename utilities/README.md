@@ -15,14 +15,19 @@ nohup python cleanup-image-paths.py /study/camera/ &
 
 ## Generate thumbnails and medium sized images for browser
 ```bash
-# generate list of commands for each participant folder
+# To generate thumbnail cmds for a participant's images run:
+bash create_thumbnails.sh /study/camera/P001/
+#   input = <study folder>
+#   output = <study folder>/medium/ - dir with medium-size images
+#             <study folder>/thumbnail/ - dir with thumbnail size images
+
+
+# or to optimise the above if you have many participants...
+# 1) generate list of commands for each participant folder
 python write-thumbnail-cmds.py /study/camera/
 # output auto written to 'thumbnailCmds.txt'
 
-# Then each line from 'thumbnailCmds.txt' can be run as follows:
-bash create_thumbnails.sh /study/camera/P001/
-
-# or if you have gnu parallel on your unix system, these cmds in 'thumbnailCmds.txt' can be run in parallel:
+# 2) Using gnu parallel, these cmds in 'thumbnailCmds.txt' can be run in parallel:
 # (j = max num concurrent processes at a time)
 nohup parallel -j 10 -- < thumnailCmds.txt &
 ```
