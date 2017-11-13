@@ -19,7 +19,11 @@ nohup python cleanup-image-paths.py /study/camera/ &
 python write-thumbnail-cmds.py /study/camera/
 # output auto written to 'thumbnailCmds.txt'
 
-# run gnu parallel to execute these cmds (j = max num concurrent processes at a time)
+# Then each line from 'thumbnailCmds.txt' can be run as follows:
+bash create_thumbnails.sh /study/camera/P001/
+
+# or if you have gnu parallel on your unix system, these cmds in 'thumbnailCmds.txt' can be run in parallel:
+# (j = max num concurrent processes at a time)
 nohup parallel -j 10 -- < thumnailCmds.txt &
 ```
 
