@@ -52,8 +52,8 @@ def evaluateAnnotationAgreement(fileListStr, refAnnotationsCsv, newAnnotationsCs
                format='%Y%m%d %H%M%S')
     fileList = fileList.sort_values('imgTime')
     pd.options.mode.chained_assignment = None  # default='warn'
-    fileList = appendAnnotationsToList(refAnnotationsCsv, '%d/%m/%Y %H:%M:%S', 0, fileList, 'ref')
-    fileList = appendAnnotationsToList(newAnnotationsCsv, '%Y-%m-%dT%H:%M:%S.%fZ', 1, fileList, 'my')
+    fileList = appendAnnotationsToList(refAnnotationsCsv, '%d/%m/%Y %H:%M:%S', False, fileList, 'ref')
+    fileList = appendAnnotationsToList(newAnnotationsCsv, '%Y-%m-%dT%H:%M:%S.%fZ', True, fileList, 'my')
     
     # calculate and write out agreement scores and confusion matrix
     refCodes = fileList['refCodes']
@@ -82,13 +82,17 @@ def evaluateAnnotationAgreement(fileListStr, refAnnotationsCsv, newAnnotationsCs
     return crossTab.style.applymap(highlight_vals)
 
 
-def appendAnnotationsToList(csvPath, dateFormat, hourShift, fileList, colName):
+def appendAnnotationsToList(csvPath, dateFormat, timeZonePresent, fileList, colName):
     # import and prepare csv annotations file
     ref = pd.read_csv(csvPath)
-    ref['startTime'] = pd.to_datetime(ref['startTime'], format=dateFormat)
-    ref['endTime'] = pd.to_datetime(ref['endTime'], format=dateFormat)
-    ref['startTime'] = ref['startTime'] + pd.to_timedelta(hourShift,unit='h')
-    ref['endTime'] = ref['endTime'] + pd.to_timedelta(hourShift,unit='h')
+    if timeZonePresent:
+        # convert UTC time (saved by node-image-browser) to local time (acc data)
+        ref['startTime'] = pd.to_datetime(ref['startTime'], format=dateFormat).dt.tz_localize('UTC').dt.tz_convert('Europe/London')
+        ref['endTime'] = pd.to_datetime(ref['endTime'], format=dateFormat).dt.tz_localize('UTC').dt.tz_convert('Europe/London')
+    # now store time and be timezone agnostic (after adjustment above if needed from node.js browser files)
+    ref['startTime'] = pd.to_datetime(ref['startTime'], format=dateFormat).dt.tz_localize(None)
+    ref['endTime'] = pd.to_datetime(ref['endTime'], format=dateFormat).dt.tz_localize(None)
+    
 
     # default end time for one annotation is usually ~15-20sec before start-time for next episode
     # therefore set new 'complete' endtime as start-time of next episode
