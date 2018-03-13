@@ -1,6 +1,7 @@
 import argparse
 import fnmatch
 import os
+from shutil import copyfile
 import sys
 import glob
 
@@ -31,12 +32,15 @@ for folder in glob.glob(args.sourceDir + '*/'):
             images.append(os.path.join(root, filename))
         for filename in fnmatch.filter(filenames, '*.txt'): 
             images.append(os.path.join(root, filename))
+        for filename in fnmatch.filter(filenames, 'ACTIVITY.CSV'): 
+            images.append(os.path.join(root, filename))
     
     newFolder = args.destinationDir + folder.replace(args.sourceDir,'').replace(' ','')
     if not os.path.exists(newFolder):
             os.makedirs(newFolder)
     for image in images:
         os.rename(image, newFolder+image.split('/')[-1])
+        #copyfile(image, newFolder+image.split('/')[-1])
         #print 'mv "' + image + '" "' + newFolder+image.split('/')[-1] + '"'
     print folder, len(images)
 print 'finished'
