@@ -85,8 +85,8 @@ home activity;lawn and garden;tree and shrub service;8190 sacking grass leaves
 home activity;lawn and garden;tree and shrub service;8210 trimming shrubs or trees manual cutter
 home activity;lawn and garden;tree and shrub service;8215 trimming shrubs or trees power cutter using leaf blower edge
 home activity;leisure;activities for maintenance of a household;miscellaneous;9010 board game/card/chess playing sitting
-home activity;leisure;activities for maintenance of a household;miscellaneous;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person
-home activity;leisure;activities for maintenance of a household;miscellaneous;9101 retreat/family reunion activities playing games with more than one person
+home activity;leisure;activities for maintenance of a household;miscellaneous;9100 social activities involving sitting eating relaxing talking with more than one person
+home activity;leisure;activities for maintenance of a household;miscellaneous;9101 social activities playing games with more than one person
 home activity;leisure;activities for maintenance of a household;with animals;5190 sitting playing with animals active periods
 home activity;leisure;activities for maintenance of a household;with animals;5191 standing playing with animals active periods
 home activity;leisure;activities for maintenance of a household;with animals;5192 walking/running playing with animals active periods
@@ -140,6 +140,7 @@ leisure;eating;social;13030 eating sitting indoor/outdoor
 leisure;eating;social;13035 eating standing indoor/outdoor
 leisure;eating;social;5060 buying foods or drinks as a takeaway
 leisure;miscellaneous;sitting;0010 sitting / lying dialysis
+leisure;miscellaneous;sitting;9100 social activities involving sitting eating relaxing talking with more than one person
 leisure;miscellaneous;sitting;21000 sitting meeting
 leisure;miscellaneous;sitting;21005 (generic) sitting light office writing typing work
 leisure;miscellaneous;sitting;21016 sitting child care only active periods
@@ -181,7 +182,7 @@ leisure;recreation;indoor;9020 drawing writing painting standing
 leisure;recreation;indoor;9045 sitting playing traditional video game computer game
 leisure;recreation;indoor;9075 sitting arts and crafts carving/wood weaving/spinning wool
 leisure;recreation;indoor;9085 standing arts and crafts sand painting carving weaving
-leisure;recreation;indoor;9101 retreat/family reunion activities involving playing games with children
+leisure;recreation;indoor;9101 social activities involving playing games with children
 leisure;recreation;indoor;9115 sport spectator sitting
 leisure;recreation;outdoor;12010 jogging/walking combination
 leisure;recreation;outdoor;15180 darts lawn
@@ -400,8 +401,9 @@ transportation;private transportation;16020 flying helicopter
 transportation;private transportation;16030 motor scooter motorcycle
 transportation;public transportation;16016 riding in a bus or train
 transportation;public transportation;16020 flying airplane
+transportation;public transportation;18012 boat passenger
 transportation;waiting;7021 sitting
-transportation;waiting;7040 standing in a line
+transportation;waiting;7040 standing
 transportation;walking;12150 running
 transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
 transportation;walking;17165 walking the dog
