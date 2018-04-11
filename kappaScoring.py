@@ -35,16 +35,17 @@ def main():
         print 'participant = ', args.participantStr
 
     # auto determine I/O file names
-    fileListTxt = args.imageListsDir + args.participantStr + '-fileList.txt'
-    refAnnotationsCsv = args.refDir + args.participantStr + '-ref.csv'
+    fileListTxt = args.imageListsDir + args.participantStr + '-imageList.txt'
+    refAnnotationsCsv = args.refDir + args.participantStr + '-Salma-activities.csv'
     feedbackHtml = args.annotationsCsv.replace('.csv','-feedback.html')
 
     # call main method to evaluate annotation performance
     evaluateAnnotationAgreement(fileListTxt, refAnnotationsCsv, \
-                                args.annotationsCsv, feedbackHtml)
+                                args.annotationsCsv, feedbackHtml, True)
 
 
-def evaluateAnnotationAgreement(fileListStr, refAnnotationsCsv, newAnnotationsCsv, outFeedbackHtml):
+def evaluateAnnotationAgreement(fileListStr, refAnnotationsCsv,
+                                newAnnotationsCsv, outFeedbackHtml, groupAnnotations):
     fileList = pd.read_csv(fileListStr)
     fileList.columns = ['name']
     fileList['imgTime'] = pd.to_datetime(fileList['name'].str.split('_').str.get(2) + ' ' 
@@ -52,15 +53,32 @@ def evaluateAnnotationAgreement(fileListStr, refAnnotationsCsv, newAnnotationsCs
                format='%Y%m%d %H%M%S')
     fileList = fileList.sort_values('imgTime')
     pd.options.mode.chained_assignment = None  # default='warn'
-    fileList = appendAnnotationsToList(refAnnotationsCsv, '%d/%m/%Y %H:%M:%S', False, fileList, 'ref')
+    #fileList = appendAnnotationsToList(refAnnotationsCsv, '%d/%m/%Y %H:%M:%S', False, fileList, 'ref')
+    fileList = appendAnnotationsToList(refAnnotationsCsv, '%Y-%m-%dT%H:%M:%S.%fZ', True, fileList, 'ref')
     fileList = appendAnnotationsToList(newAnnotationsCsv, '%Y-%m-%dT%H:%M:%S.%fZ', True, fileList, 'my')
+    
+    if groupAnnotations == True:    
+        # read in 'annotation' to 'label' mapping
+        a2l = pd.read_csv('label-dictionary-9-classes.csv', header=0, skip_blank_lines=True)
+        # manually add sleep and uncodeable labels since not in compendium
+        a2l = a2l.append(pd.DataFrame([{'annotation':'7030 sleeping','label':'sleep'}]),
+                         ignore_index =True)
+        # move from ~10 labels down to ~7 labels
+        #labelMapFree = {'bicycling':'bicycling', 'household-chores':'mixed', 'manual-work':'mixed',
+        #                'mixed-activity':'mixed', 'sitting':'sit.stand', 'sports':'mixed',
+        #                'standing':'sit.stand', 'vehicle':'vehicle', 'walking':'walking',
+        #                'sleep':'sleep'}# 'unknown':'none', 'none':'none',
+                        #'uncodeable':'uncodeable'}
+        #a2l['label'] = a2l['label'].replace(labelMapFree)
+        a2lDict = a2l.set_index('annotation').T.to_dict('records')[0]
+        fileList['refCodes'] = fileList['ref'].replace(a2lDict)
+        fileList['myCodes'] = fileList['my'].replace(a2lDict)
     
     # calculate and write out agreement scores and confusion matrix
     refCodes = fileList['refCodes']
     myCodes = fileList['myCodes']
-    #myCodes = myCodes.replace({21070:11791})
-    crossTab = pd.crosstab(refCodes, myCodes, margins=True )
     
+    crossTab = pd.crosstab(refCodes, myCodes, margins=True )
     print '\n\nkappa score = ', cohen_kappa_score(refCodes, myCodes)
 
     w = open(outFeedbackHtml,'w')
@@ -112,6 +130,7 @@ def appendAnnotationsToList(csvPath, dateFormat, fromNodeJS, fileList, colName):
     fileList.loc[fileList[colName]=='undefined', colName] = 'undefined;-99'
     fileList.loc[fileList[colName]==' <unknown>', colName] = 'undefined;-99'
     fileList[colName + 'Codes'] = fileList[colName].str.extract('(\d+)', expand=False)
+    fileList[colName + 'Codes-orig'] = fileList[colName + 'Codes']
     return fileList
 
 
@@ -136,8 +155,13 @@ def episodesHtml(fileList):
         line += '<td>' + startTime.strftime("%Y-%m-%d") + '</td>'
         line += '<td>' + startTime.strftime("%I:%M %p") + '</td>'
         line += '<td>' + endTime.strftime("%I:%M %p") + '</td>'
-        line += '<td>' + str(episode['refCodes'].min()) + '</td>'
-        line += '<td>' + str(episode['myCodes'].min()) + '</td>'
+        refCodeStr = str(episode['refCodes'].min())
+        myCodeStr = str(episode['myCodes'].min())
+        if refCodeStr != str(episode['refCodes-orig'].min()):
+            refCodeStr += " (" + str(episode['refCodes-orig'].min()) + ")"
+            myCodeStr += " (" + str(episode['myCodes-orig'].min()) + ")"
+        line += '<td>' + refCodeStr  + '</td>'
+        line += '<td>' + myCodeStr + '</td>'
         line += '</tr>'
         if duration_mins >= 5:
             html += line + '\n'

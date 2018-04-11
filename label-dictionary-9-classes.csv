@@ -1,0 +1,230 @@
+annotation,label
+transportation;private transportation;1010 bicycling,bicycling
+leisure;sports;conditioning;2010 bicycling stationary,bicycling
+leisure;sports;conditioning;2019 bicycling stationary RPM/Spin bike class,bicycling
+home activity;household chores;house cleaning;miscellaneous;5100 making bed/changing linens,household-chores
+home activity;household chores;washing/ironing/mending clothes;5080 knitting sewing sitting,household-chores
+home activity;household chores;house cleaning;furniture;5020 cleaning heavy such as car/windows/garage,household-chores
+home activity;household chores;house cleaning;furniture;5032 dusting or polishing furniture,household-chores
+home activity;household chores;house cleaning;miscellaneous;5148 watering plants,household-chores
+home activity;household chores;washing/ironing/mending clothes;5080 knitting sewing wrapping presents sitting,household-chores
+home activity;household chores;washing/ironing/mending clothes;5092 washing clothes by hand (with or without hanging wash),household-chores
+home activity;household chores;house cleaning;floors;5010 cleaning sweeping carpet or floors,household-chores
+home activity;home repair;indoor;6126 home repair miscellaneous,household-chores
+home activity;household chores;house cleaning;floors;5131 scrubbing floors on hands and knees scrubbing bathroom bathtub,household-chores
+home activity;child/elderly/pet care;pet care;5053 feeding household animals,household-chores
+home activity;self care;13000 getting ready for bed standing,household-chores
+home activity;child/elderly/pet care;pet care;5197  household animal care aside from feeding,household-chores
+home activity;self care;13020 dressing/undressing,household-chores
+home activity;self care;13040 (generic) self care such as grooming/washing hands/shaving/brushing teeth/putting on make-up not eliminating and bathing (not necessary in the toilet),household-chores
+occupation;interruption;miscellaneous;5041 kitchen activity in the working place,household-chores
+home activity;household chores;washing/ironing/mending clothes;5095 putting away /gathering clothes involving walking,household-chores
+home activity;miscellaneous;5025 (generic) multiple household tasks all at once including standing/lifting/sitting,household-chores
+home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking,household-chores
+occupation;personal services;11413 kitchen maid,household-chores
+home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up,household-chores
+home activity;household chores;washing/ironing/mending clothes;5070 ironing,household-chores
+occupation;manufacturing;11115 chef,household-chores
+home activity;household chores;preparing meals/cooking/washing dishes;5051 serving food/setting table implied walking and standing,household-chores
+occupation;interruption;5041 kitchen activity in the working place,household-chores
+home activity;home repair;indoor;6124 hammering nails,manual-work
+occupation;construction;11050 carrying heavy loads,manual-work
+occupation;agriculture/forestry/fishing;11540 shovelling digging ditches,manual-work
+home activity;household chores;house cleaning;floors;5140 sweeping garage sidewalk or outside of house,manual-work
+home activity;lawn and garden;gardening service;8230 watering garden,manual-work
+occupation;interruption;walking;11795 walking on job and carrying light objects such as boxes or pushing trolleys,manual-work
+home activity;lawn and garden;tree and shrub service;8025 clearing light brush thinning garden,manual-work
+home activity;lawn and garden;gardening service;8245 gardening/picking up fruits vegetables flowers,manual-work
+occupation;public admin/education/health;health;11615 nursing patient care,manual-work
+home activity;lawn and garden;lawn care service;8135 planting potting transplanting seedlings or plants,manual-work
+home activity;lawn and garden;lawn care service;8095 mowing lawn,manual-work
+occupation;miscellaneous;11870 working in scene shop theatre actor backstage employee,manual-work
+occupation;miscellaneous;11475 (generic) manual or unskilled labour,manual-work
+occupation;miscellaneous;11475 (generic) manual labour,manual-work
+home activity;lawn and garden;gardening service;8192 shoveling dirt or mud,manual-work
+home activity;lawn and garden;gardening service;8050 digging spading filling garden compositing,manual-work
+home activity;lawn and garden;gardening service;8192 shovelling dirt or mud,manual-work
+home activity;child/elderly/pet care;child care;5181 walking and carrying child,mixed-activity
+home activity;leisure;activities for maintenance of a household;miscellaneous;9101 retreat/family reunion activities playing games with more than one person,mixed-activity
+occupation;agriculture/forestry/fishing;11192 taking care of animals,mixed-activity
+leisure;recreation;outdoor;5175 walking/running playing with child(ren),mixed-activity
+leisure;miscellaneous;17031 loading /unloading a car implied walking,mixed-activity
+leisure;miscellaneous;21070 (generic) walking/standing combination indoor,mixed-activity
+leisure;miscellaneous;walking;17031 loading /unloading a car implied walking,mixed-activity
+leisure;recreation;outdoor;5171 standing playing with child(ren),mixed-activity
+occupation;interruption;11795 walking on job and carrying light objects such as boxes or pushing trolleys,mixed-activity
+leisure;miscellaneous;5060 shopping miscellaneous,mixed-activity
+home activity;leisure;activties for maintenance of a household;with animals;5192 walking/running playing with animals active periods,mixed-activity
+home activity;miscellaneous;walking;5121 walking with moving and lifting loads such as bikes and furniture,mixed-activity
+leisure;religious activities;20039 walking/standing combination for religious purposes usher,mixed-activity
+home activity;leisure;individual activities;10074 playing musical instruments,mixed-activity
+occupation;interruption;miscellaneous;13009 toilet break,mixed-activity
+leisure;eating;5060 buying foods or drinks as a takeaway,mixed-activity
+home activity;household chores;grocery shopping;5060 shopping,mixed-activity
+occupation;office and administrative support;11600 (generic) standing tasks such as store clerk/libarian/packing boxes/repair heavy parts,mixed-activity
+home activity;child/elderly/pet care;child care;5185 child care sitting/kneeling occasional lifting,mixed-activity
+occupation;miscellaneous;11615 (generic) standing lifting items continuously with limited walking,mixed-activity
+home activity;child/elderly/pet care;child care;5186 child care standing occasional lifting,mixed-activity
+leisure;miscellaneous;21017 standing child care only active periods,mixed-activity
+home activity;child/elderly/pet care;child care;5183 standing holding child,mixed-activity
+home activity;miscellaneous;standing;5146 standing packing/unpaking household items occational lifting,mixed-activity
+occupation;interruption;standing;9015 standing scanning documents,mixed-activity
+leisure;miscellaneous;standing;21017 standing child care only active periods,mixed-activity
+home activity;leisure;individual activities;9085 standing arts and crafts/sand painting/carving weaving,mixed-activity
+occupation;interruption;standing;9071 (generic) standing miscellaneous,standing
+occupation;public admin/education/health;education;9071 teaching standing,standing
+none,none
+home activity;leisure;activities for maintenance of a household;with animals;5190 sitting playing with animals active periods,sitting
+home activity;leisure;activties for maintenance of a household;with children;5170 sitting playing with child(ren),sitting
+home activity;child/elderly/pet care;child care;5185 child care sitting/kneeling  occasional lifting,sitting
+leisure;miscellaneous;sitting;21016 sitting child care only active periods,sitting
+occupation;office and administrative support;11580 office/computer work general,sitting
+home activity;leisure;activties for maintenance of a household;5170 sitting playing with child(ren),sitting
+home activity;leisure;activties for maintenance of a household;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person,sitting
+home activity;child/elderly/pet care;child care;5185 child care sitting/kneeling,sitting
+home activity;leisure;activities for maintenance of a household;miscellaneous;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person,sitting
+home activity;leisure;activities for maintenance of a household;with children;5170 sitting playing with child(ren),sitting
+home activity;miscellaneous;sitting;11580 office/computer work general,sitting
+occupation;interruption;sitting;13030 eating sitting,sitting
+occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating,sitting
+leisure;eating;social;13030 eating sitting indoor/outdoor,sitting
+leisure;religious activities;20005 sitting in church talking or singing attending a ceremony sitting active,sitting
+home activity;self care;13036 taking medication,sitting
+leisure;miscellaneous;sitting;21000 sitting meeting,sitting
+home activity;self care;13046 having hair or nails done by someone else sitting,sitting
+home activity;leisure;activties for maintenance of a household;miscellaneous;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person,sitting
+leisure;music playing;10074 playing musical instruments,sitting
+leisure;eating;not-social;13030 eating sitting indoor/outdoor,sitting
+leisure;eating;social;13035 eating standing indoor/outdoor,sitting
+leisure;eating;not-social;5060 buying foods or drinks as a takeaway,sitting
+home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time),sitting
+leisure;miscellaneous;21000 sitting meeting or talking with others,sitting
+leisure;miscellaneous;21016 sitting child care only active periods,sitting
+occupation;interruption;11585 sitting meeting/talking to colleages with or without eating,sitting
+occupation;interruption;13030 eating sitting,sitting
+leisure;eating;13030 eating sitting indoor/outdoor,sitting
+occupation;interruption;11585 sitting meeting/talking to colleagues with or without eating,sitting
+leisure;miscellaneous;sitting;5080 sitting non-desk work (with or without eating at the same time),sitting
+home activity;miscellaneous;sitting;9045 sitting playing traditional video game computer game,sitting
+occupation;interruption;9060 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.),sitting
+leisure;religious activities;20000 sitting in church in service attending a ceremony sitting quietly,sitting
+leisure;miscellaneous;sitting;21005 (generic) sitting light office writing typing work,sitting
+transportation;waiting;7021 sitting,sitting
+occupation;interruption;9060 (generic) sitting without observable/identifiable activities,sitting
+home activity;miscellaneous;sitting;9060 sitting reading or using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting),sitting
+home activity;miscellaneous;sitting;7021 sitting without observable actiivties,sitting
+leisure;miscellaneous;21005 (generic) sitting light office writing typing work,sitting
+occupation;office and administrative support;11580 office wok/computer work general,sitting
+occupation;office and administrative support;11580 office work/computer work general,sitting
+home activity;miscellaneous;sitting;21010 sitting non-desk work (with or without eating at the same time),sitting
+occupation;interruption;13009 toilet break,sitting
+occupation;public admin/education/health;education;9065 students/attending seminars or talks,sitting
+occupation;interruption;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.),sitting
+occupation;interruption;sitting;9060 sitting without observable/identifiable activities,sitting
+leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities,sitting
+home activity;miscellaneous;sitting;9030 sitting desk work (with or without eating at the same time),sitting
+home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time),sitting
+home activity;miscellaneous;sitting;5080 sitting non-desk work (with or without eating at the same time),sitting
+home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable activities,sitting
+home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity,sitting
+home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities,sitting
+home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time),sitting
+occupation;interruption;9060 (generic) sitting without observable activities,sitting
+leisure;miscellaneous;21010 sitting non-desk work (with or without eating at the same time),sitting
+home activity;eating;13030 eating sitting alone or with someone,sitting
+home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting),sitting
+occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.),sitting
+leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone,sitting
+home activity;leisure;individual activities;9075 sitting arts and crafts carving/wood weaving/spinning wool,sitting
+leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable activities,sitting
+home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity,sitting
+home activity;miscellaneous;sitting;7021 sitting without observable activities,sitting
+home activity;self care;13009 toilet eliminating or squatting,sitting
+home activity;household chores;washing/ironing/mending clothes;5082 sewing with a machine,sitting
+leisure;sports;water activities;18012 boating power passenger,vehicle
+leisure;sports;conditioning;2115 upper body exercise arm ergometer,sports
+leisure;sports;conditioning;2065 stair-treadmill ergometer general,sports
+leisure;sports;water activities;18070 canoeing/rowing,sports
+leisure;sports;ball games;15235 football or baseball playing catch,sports
+transportation;walking;12150 running,sports
+leisure;sports;ball games;15690 tennis singles,sports
+leisure;sports;ball games;15090 bowling,sports
+leisure;sports;ball games;15680 tennis doubles,sports
+leisure;dancing;3010 ballet modern or jazz general rehearsal or class,sports
+leisure;sports;conditioning;2060 health club exercise,sports
+leisure;sports;conditioning;2120 water aerobics water calisthenics water exercise,sports
+leisure;sports;conditioning;2070 rowing stationary ergometer,sports
+leisure;sports;conditioning;2048 elliptical trainer,sports
+leisure;sports;conditioning;2050 resistance training,sports
+leisure;sports;gymnasium and athletics;athletics;12150 running,sports
+home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet,standing
+home activity;miscellaneous;standing;9070 standing reading or without obvious activities,standing
+home activity;self care;13045 hairstyling standing,standing
+home activity;miscellaneous;standing;9020 standing writing/drawing/painting,standing
+occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet,standing
+transportation;waiting;7040 standing in a line,standing
+occupation;interruption;standing;9020 standing writing/drawing/painting,standing
+leisure;miscellaneous;standing;9070 standing reading or without observable/identifiable activities,standing
+leisure;miscellaneous;standing;9050 standing talking in person/using a phone/smartphone/tablet,standing
+home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities,standing
+home activity;miscellaneous;standing;5146 standing packing/unpacking household items occasional lifting,standing
+leisure;miscellaneous;standing;9020 standing writing/drawing/painting,standing
+occupation;interruption;9070 standing reading or without obvious activities,standing
+occupation;interruption;standing;9050 standing talking in persone/using a phone/smartphone/tablet,standing
+occupation;interruption;9020 standing writing/drawing/painting,standing
+transportation;walking;9071 standing miscellaneous (talking to others etc.),standing
+leisure;miscellaneous;9071 (generic) standing miscellaneous indoor or outdoor,standing
+occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet,standing
+leisure;miscellaneous;standing;9071 (generic) standing miscellaneous,standing
+home activity;home repair;indoor;5160 standing light effort tasks,standing
+occupation;office and administrative support;11600 (generic) standing tasks such as store clerk/librarian/packing boxes/repair heavy parts,standing
+leisure;religious activities;20030 standing talking in church,standing
+occupation;interruption;standing;9071 (generic) standing miscellaneous,standing
+occupation;interruption;standing;9070 standing reading or without observable/identifiable activities,standing
+occupation;interruption;9015 standing scanning documents,standing
+leisure;eating;13035 eating standing indoor/outdoor,standing
+occupation;interruption;9070 standing reading or without observable/identifiable activities,standing
+leisure;eating;social;5060 buying foods or drinks as a takeaway,standing
+home activity;eating;13035 eating standing alone or with others,standing
+occupation;interruption;standing;13035 eating standing,standing
+occupation;interruption;13035 eating standing,standing
+transportation;walking;9050 standing miscellaneous (talking to others etc.),standing
+leisure;eating;not-social;13035 eating standing indoor/outdoor,standing
+occupation;public admin/education/health;education;09071 teaching standing,standing
+home activity;miscellaneous;standing;9050 standing talking in person on the phone/computer (skype chatting) or using a mobileo phone/smartphone/tablet,standing
+leisure;miscellaneous;standing;9070 standing reading or without obvious activities,standing
+home activity;miscellaneous;standing;9071 (generic) standing miscellaneous,standing
+uncodeable;0002 image dark/blurred/obscured,unknown
+uncodeable;0001 camera taken off,unknown
+ <unknown>,unknown
+home activity;lawn and garden;gardening service;8055 driving tractor,vehicle
+transportation;private transportation;16010 driving automobile or light truck (not a semi),vehicle
+transportation;public transportation;16016 riding in a bus or train,vehicle
+transportation;private transportation;16015 riding in a car or truck,vehicle
+occupation;interruption;walking;17070 walking downstairs,walking
+leisure;miscellaneous;walking;17133 walking upstairs,walking
+home activity;miscellaneous;walking;5147 walking moving away light items (pens/papers/keys not included),walking
+home activity;miscellaneous;walking;5165 (generic) walking non-cleaning task such as closing windows lock door putting away items,walking
+home activity;household chores;preparing meals/cooking/washing dishes;5035 cleaning up table after meal implied walking (e.g. leaving from eating table to the kitchen),walking
+transportation;walking;17165 walking the dog,walking
+occupation;interruption;walking;11791 walking on job in office or lab area,walking
+transportation;walking;17270 walking as the single means to work or class (not from),walking
+leisure;miscellaneous;walking;21070 (generic) walking and occasional standing (no more than two consecutive images),walking
+leisure;miscellaneous;walking;5060 shopping miscellaneous,walking
+transportation;walking;17250 walking as the single means to a destination not to work or class,walking
+transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports,walking
+occupation;interruption;11791 walking on job in office or lab area,walking
+home activity;miscellaneous;walking;17150 walking household without observable loads,walking
+occupation;interruption;walking;17133 walking upstairs,walking
+occupation;interruption;17133 walking upstairs,walking
+leisure;miscellaneous;walking;17070 descending stairs,walking
+leisure;sports;miscellaneous;17082 hiking or walking at a normal pace through fields and hillsides,walking
+leisure;miscellaneous;sitting;0010 sitting / lying dialysis,sitting
+leisure;recreation;indoor;9020 drawing writing painting standing,standing
+home activity;home repair;outdoor;6020 automobile body work,manual-work
+home activity;home repair;outdoor;6225 washing and waxing car,household-chores
+home activity;lawn and garden;tree and shrub service;8210 trimming shrubs or trees manual cutter,manual-work
+leisure;miscellaneous;standing;0011 standing dialysis,standing
+home activity;self care;13050 showering/towelling off implied standing,standing
+home activity;home repair;indoor;6144 repairing appliances,manual-work
+transportation;waiting;7040 standing,standing
