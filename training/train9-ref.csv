@@ -1,123 +1,160 @@
-participant,startTime,endTime,source,annotation
-p006,15/10/2014 07:05:17,15/10/2014 07:07:14,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 07:07:37,15/10/2014 07:09:09,images,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
-p006,15/10/2014 07:10:39,15/10/2014 07:16:22,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 07:16:46,15/10/2014 07:28:34,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 07:28:57,15/10/2014 07:38:34,images,home activity;leisure;activties for maintenance of a household;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person
-p006,15/10/2014 07:38:59,15/10/2014 07:40:32,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 07:40:57,15/10/2014 07:46:41,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 07:47:04,15/10/2014 07:48:58,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 07:50:22,15/10/2014 07:52:54,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 07:53:40,15/10/2014 07:59:50,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 08:00:13,15/10/2014 08:02:15,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 08:02:38,15/10/2014 08:03:24,images,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
-p006,15/10/2014 08:03:48,15/10/2014 08:06:47,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 08:07:15,15/10/2014 08:11:41,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 08:12:04,15/10/2014 08:14:39,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 08:15:05,15/10/2014 08:21:36,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 08:22:02,15/10/2014 08:24:03,images,home activity;self care;13040 (generic) self care such as grooming/washing hands/shaving/brushing teeth/putting on make-up not eliminating and bathing (not necessary in the toilet)
-p006,15/10/2014 08:24:26,15/10/2014 08:25:11,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 08:25:37,15/10/2014 08:27:12,images,home activity;miscellaneous;sitting;21010 sitting non-desk work (with or without eating at the same time)
-p006,15/10/2014 08:27:36,15/10/2014 08:30:35,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 08:30:59,15/10/2014 08:33:34,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
-p006,15/10/2014 08:34:42,15/10/2014 08:45:39,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 08:46:04,15/10/2014 08:50:03,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 08:50:29,15/10/2014 09:07:25,images,transportation;public transportation;16016 riding in a bus or train
-p006,15/10/2014 09:07:50,15/10/2014 09:13:55,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
-p006,15/10/2014 09:14:20,15/10/2014 09:18:13,images,transportation;waiting;7021 sitting
-p006,15/10/2014 09:18:39,15/10/2014 09:24:23,images,transportation;public transportation;16016 riding in a bus or train
-p006,15/10/2014 09:24:47,15/10/2014 09:29:35,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
-p006,15/10/2014 09:29:59,15/10/2014 09:33:03,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 09:33:26,15/10/2014 09:36:11,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
-p006,15/10/2014 09:36:34,15/10/2014 09:37:43,images,transportation;walking;9050 standing miscellaneous (talking to others etc.)
-p006,15/10/2014 09:38:07,15/10/2014 09:52:20,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p006,15/10/2014 09:52:21,15/10/2014 09:59:57,images,occupation;office and administrative support;11580 office wok/computer work general
-p006,15/10/2014 10:00:30,15/10/2014 10:59:07,images,occupation;office and administrative support;11580 office wok/computer work general
-p006,15/10/2014 10:59:31,15/10/2014 11:17:56,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p006,15/10/2014 11:18:18,15/10/2014 11:31:07,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 11:31:31,15/10/2014 11:52:31,images,transportation;private transportation;1010 bicycling
-p006,15/10/2014 11:52:55,15/10/2014 11:55:55,images,home activity;miscellaneous;walking;5121 walking with moving and lifting loads such as bikes and furniture
-p006,15/10/2014 11:56:19,15/10/2014 11:58:15,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 11:58:40,15/10/2014 12:01:28,images,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
-p006,15/10/2014 12:01:51,15/10/2014 12:09:19,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 12:09:42,15/10/2014 12:24:41,images,home activity;eating;13030 eating sitting alone or with someone
-p006,15/10/2014 12:25:04,15/10/2014 12:36:06,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable activities
-p006,15/10/2014 12:36:31,15/10/2014 12:41:48,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 12:42:13,15/10/2014 12:43:00,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 12:43:25,15/10/2014 12:50:21,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 12:50:47,15/10/2014 12:52:24,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 12:52:47,15/10/2014 12:56:24,images,home activity;miscellaneous;standing;9070 standing reading or without obvious activities
-p006,15/10/2014 12:56:49,15/10/2014 13:05:32,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
-p006,15/10/2014 13:05:57,15/10/2014 13:25:04,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 13:25:26,15/10/2014 13:32:00,images,home activity;eating;13030 eating sitting alone or with someone
-p006,15/10/2014 13:32:22,15/10/2014 13:40:28,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 13:40:53,15/10/2014 13:42:50,images,home activity;leisure;activties for maintenance of a household;5170 sitting playing with child(ren)
-p006,15/10/2014 13:43:36,15/10/2014 13:44:24,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 13:44:47,15/10/2014 13:52:29,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 13:52:52,15/10/2014 13:59:57,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 14:00:20,15/10/2014 14:01:49,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 14:02:13,15/10/2014 14:12:37,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 14:13:01,15/10/2014 14:23:40,images,home activity;leisure;activties for maintenance of a household;5170 sitting playing with child(ren)
-p006,15/10/2014 14:24:05,15/10/2014 14:25:39,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 14:26:01,15/10/2014 14:27:09,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 14:27:33,15/10/2014 14:30:19,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 14:30:43,15/10/2014 14:45:44,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 14:46:08,15/10/2014 14:50:47,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable activities
-p006,15/10/2014 14:51:09,15/10/2014 14:58:08,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 14:58:31,15/10/2014 15:03:10,images,home activity;leisure;activties for maintenance of a household;5170 sitting playing with child(ren)
-p006,15/10/2014 15:03:32,15/10/2014 15:18:21,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 15:18:47,15/10/2014 15:23:14,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p006,15/10/2014 15:23:38,15/10/2014 15:28:29,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 15:29:15,15/10/2014 15:33:17,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p006,15/10/2014 15:33:41,15/10/2014 15:36:15,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 15:36:39,15/10/2014 15:51:24,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 15:51:49,15/10/2014 15:56:27,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 15:56:49,15/10/2014 15:59:53,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 16:00:16,15/10/2014 16:03:40,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 16:04:06,15/10/2014 16:05:40,images,home activity;miscellaneous;standing;9070 standing reading or without obvious activities
-p006,15/10/2014 16:06:04,15/10/2014 16:19:42,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 16:20:31,15/10/2014 16:25:35,images,home activity;miscellaneous;5025 (generic) multiple household tasks all at once including standing/lifting/sitting
-p006,15/10/2014 16:25:59,15/10/2014 16:32:59,images,home activity;miscellaneous;standing;9070 standing reading or without obvious activities
-p006,15/10/2014 16:33:22,15/10/2014 16:35:40,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 16:36:26,15/10/2014 16:37:12,images,home activity;miscellaneous;standing;9070 standing reading or without obvious activities
-p006,15/10/2014 16:37:36,15/10/2014 16:53:35,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable activities
-p006,15/10/2014 16:54:00,15/10/2014 16:59:39,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 17:00:12,15/10/2014 17:12:07,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 17:13:01,15/10/2014 17:17:16,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 17:17:40,15/10/2014 17:59:53,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 18:00:20,15/10/2014 18:02:46,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 18:03:10,15/10/2014 18:03:56,images,home activity;leisure;activties for maintenance of a household;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person
-p006,15/10/2014 18:04:18,15/10/2014 18:05:03,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 18:05:27,15/10/2014 18:10:32,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 18:10:55,15/10/2014 18:13:35,images,home activity;leisure;activties for maintenance of a household;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person
-p006,15/10/2014 18:13:57,15/10/2014 18:15:05,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 18:16:12,15/10/2014 18:22:34,images,home activity;leisure;activties for maintenance of a household;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person
-p006,15/10/2014 18:22:57,15/10/2014 18:24:06,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 cleaning up table after meal implied walking (e.g. leaving from eating table to the kitchen)
-p006,15/10/2014 18:24:29,15/10/2014 18:25:15,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 18:25:38,15/10/2014 18:29:14,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 18:29:39,15/10/2014 18:33:15,images,transportation;walking;9071 standing miscellaneous (talking to others etc.)
-p006,15/10/2014 18:33:38,15/10/2014 18:36:31,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 18:36:53,15/10/2014 18:38:48,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 18:39:07,15/10/2014 18:50:37,images,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
-p006,15/10/2014 18:51:02,15/10/2014 18:59:33,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 19:00:06,15/10/2014 19:33:37,images,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
-p006,15/10/2014 19:34:22,15/10/2014 19:37:31,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 19:37:54,15/10/2014 19:50:04,images,home activity;child/elderly/pet care;child care;5188 reclining with baby
-p006,15/10/2014 19:50:31,15/10/2014 19:57:27,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 19:57:50,15/10/2014 20:01:58,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p006,15/10/2014 20:02:23,15/10/2014 20:10:39,images,home activity;miscellaneous;sitting;9030 sitting desk work (with or without eating at the same time)
-p006,15/10/2014 20:10:40,15/10/2014 20:49:54,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 20:50:18,15/10/2014 20:51:27,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 20:52:00,15/10/2014 20:59:41,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 21:00:17,15/10/2014 21:15:26,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p006,15/10/2014 21:15:50,15/10/2014 21:18:36,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 21:19:01,15/10/2014 21:21:31,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 21:21:53,15/10/2014 21:25:32,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 21:25:55,15/10/2014 21:29:07,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 21:29:32,15/10/2014 21:43:18,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable activities
-p006,15/10/2014 21:44:03,15/10/2014 21:47:49,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 21:48:13,15/10/2014 21:49:19,images,uncodeable;0002 image dark/blurred/obscured
-p006,15/10/2014 21:49:42,15/10/2014 21:59:33,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 22:00:05,15/10/2014 22:23:02,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p006,15/10/2014 22:23:27,15/10/2014 22:25:03,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p006,15/10/2014 22:25:27,15/10/2014 22:27:14,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+startTime,endTime,duration,annotation
+2014-10-14T13:08:27.000Z,2014-10-14T13:08:59.007Z,32.007,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T13:09:00.009Z,2014-10-14T13:12:30.018Z,210.009,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-10-14T13:12:55.019Z,2014-10-14T14:53:22.214Z,6027.195,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T14:53:46.215Z,2014-10-15T06:05:41.226Z,54715.011,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T06:06:05.227Z,2014-10-15T06:07:13.229Z,68.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T06:07:37.230Z,2014-10-15T06:09:08.233Z,91.003,home activity;miscellaneous;standing;5146 standing packing/unpacking household items occasional lifting
+2014-10-15T06:10:38.234Z,2014-10-15T06:16:45.247Z,367.013,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T06:17:10.248Z,2014-10-15T06:28:34.270Z,684.022,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T06:28:56.271Z,2014-10-15T06:30:28.275Z,92.004,home activity;leisure;activities for maintenance of a household;miscellaneous;9100 social activities involving sitting eating relaxing talking with more than one person
+2014-10-15T06:30:51.276Z,2014-10-15T06:33:34.282Z,163.006,home activity;eating;13030 eating sitting alone or with someone
+2014-10-15T06:33:58.283Z,2014-10-15T06:35:06.286Z,68.003,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-10-15T06:35:29.287Z,2014-10-15T06:38:33.294Z,184.007,home activity;eating;13030 eating sitting alone or with someone
+2014-10-15T06:38:59.295Z,2014-10-15T06:40:56.300Z,117.005,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T06:41:20.301Z,2014-10-15T06:42:07.303Z,47.002,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-10-15T06:42:32.304Z,2014-10-15T06:43:43.306Z,71.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T06:44:08.307Z,2014-10-15T06:45:46.311Z,98.004,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T06:46:25.313Z,2014-10-15T06:46:40.321Z,15.008,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T06:47:04.322Z,2014-10-15T06:48:58.327Z,114.005,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T06:50:21.328Z,2014-10-15T06:52:54.334Z,153.006,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T06:53:40.335Z,2014-10-15T06:54:26.337Z,46.002,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-10-15T06:54:49.338Z,2014-10-15T06:56:00.341Z,71.003,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-10-15T06:56:24.342Z,2014-10-15T06:57:10.344Z,46.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T06:57:34.345Z,2014-10-15T06:58:58.348Z,84.003,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-10-15T06:59:22.349Z,2014-10-15T07:00:12.351Z,50.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T07:00:39.352Z,2014-10-15T07:02:14.356Z,95.004,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T07:02:38.357Z,2014-10-15T07:03:23.359Z,45.002,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
+2014-10-15T07:03:47.360Z,2014-10-15T07:06:46.366Z,179.006,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T07:07:15.367Z,2014-10-15T07:10:05.373Z,170.006,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-10-15T07:10:51.374Z,2014-10-15T07:11:40.376Z,49.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T07:12:03.377Z,2014-10-15T07:13:22.380Z,79.003,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
+2014-10-15T07:13:45.381Z,2014-10-15T07:14:39.383Z,54.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T07:15:05.384Z,2014-10-15T07:21:36.401Z,391.017,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T07:22:01.402Z,2014-10-15T07:23:14.404Z,73.002,home activity;self care;13040 (generic) self care such as grooming/washing hands/shaving/brushing teeth/putting on make-up not eliminating and bathing (not necessary in the toilet)
+2014-10-15T07:23:38.405Z,2014-10-15T07:25:11.409Z,93.004,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T07:25:36.410Z,2014-10-15T07:28:23.417Z,167.007,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T07:29:14.418Z,2014-10-15T07:30:34.421Z,80.003,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T07:30:59.422Z,2014-10-15T07:33:33.428Z,154.006,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+2014-10-15T07:34:42.429Z,2014-10-15T07:46:51.454Z,729.025,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T07:47:17.455Z,2014-10-15T07:50:03.462Z,166.007,transportation;waiting;7021 sitting
+2014-10-15T07:50:28.463Z,2014-10-15T08:07:25.506Z,1017.043,transportation;public transportation;16016 riding in a bus or train
+2014-10-15T08:07:49.507Z,2014-10-15T08:13:54.522Z,365.015,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+2014-10-15T08:14:18.523Z,2014-10-15T08:18:12.533Z,234.01,transportation;waiting;7021 sitting
+2014-10-15T08:18:37.534Z,2014-10-15T08:24:22.547Z,345.013,transportation;public transportation;16016 riding in a bus or train
+2014-10-15T08:24:46.548Z,2014-10-15T08:29:35.560Z,289.012,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-10-15T08:29:59.561Z,2014-10-15T08:33:02.569Z,183.008,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T08:33:26.570Z,2014-10-15T08:51:56.616Z,1110.046,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-10-15T08:52:20.617Z,2014-10-15T08:53:08.619Z,48.002,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
+2014-10-15T08:53:31.620Z,2014-10-15T09:59:06.751Z,3935.131,occupation;office and administrative support;11580 office/computer work general
+2014-10-15T09:59:30.752Z,2014-10-15T10:17:56.797Z,1106.045,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-10-15T10:18:18.798Z,2014-10-15T10:27:03.820Z,525.022,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T10:27:49.821Z,2014-10-15T10:28:38.823Z,49.002,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+2014-10-15T10:29:03.824Z,2014-10-15T10:52:31.882Z,1408.058,transportation;private transportation;1010 bicycling
+2014-10-15T10:52:54.883Z,2014-10-15T10:54:27.885Z,93.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T10:55:05.886Z,2014-10-15T10:55:54.888Z,49.002,home activity;miscellaneous;walking;5121 walking with moving and lifting loads such as bikes and furniture
+2014-10-15T10:56:18.889Z,2014-10-15T10:58:14.893Z,116.004,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T10:58:38.894Z,2014-10-15T10:59:50.897Z,72.003,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
+2014-10-15T11:00:17.898Z,2014-10-15T11:01:27.900Z,70.002,home activity;household chores;washing/ironing/mending clothes;5095 putting away /gathering clothes involving walking
+2014-10-15T11:01:51.901Z,2014-10-15T11:07:20.915Z,329.014,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T11:08:09.916Z,2014-10-15T11:09:18.919Z,69.003,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T11:09:41.920Z,2014-10-15T11:16:14.935Z,393.015,home activity;eating;13030 eating sitting alone or with someone
+2014-10-15T11:16:37.936Z,2014-10-15T11:17:26.938Z,49.002,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T11:17:48.939Z,2014-10-15T11:23:01.952Z,313.013,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T11:23:28.953Z,2014-10-15T11:25:03.957Z,95.004,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T11:25:26.958Z,2014-10-15T11:36:05.983Z,639.025,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T11:36:30.984Z,2014-10-15T11:41:00.994Z,270.01,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T11:41:24.995Z,2014-10-15T11:41:47.996Z,23.001,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T11:42:13.997Z,2014-10-15T11:42:59.999Z,46.002,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T11:43:25.000Z,2014-10-15T11:50:21.017Z,416.017,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T11:50:46.018Z,2014-10-15T11:51:36.020Z,50.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T11:52:00.021Z,2014-10-15T11:56:24.030Z,264.009,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T11:56:47.031Z,2014-10-15T12:05:31.048Z,524.017,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T12:05:57.049Z,2014-10-15T12:21:56.085Z,959.036,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T12:22:41.086Z,2014-10-15T12:24:38.091Z,117.005,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T12:25:03.092Z,2014-10-15T12:26:13.095Z,70.003,home activity;eating;13030 eating sitting alone or with someone
+2014-10-15T12:26:36.096Z,2014-10-15T12:30:06.104Z,210.008,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T12:30:29.105Z,2014-10-15T12:32:00.109Z,91.004,home activity;eating;13030 eating sitting alone or with someone
+2014-10-15T12:32:22.110Z,2014-10-15T12:36:28.118Z,246.008,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T12:36:51.119Z,2014-10-15T12:40:02.126Z,191.007,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T12:40:28.127Z,2014-10-15T12:42:49.133Z,141.006,home activity;leisure;activities for maintenance of a household;with children;5170 sitting playing with child(ren)
+2014-10-15T12:43:36.134Z,2014-10-15T12:44:23.136Z,47.002,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T12:44:47.137Z,2014-10-15T12:52:52.155Z,485.018,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T12:53:16.156Z,2014-10-15T12:58:24.169Z,308.013,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T12:58:47.170Z,2014-10-15T12:59:56.173Z,69.003,home activity;eating;13035 eating standing alone or with others
+2014-10-15T13:00:19.174Z,2014-10-15T13:01:48.177Z,89.003,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-10-15T13:02:12.178Z,2014-10-15T13:12:36.203Z,624.025,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T13:13:00.204Z,2014-10-15T13:13:48.206Z,48.002,home activity;leisure;activities for maintenance of a household;with children;5170 sitting playing with child(ren)
+2014-10-15T13:14:13.207Z,2014-10-15T13:16:55.214Z,162.007,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-10-15T13:17:19.215Z,2014-10-15T13:23:40.230Z,381.015,home activity;leisure;activities for maintenance of a household;with children;5170 sitting playing with child(ren)
+2014-10-15T13:24:04.231Z,2014-10-15T13:24:50.233Z,46.002,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T13:25:38.234Z,2014-10-15T13:27:56.240Z,138.006,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T13:28:21.241Z,2014-10-15T13:30:18.246Z,117.005,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-10-15T13:30:42.247Z,2014-10-15T13:45:44.276Z,902.029,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T13:46:08.277Z,2014-10-15T13:49:37.285Z,209.008,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T13:50:00.286Z,2014-10-15T13:58:07.305Z,487.019,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T13:58:30.306Z,2014-10-15T14:03:09.317Z,279.011,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-10-15T14:03:32.318Z,2014-10-15T14:17:02.352Z,810.034,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T14:17:47.353Z,2014-10-15T14:18:20.354Z,33.001,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T14:18:46.355Z,2014-10-15T14:21:38.362Z,172.007,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-10-15T14:22:03.363Z,2014-10-15T14:23:13.366Z,70.003,transportation;waiting;7021 sitting
+2014-10-15T14:23:37.367Z,2014-10-15T14:28:28.378Z,291.011,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T14:29:15.379Z,2014-10-15T14:32:52.388Z,217.009,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-10-15T14:33:16.389Z,2014-10-15T14:34:57.393Z,101.004,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T14:35:24.394Z,2014-10-15T14:36:13.396Z,49.002,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T14:36:37.397Z,2014-10-15T14:37:26.399Z,49.002,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
+2014-10-15T14:37:51.400Z,2014-10-15T14:51:23.426Z,812.026,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T14:51:48.427Z,2014-10-15T14:56:26.438Z,278.011,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T14:56:49.439Z,2014-10-15T15:03:39.457Z,410.018,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T15:04:06.458Z,2014-10-15T15:05:40.462Z,94.004,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-10-15T15:06:03.463Z,2014-10-15T15:18:03.493Z,720.03,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T15:18:28.494Z,2014-10-15T15:19:40.496Z,72.002,home activity;miscellaneous;walking;5147 walking moving away light items (pens/papers/keys not included)
+2014-10-15T15:20:30.497Z,2014-10-15T15:24:48.508Z,258.011,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T15:25:34.509Z,2014-10-15T15:27:53.515Z,139.006,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-10-15T15:28:16.516Z,2014-10-15T15:32:58.528Z,282.012,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T15:33:22.529Z,2014-10-15T15:35:40.535Z,138.006,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T15:36:25.536Z,2014-10-15T15:38:02.540Z,97.004,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-10-15T15:39:10.541Z,2014-10-15T15:40:32.544Z,82.003,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T15:40:56.545Z,2014-10-15T15:43:49.552Z,173.007,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T15:44:12.553Z,2014-10-15T15:51:12.570Z,420.017,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T15:51:39.571Z,2014-10-15T15:53:34.574Z,115.003,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T15:53:59.575Z,2014-10-15T16:12:06.613Z,1087.038,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T16:13:01.614Z,2014-10-15T16:15:07.618Z,126.004,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T16:15:42.619Z,2014-10-15T16:17:16.622Z,94.003,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T16:17:39.623Z,2014-10-15T17:02:45.732Z,2706.109,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T17:03:10.733Z,2014-10-15T17:03:55.735Z,45.002,home activity;leisure;activities for maintenance of a household;miscellaneous;9100 social activities involving sitting eating relaxing talking with more than one person
+2014-10-15T17:04:18.736Z,2014-10-15T17:05:03.738Z,45.002,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T17:05:27.739Z,2014-10-15T17:11:41.755Z,374.016,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T17:12:25.756Z,2014-10-15T17:13:34.758Z,69.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T17:13:57.759Z,2014-10-15T17:15:05.762Z,68.003,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T17:16:12.763Z,2014-10-15T17:20:11.773Z,239.01,home activity;leisure;activities for maintenance of a household;miscellaneous;9100 social activities involving sitting eating relaxing talking with more than one person
+2014-10-15T17:20:36.774Z,2014-10-15T17:22:34.779Z,118.005,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T17:22:56.780Z,2014-10-15T17:24:05.782Z,69.002,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T17:24:29.783Z,2014-10-15T17:25:14.785Z,45.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T17:25:37.786Z,2014-10-15T17:29:14.795Z,217.009,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T17:29:38.796Z,2014-10-15T17:33:14.805Z,216.009,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-10-15T17:33:37.806Z,2014-10-15T17:36:30.811Z,173.005,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T17:36:53.812Z,2014-10-15T17:39:05.818Z,132.006,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T17:40:37.819Z,2014-10-15T17:50:37.837Z,600.018,home activity;miscellaneous;sitting;5080 sitting non-desk work (with or without eating at the same time)
+2014-10-15T17:51:02.838Z,2014-10-15T18:32:01.914Z,2459.076,home activity;miscellaneous;sitting;5080 sitting non-desk work (with or without eating at the same time)
+2014-10-15T18:32:48.915Z,2014-10-15T18:33:36.917Z,48.002,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
+2014-10-15T18:34:21.918Z,2014-10-15T18:35:07.920Z,46.002,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T18:35:30.921Z,2014-10-15T18:36:42.924Z,72.003,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T18:37:07.925Z,2014-10-15T18:50:03.955Z,776.03,home activity;child/elderly/pet care;child care;5188 reclining with baby
+2014-10-15T18:50:30.956Z,2014-10-15T18:57:49.973Z,439.017,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T18:58:12.974Z,2014-10-15T19:01:58.983Z,226.009,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-15T19:02:23.984Z,2014-10-15T19:05:49.991Z,206.007,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T19:06:35.992Z,2014-10-15T19:49:53.081Z,2597.089,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T19:50:18.082Z,2014-10-15T19:51:27.084Z,69.002,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T19:52:00.085Z,2014-10-15T20:15:25.134Z,1405.049,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-10-15T20:15:50.135Z,2014-10-15T20:18:36.142Z,166.007,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T20:19:00.143Z,2014-10-15T20:20:09.146Z,69.003,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T20:20:32.147Z,2014-10-15T20:21:30.149Z,58.002,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T20:21:53.150Z,2014-10-15T20:25:32.159Z,219.009,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T20:25:55.160Z,2014-10-15T20:29:07.168Z,192.008,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T20:29:31.169Z,2014-10-15T20:43:17.197Z,826.028,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-15T20:44:02.198Z,2014-10-15T20:47:48.207Z,226.009,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T20:48:13.208Z,2014-10-15T20:49:19.210Z,66.002,uncodeable;0002 image dark/blurred/obscured
+2014-10-15T20:49:42.211Z,2014-10-15T21:23:02.282Z,2000.071,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-10-15T21:23:26.283Z,2014-10-15T21:25:02.287Z,96.004,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-15T21:25:26.288Z,2014-10-15T21:27:13.292Z,107.004,home activity;miscellaneous;standing;9020 standing writing/drawing/painting

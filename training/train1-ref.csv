@@ -1,79 +1,127 @@
-participant,startTime,endTime,source,annotation
-p009,24/06/2014 06:11:00,24/06/2014 06:14:59,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p009,24/06/2014 06:15:00,24/06/2014 06:44:59,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p009,24/06/2014 06:45:00,24/06/2014 06:46:59,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p009,24/06/2014 06:47:00,24/06/2014 06:55:59,images,leisure;sports;gymnasium and athletics;athletics;12150 running
-p009,24/06/2014 06:56:00,24/06/2014 06:58:59,images,uncodeable;0002 image dark/blurred/obscured
-p009,24/06/2014 06:59:00,24/06/2014 07:19:59,images,leisure;sports;gymnasium and athletics;athletics;12150 running
-p009,24/06/2014 07:20:00,24/06/2014 07:30:59,images,uncodeable;0001 camera taken off
-p009,24/06/2014 07:31:00,24/06/2014 07:30:59,images,uncodeable;0002 image dark/blurred/obscured
-p009,24/06/2014 07:31:00,24/06/2014 07:31:59,images,home activity;miscellaneous;standing;9071 (generic) standing miscellaneous
-p009,24/06/2014 07:32:00,24/06/2014 07:33:59,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
-p009,24/06/2014 07:34:00,24/06/2014 07:36:59,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p009,24/06/2014 07:37:00,24/06/2014 07:41:00,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
-p009,24/06/2014 07:41:01,24/06/2014 07:44:36,images,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
-p009,24/06/2014 07:44:37,24/06/2014 08:23:15,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
-p009,24/06/2014 07:23:16,24/06/2014 07:30:40,images,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
-p009,24/06/2014 07:30:41,24/06/2014 08:51:59,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
-p009,24/06/2014 08:52:00,24/06/2014 08:53:59,images,uncodeable;0002 image dark/blurred/obscured
-p009,24/06/2014 08:54:00,24/06/2014 08:55:59,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p009,24/06/2014 08:56:00,24/06/2014 08:58:59,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p009,24/06/2014 08:59:00,24/06/2014 09:00:59,images,home activity;miscellaneous;standing;9071 (generic) standing miscellaneous
-p009,24/06/2014 09:01:00,24/06/2014 09:02:59,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p009,24/06/2014 09:03:00,24/06/2014 09:07:59,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p009,24/06/2014 09:08:00,24/06/2014 09:35:10,images,leisure;eating;13030 eating sitting indoor/outdoor
-p009,24/06/2014 09:35:12,24/06/2014 09:45:59,images,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
-p009,24/06/2014 09:46:00,24/06/2014 10:09:59,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p009,24/06/2014 10:10:00,24/06/2014 10:14:59,images,leisure;miscellaneous;5060 shopping miscellaneous
-p009,24/06/2014 10:15:00,24/06/2014 10:17:59,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p009,24/06/2014 10:18:00,24/06/2014 10:24:59,images,leisure;miscellaneous;5060 shopping miscellaneous
-p009,24/06/2014 10:25:00,24/06/2014 10:35:59,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p009,24/06/2014 10:36:00,24/06/2014 10:39:59,images,leisure;miscellaneous;9071 (generic) standing miscellaneous
-p009,24/06/2014 10:40:00,24/06/2014 10:46:40,images,leisure;miscellaneous;21005 (generic) sitting light office work
-p009,24/06/2014 10:46:41,24/06/2014 10:56:23,images,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
-p009,24/06/2014 10:56:24,24/06/2014 11:01:59,images,leisure;miscellaneous;21005 (generic) sitting light office work
-p009,24/06/2014 11:02:00,24/06/2014 11:06:59,images,uncodeable;0002 image dark/blurred/obscured
-p009,24/06/2014 11:07:00,24/06/2014 11:18:59,images,leisure;miscellaneous;standing;9050 standing talking in person/using a phone/smartphone/tablet
-p009,24/06/2014 11:19:00,24/06/2014 11:31:59,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p009,24/06/2014 11:32:00,24/06/2014 11:33:59,images,leisure;miscellaneous;9071 (generic) standing miscellaneous
-p009,24/06/2014 11:34:00,24/06/2014 11:37:59,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p009,24/06/2014 11:38:00,24/06/2014 11:40:59,images,leisure;miscellaneous;9071 (generic) standing miscellaneous
-p009,24/06/2014 11:41:00,24/06/2014 12:05:59,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p009,24/06/2014 12:06:00,24/06/2014 13:44:55,images,leisure;eating;13030 eating sitting indoor/outdoor
-p009,24/06/2014 13:44:56,24/06/2014 13:55:59,images,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
-p009,24/06/2014 13:56:00,24/06/2014 14:28:59,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
-p009,24/06/2014 14:29:00,24/06/2014 14:30:59,images,transportation;waiting;7040 standing in a line
-p009,24/06/2014 14:31:00,24/06/2014 14:35:59,images,transportation;public transportation;16016 riding in a bus or train
-p009,24/06/2014 14:36:00,24/06/2014 14:39:59,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
-p009,24/06/2014 14:40:00,24/06/2014 14:41:59,images,occupation;interruption;11791 walking on job in office or lab area
-p009,24/06/2014 14:42:00,24/06/2014 14:43:59,images,occupation;interruption;5041 kitchen activity in the working place
-p009,24/06/2014 14:44:00,24/06/2014 14:59:59,images,occupation;interruption;11585 sitting meeting with or without eating
-p009,24/06/2014 15:00:00,24/06/2014 15:32:59,images,occupation;office and administrative support;11580 office wok/computer work general
-p009,24/06/2014 15:33:00,24/06/2014 15:35:59,images,leisure;miscellaneous;9071 (generic) standing miscellaneous
-p009,24/06/2014 15:36:00,24/06/2014 15:53:59,images,occupation;interruption;11585 sitting meeting with or without eating
-p009,24/06/2014 15:54:00,24/06/2014 16:16:59,images,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
-p009,24/06/2014 16:17:00,24/06/2014 16:18:59,images,occupation;interruption;9060 sitting using mobile/smartphone or talking on phone/computer
-p009,24/06/2014 16:19:00,24/06/2014 16:50:24,images,occupation;office and administrative support;11580 office wok/computer work general
-p009,24/06/2014 16:50:25,24/06/2014 17:00:41,images,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
-p009,24/06/2014 17:00:42,24/06/2014 17:12:59,images,occupation;office and administrative support;11580 office wok/computer work general
-p009,24/06/2014 17:13:00,24/06/2014 17:17:59,images,uncodeable;0001 camera taken off
-p009,24/06/2014 17:18:00,24/06/2014 17:53:59,images,occupation;office and administrative support;11580 office wok/computer work general
-p009,24/06/2014 17:54:00,24/06/2014 18:02:59,images,uncodeable;0002 image dark/blurred/obscured
-p009,24/06/2014 18:03:00,24/06/2014 18:03:59,images,occupation;interruption;11791 walking on job in office or lab area
-p009,24/06/2014 18:04:00,24/06/2014 18:25:59,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p009,24/06/2014 18:26:00,24/06/2014 18:29:23,images,leisure;eating;13030 eating sitting indoor/outdoor
-p009,24/06/2014 18:29:24,24/06/2014 18:39:37,images,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
-p009,24/06/2014 18:39:38,24/06/2014 19:08:59,images,leisure;eating;13030 eating sitting indoor/outdoor
-p009,24/06/2014 19:09:00,24/06/2014 19:17:59,images,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
-p009,24/06/2014 19:18:00,24/06/2014 19:19:59,images,leisure;miscellaneous;9071 (generic) standing miscellaneous
-p009,24/06/2014 19:20:00,24/06/2014 19:22:59,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p009,24/06/2014 19:23:00,24/06/2014 19:31:59,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
-p009,24/06/2014 19:32:00,24/06/2014 19:33:59,images,home activity;miscellaneous;sitting;9060 sitting reading or using mobile/smartphone or talking on phone/computer
-p009,24/06/2014 19:34:00,24/06/2014 19:36:59,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p009,24/06/2014 19:37:00,24/06/2014 20:12:59,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
-p009,24/06/2014 20:13:00,24/06/2014 20:15:59,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p009,24/06/2014 20:16:00,24/06/2014 20:25:59,images,uncodeable;0002 image dark/blurred/obscured
-p009,24/06/2014 20:26:00,24/06/2014 20:28:59,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p009,24/06/2014 20:29:00,24/06/2014 20:33:59,images,uncodeable;0002 image dark/blurred/obscured
-p009,24/06/2014 20:34:00,24/06/2014 21:05:59,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
-p009,24/06/2014 21:06:02,24/06/2014 22:27:35,images,uncodeable;0001 camera taken off
+startTime,endTime,duration,annotation
+2014-06-23T09:52:10.000Z,2014-06-24T05:11:30.003Z,69560.003,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+2014-06-24T05:11:57.004Z,2014-06-24T05:13:52.009Z,115.005,home activity;miscellaneous;walking;5165 (generic) walking non-cleaning task such as closing windows lock door putting away items
+2014-06-24T05:15:00.010Z,2014-06-24T05:38:33.061Z,1413.051,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-06-24T05:38:57.062Z,2014-06-24T05:39:54.064Z,57.002,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-06-24T05:40:39.065Z,2014-06-24T05:42:14.069Z,95.004,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-06-24T05:42:41.070Z,2014-06-24T05:44:53.074Z,132.004,uncodeable;0001 camera taken off
+2014-06-24T05:45:38.075Z,2014-06-24T05:47:18.078Z,100.003,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-06-24T05:47:41.079Z,2014-06-24T05:56:12.100Z,511.021,leisure;sports;gymnasium and athletics;athletics;12150 running
+2014-06-24T05:56:37.101Z,2014-06-24T05:58:54.106Z,137.005,uncodeable;0002 image dark/blurred/obscured
+2014-06-24T05:59:19.107Z,2014-06-24T06:02:52.116Z,213.009,leisure;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-06-24T06:03:16.117Z,2014-06-24T06:20:31.168Z,1035.051,leisure;sports;gymnasium and athletics;athletics;12150 running
+2014-06-24T06:20:39.169Z,2014-06-24T06:30:59.189Z,620.02,uncodeable;0001 camera taken off
+2014-06-24T06:31:01.190Z,2014-06-24T06:31:01.192Z,0.002,uncodeable;0002 image dark/blurred/obscured
+2014-06-24T06:31:02.193Z,2014-06-24T06:32:31.200Z,89.007,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-06-24T06:32:54.201Z,2014-06-24T06:33:40.203Z,46.002,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-06-24T06:34:03.204Z,2014-06-24T06:36:46.211Z,163.007,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-06-24T06:37:10.212Z,2014-06-24T06:41:18.222Z,248.01,occupation;office and administrative support;11580 office/computer work general
+2014-06-24T06:41:41.223Z,2014-06-24T06:44:35.229Z,174.006,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-06-24T06:44:59.230Z,2014-06-24T07:23:38.321Z,2319.091,home activity;miscellaneous;sitting;11580 office/computer work general
+2014-06-24T07:24:03.322Z,2014-06-24T07:30:39.336Z,396.014,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-06-24T07:31:03.337Z,2014-06-24T07:51:40.387Z,1237.05,home activity;miscellaneous;sitting;11580 office/computer work general
+2014-06-24T07:52:05.388Z,2014-06-24T07:53:55.392Z,110.004,uncodeable;0002 image dark/blurred/obscured
+2014-06-24T07:54:21.393Z,2014-06-24T07:56:08.396Z,107.003,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-06-24T07:56:34.397Z,2014-06-24T07:59:02.403Z,148.006,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-06-24T07:59:25.404Z,2014-06-24T08:01:28.408Z,123.004,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-06-24T08:01:51.409Z,2014-06-24T08:03:00.412Z,69.003,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-06-24T08:03:48.413Z,2014-06-24T08:07:39.423Z,231.01,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T08:08:01.424Z,2014-06-24T08:10:08.429Z,127.005,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T08:10:31.430Z,2014-06-24T08:12:03.434Z,92.004,leisure;eating;social;13030 eating sitting indoor/outdoor
+2014-06-24T08:12:26.435Z,2014-06-24T08:13:14.437Z,48.002,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T08:13:37.438Z,2014-06-24T08:22:29.461Z,532.023,leisure;eating;social;13030 eating sitting indoor/outdoor
+2014-06-24T08:22:53.462Z,2014-06-24T08:23:40.464Z,47.002,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+2014-06-24T08:24:03.465Z,2014-06-24T08:34:47.491Z,644.026,leisure;eating;social;13030 eating sitting indoor/outdoor
+2014-06-24T08:35:12.492Z,2014-06-24T08:46:00.517Z,648.025,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T08:46:23.518Z,2014-06-24T09:09:54.578Z,1411.06,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T09:10:21.579Z,2014-06-24T09:15:28.592Z,307.013,leisure;miscellaneous;walking;5060 shopping miscellaneous
+2014-06-24T09:15:51.593Z,2014-06-24T09:17:47.598Z,116.005,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T09:18:12.599Z,2014-06-24T09:25:11.616Z,419.017,leisure;miscellaneous;walking;5060 shopping miscellaneous
+2014-06-24T09:25:36.617Z,2014-06-24T09:36:25.645Z,649.028,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T09:36:48.646Z,2014-06-24T09:37:34.648Z,46.002,leisure;miscellaneous;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-06-24T09:37:57.649Z,2014-06-24T09:40:18.655Z,141.006,leisure;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-06-24T09:40:42.656Z,2014-06-24T09:42:19.660Z,97.004,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+2014-06-24T09:42:42.661Z,2014-06-24T09:46:18.670Z,216.009,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T09:46:42.671Z,2014-06-24T09:56:22.696Z,580.025,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+2014-06-24T09:56:45.697Z,2014-06-24T09:57:54.700Z,69.003,leisure;miscellaneous;sitting;21005 (generic) sitting light office writing typing work
+2014-06-24T09:58:18.701Z,2014-06-24T10:00:58.708Z,160.007,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+2014-06-24T10:01:22.709Z,2014-06-24T10:02:10.711Z,48.002,leisure;miscellaneous;walking;21070 (generic) walking and occasional standing (no more than two consecutive images)
+2014-06-24T10:02:33.712Z,2014-06-24T10:07:20.721Z,287.009,uncodeable;0002 image dark/blurred/obscured
+2014-06-24T10:07:55.722Z,2014-06-24T10:11:15.730Z,200.008,leisure;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-06-24T10:11:38.731Z,2014-06-24T10:17:27.745Z,349.014,leisure;miscellaneous;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-06-24T10:17:50.746Z,2014-06-24T10:18:37.748Z,47.002,leisure;miscellaneous;walking;21070 (generic) walking and occasional standing (no more than two consecutive images)
+2014-06-24T10:19:01.749Z,2014-06-24T10:27:35.771Z,514.022,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T10:27:59.772Z,2014-06-24T10:29:30.776Z,91.004,transportation;walking;9050 standing miscellaneous (talking to others etc.)
+2014-06-24T10:29:53.777Z,2014-06-24T10:32:32.784Z,159.007,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T10:32:55.785Z,2014-06-24T10:33:42.787Z,47.002,transportation;walking;9050 standing miscellaneous (talking to others etc.)
+2014-06-24T10:34:04.788Z,2014-06-24T10:37:35.797Z,211.009,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T10:37:58.798Z,2014-06-24T10:40:39.805Z,161.007,transportation;walking;9050 standing miscellaneous (talking to others etc.)
+2014-06-24T10:41:04.806Z,2014-06-24T11:02:24.859Z,1280.053,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T11:02:48.860Z,2014-06-24T11:04:47.865Z,119.005,transportation;walking;9050 standing miscellaneous (talking to others etc.)
+2014-06-24T11:05:11.866Z,2014-06-24T11:05:59.868Z,48.002,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T11:06:24.869Z,2014-06-24T11:08:01.873Z,97.004,leisure;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-06-24T11:08:24.874Z,2014-06-24T11:27:41.921Z,1157.047,leisure;eating;social;13030 eating sitting indoor/outdoor
+2014-06-24T11:28:05.922Z,2014-06-24T11:29:22.932Z,77.01,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T11:29:46.933Z,2014-06-24T11:34:48.946Z,302.013,leisure;eating;social;13030 eating sitting indoor/outdoor
+2014-06-24T11:35:11.947Z,2014-06-24T11:47:36.978Z,745.031,leisure;eating;social;13030 eating sitting indoor/outdoor
+2014-06-24T11:47:59.979Z,2014-06-24T11:48:48.981Z,49.002,leisure;miscellaneous;walking;21070 (generic) walking and occasional standing (no more than two consecutive images)
+2014-06-24T11:49:10.982Z,2014-06-24T11:56:00.999Z,410.017,leisure;eating;not-social;5060 buying foods or drinks as a takeaway
+2014-06-24T11:56:23.000Z,2014-06-24T12:31:51.090Z,2128.09,leisure;eating;social;13030 eating sitting indoor/outdoor
+2014-06-24T12:32:14.091Z,2014-06-24T12:43:26.120Z,672.029,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T12:43:49.121Z,2014-06-24T12:44:34.123Z,45.002,leisure;miscellaneous;sitting;21005 (generic) sitting light office writing typing work
+2014-06-24T12:44:57.124Z,2014-06-24T12:46:27.128Z,90.004,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+2014-06-24T12:46:49.129Z,2014-06-24T12:47:36.131Z,47.002,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T12:47:59.132Z,2014-06-24T12:51:24.141Z,205.009,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+2014-06-24T12:51:47.142Z,2014-06-24T12:55:28.151Z,221.009,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T12:55:53.152Z,2014-06-24T13:11:10.191Z,917.039,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T13:11:33.192Z,2014-06-24T13:14:39.200Z,186.008,transportation;walking;9050 standing miscellaneous (talking to others etc.)
+2014-06-24T13:15:03.201Z,2014-06-24T13:28:45.236Z,822.035,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+2014-06-24T13:29:09.237Z,2014-06-24T13:30:41.241Z,92.004,transportation;waiting;7040 standing
+2014-06-24T13:31:06.242Z,2014-06-24T13:35:58.252Z,292.01,transportation;public transportation;16016 riding in a bus or train
+2014-06-24T13:36:22.253Z,2014-06-24T13:39:08.259Z,166.006,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+2014-06-24T13:39:32.260Z,2014-06-24T13:44:22.270Z,290.01,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-06-24T13:44:45.271Z,2014-06-24T13:59:51.310Z,906.039,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-06-24T14:00:14.311Z,2014-06-24T14:07:39.330Z,445.019,occupation;office and administrative support;11580 office/computer work general
+2014-06-24T14:08:01.331Z,2014-06-24T14:20:17.357Z,736.026,occupation;office and administrative support;11580 office/computer work general
+2014-06-24T14:20:40.358Z,2014-06-24T14:33:03.390Z,743.032,occupation;office and administrative support;11580 office/computer work general
+2014-06-24T14:33:26.391Z,2014-06-24T14:36:07.398Z,161.007,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-06-24T14:36:31.399Z,2014-06-24T14:53:39.440Z,1028.041,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-06-24T14:54:04.441Z,2014-06-24T15:10:03.482Z,959.041,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-06-24T15:10:25.483Z,2014-06-24T15:16:59.500Z,394.017,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-06-24T15:17:22.501Z,2014-06-24T15:18:27.503Z,65.002,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-06-24T15:19:01.504Z,2014-06-24T15:50:02.578Z,1861.074,occupation;office and administrative support;11580 office/computer work general
+2014-06-24T15:50:25.579Z,2014-06-24T16:00:41.602Z,616.023,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-06-24T16:01:04.603Z,2014-06-24T16:13:29.633Z,745.03,occupation;office and administrative support;11580 office/computer work general
+2014-06-24T16:13:53.634Z,2014-06-24T16:17:45.641Z,232.007,uncodeable;0001 camera taken off
+2014-06-24T16:18:08.642Z,2014-06-24T16:43:54.701Z,1546.059,occupation;office and administrative support;11580 office/computer work general
+2014-06-24T16:44:20.702Z,2014-06-24T16:45:29.705Z,69.003,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
+2014-06-24T16:45:52.706Z,2014-06-24T16:54:09.724Z,497.018,occupation;office and administrative support;11580 office/computer work general
+2014-06-24T16:54:33.725Z,2014-06-24T17:02:48.744Z,495.019,uncodeable;0002 image dark/blurred/obscured
+2014-06-24T17:03:12.745Z,2014-06-24T17:04:00.747Z,48.002,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-06-24T17:04:24.748Z,2014-06-24T17:26:18.804Z,1314.056,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T17:26:42.805Z,2014-06-24T17:28:39.810Z,117.005,leisure;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-06-24T17:29:24.811Z,2014-06-24T17:39:37.835Z,613.024,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T17:39:59.836Z,2014-06-24T17:55:11.874Z,912.038,leisure;eating;not-social;13030 eating sitting indoor/outdoor
+2014-06-24T17:55:34.875Z,2014-06-24T17:56:24.877Z,50.002,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T17:56:49.878Z,2014-06-24T17:58:43.883Z,114.005,leisure;eating;not-social;13030 eating sitting indoor/outdoor
+2014-06-24T17:59:28.884Z,2014-06-24T18:01:01.888Z,93.004,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T18:01:25.889Z,2014-06-24T18:02:39.892Z,74.003,leisure;eating;not-social;13030 eating sitting indoor/outdoor
+2014-06-24T18:03:25.893Z,2014-06-24T18:05:09.896Z,104.003,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+2014-06-24T18:05:32.897Z,2014-06-24T18:07:30.902Z,118.005,leisure;eating;not-social;13030 eating sitting indoor/outdoor
+2014-06-24T18:07:55.903Z,2014-06-24T18:18:22.924Z,627.021,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-06-24T18:18:45.925Z,2014-06-24T18:19:54.928Z,69.003,leisure;miscellaneous;standing;9071 (generic) standing miscellaneous
+2014-06-24T18:20:19.929Z,2014-06-24T18:23:07.936Z,168.007,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-06-24T18:23:30.937Z,2014-06-24T18:25:00.939Z,90.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-06-24T18:25:24.940Z,2014-06-24T18:31:43.952Z,379.012,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-06-24T18:32:05.953Z,2014-06-24T18:34:09.957Z,124.004,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-06-24T18:34:33.958Z,2014-06-24T18:36:52.964Z,139.006,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-06-24T18:37:14.965Z,2014-06-24T19:01:46.022Z,1471.057,home activity;miscellaneous;sitting;11580 office/computer work general
+2014-06-24T19:02:09.023Z,2014-06-24T19:03:05.025Z,56.002,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-06-24T19:03:31.026Z,2014-06-24T19:13:24.049Z,593.023,home activity;miscellaneous;sitting;11580 office/computer work general
+2014-06-24T19:13:46.050Z,2014-06-24T19:15:47.055Z,121.005,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-06-24T19:16:10.056Z,2014-06-24T19:26:14.080Z,604.024,uncodeable;0002 image dark/blurred/obscured
+2014-06-24T19:26:44.081Z,2014-06-24T19:28:50.086Z,126.005,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-06-24T19:29:14.087Z,2014-06-24T19:33:34.096Z,260.009,uncodeable;0002 image dark/blurred/obscured
+2014-06-24T19:34:23.097Z,2014-06-24T20:03:51.177Z,1768.08,home activity;miscellaneous;sitting;11580 office/computer work general
+2014-06-24T20:03:52.178Z,2014-06-24T20:05:34.183Z,102.005,home activity;miscellaneous;sitting;9030 sitting desk entertainment/hobby (with or without eating at the same time)
+2014-06-24T20:06:01.184Z,2014-06-24T21:27:35.332Z,4894.148,uncodeable;0001 camera taken off

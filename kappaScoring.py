@@ -35,8 +35,8 @@ def main():
         print 'participant = ', args.participantStr
 
     # auto determine I/O file names
-    fileListTxt = args.imageListsDir + args.participantStr + '-imageList.txt'
-    refAnnotationsCsv = args.refDir + args.participantStr + '-Salma-activities.csv'
+    fileListTxt = args.imageListsDir + args.participantStr + '-fileList.txt'
+    refAnnotationsCsv = args.refDir + args.participantStr + '-ref.csv'
     feedbackHtml = args.annotationsCsv.replace('.csv','-feedback.html')
 
     # call main method to evaluate annotation performance

@@ -1,103 +1,111 @@
-participant,startTime,endTime,source,annotation
-p004,14/10/2014 08:21:48,14/10/2014 08:23:22,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p004,14/10/2014 08:23:45,14/10/2014 08:27:24,images,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
-p004,14/10/2014 08:27:47,14/10/2014 08:28:56,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable activities
-p004,14/10/2014 08:29:19,14/10/2014 08:36:42,images,home activity;miscellaneous;walking;5165 (generic) walking non-cleaning task such as closing windows lock door putting away items
-p004,14/10/2014 08:37:11,14/10/2014 08:40:23,images,transportation;walking;17250 walking as the single means to a destination not to work or class
-p004,14/10/2014 08:40:46,14/10/2014 08:42:18,images,leisure;eating;5060 buying foods or drinks as a takeaway
-p004,14/10/2014 08:42:43,14/10/2014 08:47:29,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
-p004,14/10/2014 08:47:31,14/10/2014 08:59:50,images,transportation;waiting;7021 sitting
-p004,14/10/2014 09:00:12,14/10/2014 09:01:47,images,transportation;walking;9050 standing miscellaneous (talking to others etc.)
-p004,14/10/2014 09:02:10,14/10/2014 09:14:18,images,transportation;waiting;7021 sitting
-p004,14/10/2014 09:14:41,14/10/2014 09:17:03,images,transportation;waiting;7040 standing in a line
-p004,14/10/2014 09:17:25,14/10/2014 09:22:10,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 09:22:37,14/10/2014 09:24:28,images,transportation;public transportation;16016 riding in a bus or train
-p004,14/10/2014 09:25:17,14/10/2014 09:26:29,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
-p004,14/10/2014 09:27:16,14/10/2014 09:28:30,images,occupation;interruption;11791 walking on job in office or lab area
-p004,14/10/2014 09:29:18,14/10/2014 09:30:50,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 09:31:15,14/10/2014 09:34:03,images,occupation;interruption;11791 walking on job in office or lab area
-p004,14/10/2014 09:34:26,14/10/2014 09:42:25,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 09:42:49,14/10/2014 09:47:30,images,occupation;interruption;11791 walking on job in office or lab area
-p004,14/10/2014 09:47:53,14/10/2014 09:57:38,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 09:58:10,14/10/2014 10:00:28,images,occupation;interruption;9050 standing talking in persone/using a phone/smartphone/tablet
-p004,14/10/2014 10:01:14,14/10/2014 10:49:21,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 10:49:44,14/10/2014 10:59:56,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 11:00:19,14/10/2014 11:59:37,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 12:00:00,14/10/2014 12:24:55,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 12:25:19,14/10/2014 12:37:45,images,occupation;interruption;13030 eating sitting
-p004,14/10/2014 12:38:10,14/10/2014 12:39:28,images,occupation;interruption;17133 walking upstairs
-p004,14/10/2014 12:39:54,14/10/2014 12:43:03,images,occupation;interruption;5041 kitchen activity in the working place
-p004,14/10/2014 12:43:28,14/10/2014 12:59:54,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 13:00:19,14/10/2014 14:05:14,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 14:06:02,14/10/2014 14:07:15,images,occupation;interruption;5041 kitchen activity in the working place
-p004,14/10/2014 14:07:39,14/10/2014 14:10:20,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 14:10:43,14/10/2014 14:21:46,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 14:22:09,14/10/2014 14:42:13,images,occupation;interruption;11585 sitting meeting/talking to colleagues with or without eating
-p004,14/10/2014 14:42:37,14/10/2014 14:59:53,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 15:00:26,14/10/2014 15:25:11,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 15:25:36,14/10/2014 15:27:11,images,occupation;interruption;11791 walking on job in office or lab area
-p004,14/10/2014 15:27:35,14/10/2014 15:52:10,images,occupation;interruption;13030 eating sitting
-p004,14/10/2014 15:52:35,14/10/2014 15:57:32,images,occupation;interruption;11791 walking on job in office or lab area
-p004,14/10/2014 15:58:19,14/10/2014 16:01:02,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 16:01:25,14/10/2014 16:08:51,images,occupation;interruption;11585 sitting meeting/talking to colleages with or without eating
-p004,14/10/2014 16:09:15,14/10/2014 16:11:38,images,occupation;interruption;11791 walking on job in office or lab area
-p004,14/10/2014 16:12:02,14/10/2014 16:13:59,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 16:14:22,14/10/2014 16:16:20,images,occupation;interruption;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
-p004,14/10/2014 16:16:43,14/10/2014 16:39:54,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 16:40:18,14/10/2014 16:41:06,images,occupation;interruption;9060 (generic) sitting without observable activities
-p004,14/10/2014 16:41:28,14/10/2014 16:59:43,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 17:00:06,14/10/2014 17:49:01,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 17:49:23,14/10/2014 17:51:18,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 17:51:41,14/10/2014 17:52:52,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 17:53:38,14/10/2014 17:54:23,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 17:54:47,14/10/2014 17:55:56,images,occupation;office and administrative support;11580 office wok/computer work general
-p004,14/10/2014 17:56:20,14/10/2014 17:57:30,images,occupation;interruption;11791 walking on job in office or lab area
-p004,14/10/2014 17:57:31,14/10/2014 18:00:56,nonWear, <unknown>
-p004,14/10/2014 18:00:57,14/10/2014 18:00:57,images,occupation;interruption;11791 walking on job in office or lab area
-p004,14/10/2014 18:01:20,14/10/2014 18:04:44,images,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
-p004,14/10/2014 18:05:40,14/10/2014 18:12:20,images,transportation;public transportation;16016 riding in a bus or train
-p004,14/10/2014 18:12:21,14/10/2014 18:15:50,nonWear, <unknown>
-p004,14/10/2014 18:15:51,14/10/2014 18:33:22,images,leisure;miscellaneous;walking;5060 shopping miscellaneous
-p004,14/10/2014 18:33:45,14/10/2014 18:34:32,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 18:34:57,14/10/2014 18:37:15,images,leisure;miscellaneous;walking;5060 shopping miscellaneous
-p004,14/10/2014 18:39:28,14/10/2014 18:43:21,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 18:43:44,14/10/2014 18:47:38,images,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
-p004,14/10/2014 18:48:03,14/10/2014 18:48:52,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p004,14/10/2014 18:49:15,14/10/2014 18:50:02,images,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
-p004,14/10/2014 18:50:25,14/10/2014 18:59:45,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p004,14/10/2014 19:00:31,14/10/2014 19:03:11,images,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
-p004,14/10/2014 19:03:35,14/10/2014 19:30:24,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p004,14/10/2014 19:30:47,14/10/2014 19:31:56,images,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
-p004,14/10/2014 19:32:20,14/10/2014 19:41:20,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p004,14/10/2014 19:41:44,14/10/2014 19:42:53,images,home activity;miscellaneous;standing;9050 standing talking in person on the phone/computer (skype chatting) or using a mobileo phone/smartphone/tablet
-p004,14/10/2014 19:43:16,14/10/2014 19:54:38,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p004,14/10/2014 19:55:02,14/10/2014 20:12:40,images,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
-p004,14/10/2014 20:13:04,14/10/2014 20:14:37,images,home activity;miscellaneous;standing;9070 standing reading or without obvious activities
-p004,14/10/2014 20:15:00,14/10/2014 20:33:07,images,home activity;leisure;activities for maintenance of a household;miscellaneous;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person
-p004,14/10/2014 20:33:30,14/10/2014 20:44:12,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p004,14/10/2014 20:44:35,14/10/2014 20:46:32,images,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
-p004,14/10/2014 20:46:55,14/10/2014 20:48:50,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 20:49:13,14/10/2014 20:50:45,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p004,14/10/2014 20:51:07,14/10/2014 20:53:31,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 20:55:01,14/10/2014 20:58:15,images,leisure;miscellaneous;walking;5060 shopping miscellaneous
-p004,14/10/2014 20:58:38,14/10/2014 20:59:51,images,leisure;eating;13030 eating sitting indoor/outdoor
-p004,14/10/2014 21:00:15,14/10/2014 21:15:37,images,leisure;eating;13030 eating sitting indoor/outdoor
-p004,14/10/2014 21:15:38,14/10/2014 21:44:17,images,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
-p004,14/10/2014 21:45:03,14/10/2014 21:46:37,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p004,14/10/2014 21:47:03,14/10/2014 21:51:48,images,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
-p004,14/10/2014 21:52:13,14/10/2014 21:57:01,images,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
-p004,14/10/2014 21:57:25,14/10/2014 22:05:21,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 22:05:44,14/10/2014 22:10:31,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p004,14/10/2014 22:10:55,14/10/2014 22:11:44,images,home activity;household chores;house cleaning;miscellaneous;5100 making bed/changing linens
-p004,14/10/2014 22:12:07,14/10/2014 22:18:47,images,uncodeable;0002 image dark/blurred/obscured
-p004,14/10/2014 22:19:12,14/10/2014 22:23:34,images,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
-p004,14/10/2014 22:23:56,14/10/2014 22:32:38,images,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
-p004,14/10/2014 22:33:23,14/10/2014 22:34:35,images,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
-p004,14/10/2014 22:34:58,14/10/2014 22:36:10,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p004,14/10/2014 22:36:34,14/10/2014 22:37:21,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p004,14/10/2014 22:37:44,14/10/2014 22:42:34,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p004,14/10/2014 22:42:57,14/10/2014 22:45:20,images,home activity;miscellaneous;sitting;11580 office work such as writing and typing (with or without eating at the same time)
-p004,14/10/2014 22:45:44,14/10/2014 22:47:05,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable activities
-p004,14/10/2014 22:47:30,14/10/2014 22:51:54,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
-p004,14/10/2014 22:52:17,14/10/2014 22:53:26,images,home activity;miscellaneous;sitting;21010 sitting non-desk work (with or without eating at the same time)
-p004,14/10/2014 22:53:54,14/10/2014 22:58:58,images,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+startTime,endTime,duration,annotation
+2014-10-14T07:21:47.000Z,2014-10-14T07:22:35.002Z,48.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-14T07:22:58.003Z,2014-10-14T07:26:59.013Z,241.01,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-10-14T07:27:23.014Z,2014-10-14T07:28:55.018Z,92.004,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-14T07:29:19.019Z,2014-10-14T07:31:59.026Z,160.007,home activity;self care;13040 (generic) self care such as grooming/washing hands/shaving/brushing teeth/putting on make-up not eliminating and bathing (not necessary in the toilet)
+2014-10-14T07:32:24.027Z,2014-10-14T07:36:42.038Z,258.011,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-14T07:37:11.039Z,2014-10-14T07:40:23.045Z,192.006,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-10-14T07:40:46.046Z,2014-10-14T07:42:18.050Z,92.004,leisure;eating;not-social;5060 buying foods or drinks as a takeaway
+2014-10-14T07:42:42.051Z,2014-10-14T07:46:13.059Z,211.008,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+2014-10-14T07:46:36.060Z,2014-10-14T07:53:54.078Z,438.018,transportation;waiting;7021 sitting
+2014-10-14T07:54:18.079Z,2014-10-14T08:01:22.097Z,424.018,leisure;miscellaneous;sitting;5080 sitting non-desk work (with or without eating at the same time)
+2014-10-14T08:01:46.098Z,2014-10-14T08:14:17.130Z,751.032,transportation;waiting;7021 sitting
+2014-10-14T08:14:41.131Z,2014-10-14T08:15:51.134Z,70.003,transportation;waiting;7040 standing in a line
+2014-10-14T08:16:15.135Z,2014-10-14T08:17:02.137Z,47.002,transportation;public transportation;16016 riding in a bus or train
+2014-10-14T08:17:25.138Z,2014-10-14T08:22:10.147Z,285.009,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T08:22:36.148Z,2014-10-14T08:24:27.152Z,111.004,transportation;public transportation;16016 riding in a bus or train
+2014-10-14T08:25:16.153Z,2014-10-14T08:28:29.160Z,193.007,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+2014-10-14T08:29:18.161Z,2014-10-14T08:30:50.165Z,92.004,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T08:31:14.166Z,2014-10-14T08:32:52.169Z,98.003,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-10-14T08:33:41.170Z,2014-10-14T08:42:49.191Z,548.021,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T08:43:11.192Z,2014-10-14T08:47:29.203Z,258.011,occupation;interruption;standing;9070 standing reading or without observable/identifiable activities
+2014-10-14T08:47:52.204Z,2014-10-14T08:58:10.229Z,618.025,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T08:58:32.230Z,2014-10-14T09:00:27.235Z,115.005,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-10-14T09:01:13.236Z,2014-10-14T09:49:20.355Z,2887.119,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T09:49:44.356Z,2014-10-14T11:24:55.596Z,5711.24,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T11:25:18.597Z,2014-10-14T11:36:05.625Z,647.028,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-10-14T11:36:29.626Z,2014-10-14T11:39:27.632Z,178.006,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-10-14T11:39:52.633Z,2014-10-14T11:43:02.640Z,190.007,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-10-14T11:43:27.641Z,2014-10-14T12:22:47.733Z,2360.092,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T12:23:10.734Z,2014-10-14T12:23:56.736Z,46.002,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-10-14T12:24:19.737Z,2014-10-14T13:05:13.836Z,2454.099,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T13:06:01.837Z,2014-10-14T13:07:13.840Z,72.003,occupation;interruption;miscellaneous;5041 kitchen activity in the working place
+2014-10-14T13:07:39.841Z,2014-10-14T13:09:56.847Z,137.006,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T13:10:19.848Z,2014-10-14T13:11:07.850Z,48.002,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-10-14T13:11:53.851Z,2014-10-14T13:21:45.875Z,592.024,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T13:22:09.876Z,2014-10-14T13:41:00.925Z,1131.049,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-10-14T13:41:25.926Z,2014-10-14T13:42:12.928Z,47.002,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
+2014-10-14T13:42:36.929Z,2014-10-14T13:44:24.933Z,108.004,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T13:44:47.934Z,2014-10-14T13:46:42.939Z,115.005,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-10-14T13:47:05.940Z,2014-10-14T14:25:10.033Z,2284.093,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T14:25:35.034Z,2014-10-14T14:27:10.037Z,95.003,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-10-14T14:27:34.038Z,2014-10-14T14:28:44.041Z,70.003,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-10-14T14:29:07.042Z,2014-10-14T14:31:02.047Z,115.005,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
+2014-10-14T14:31:25.048Z,2014-10-14T14:52:09.099Z,1244.051,occupation;interruption;sitting;13030 eating sitting
+2014-10-14T14:52:34.100Z,2014-10-14T14:57:31.112Z,297.012,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-10-14T14:58:18.113Z,2014-10-14T14:59:04.115Z,46.002,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-10-14T14:59:27.116Z,2014-10-14T15:01:02.119Z,95.003,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T15:01:25.120Z,2014-10-14T15:05:42.131Z,257.011,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-10-14T15:06:05.132Z,2014-10-14T15:10:24.142Z,259.01,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-10-14T15:10:50.143Z,2014-10-14T15:11:37.145Z,47.002,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-10-14T15:12:01.146Z,2014-10-14T15:13:58.151Z,117.005,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T15:14:21.152Z,2014-10-14T15:16:20.157Z,119.005,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-10-14T15:16:42.158Z,2014-10-14T15:24:00.176Z,438.018,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T15:24:22.177Z,2014-10-14T15:27:35.185Z,193.008,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-10-14T15:28:00.186Z,2014-10-14T15:39:27.213Z,687.027,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T15:39:53.214Z,2014-10-14T15:41:05.217Z,72.003,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
+2014-10-14T15:41:28.218Z,2014-10-14T15:44:42.226Z,194.008,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T15:45:05.227Z,2014-10-14T15:46:02.229Z,57.002,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-10-14T15:46:25.230Z,2014-10-14T16:39:40.360Z,3195.13,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T16:40:02.361Z,2014-10-14T16:43:31.370Z,209.009,occupation;interruption;sitting;9055 sitting using a mobile phone/smartphone/tablet or talking on the phone/computer (skype meeting etc.)
+2014-10-14T16:43:54.371Z,2014-10-14T16:49:00.384Z,306.013,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T16:49:23.385Z,2014-10-14T16:51:18.390Z,115.005,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T16:51:41.391Z,2014-10-14T16:52:51.394Z,70.003,occupation;office and administrative support;11580 office/computer work general
+2014-10-14T16:53:37.395Z,2014-10-14T16:54:23.397Z,46.002,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T16:54:46.398Z,2014-10-14T16:55:32.400Z,46.002,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
+2014-10-14T16:55:56.401Z,2014-10-14T16:57:29.403Z,93.002,transportation;walking;17161 walking not as the single means of transports e.g.from house to transports or vice versa/from car to places or vice versa/between transports
+2014-10-14T17:00:56.404Z,2014-10-14T17:05:38.413Z,282.009,transportation;waiting;7021 sitting
+2014-10-14T17:06:06.414Z,2014-10-14T17:12:19.429Z,373.015,transportation;public transportation;16016 riding in a bus or train
+2014-10-14T17:15:51.430Z,2014-10-14T17:24:38.452Z,527.022,home activity;household chores;grocery shopping;5060 shopping
+2014-10-14T17:25:00.453Z,2014-10-14T17:26:09.456Z,69.003,leisure;miscellaneous;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-10-14T17:26:33.457Z,2014-10-14T17:33:21.474Z,408.017,leisure;miscellaneous;walking;5060 shopping miscellaneous
+2014-10-14T17:33:45.475Z,2014-10-14T17:34:32.477Z,47.002,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T17:34:56.478Z,2014-10-14T17:37:14.481Z,138.003,leisure;miscellaneous;walking;5060 shopping miscellaneous
+2014-10-14T17:39:28.482Z,2014-10-14T17:43:20.491Z,232.009,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T17:43:43.492Z,2014-10-14T17:47:38.502Z,235.01,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-10-14T17:48:02.503Z,2014-10-14T17:48:51.505Z,49.002,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-14T17:49:14.506Z,2014-10-14T17:50:01.508Z,47.002,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-10-14T17:50:24.509Z,2014-10-14T17:59:21.531Z,537.022,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-14T17:59:45.532Z,2014-10-14T18:03:11.537Z,206.005,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
+2014-10-14T18:03:34.538Z,2014-10-14T18:30:23.601Z,1609.063,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-14T18:30:46.602Z,2014-10-14T18:31:55.605Z,69.003,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-10-14T18:32:19.606Z,2014-10-14T18:41:19.629Z,540.023,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-14T18:41:43.630Z,2014-10-14T18:42:52.633Z,69.003,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-10-14T18:43:15.634Z,2014-10-14T18:53:29.656Z,614.022,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-14T18:53:53.657Z,2014-10-14T19:12:40.702Z,1127.045,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-10-14T19:13:03.703Z,2014-10-14T19:14:36.707Z,93.004,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-14T19:14:59.708Z,2014-10-14T19:27:11.739Z,732.031,home activity;leisure;activities for maintenance of a household;miscellaneous;9100 retreat/family reunion activities involving sitting eating relaxing talking with more than one person
+2014-10-14T19:27:35.740Z,2014-10-14T19:31:09.749Z,214.009,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-10-14T19:31:33.750Z,2014-10-14T19:44:11.781Z,758.031,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-14T19:44:34.782Z,2014-10-14T19:45:43.785Z,69.003,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-10-14T19:46:08.786Z,2014-10-14T19:48:50.793Z,162.007,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-10-14T19:49:12.794Z,2014-10-14T19:50:45.798Z,93.004,home activity;miscellaneous;sitting;11580 office/computer work general
+2014-10-14T19:51:07.799Z,2014-10-14T19:53:31.805Z,144.006,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T19:55:00.806Z,2014-10-14T19:58:14.814Z,194.008,leisure;eating;not-social;5060 buying foods or drinks as a takeaway
+2014-10-14T19:58:37.815Z,2014-10-14T19:59:26.817Z,49.002,leisure;miscellaneous;sitting;9060 (generic) sitting/lying reading or without observable/identifiable activities
+2014-10-14T19:59:50.818Z,2014-10-14T20:14:51.857Z,901.039,leisure;eating;social;13030 eating sitting indoor/outdoor
+2014-10-14T20:15:14.858Z,2014-10-14T20:44:17.929Z,1743.071,leisure;miscellaneous;sitting;9055 sitting talking to person/using the phone
+2014-10-14T20:45:03.930Z,2014-10-14T20:47:01.935Z,118.005,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-14T20:47:27.936Z,2014-10-14T20:57:25.961Z,598.025,home activity;household chores;washing/ironing/mending clothes;5090 folding or hanging clothes/put clothes in or out of washer or dryer/packing suitcase limited walking
+2014-10-14T20:57:50.962Z,2014-10-14T21:06:06.983Z,496.021,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T21:06:30.984Z,2014-10-14T21:11:43.996Z,313.012,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-14T21:12:06.997Z,2014-10-14T21:18:47.010Z,400.013,uncodeable;0002 image dark/blurred/obscured
+2014-10-14T21:19:11.011Z,2014-10-14T21:23:10.021Z,239.01,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-10-14T21:23:34.022Z,2014-10-14T21:33:22.046Z,588.024,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-10-14T21:33:47.047Z,2014-10-14T21:34:57.050Z,70.003,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-10-14T21:35:20.051Z,2014-10-14T21:36:09.053Z,49.002,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-10-14T21:36:33.054Z,2014-10-14T21:37:43.057Z,70.003,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-10-14T21:38:08.058Z,2014-10-14T21:40:35.063Z,147.005,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-10-14T21:40:58.064Z,2014-10-14T21:42:33.068Z,95.004,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-10-14T21:42:57.069Z,2014-10-14T21:47:04.079Z,247.01,home activity;miscellaneous;sitting;5080 sitting non-desk work (with or without eating at the same time)
+2014-10-14T21:47:29.080Z,2014-10-14T21:58:58.108Z,689.028,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities

@@ -1,75 +1,94 @@
-participant,startTime,endTime,source,annotation
-p008,03/07/2014 07:01:09,03/07/2014 07:02:49,images,home activity;miscellaneous;standing;9071 (generic) standing miscellaneous
-p008,03/07/2014 07:02:50,03/07/2014 07:12:46,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p008,03/07/2014 07:12:47,03/07/2014 07:15:49,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p008,03/07/2014 07:15:50,03/07/2014 07:17:01,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p008,03/07/2014 07:17:02,03/07/2014 07:18:11,images,home activity;miscellaneous;standing;9071 (generic) standing miscellaneous
-p008,03/07/2014 07:18:12,03/07/2014 07:21:47,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p008,03/07/2014 07:21:48,03/07/2014 07:24:09,images,home activity;miscellaneous;walking;17150 walking household without observable loads
-p008,03/07/2014 07:24:10,03/07/2014 07:26:27,images,home activity;self care;13020 dressing/undressing
-p008,03/07/2014 07:26:28,03/07/2014 07:41:23,images,transportation;walking;17270 walking as the single means to work or class
-p008,03/07/2014 07:41:24,03/07/2014 07:45:49,images,occupation;interruption;11791 walking on job in office or lab area
-p008,03/07/2014 07:45:50,03/07/2014 08:47:08,images,occupation;office and administrative support;11580 office wok/computer work general
-p008,03/07/2014 08:47:09,03/07/2014 08:51:03,images,uncodeable;0002 image dark/blurred/obscured
-p008,03/07/2014 08:51:04,03/07/2014 09:44:07,images,occupation;office and administrative support;11580 office wok/computer work general
-p008,03/07/2014 09:44:08,03/07/2014 09:47:13,images,uncodeable;0002 image dark/blurred/obscured
-p008,03/07/2014 09:47:14,03/07/2014 09:49:49,images,occupation;office and administrative support;11580 office wok/computer work general
-p008,03/07/2014 09:49:50,03/07/2014 09:51:51,images,occupation;interruption;11791 walking on job in office or lab area
-p008,03/07/2014 09:51:52,03/07/2014 09:55:43,images,occupation;interruption;09071 standing miscellaneous
-p008,03/07/2014 09:55:44,03/07/2014 10:54:44,images,occupation;office and administrative support;11580 office wok/computer work general
-p008,03/07/2014 10:54:45,03/07/2014 11:02:13,images,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
-p008,03/07/2014 11:02:14,03/07/2014 11:04:55,images,uncodeable;0002 image dark/blurred/obscured
-p008,03/07/2014 11:04:56,03/07/2014 12:09:44,images,occupation;office and administrative support;11580 office wok/computer work general
-p008,03/7/2014 12:09:45,03/07/2014 12:17:14,images,occupation;interruption;11791 walking on job in office or lab area
-p008,03/07/2014 12:17:15,03/07/2014 12:29:02,images,occupation;interruption;sitting;13030 eating sitting
-p008,03/07/2014 12:29:03,03/07/2014 12:30:38,images,occupation;interruption;walking;11791 walking on job in office or lab area
-p008,03/07/2014 12:30:39,03/07/2014 12:57:12,images,occupation;interruption;sitting;13030 eating sitting
-p008,03/07/2014 12:57:13,03/07/2014 12:58:46,images,uncodeable;0002 image dark/blurred/obscured
-p008,03/07/2014 12:58:47,03/07/2014 13:00:20,images,occupation;interruption;11791 walking on job in office or lab area
-p008,03/07/2014 13:00:21,03/07/2014 13:29:53,images,occupation;office and administrative support;11580 office wok/computer work general
-p008,03/07/2014 13:29:54,03/07/2014 13:36:10,images,occupation;interruption;11585 sitting meetings (can be with eating and talking)
-p008,03/07/2014 13:36:11,03/07/2014 16:04:29,images,occupation;office and administrative support;11580 office wok/computer work general
-p008,03/07/2014 16:04:30,03/07/2014 16:11:23,images,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
-p008,03/07/2014 16:11:24,03/07/2014 16:17:12,images,occupation;office and administrative support;11580 office wok/computer work general
-p008,03/07/2014 16:17:13,03/07/2014 16:36:11,images,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
-p008,03/07/2014 16:36:13,03/07/2014 16:38:50,images,uncdeable;0002 image dark/blurred/obscured
-p008,03/07/2014 16:38:51,03/07/2014 16:51:54,images,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
-p008,03/07/2014 16:51:55,03/07/2014 16:53:04,imagees,occupation;interruption;sitting;13030 eating sitting
-p008,03/07/2014 16:53:26,03/07/2014 16:55:46,images,occupation;office and administrative support;11580 office work/computer work general
-p008,03/07/2014 16:56:09,03/07/2014 16:58:48,images,occupation;interruption;sitting;13030 eating sitting
-p008,03/07/2014 16:59:11,03/07/2014 17:01:52,images,occupation;office and administrative support;11580 office work/computer work general
-p008,03/07/2014 17:02:16,03/07/2014 17:03:26,images,occupation;interruption;standing;9070 standing reading or without observable/identifiable activities
-p008,03/07/2014 17:03:49,03/07/2014 17:08:31,images,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
-p008,03/07/2014 17:08:56,03/07/2014 17:11:22,images,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
-p008,03/07/2014 17:11:46,03/07/2014 17:38:37,images,occupation;office and administrative support;11580 office work/computer work general
-p008,03/07/2014 17:38:59,03/07/2014 17:40:14,images,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
-p008,03/07/2014 17:40:37,03/07/2014 18:21:39,images,occupation;office and administrative support;11580 office work/computer work general
-p008,03/07/2014 18:21:40,03/07/2014 18:24:00,images,uncodeable;0002 image dark/blurred/obscured
-p008,03/07/2014 18:24:01,03/07/2014 18:26:50,images,occupation;interruption;11796 gathering things ready to leave
-p008,03/07/2014 18:26:51,03/07/2014 18:41:11,images,transportation;walking;17250 walking as the single means to a destination not for work or class
-p008,03/07/2014 18:41:12,03/07/2014 18:49:05,images,home activity;household chores;grocery shopping;5060 shopping
-p008,03/07/2014 18:49:06,03/07/2014 18:53:24,images,transportation;walking;17250 walking as the single means to a destination not for work or class
-p008,03/07/2014 18:53:25,03/07/2014 18:56:57,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p008,03/07/2014 18:56:58,03/07/2014 19:07:24,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p008,03/07/2014 19:07:25,03/07/2014 19:09:48,images,home activity;miscellaneous;walking;5121 walking with moving lifting light loads
-p008,03/07/2014 19:09:49,03/07/2014 19:12:59,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p008,03/07/2014 19:13:00,03/07/2014 19:14:37,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p008,03/07/2014 19:14:38,03/07/2014 19:18:36,images,home activity;eating;13030 eating sitting alone
-p008,03/07/2014 19:18:37,03/07/2014 19:20:55,images,home activity;miscellaneous;standing;9071 (generic) standing miscellaneous
-p008,03/07/2014 19:20:56,03/07/2014 19:22:28,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p008,03/07/2014 19:22:29,03/07/2014 19:27:06,images,home activity;miscellaneous;sitting;9060 sitting reading or using mobile/smartphone or talking on phone/computer
-p008,03/07/2014 19:27:07,03/07/2014 19:33:15,images,home activity;eating;13030 eating sitting alone
-p008,03/07/2014 19:33:16,03/07/2014 20:08:46,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p008,03/07/2014 20:08:47,03/07/2014 20:16:37,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p008,03/07/2014 20:16:38,03/07/2014 20:17:47,images,home activity;eating;13030 eating sitting alone
-p008,03/07/2014 20:17:48,03/07/2014 20:24:56,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p008,03/07/2014 20:24:57,03/07/2014 20:39:32,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p008,03/07/2014 20:39:33,03/07/2014 20:44:38,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p008,03/07/2014 20:44:39,03/07/2014 20:50:34,images,home activity;miscellaneous;standing;9050 standing talking in person on the phone/computer or using a mobile or smartphone
-p008,03/07/2014 20:50:35,03/07/2014 20:57:42,images,home activity;miscellaneous;sitting;7010 lying and watching television with TV on as the primary activity
-p008,03/07/2014 20:57:43,03/07/2014 21:03:24,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p008,03/07/2014 21:03:25,03/07/2014 21:20:14,images,uncodeable;0002 image dark/blurred/obscured
-p008,03/07/2014 21:20:15,03/07/2014 21:43:55,images,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
-p008,03/07/2014 21:43:56,03/07/2014 21:45:27,images,home activity;miscellaneous;sitting;9030  sitting desk work (with or without eating at the same time)
-p008,03/07/2014 21:45:28,03/07/2014 21:46:36,images,uncodeable;0002 image dark/blurred/obscured
-p008,03/07/2014 21:46:37,03/07/2014 21:48:57,images,home activity;miscellaneous;walking;17150 walking household without observable loads
+startTime,endTime,duration,annotation
+2014-07-03T06:01:08.000Z,2014-07-03T06:02:00.002Z,52.002,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-07-03T06:02:26.003Z,2014-07-03T06:03:36.006Z,70.003,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T06:03:59.007Z,2014-07-03T06:06:58.015Z,179.008,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-07-03T06:07:22.016Z,2014-07-03T06:12:24.029Z,302.013,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T06:12:47.030Z,2014-07-03T06:15:27.037Z,160.007,home activity;eating;13030 eating sitting alone or with someone
+2014-07-03T06:15:49.038Z,2014-07-03T06:16:37.040Z,48.002,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T06:17:01.041Z,2014-07-03T06:17:48.043Z,47.002,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
+2014-07-03T06:18:12.044Z,2014-07-03T06:21:00.051Z,168.007,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T06:21:47.052Z,2014-07-03T06:26:28.062Z,281.01,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-07-03T06:26:51.063Z,2014-07-03T06:40:59.099Z,848.036,transportation;walking;17270 walking as the single means to work or class (not from)
+2014-07-03T06:41:24.100Z,2014-07-03T06:46:13.112Z,289.012,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-07-03T06:46:37.113Z,2014-07-03T06:47:23.115Z,46.002,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T06:47:46.116Z,2014-07-03T06:48:55.119Z,69.003,occupation;interruption;sitting;9060 sitting without observable/identifiable activities
+2014-07-03T06:49:19.120Z,2014-07-03T07:46:42.269Z,3443.149,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T07:47:08.270Z,2014-07-03T07:50:40.278Z,212.008,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T07:51:04.279Z,2014-07-03T08:43:22.415Z,3138.136,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T08:44:07.416Z,2014-07-03T08:46:52.423Z,165.007,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T08:47:14.424Z,2014-07-03T08:49:27.430Z,133.006,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T08:49:50.431Z,2014-07-03T08:51:26.435Z,96.004,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-07-03T08:51:51.436Z,2014-07-03T08:55:22.445Z,211.009,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-07-03T08:55:44.446Z,2014-07-03T09:53:57.598Z,3493.152,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T09:54:21.599Z,2014-07-03T10:01:39.618Z,438.019,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-07-03T10:02:13.619Z,2014-07-03T10:04:31.624Z,138.005,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T10:04:55.625Z,2014-07-03T11:09:00.792Z,3845.167,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T11:09:45.793Z,2014-07-03T11:10:34.795Z,49.002,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-07-03T11:10:58.796Z,2014-07-03T11:17:14.810Z,376.014,occupation;interruption;miscellaneous;5041 kitchen activity in the working place
+2014-07-03T11:17:39.811Z,2014-07-03T11:28:37.839Z,658.028,occupation;interruption;sitting;13030 eating sitting
+2014-07-03T11:29:03.840Z,2014-07-03T11:30:15.843Z,72.003,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-07-03T11:30:39.844Z,2014-07-03T11:42:30.875Z,711.031,occupation;interruption;sitting;13030 eating sitting
+2014-07-03T11:42:53.876Z,2014-07-03T11:56:50.912Z,837.036,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-07-03T11:57:13.913Z,2014-07-03T11:58:22.916Z,69.003,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T11:58:47.917Z,2014-07-03T11:59:57.919Z,70.002,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-07-03T12:00:20.920Z,2014-07-03T12:29:07.995Z,1727.075,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T12:29:53.996Z,2014-07-03T12:35:47.011Z,353.015,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-07-03T12:36:10.012Z,2014-07-03T13:19:27.124Z,2597.112,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T13:19:52.125Z,2014-07-03T13:21:02.128Z,70.003,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T13:21:27.129Z,2014-07-03T13:29:09.149Z,462.02,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T13:29:33.150Z,2014-07-03T13:33:20.160Z,227.01,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-07-03T13:33:43.161Z,2014-07-03T13:43:52.187Z,609.026,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T13:44:15.188Z,2014-07-03T13:45:24.191Z,69.003,occupation;interruption;sitting;11585 sitting meeting/talking to colleagues with or without eating
+2014-07-03T13:45:49.192Z,2014-07-03T13:46:38.194Z,49.002,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T13:47:47.195Z,2014-07-03T13:50:12.200Z,145.005,occupation;interruption;miscellaneous;5041 kitchen activity in the working place
+2014-07-03T13:51:00.201Z,2014-07-03T14:18:58.274Z,1678.073,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T14:19:21.275Z,2014-07-03T14:20:54.279Z,93.004,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T14:21:17.280Z,2014-07-03T14:23:11.285Z,114.005,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-07-03T14:23:34.286Z,2014-07-03T14:40:28.330Z,1014.044,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T14:41:14.331Z,2014-07-03T14:48:16.349Z,422.018,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-07-03T14:48:41.350Z,2014-07-03T15:06:47.397Z,1086.047,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T15:07:09.398Z,2014-07-03T15:09:53.405Z,164.007,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T15:10:16.406Z,2014-07-03T15:16:47.423Z,391.017,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T15:17:13.424Z,2014-07-03T15:35:49.472Z,1116.048,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-07-03T15:36:12.473Z,2014-07-03T15:38:28.479Z,136.006,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T15:38:51.480Z,2014-07-03T15:51:09.512Z,738.032,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-07-03T15:51:33.513Z,2014-07-03T16:02:40.542Z,667.029,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T16:03:03.543Z,2014-07-03T16:08:31.557Z,328.014,occupation;interruption;standing;9050 standing talking in person/using a phone/smartphone/tablet
+2014-07-03T16:08:56.558Z,2014-07-03T16:38:37.633Z,1781.075,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T16:38:59.634Z,2014-07-03T16:40:14.637Z,75.003,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T16:40:37.638Z,2014-07-03T17:20:55.742Z,2418.104,occupation;office and administrative support;11580 office/computer work general
+2014-07-03T17:21:40.743Z,2014-07-03T17:23:36.748Z,116.005,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T17:24:01.749Z,2014-07-03T17:25:39.753Z,98.004,occupation;interruption;walking;11791 walking on job in office or lab area
+2014-07-03T17:26:50.754Z,2014-07-03T17:40:44.790Z,834.036,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-07-03T17:41:11.791Z,2014-07-03T17:48:38.810Z,447.019,home activity;household chores;grocery shopping;5060 shopping
+2014-07-03T17:49:05.811Z,2014-07-03T17:53:01.821Z,236.01,transportation;walking;17250 walking as the single means to a destination not to work or class
+2014-07-03T17:53:25.822Z,2014-07-03T17:55:25.827Z,120.005,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T17:55:48.828Z,2014-07-03T17:58:59.836Z,191.008,home activity;miscellaneous;sitting;9060 sitting/lying reading or without observable/identifiable activities
+2014-07-03T17:59:23.837Z,2014-07-03T18:05:02.851Z,339.014,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-07-03T18:05:48.852Z,2014-07-03T18:07:00.855Z,72.003,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-07-03T18:07:25.856Z,2014-07-03T18:09:25.861Z,120.005,home activity;miscellaneous;5025 (generic) multiple household tasks all at once including standing/lifting/sitting
+2014-07-03T18:09:49.862Z,2014-07-03T18:12:13.868Z,144.006,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-07-03T18:13:00.869Z,2014-07-03T18:14:11.872Z,71.003,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T18:14:38.873Z,2014-07-03T18:18:12.882Z,214.009,home activity;eating;13030 eating sitting alone or with someone
+2014-07-03T18:18:36.883Z,2014-07-03T18:20:31.888Z,115.005,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
+2014-07-03T18:20:56.889Z,2014-07-03T18:22:04.892Z,68.003,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-07-03T18:22:28.893Z,2014-07-03T18:26:43.903Z,255.01,home activity;miscellaneous;sitting;9055 sitting/lying talking in person/using a mobile phone/smartphone/tablet or talking on the phone/computer (skype chatting)
+2014-07-03T18:27:06.904Z,2014-07-03T18:32:29.918Z,323.014,home activity;eating;13030 eating sitting alone or with someone
+2014-07-03T18:32:52.919Z,2014-07-03T19:07:37.002Z,2084.083,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-07-03T19:08:47.003Z,2014-07-03T19:17:25.025Z,518.022,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T19:17:48.026Z,2014-07-03T19:24:30.042Z,402.016,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-07-03T19:24:56.043Z,2014-07-03T19:39:10.079Z,854.036,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T19:39:32.080Z,2014-07-03T19:41:29.085Z,117.005,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
+2014-07-03T19:41:53.086Z,2014-07-03T19:44:13.092Z,140.006,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-07-03T19:44:39.093Z,2014-07-03T19:50:11.107Z,332.014,home activity;miscellaneous;standing;9050 standing talking in person/on the phone/computer (skype chatting) or using a mobile phone/smartphone/tablet
+2014-07-03T19:50:34.108Z,2014-07-03T19:56:55.123Z,381.015,home activity;miscellaneous;sitting;7010 sitting/lying and watching television with TV on as the primary activity
+2014-07-03T19:57:43.124Z,2014-07-03T20:01:05.132Z,202.008,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T20:01:28.133Z,2014-07-03T20:03:01.137Z,93.004,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-07-03T20:03:25.138Z,2014-07-03T20:19:30.180Z,965.042,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T20:20:15.181Z,2014-07-03T20:21:27.183Z,72.002,home activity;miscellaneous;standing;9070 standing reading or without observable/identifiable activities
+2014-07-03T20:21:50.184Z,2014-07-03T20:41:59.235Z,1209.051,home activity;household chores;preparing meals/cooking/washing dishes;5035 kitchen activity general cooking/washing/dishes/cleaning up
+2014-07-03T20:42:22.236Z,2014-07-03T20:43:32.239Z,70.003,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-07-03T20:43:56.240Z,2014-07-03T20:45:04.243Z,68.003,home activity;miscellaneous;standing;9020 standing writing/drawing/painting
+2014-07-03T20:45:27.244Z,2014-07-03T20:46:13.246Z,46.002,uncodeable;0002 image dark/blurred/obscured
+2014-07-03T20:46:36.247Z,2014-07-03T20:47:23.249Z,47.002,home activity;miscellaneous;walking;17150 walking household without observable loads
+2014-07-03T20:47:47.250Z,2014-07-03T20:48:57.253Z,70.003,uncodeable;0002 image dark/blurred/obscured
