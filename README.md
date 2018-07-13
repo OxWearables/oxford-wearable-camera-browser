@@ -23,6 +23,8 @@ npm install
 npm start
 ```
 
+For those less familiar with command line operations, here are [Apple OSX step-by-step installation guidelines](utilities/sensecam-browser-installation-osx.docx) by Andrea Spray (LSHTM).
+
 
 ## Adding data from a new participant
 Your study should have data stored as follows:
