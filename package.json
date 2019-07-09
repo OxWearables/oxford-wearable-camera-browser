@@ -197,6 +197,7 @@
     "mkdirp": "^0.5.1",
     "mkpath": "^0.1.0",
     "mksnapshot": "^0.3.1",
+    "moment-timezone": "^0.5.26",
     "ms": "^2.1.1",
     "nan": "^2.10.0",
     "negotiator": "^0.6.1",

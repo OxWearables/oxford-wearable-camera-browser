@@ -862,7 +862,7 @@ function load_images() {
 		fs.stat(path.join(ANNOTATION_DIR, p_folder), (err, stats) => {
 			if (err && err.code=='ENOENT') {
 				console.log("creating annotatioin dir:", path.join(ANNOTATION_DIR, p_folder));
-				fs.mkdirSync(path.join(ANNOTATION_DIR, p_folder));
+				//fs.mkdirSync(path.join(ANNOTATION_DIR, p_folder));
 			}
 			// ensure all size directories exist
 			['full', 'medium', 'thumbnail'].forEach( 
@@ -1461,7 +1461,7 @@ function openPhotoSwipe(index) {
 	        item.h = img_sizes.medium[1];
 	    }
         item.msrc = IMAGE_DIR+current_participant+'/thumbnail/'+imgs[index];
-	    item.title = labels[evts[index]] || "";
+	    item.title = labels[evts[index]] + ' - ' + img_times[index] || "";
 
 	});
 
@@ -1635,6 +1635,7 @@ function generate_annotation_file() {
 	var curr_evt = null;
 	var curr_label = null;
 	var curr_start = null;
+	var moment = require('moment-timezone');
 	var str = "startTime,endTime,duration,annotation\n";
 	console.log("STARTING", curr_evt,curr_start, curr_label);
 
@@ -1648,10 +1649,12 @@ function generate_annotation_file() {
 			annotated_count += 1
 		}
 		// console.log(i, e, label)
-		if (curr_evt!== e || label !== curr_label) {
+		var curr_time = img_times[i]
+		var last_time = img_times[i-1];
+		var time_gap_mins = (curr_time - last_time)/1000/60.0
+		if (curr_evt!== e || label !== curr_label || time_gap_mins>=4) {
 			if (curr_start!==null) {
-				var last_time = img_times[i-1];
-				str += curr_start.toISOString() + ',' + last_time.toISOString() + ',' +(last_time-curr_start)/1000 +',' + curr_label + '\n';
+				str += moment(curr_start).format() + ',' + moment(last_time).format() + ',' +(last_time-curr_start)/1000 +',' + curr_label + '\n';
 				console.log(i, curr_label, curr_start.toTimeString().split(" ")[0], last_time.toTimeString().split(" ")[0]);
 			}
 			curr_label = label;
@@ -1663,7 +1666,7 @@ function generate_annotation_file() {
 	if (last_idx!==-100) {
 		var last_time = img_times[last_idx];
 		console.log("last_time:", last_idx, last_time);
-		str += curr_start.toISOString() + ',' + last_time.toISOString() + ','+(last_time-curr_start)/1000+"," + curr_label + '\n';
+		str += moment(curr_start).format() + ',' + moment(last_time).format() + ','+(last_time-curr_start)/1000+"," + curr_label + '\n';
 	}
 	console.log(str);
 	var completed_percent = annotated_count/(imgs.length*.01)
@@ -1677,7 +1680,7 @@ function save_annotation() {
 	if (current_schema===null) return alert("current schema not set (may be mid-load)");
 	var data = generate_annotation_file();
 	return new Promise((resolve, reject) => {
-		var annFileStr = path.join(ANNOTATION_DIR,current_participant,current_participant+'-'+current_schema)
+		var annFileStr = path.join(ANNOTATION_DIR,current_participant+'-'+current_schema)
 		console.log("writing annotation to", annFileStr);
 		fs.writeFile(annFileStr, data, {}, (err, res) => {
 			if (err) {
@@ -1769,7 +1772,7 @@ function parse_annotation_file(text) {
 
 }
 function load_annotation() {
-	var annotation_file = path.join(ANNOTATION_DIR,current_participant,current_participant+'-'+current_schema);
+	var annotation_file = path.join(ANNOTATION_DIR,current_participant+'-'+current_schema);
 	console.log("reading annotation:", annotation_file);
 	fs.readFile(annotation_file, "utf-8", (err, data) => {
 		if (err) {
