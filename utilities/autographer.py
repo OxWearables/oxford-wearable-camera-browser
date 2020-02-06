@@ -3,11 +3,12 @@
 import argparse
 from datetime import datetime
 import fnmatch
+import glob
 import os
 import re
-from shutil import copyfile
+import shutil
 import sys
-import glob
+from tqdm import tqdm
 
 
 def main():
@@ -27,10 +28,7 @@ def main():
             default="/Volumes/Autographer/")
     parser.add_argument('--participantDir', type=str,
             help="root path to store study data for participant",
-            default="")
-    parser.add_argument('--participantID', type=str,
-            help="name/ID of participant",
-            default="setup")
+            default="camera/test/")
     parser.add_argument('--setup',
             metavar='True/False', default=False, type=str2bool,
             help="""Wipe data from device and setup with correct time \n
@@ -44,23 +42,25 @@ def main():
         sys.exit(-1)
     args = parser.parse_args()
 
+    if not args.participantDir.endswith('/'):
+            arge.participantDir = args.participantDir + '/'
+
     if args.download is True:
-        downloadData(args.cameraDir, args.participantDir, args.participantID)
+        downloadData(args.cameraDir, args.participantDir)
 
     if args.setup is True:
         setupCamera(args.cameraDir)
 
 
-def downloadData(cameraDir, participantDir, participantID):
+def downloadData(cameraDir, participantDir):
     """Download participant data from camera to disk
 
     Image files and sensor files copied from device to local drive
 
     :param str cameraDir: Input path to root dir of camera
     :param str cameraDir: Output path to store study data for participant
-    :param str participantID: participant name/ID
 
-    :return: Camera data copied to <participantDir>/<participantID>
+    :return: Camera data copied to <participantDir>
     :rtype: void
     """
 
@@ -77,15 +77,16 @@ def downloadData(cameraDir, participantDir, participantID):
                 for filename in fnmatch.filter(filenames, '*.CSV'): 
                     images.append(os.path.join(root, filename))
         
-        newFolder = participantDir + participantID + '/'
-        if not os.path.exists(newFolder):
-                os.makedirs(newFolder)
-        for image in images:
-            newImg = newFolder+image.split('/')[-1]
-            #os.rename(image, newImg)
-            copyfile(image, newImg)
-        print(folder, len(images))
-        print('copy of data is now complete from the camera to', newFolder)
+        if not os.path.exists(participantDir):
+                os.makedirs(participantDir)
+        
+        # copy images to <participantDir> and display tqdm() progress bar
+        for image in tqdm(images):
+            newImg = participantDir + image.split('/')[-1]
+            newImg = newImg.replace('.RES', '.jpg')
+            shutil.copyfile(image, newImg)
+        print('copy of', len(images), 'data items to', participantDir, 
+            'is now complete')
 
 
 def setupCamera(cameraDir):
@@ -103,7 +104,8 @@ def setupCamera(cameraDir):
     setCameraTime(cameraDir)
 
     # delete data from camera
-    #shutil.rmtree(cameraDir + 'DATA/')
+    shutil.rmtree(cameraDir + 'DATA/')
+    shutil.rmtree(cameraDir + 'LOGS/')
     
     print('Camera now ready. Please safely eject the device and collect data!')
 
@@ -129,15 +131,14 @@ def setCameraTime(cameraDir):
     # get computer time estimate for when camera was plugged in
     computerTime = datetime.now()
     try:
-        # get OSX registry time
+        # get OSX registry time (unfortunately doesn't work on newer versions)
         deviceLog = []
         for line in open("/var/log/system.log"):
             if "New disk" in line and "Autographer" in line:
-                print(line)
                 deviceLog += [line]
         computerTime = deviceLog[-1]
     except:
-        print('could not read OSX system log')
+        print('could not read OSX system log, so using current time instead')
     
     # get camera time estimate for when camera was plugged in
     cameraTime = datetime.now()
@@ -145,14 +146,14 @@ def setCameraTime(cameraDir):
         for line in open(cameraDir + "autographer.inf"):
             if "Time=" in line:
                 timePart = line.split('=')[-1]
-                cameraTime = datetime.strpTime(timePart[0:19], '%Y-%m-%dT%H:%M:%S')
-    except:
-        print('could not read camera time file')
+                cameraTime = datetime.strptime(timePart[0:19], '%Y-%m-%dT%H:%M:%S')
+    except Exception as e:
+        print(str(e), 'could not read camera time file')
 
     # write difference (in seconds) between computer and camera time
     secondDiff = (computerTime - cameraTime).total_seconds()
     w = open(cameraDir + "clock_correction.txt", 'w')
-    w.write(secondDiff)
+    w.write(str(int(secondDiff)))
     w.close()
 
 

@@ -1,6 +1,21 @@
 # Image preparation utilities
 This document describes how to deal with the substantial amount of moving around and cleaning of data needed to get wearable camera files ready for annotation.
 
+## Set Vicon Autographer camera to record data
+```bash
+python autographer.py --setup True
+# Wipe data from device and setup with correct time 
+# Call this function immediately after camera is plugged in
+
+diskutil unmount /Volumes/Autographer/
+```
+
+## Download data from Vicon Autographer camera
+```bash
+python autographer.py --download True --participantDir camera/p001/
+# Download participant data from camera to disk
+```
+
 ## Copying files from local drive to cluster
 ```bash
 nohup rsync -avrz -d *camera user@server:/study/camera/ &
