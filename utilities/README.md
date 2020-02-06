@@ -4,7 +4,8 @@ This document describes how to deal with the substantial amount of moving around
 ## Set Vicon Autographer camera to record data
 Run this script to setup the device with the correct time (synced to your computer)
 and to wipe data from the device.
-*It is important to call this function immediately after camera is plugged in*
+
+**It is important to call this function immediately after camera is plugged in**
 ```bash
 pip install tqdm # called first time only
 python autographer.py --setup True
