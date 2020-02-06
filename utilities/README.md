@@ -2,18 +2,19 @@
 This document describes how to deal with the substantial amount of moving around and cleaning of data needed to get wearable camera files ready for annotation.
 
 ## Set Vicon Autographer camera to record data
+Run this script to setup the device with the correct time (synced to your computer)
+and to wipe data from the device.
+*It is important to call this function immediately after camera is plugged in*
 ```bash
+pip install tqdm # called first time only
 python autographer.py --setup True
-# Wipe data from device and setup with correct time 
-# Call this function immediately after camera is plugged in
-
-diskutil unmount /Volumes/Autographer/
+# you can now safely unplug the device
 ```
 
 ## Download data from Vicon Autographer camera
+Run this script to download data from the device to participant's data folder.
 ```bash
-python autographer.py --download True --participantDir camera/p001/
-# Download participant data from camera to disk
+python autographer.py --download True --destDir ~/myStudy/p001/
 ```
 
 ## Copying files from local drive to cluster

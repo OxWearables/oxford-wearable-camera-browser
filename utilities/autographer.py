@@ -26,8 +26,8 @@ def main():
     parser.add_argument('--cameraDir', type=str,
             help="path with root of camera dir",
             default="/Volumes/Autographer/")
-    parser.add_argument('--participantDir', type=str,
-            help="root path to store study data for participant",
+    parser.add_argument('--destDir', type=str,
+            help="destination path to copy camera data to",
             default="camera/test/")
     parser.add_argument('--setup',
             metavar='True/False', default=False, type=str2bool,
@@ -42,11 +42,11 @@ def main():
         sys.exit(-1)
     args = parser.parse_args()
 
-    if not args.participantDir.endswith('/'):
-            arge.participantDir = args.participantDir + '/'
+    if not args.destDir.endswith('/'):
+            args.destDir = args.destDir + '/'
 
     if args.download is True:
-        downloadData(args.cameraDir, args.participantDir)
+        downloadData(args.cameraDir, args.destDir)
 
     if args.setup is True:
         setupCamera(args.cameraDir)
@@ -83,7 +83,7 @@ def downloadData(cameraDir, participantDir):
         # copy images to <participantDir> and display tqdm() progress bar
         for image in tqdm(images):
             newImg = participantDir + image.split('/')[-1]
-            newImg = newImg.replace('.RES', '.jpg')
+            newImg = newImg.replace('.RES', '.JPG')
             shutil.copyfile(image, newImg)
         print('copy of', len(images), 'data items to', participantDir, 
             'is now complete')
@@ -130,15 +130,8 @@ def setCameraTime(cameraDir):
 
     # get computer time estimate for when camera was plugged in
     computerTime = datetime.now()
-    try:
-        # get OSX registry time (unfortunately doesn't work on newer versions)
-        deviceLog = []
-        for line in open("/var/log/system.log"):
-            if "New disk" in line and "Autographer" in line:
-                deviceLog += [line]
-        computerTime = deviceLog[-1]
-    except:
-        print('could not read OSX system log, so using current time instead')
+    # todo - read system logs to identify device plug-in time
+    # e.g. for OSX ... $ grep "New disk" /var/log/system.log | tail -1
     
     # get camera time estimate for when camera was plugged in
     cameraTime = datetime.now()
@@ -148,7 +141,7 @@ def setCameraTime(cameraDir):
                 timePart = line.split('=')[-1]
                 cameraTime = datetime.strptime(timePart[0:19], '%Y-%m-%dT%H:%M:%S')
     except Exception as e:
-        print(str(e), 'could not read camera time file')
+        print(str(e), 'could not read camera timestamp file')
 
     # write difference (in seconds) between computer and camera time
     secondDiff = (computerTime - cameraTime).total_seconds()
