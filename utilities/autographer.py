@@ -29,13 +29,16 @@ def main():
     parser.add_argument('--destDir', type=str,
             help="destination path to copy camera data to",
             default="camera/test/")
-    parser.add_argument('--setup',
+    parser.add_argument('--setTime',
             metavar='True/False', default=False, type=str2bool,
-            help="""Wipe data from device and setup with correct time \n
+            help="""Setup device with correct time \n
                 Call this function immediately after camera is plugged in.""")
     parser.add_argument('--download',
             metavar='True/False', default=False, type=str2bool,
             help="Download data from device to destination directory")
+    parser.add_argument('--delete',
+            metavar='True/False', default=False, type=str2bool,
+            help="Delete all of participant's data from camera")
     # parse arguments
     if len(sys.argv) < 2:
         parser.print_help()
@@ -48,8 +51,11 @@ def main():
     if args.download is True:
         downloadData(args.cameraDir, args.destDir)
 
-    if args.setup is True:
-        setupCamera(args.cameraDir)
+    if args.setTime is True:
+        setCameraTime(args.cameraDir)
+
+    if args.delete is True:
+        deleteCameraData(args.cameraDir)
 
 
 def downloadData(cameraDir, participantDir):
@@ -89,25 +95,22 @@ def downloadData(cameraDir, participantDir):
             'is now complete')
 
 
-def setupCamera(cameraDir):
-    """Setup camera to record new data
+def deleteCameraData(cameraDir):
+    """Wipe particiapnt's data from camera
 
-    Set time on camera and also wipe data from it
+    Delete all of participant's data from camera
 
     :param str cameraDir: Input path to root dir of camera
 
-    :return: Camera wiped and now ready to collect data
+    :return: Participant's data wiped from camera
     :rtype: void
     """
-
-    # set time on the camera i.e. write clock_correction.txt
-    setCameraTime(cameraDir)
 
     # delete data from camera
     shutil.rmtree(cameraDir + 'DATA/')
     shutil.rmtree(cameraDir + 'LOGS/')
     
-    print('Camera now ready. Please safely eject the device and collect data!')
+    print('Camera data has now been deleted.')
 
 
 def setCameraTime(cameraDir):
@@ -148,6 +151,8 @@ def setCameraTime(cameraDir):
     w = open(cameraDir + "clock_correction.txt", 'w')
     w.write(str(int(secondDiff)))
     w.close()
+
+    print('Camera clock now synced to PC time.')
 
 
 def str2bool(v):

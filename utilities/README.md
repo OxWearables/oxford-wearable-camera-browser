@@ -1,15 +1,17 @@
-# Image preparation utilities
-This document describes how to deal with the substantial amount of moving around and cleaning of data needed to get wearable camera files ready for annotation.
+# Vicon Autographer utilities
+This section describes how to setup and download data from the Vicon Autogapher
+wearable camera.
 
-## Set Vicon Autographer camera to record data
-Run this script to setup the device with the correct time (synced to your computer)
-and to wipe data from the device.
-
-**It is important to call this function immediately after camera is plugged in**
+Install dependency:
 ```bash
 pip install tqdm # called first time only
-python autographer.py --setup True
-# you can now safely unplug the device
+```
+
+## Set Vicon Autographer camera time
+Run this script to sync the device time to that of your computer
+**It is important to call this function immediately after camera is plugged in**
+```bash
+python autographer.py --setTime True
 ```
 
 ## Download data from Vicon Autographer camera
@@ -17,6 +19,16 @@ Run this script to download data from the device to participant's data folder.
 ```bash
 python autographer.py --download True --destDir ~/myStudy/p001/
 ```
+
+## Delete data from Vicon Autographer camera
+Run this script to delete all data from the device
+```bash
+python autographer.py --delete True
+```
+
+
+# Image preparation utilities
+This section describes how to deal with the substantial amount of moving around and cleaning of data needed to get wearable camera files ready for annotation.
 
 ## Copying files from local drive to cluster
 ```bash
