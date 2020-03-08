@@ -2,18 +2,25 @@ const schema = require('./schema.js');
 const image_resize = require('./image_resize.js');
 const electron = require('electron');
 // Module to control application life.
-const {app, BrowserWindow} = electron;
+const app = electron.app
+const BrowserWindow = electron.BrowserWindow
+// const {app, BrowserWindow} = electron;
 // Module to create native browser window.
 require('electron-reload')(__dirname, {ignored: /node_modules|[\/\\]\.|annotation/});
 console.log("start");
-const path = require('path');
+var path = require('path');
 const url = require('url');
-let win = null;
+// let win = null;
+let win
 
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 1024, height:768});
+  win = new BrowserWindow({
+    width: 1024, 
+    height:768, 
+    icon: path.join(__dirname, 'assets/icons/png/art.png')
+  });
 
   // and load the index.html of the app.
   // win.loadURL('http://127.0.0.1:3000')
@@ -25,21 +32,20 @@ function createWindow () {
 
   // win.webContents.openDevTools()
   // Emitted when the window is closed.
-  win.on('closed', () => {
+  win.on('closed', function () {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     win = null;
-  });
+  })
 }
 
-var resize_operation = image_resize.initialize();
-app.on('ready', ()=>{
-  console.log("ready.. but waiting for resizing of images to be done.");
-  resize_operation.then(()=>{
-    console.log("all resizing done!");
-    createWindow();
-  });
+const resize_operation = false
+// var resize_operation = image_resize.initialize();
+
+app.on('ready', function () {
+  console.log("all resizing done!");
+  createWindow()
 });
 
 app.on('activate', function () {

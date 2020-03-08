@@ -30,6 +30,8 @@ process.on("unhandledRejection", function(reason, promise) {
     console.log("Possibly Unhandled Rejection", JSON.stringify(reason), JSON.stringify(promise)); 
 });
 
+
+
 // for resizing
 var img_sizes = {
 	thumbnail: [100, 87],
@@ -37,9 +39,54 @@ var img_sizes = {
 	full: [2592,1936]
 };
 
-var IMAGE_DIR = path.normalize(path.resolve('./images')+path.sep);
-var ANNOTATION_DIR = path.normalize(path.resolve('./annotation')+path.sep);
-var RESIZING_ENABLED = true;
+
+const {app} = require('electron');
+const userHomePath = app.getPath('home');
+const BROWSER_ROOT_DIR = path.join(userHomePath, 'OxfordImageBrowser')
+// fs.mkdirSync(browserRootPath, { recursive: true })
+
+// fs.mkdir(browserRootPath)
+
+// fs.existsSync(browserRootPath) || fs.mkdirSync(browserRootPath);
+
+
+// function ensureDirSync (dirpath) {
+//   try {
+//     return fs.mkdirSync(dirpath)
+//   } catch (err) {
+//     if (err.code !== 'EEXIST') throw err
+//   }
+// }
+
+// exports.resize_outstanding = resize_outstanding;
+
+
+const default_schema_dir = './schema/'
+const IMAGE_DIR = path.normalize(path.join(BROWSER_ROOT_DIR, './images')+path.sep);
+const ANNOTATION_DIR = path.normalize(path.join(BROWSER_ROOT_DIR, './annotation')+path.sep);
+// var IMAGE_DIR = path.normalize(path.resolve('./images')+path.sep);
+// var ANNOTATION_DIR = path.normalize(path.resolve('./annotation')+path.sep);
+var RESIZING_ENABLED = false;
+
+const SCHEMA_DIR = path.normalize(path.join(BROWSER_ROOT_DIR, './schema')+path.sep);
+
+
+if (!fs.existsSync(BROWSER_ROOT_DIR)){
+    fs.mkdirSync(BROWSER_ROOT_DIR);
+    console.log("**** MADE BROWSER ROOT PATH HERE: ", BROWSER_ROOT_DIR)
+}
+
+Promise.all([fs.mkdirAsync(IMAGE_DIR),fs.mkdirAsync(ANNOTATION_DIR), fs.mkdirAsync(SCHEMA_DIR)]).catch({code:"EEXIST"}, (e) =>{ 
+		})
+
+if (fs.existsSync(default_schema_dir)){
+Promise.all([fs.createReadStream(default_schema_dir + '7-class.csv').pipe(fs.createWriteStream(SCHEMA_DIR + '7-class.csv')),
+		fs.createReadStream(default_schema_dir + 'annotation.csv').pipe(fs.createWriteStream(SCHEMA_DIR + 'annotation.csv')),
+		fs.createReadStream(default_schema_dir + 'free_text.csv').pipe(fs.createWriteStream(SCHEMA_DIR + 'free_text.csv')),
+		fs.createReadStream(default_schema_dir + 'social.csv').pipe(fs.createWriteStream(SCHEMA_DIR + 'social.csv'))]).catch({code:"ENOENT"}, (e) =>{
+		})
+}
+		
 
 // this sends the directory names to the main process
 // why do we check for default value? because the main process has a different
@@ -51,62 +98,95 @@ ipcMain.on('ANNOTATION_DIR', (event, arg) => {
 	console.log("ipc ANNOTATION_DIR", ANNOTATION_DIR)
 	event.returnValue = ANNOTATION_DIR;
 });
-function initialize() {
-	// must be done at start of application 
-	return new Promise((resolve, reject)=>{
 
-		try {
-			var data = fs.readFileSync('./file_paths.json')
+
+// function initialize() {
+	// // must be done at start of application 
+	// return new Promise((resolve, reject)=>{
+
+	// 	try {
+	// 		var data = fs.readFileSync('./file_paths.json')
 		
-			var file_paths = JSON.parse(data);
-			console.log("file_paths.json found:,", file_paths)
-			if ('RESIZING_ENABLED' in file_paths) {
-				RESIZING_ENABLED = file_paths['RESIZING_ENABLED']
-			}
-			if ('IMAGE_DIR' in file_paths) {
-				console.log("setting images directory to ",file_paths['IMAGE_DIR'])
-				IMAGE_DIR = path.normalize(path.resolve(file_paths['IMAGE_DIR'])+path.sep)
-			}
-			if ('ANNOTATION_DIR' in file_paths) {
-				console.log("setting images directory to ",file_paths['ANNOTATION_DIR'])
-				ANNOTATION_DIR = path.normalize(path.resolve(file_paths['ANNOTATION_DIR'])+path.sep)
-			}
-			resolve()
-		} 
-		catch (e) {
-			console.log("file_paths.json doesn't exist so using default images & annotations directories");
-			resolve() 
-		}
-	}).then(()=>{
-		return Promise.all([fs.mkdirAsync(IMAGE_DIR),fs.mkdirAsync(ANNOTATION_DIR)]).catch({code:"EEXIST"}, (e) =>{
-			console.log("folder exists:", e.path	);
-		})
-	}).then(()=>{
-		console.log("'images' and 'annotation' folders setup..");
-	}).then(()=>{
-		watch.watchTree(IMAGE_DIR, {'interval':1}, function (f, curr, prev) {
-			if (typeof f == "object" && prev === null && curr === null) {
-			  // Finished walking the tree
-			} else if (prev === null) {
-			  console.log('new file added:', f);
-			  imagesModified('added',f);
-			} else if (curr.nlink === 0) {
-			  console.log('file removed:', f);
-			  imagesModified('deleted',f);
-			  // f was removed
-			} else {
-			  console.log('file modified:', f);
-			  // f was changed
-			}
-		});
-	}).then(()=>{
+	// 		var file_paths = JSON.parse(data);
+
+	// 		console.log("---file_paths.json found:,", file_paths)
+
+	// 		if ('RESIZING_ENABLED' in file_paths) {
+	// 			RESIZING_ENABLED = file_paths['RESIZING_ENABLED']
+	// 		}
+			// if ('IMAGE_DIR' in file_paths) {
+			// 	console.log("setting images directory to ",file_paths['IMAGE_DIR'])
+			// 	IMAGE_DIR = path.normalize(path.resolve(file_paths['IMAGE_DIR'])+path.sep)
+			// }
+			// if ('ANNOTATION_DIR' in file_paths) {
+			// 	console.log("setting images directory to ",file_paths['ANNOTATION_DIR'])
+			// 	ANNOTATION_DIR = path.normalize(path.resolve(file_paths['ANNOTATION_DIR'])+path.sep)
+			// }
+
+			// IMAGE_DIR = path.normalize(path.resolve(path.join(browserRootPath, 'images')))
+			// ANNOTATION_DIR = path.normalize(path.resolve(path.join(browserRootPath, 'annotations')))
+
+
+// fs.createReadStream('./schema/7-class.csv').pipe(fs.createWriteStream(SCHEMA_DIR + '7-class.csv'));
+// fs.createReadStream('./schema/annotation.csv').pipe(fs.createWriteStream(SCHEMA_DIR + 'annotation.csv'));
+
+
+function ensureDirSync (dirpath) {
+  try {
+    return fs.mkdirSync(dirpath)
+  } catch (err) {
+    if (err.code !== 'EEXIST') throw err
+  }
+}
+// 			resolve()
+// 		} 
+// 		catch (e) {
+// 			console.log("file_paths.json doesn't exist so using default images & annotations directories");
+// 			resolve() 
+// 		}
+// 	}).then(()=>{
+// 		return Promise.all([fs.mkdirAsync(IMAGE_DIR),fs.mkdirAsync(ANNOTATION_DIR), fs.mkdirAsync(SCHEMA_DIR)]).catch({code:"EEXIST"}, (e) =>{ 
+// 		})
+// 	// }).then(()=>{
+// 	// 	return Promise.all([fs.createReadStream(default_schema_dir + '7-class.csv').pipe(fs.createWriteStream(SCHEMA_DIR + '7-class.csv')),
+// 	// 	fs.createReadStream(default_schema_dir + 'annotation.csv').pipe(fs.createWriteStream(SCHEMA_DIR + 'annotation.csv')),
+// 	// 	fs.createReadStream(default_schema_dir + 'free_text.csv').pipe(fs.createWriteStream(SCHEMA_DIR + 'free_text.csv')),
+// 	// 	fs.createReadStream(default_schema_dir + 'social.csv').pipe(fs.createWriteStream(SCHEMA_DIR + 'social.csv'))]).catch({code:"ENOENT"}, (e) =>{
+// 	// 	})
+// 	}).then(()=>{
+// 		console.log("'images' and 'annotation' folders setup..");
+// 	}).then(()=>{
+// 		watch.watchTree(IMAGE_DIR, {'interval':1}, function (f, curr, prev) {
+// 			if (typeof f == "object" && prev === null && curr === null) {
+// 			  // Finished walking the tree
+// 			} else if (prev === null) {
+// 			  console.log('new file added:', f);
+// 			  imagesModified('added',f);
+// 			} else if (curr.nlink === 0) {
+// 			  console.log('file removed:', f);
+// 			  imagesModified('deleted',f);
+// 			  // f was removed
+// 			} else {
+// 			  console.log('file modified:', f);
+// 			  // f was changed
+// 			}
+// 		});
+// 	}).then(()=>{
 		
-		if (RESIZING_ENABLED===true) {
-			return resize_outstanding().then(Promise.resolve('resizing outstanding images!'));
-		} else {
-			console.log("RESIZING_ENABLED = false so skipping resizing")
-		}
-	});
+// 		if (RESIZING_ENABLED===true) {
+// 			return resize_outstanding().then(Promise.resolve('resizing outstanding images!'));
+// 		} else {
+// 			console.log("RESIZING_ENABLED = false so skipping resizing")
+// 		}
+// 	});
+// }
+
+function ensureDirSync (dirpath) {
+  try {
+    return fs.mkdirSync(dirpath)
+  } catch (err) {
+    if (err.code !== 'EEXIST') throw err
+  }
 }
 
 function resize_outstanding() {
@@ -114,7 +194,7 @@ function resize_outstanding() {
 	return Promise.resolve()
 	.then( () => {
 		return fs.readdirAsync(IMAGE_DIR).map(
-			(p_folder) => {
+			(p_folder) => {if(p_folder!='.DS_Store'){
 				var sizes = {};
 				console.log("participant folder:", p_folder);
 
@@ -124,9 +204,9 @@ function resize_outstanding() {
 				var stat = fs.lstatSync(dir);
 				if (stat.isDirectory() || stat.isSymbolicLink()) {
 					// ensure corresponding annotation directory also exists
-					fs.statAsync(path.join('annotation', p_folder)).catch( {code:'ENOENT'}, (e) => {
+					fs.statAsync(path.join(ANNOTATION_DIR, p_folder)).catch( {code:'ENOENT'}, (e) => {
 						console.log("creating annotatioin dir:", path.join('annotation', p_folder));
-						fs.mkdir(path.join('annotation', p_folder));
+						fs.mkdir(path.join(ANNOTATION_DIR, p_folder));
 					});
 					// ensure all size directories exist
 					return Promise.each(
@@ -169,7 +249,7 @@ function resize_outstanding() {
 				
 			}
 
-		}).all();
+		}}).all();
 	}).then(() => {
 		console.log('done reading');
 		console.log(participants);
@@ -236,6 +316,10 @@ setInterval(() => {
 
 function filename_is_image(filename) {
 	return filename.toLowerCase().endsWith('.jpg') || filename.toLowerCase().endsWith('.jpeg');
+}
+
+function not_ignored(foldername) {
+	return !foldername.toLowerCase().endsWith('.ds_store')
 }
 
 function imagesModified(state, f) {
@@ -419,5 +503,22 @@ function process_full(p_name, f, queue) {
 	});
 }
 
+
+// destination will be created or overwritten by default.
+
+// fs.copyFile('./schema/7-class.csv', SCHEMA_DIR + '7-class.csv', (err) => {
+//   if (err) throw err;
+//   console.log('7-class file was copied to schema folder');
+// });
+
+// fs.copyFile('./schema/annotation.csv', SCHEMA_DIR + 'annotation.csv', (err) => {
+//   if (err) throw err;
+//   console.log('annotation file was copied to schema folder');
+// });
+
+
 exports.resize_outstanding = resize_outstanding;
-exports.initialize = initialize;
+// exports.initialize = initialize;
+
+
+
