@@ -152,22 +152,35 @@ To restore the backup you should go into the annotation folder, then go into the
 # Updated Instructions (March 2020)
 The code has been updaetd to allow packaging into an app for easy distribution. 
 
-### Files that are updated:
+## Files that are updated:
 * main.js
 * image_resize.js
 * file_paths.json
 * schema.js
 * package.json
-* package-lock.json
 * static/main.html
+
+
+* package-lock.json
 * assets/
 * release-builds/
 * node_modules/
 * .gitignore
 
 
-### To package into a Mac app
+## To package into a Mac app
 Install Node.js and electron prebuilt. To do the latter, run 
 ```
 sudo npm install -g electron
 ```
+
+## 2. Install npm package dependencies (this creates a 'node_modules' dir )
+```
+npm install
+```
+
+## 3. Package into Mac app (this creates app in a 'release-builds' dir)
+```
+electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/art.icns --prune=true --out=release-builds
+```
+
