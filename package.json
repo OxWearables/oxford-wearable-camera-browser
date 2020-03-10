@@ -204,7 +204,7 @@
     "nopt": "^3.0.6",
     "normalize-package-data": "^2.3.8",
     "normalize-path": "^2.1.1",
-    "npm": "^6.1.0",
+    "npm": "^6.13.4",
     "nugget": "^2.0.1",
     "number-is-nan": "^1.0.1",
     "oauth-sign": "^0.8.2",
