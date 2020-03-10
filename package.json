@@ -34,7 +34,7 @@
     "body-parser": "^1.18.3",
     "boom": "^2.10.1",
     "brace-expansion": "^1.1.11",
-    "braces": "^1.8.5",
+    "braces": "^2.3.1",
     "buffer-equal": "^0.0.1",
     "buffer-shims": "^1.0.0",
     "buffers": "^0.1.1",
