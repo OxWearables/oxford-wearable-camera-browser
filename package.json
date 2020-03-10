@@ -289,7 +289,7 @@
     "stream-to-buffer": "^0.1.0",
     "string-width": "^1.0.2",
     "string_decoder": "^1.1.1",
-    "stringstream": "^0.0.5",
+    "stringstream": "^0.0.6",
     "strip-ansi": "^3.0.1",
     "strip-bom": "^2.0.0",
     "strip-indent": "^1.0.1",
