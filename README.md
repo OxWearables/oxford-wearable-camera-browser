@@ -26,43 +26,57 @@ npm start
 For those less familiar with command line operations, here are [Apple OSX step-by-step installation guidelines](utilities/sensecam-browser-installation-osx.docx) by Andrea Spray (LSHTM).
 
 
-## Adding data from a new participant
-Your study should have data stored as follows:
+## Root folder
+When running the browser for the first time, it will create the following folder structure in your root directory (in Mac, this would be `/Users/{your_user_name}`).
+
 ```python
-path/<studyName>/
+root/OxfordImageBrowser/
     annotations/
     images/
-        participant1/
+    schema/
+```
+
+
+## Adding data from a new participant
+Your study should have data stored as follows: 
+```python
+root/OxfordImageBrowser/images/
+    participant1/
+        B00000895_21I7IV_20170314_134417E.JPG
+        B00000895_21I7IV_20170314_134447E.JPG
+        ...
+        B00000895_21I7IV_20170314_233239E.JPG
+        medium/
             B00000895_21I7IV_20170314_134417E.JPG
             B00000895_21I7IV_20170314_134447E.JPG
             ...
             B00000895_21I7IV_20170314_233239E.JPG
-            medium/
-                B00000895_21I7IV_20170314_134417E.JPG
-                B00000895_21I7IV_20170314_134447E.JPG
-                ...
-                B00000895_21I7IV_20170314_233239E.JPG
-            thumbnail/
-                B00000895_21I7IV_20170314_134417E.JPG
-                B00000895_21I7IV_20170314_134447E.JPG
-                ...
-                B00000895_21I7IV_20170314_233239E.JPG
+        thumbnail/
+            B00000895_21I7IV_20170314_134417E.JPG
+            B00000895_21I7IV_20170314_134447E.JPG
+            ...
+            B00000895_21I7IV_20170314_233239E.JPG
+    ...
+    participantN/
+        AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
         ...
-        participantN/
+        AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
+        medium/
             AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
             ...
             AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
-            medium/
-                AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
-                ...
-                AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
-            thumbnail/
-                AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
-                ...
-                AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
+        thumbnail/
+            AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
+            ...
+            AAAAAAAAA_BBBBBB_YYYYMMDD_HHMMSSE.JPG
 ```
 
+If you don't see the folders `medium` and `thumbnail` in the individual participant image folders, it means your images have not yet been resized. If your images aren't already resized, look at the utilities folder for the write-thumbnail-commands.py script to resize images before loading them into the browser. 
 
+Please go to this [page with further information on file input](fileInput.md).
+
+
+<!-- 
 Then update `file_paths.json`, to link to the root folder of participant images and annotation on your local or network drive. For example:
 ```
 {
@@ -71,16 +85,19 @@ Then update `file_paths.json`, to link to the root folder of participant images 
 	"RESIZING_ENABLED":false
 }
 ```
-Note you need to use two `\\` instead of `\` as this is a json file.
-`"RESIZING_ENABLED":false` will disable resizing images on startup. This is useful if you already know your images have been resized (i.e. into the medium/ and thumbnail/ folders under each participant's images/ dir). If your images aren't already resized, look at the utilities folder for the write-thumbnail-commands.py script to resize images before loading them into the browser; this is MUCH faster than letting the browser resize images.
 
-Please go to this [page with further information on file input](fileInput.md).
+Note you need to use two `\\` instead of `\` as this is a json file.
+`"RESIZING_ENABLED":false` will disable resizing images on startup. This is useful if you already know your images have been resized (i.e. into the medium/ and thumbnail/ folders under each participant's images/ dir). If your images aren't already resized, look at the utilities folder for the write-thumbnail-commands.py script to resize images before loading them into the browser; this is MUCH faster than letting the browser resize images. -->
+
+<!-- Please go to this [page with further information on file input](fileInput.md). -->
 
 
 ## Selecting schema
 A schema is simply a list of different labels used to annotate your images. The browser comes with two schemas we have used with wearable camera images, one contains only 7 classes & an 'unknown' class, the second is a more detailed schema based on the [Compendium of Physical Activities](https://sites.google.com/site/compendiumofphysicalactivities/) for which exact energy expenditure values are known.
 
-To select a schema simply press the book button and choose an option from below. Each participant can have seperate annotations using different schemas. E.g. for studying how being outdoors affects activity you could have one schema for 'primary activity', another for 'secondary activity' and a third one for 'indoor/outdoor'. 
+To use any schema, move the schema csv file to your `root/OxfordImageBrowser/schema` directory. 
+
+In your browser, to select a schema simply press the book button and choose an option from below. Each participant can have seperate annotations using different schemas. E.g. for studying how being outdoors affects activity you could have one schema for 'primary activity', another for 'secondary activity' and a third one for 'indoor/outdoor'. 
 
 
 ## Annotating images
@@ -148,27 +165,7 @@ We don't want anyone to lose their work, so if the annotation file fails to save
 To restore the backup you should go into the annotation folder, then go into the participant folder. Start annotating again to generate a new annotation file (.csv) and then close the browser, open the .csv in notepad, copy in your backup, and save and close.. now when you start the browser the data should be restored.
 
 
-
-# Updated Instructions (March 2020)
-The code has been updaetd to allow packaging into an app for easy distribution. 
-
-## Files that are updated:
-* main.js
-* image_resize.js
-* file_paths.json
-* schema.js
-* package.json
-* static/main.html
-
-
-* package-lock.json
-* assets/
-* release-builds/
-* node_modules/
-* .gitignore
-
-
-## To package into a Mac app
+# To package into a Mac app
 Install Node.js and electron prebuilt. To do the latter, run 
 ```
 sudo npm install -g electron
