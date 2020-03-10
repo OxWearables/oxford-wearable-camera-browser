@@ -247,7 +247,7 @@
     "punycode": "^1.4.1",
     "q": "^1.5.0",
     "qs": "^6.5.2",
-    "randomatic": "^1.1.6",
+    "randomatic": "^3.0.0",
     "range-parser": "^1.2.0",
     "raw-body": "^2.3.3",
     "rc": "^1.2.8",
