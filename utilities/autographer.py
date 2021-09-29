@@ -88,7 +88,7 @@ def downloadData(cameraDir, participantDir):
         
         # copy images to <participantDir> and display tqdm() progress bar
         for image in tqdm(images):
-            newImg = participantDir + image.split('/')[-1]
+            newImg = participantDir + image.replace('\\','//').split('/')[-1]
             newImg = newImg.replace('.RES', '.JPG')
             shutil.copyfile(image, newImg)
         print('copy of', len(images), 'data items to', participantDir, 
