@@ -32,7 +32,7 @@ def main():
     # auto infer particiant ID from input file
     if args.participantStr is None:
         args.participantStr = args.annotationsCsv.split('/')[-1].split('-')[0]
-        print 'participant = ', args.participantStr
+        print('participant = ', args.participantStr)
 
     # auto determine I/O file names
     fileListTxt = args.imageListsDir + args.participantStr + '-fileList.txt'
@@ -79,7 +79,7 @@ def evaluateAnnotationAgreement(fileListStr, refAnnotationsCsv,
     myCodes = fileList['myCodes']
     
     crossTab = pd.crosstab(refCodes, myCodes, margins=True )
-    print '\n\nkappa score = ', cohen_kappa_score(refCodes, myCodes)
+    print('\n\nkappa score = ', cohen_kappa_score(refCodes, myCodes))
 
     w = open(outFeedbackHtml,'w')
     w.write('<html>\n')
@@ -95,7 +95,7 @@ def evaluateAnnotationAgreement(fileListStr, refAnnotationsCsv,
     w.write(episodesHtml(fileList) + '\n')
     w.write('</tbody></table>')
     w.close()
-    print 'Feedback summary written to: ', outFeedbackHtml
+    print('Feedback summary written to: ', outFeedbackHtml)
 
     return crossTab.style.applymap(highlight_vals)
 
@@ -124,9 +124,9 @@ def appendAnnotationsToList(csvPath, dateFormat, fromNodeJS, fileList, colName):
         row_annotation = row["annotation"]
         fileList.loc[((fileList['imgTime']>=start) & (fileList['imgTime']<end)), colName] = row_annotation
     
-    print colName + ' NAN codes removed =', len(fileList[pd.isnull(fileList[colName])])
+    print(colName + ' NAN codes removed =', len(fileList[pd.isnull(fileList[colName])]))
     fileList = fileList[~pd.isnull(fileList[colName])]
-    print colName + ' missing annotations =', len(fileList[fileList[colName]=='undefined'])
+    print(colName + ' missing annotations =', len(fileList[fileList[colName]=='undefined']))
     fileList.loc[fileList[colName]=='undefined', colName] = 'undefined;-99'
     fileList.loc[fileList[colName]==' <unknown>', colName] = 'undefined;-99'
     fileList[colName + 'Codes'] = fileList[colName].str.extract('(\d+)', expand=False)
@@ -155,11 +155,8 @@ def episodesHtml(fileList):
         line += '<td>' + startTime.strftime("%Y-%m-%d") + '</td>'
         line += '<td>' + startTime.strftime("%I:%M %p") + '</td>'
         line += '<td>' + endTime.strftime("%I:%M %p") + '</td>'
-        refCodeStr = str(episode['refCodes'].min())
+        refCodeStr = str(episode['ref'].min())
         myCodeStr = str(episode['myCodes'].min())
-        if refCodeStr != str(episode['refCodes-orig'].min()):
-            refCodeStr += " (" + str(episode['refCodes-orig'].min()) + ")"
-            myCodeStr += " (" + str(episode['myCodes-orig'].min()) + ")"
         line += '<td>' + refCodeStr  + '</td>'
         line += '<td>' + myCodeStr + '</td>'
         line += '</tr>'
