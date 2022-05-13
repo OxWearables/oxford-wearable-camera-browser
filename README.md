@@ -11,6 +11,8 @@ A wearable camera image browser & annotation tool. If you find this tool helpful
 
 
 ## Installation
+THE SOFTWARE IS INTENDED FOR USE BY ACADEMICS CARRYING OUT RESEARCH AND NOT FOR USE BY CONSUMERS OR COMMERCIAL BUSINESSES [see academic use licence file](#academic-use-licence). If you are interested in using the Software commercially, please contact Oxford University Innovation Limited to negotiate a licence. Contact details are enquiries@innovation.ox.ac.uk
+
 This project relies on [Electron](https://electron.atom.io/) and Node.js, so first you need to install [npm (node pacakage manager)](https://docs.npmjs.com/getting-started/installing-node). Then proceed as follows:
 ```bash
 # 1. Download/clone this git repo
