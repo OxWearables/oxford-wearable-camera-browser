@@ -1,6 +1,7 @@
 # Academic Use Licence
 
-**These licence terms apply to all licences granted by THE CHANCELLOR, MASTERS AND SCHOLARS OF THE UNIVERSITY OF OXFORD whose administrative offices are at University Offices, Wellington Square, Oxford OX1 2JD, United Kingdom (the “University”) for use of “Oxford wearable camera browser” (“the Software”) through this website (https://github.com/activityMonitoring) (the ”Website”). 
+**These licence terms apply to all licences granted by THE CHANCELLOR, MASTERS AND SCHOLARS OF THE UNIVERSITY OF OXFORD whose administrative offices are at University Offices, Wellington Square, Oxford OX1 2JD, United Kingdom (the “University”) for use of “Oxford wearable camera browser” (“the Software”) through this website (https://github.com/OxWearables) (the ”Website”). 
+
 By downloading the Software through the Website, you (the “Licensee”) are confirming that you agree that your use of the Software is subject to these licence terms**
 
 **PLEASE READ THESE LICENCE TERMS CAREFULLY BEFORE DOWNLOADING THE SOFTWARE. IF YOU DO NOT AGREE TO THESE LICENCE TERMS YOU SHOULD NOT DOWNLOAD THE SOFTWARE.**
