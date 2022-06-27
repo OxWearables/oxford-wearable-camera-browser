@@ -154,7 +154,7 @@ python kappaScoring.py /..path../newAnnotations.csv training/train1-ref.csv trai
 #  fileListTxt        txt file listing images that were to be annotated
 
 # output:
-#   input-feedback.html: html summary page with kappa score, confusion table, and episodes to review
+#   /..path../newAnnotations-feedback.html: html summary page with kappa score, confusion table, and episodes to review
 ```
 
 
