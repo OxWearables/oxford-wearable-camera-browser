@@ -145,10 +145,13 @@ activity;indoor;walking
 # Training new researchers
 To assess the performance of new researchers learning to annotate wearable camera data, we have 9 participants with reference annotations in Oxford. The reference annotations are in training/ and ask Aiden for help to locate the image datasets on Oxford servers. This document gives a good overview of the [schedule and protocols for trainees.](trainingSchedule.docx) To assess the performance of a trainee then run:
 ```Bash
-python kappaScoring.py /..path../train4-Aiden.csv
+python kappaScoring.py /..path../newAnnotations.csv training/train1-ref.csv training/train1-fileList.txt
 
 # input:
-#   annotationsCsv: csv with annotations just made by trainee
+#   positional arguments:
+#  annotationsCsv     csv file of annotations to score
+#  refAnnotationsCsv  csv file of reference annotations
+#  fileListTxt        txt file listing images that were to be annotated
 
 # output:
 #   input-feedback.html: html summary page with kappa score, confusion table, and episodes to review

@@ -13,34 +13,22 @@ def main():
     # required args
     parser.add_argument('annotationsCsv', type=str,
             help="""csv file of annotations to score""")
-    # optional args
-    parser.add_argument('--participantStr', type=str, default=None,
-            help="""manual set of participant id e.g. 'train1'""")
-    parser.add_argument('--refDir', type=str,
-            default='training/',
-            help="""dir with reference annotations""")
-    parser.add_argument('--imageListsDir', type=str,
-            default='training/',
-            help="""dir with reference image lists""")
+    parser.add_argument('refAnnotationsCsv', type=str,
+            help="""csv file of reference annotations""")
+    parser.add_argument('fileListTxt', type=str,
+            help="""txt file listing images that were to be annotated""")
     # parse arguments
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         parser.print_help()
         sys.exit(-1)
         args = parser.parse_args()
     args = parser.parse_args()
     
-    # auto infer particiant ID from input file
-    if args.participantStr is None:
-        args.participantStr = args.annotationsCsv.split('/')[-1].split('-')[0]
-        print('participant = ', args.participantStr)
-
-    # auto determine I/O file names
-    fileListTxt = args.imageListsDir + args.participantStr + '-fileList.txt'
-    refAnnotationsCsv = args.refDir + args.participantStr + '-ref.csv'
+    # auto determine output feedback html file name
     feedbackHtml = args.annotationsCsv.replace('.csv','-feedback.html')
 
     # call main method to evaluate annotation performance
-    evaluateAnnotationAgreement(fileListTxt, refAnnotationsCsv, \
+    evaluateAnnotationAgreement(args.fileListTxt, args.refAnnotationsCsv, \
                                 args.annotationsCsv, feedbackHtml, True)
 
 
